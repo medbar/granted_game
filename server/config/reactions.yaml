@@ -1,0 +1,9 @@
+{
+  "heat": {"temperature_delta": 0.52},
+  "cold": {"temperature_delta": 0.52},
+  "phase_changes": {"water_freezes_at": 0.25, "ice_melts_at": 0.45, "water_boils_at": 0.8},
+  "burning": {"flammability_threshold": 0.3, "ignition_strength": 0.35},
+  "electricity": {"wetness_threshold": 0.5, "wet_conductivity_multiplier": 2.0},
+  "force": {"base_strength": 4.5}
+}
+

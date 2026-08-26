@@ -1,0 +1,20 @@
+{
+  "geometry_priority": [
+    ["wall", "LINE"],
+    ["ray", "BEAM"],
+    ["line", "TRAIL"],
+    ["ring", "RING"],
+    ["circle", "FIELD"],
+    ["cloud", "CLOUD"],
+    ["sphere", "PROJECTILE"],
+    ["surface", "SURFACE_OVERLAY"],
+    ["chain", "TETHER"],
+    ["point", "BURST"]
+  ],
+  "appearance": {
+    "fire": "#ff6b35", "water": "#3aa7ff", "ice": "#a8edff", "steam": "#d9e5e8",
+    "air": "#b8f1de", "stone": "#9a9083", "metal": "#d5dae2", "light": "#fff29c",
+    "darkness": "#5a3f82", "electricity": "#c8f7ff", "poison": "#86d645", "life": "#78e08f",
+    "decay": "#7b5b42", "force": "#c99cff"
+  }
+}

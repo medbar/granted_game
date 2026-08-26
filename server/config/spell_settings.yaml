@@ -1,0 +1,32 @@
+{
+  "semantic_model": "deterministic-multilingual-char-ngram-v1",
+  "sentence_transformer_upgrade": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+  "base_power": 1.0,
+  "cast_time_scale": 0.35,
+  "snapshot_radius": 12.0,
+  "max_gesture_points": 256,
+  "text_influence": 0.65,
+  "gesture_influence": 0.35,
+  "geometry_text_influence": 0.35,
+  "geometry_gesture_influence": 0.65,
+  "anchor_implications": {
+    "IGNITE": {"FIRE": 0.78, "HEAT": 0.55},
+    "FREEZE": {"COLD": 0.75},
+    "MELT": {"HEAT": 0.7},
+    "EVAPORATE": {"HEAT": 0.72, "STEAM": 0.62},
+    "PUSH": {"FORCE": 0.65},
+    "PULL": {"FORCE": 0.65},
+    "HEAL": {"LIFE": 0.7},
+    "DESTROY": {"HARM": 0.62}
+  },
+  "top_k": {
+    "matter": 3,
+    "action": 3,
+    "movement": 3,
+    "geometry": 3,
+    "target": 3,
+    "property": 3,
+    "timing": 2,
+    "logic": 2
+  }
+}

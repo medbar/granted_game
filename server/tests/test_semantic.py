@@ -11,6 +11,16 @@ def test_anchor_catalog_has_exactly_one_hundred_entries() -> None:
     assert len(SemanticResolver().anchors) == 100
 
 
+def test_anchor_embeddings_are_cached_in_memory() -> None:
+    assert SemanticResolver().anchors is SemanticResolver().anchors
+
+
+def test_semantic_backend_is_configurable_and_reported() -> None:
+    resolver = SemanticResolver()
+    assert resolver.backend == "char_ngram"
+    assert resolver.model_name == "deterministic-multilingual-char-ngram-v1"
+
+
 def test_golden_anchor_phrases() -> None:
     cases = {
         "зажги его": {"IGNITE", "FIRE"},
@@ -36,4 +46,3 @@ def test_logic_words_are_deterministic() -> None:
     result = scores("подожги всех врагов вокруг меня кроме меня")
     assert result["ALL"] > 0.9
     assert result["EXCEPT"] > 0.9
-

@@ -1,9 +1,14 @@
 {
-  "heat": {"temperature_delta": 0.52},
-  "cold": {"temperature_delta": 0.52},
+  "heat": {"temperature_delta": 0.52, "living_damage": 12.0, "steam_force_multiplier": 1.25},
+  "cold": {"temperature_delta": 0.52, "living_freeze_strength": 0.85, "slowed_duration": 3.0, "frozen_duration": 1.6},
   "phase_changes": {"water_freezes_at": 0.25, "ice_melts_at": 0.45, "water_boils_at": 0.8},
-  "burning": {"flammability_threshold": 0.3, "ignition_strength": 0.35},
-  "electricity": {"wetness_threshold": 0.5, "wet_conductivity_multiplier": 2.0},
-  "force": {"base_strength": 4.5}
+  "water": {"wetness_scale": 0.7, "wet_duration": 5.0, "extinguish_temperature_delta": 0.25},
+  "burning": {"flammability_threshold": 0.3, "ignition_strength": 0.35, "duration": 5.0},
+  "electricity": {"wetness_threshold": 0.5, "wet_conductivity_multiplier": 2.0, "base_damage": 5.0, "conductivity_damage": 14.0, "state_duration": 1.6, "propagation_multiplier": 0.72, "wet_chain_range": 2.5},
+  "force": {"base_strength": 4.5, "lift_duration": 2.6},
+  "sharp_force": {"base_damage": 20.0, "minimum_softness": 0.08},
+  "crush": {"base_damage": 24.0, "brittleness_base": 0.35, "brittleness_scale": 0.65, "hardness_reduction": 0.55},
+  "poison": {"duration": 5.0},
+  "harm": {"base_damage": 18.0},
+  "life": {"heal_amount": 16.0}
 }
-

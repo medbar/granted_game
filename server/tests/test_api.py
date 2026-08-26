@@ -11,6 +11,7 @@ def test_health() -> None:
     response = client.get("/health")
     assert response.status_code == 200
     assert response.json()["anchors"] == 100
+    assert response.json()["semantic_backend"] == "char_ngram"
 
 
 def test_cast_contract(world) -> None:
@@ -24,3 +25,9 @@ def test_cast_contract(world) -> None:
 def test_malformed_request_returns_validation_error() -> None:
     response = client.post("/cast", json={"spell_text": ""})
     assert response.status_code == 422
+
+
+def test_world_config_exposes_runtime_source_of_truth() -> None:
+    response = client.get("/world/config")
+    assert response.status_code == 200
+    assert {"spell", "materials", "reactions", "visuals"} <= response.json().keys()

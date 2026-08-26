@@ -1,6 +1,7 @@
 {
+  "semantic_backend": "char_ngram",
   "semantic_model": "deterministic-multilingual-char-ngram-v1",
-  "sentence_transformer_upgrade": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+  "sentence_transformer_model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
   "base_power": 1.0,
   "cast_time_scale": 0.35,
   "snapshot_radius": 12.0,
@@ -9,6 +10,58 @@
   "gesture_influence": 0.35,
   "geometry_text_influence": 0.35,
   "geometry_gesture_influence": 0.65,
+  "gesture_mapping": {
+    "line_straightness": 0.72,
+    "circle_closedness": 0.58,
+    "curve_minimum": 0.35,
+    "ring_multiplier": 0.85,
+    "radial_minimum": 0.18,
+    "spread_multiplier": 0.8,
+    "fast_speed": 0.58,
+    "large_extent": 3.2,
+    "large_normalizer": 6.0
+  },
+  "power": {
+    "coherence_base": 0.35,
+    "coherence_scale": 0.55,
+    "strong_bonus": 0.38,
+    "weak_penalty": 0.3,
+    "gesture_energy_bonus": 0.2,
+    "minimum": 0.12,
+    "maximum": 1.65
+  },
+  "duration": {
+    "base": 0.65,
+    "semantic_scale": 2.5,
+    "persistent_scale": 3.0
+  },
+  "spatial": {
+    "minimum_radius": 0.65,
+    "maximum_radius": 6.0,
+    "gesture_radius_scale": 0.5,
+    "large_radius_bonus": 0.6,
+    "small_radius_penalty": 0.45,
+    "minimum_range": 4.0,
+    "maximum_range": 12.0,
+    "gesture_range_scale": 1.5
+  },
+  "targeting": {
+    "around_semantic_threshold": 0.65,
+    "ring_threshold": 0.45,
+    "self_threshold": 0.35,
+    "explicit_target_threshold": 0.18,
+    "material_target_threshold": 0.2,
+    "healing_self_lock": 0.4,
+    "line_threshold": 0.55,
+    "line_minimum_dot": 0.35,
+    "distributed_air_threshold": 0.18,
+    "maximum_all_targets": 12,
+    "maximum_distributed_targets": 8
+  },
+  "runtime_effect": {
+    "base_speed": 3.0,
+    "fast_speed_bonus": 5.0
+  },
   "anchor_implications": {
     "IGNITE": {"FIRE": 0.78, "HEAT": 0.55},
     "FREEZE": {"COLD": 0.75},

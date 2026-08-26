@@ -13,6 +13,8 @@ var wander_phase := 0.0
 var impulse := Vector2.ZERO
 var states: Dictionary = {}
 var dead_for := 0.0
+var temperature := 0.5
+var wetness := 0.0
 
 
 func setup(id_value: String, spawn_position: Vector2, player: Node2D) -> void:
@@ -56,7 +58,9 @@ func _physics_process(delta: float) -> void:
 		else:
 			wander_phase += delta * 0.7
 			desired = Vector2(cos(wander_phase), sin(wander_phase * 0.73)) * 0.35
-	var slow_factor := 0.35 if states.has("frozen") else (0.55 if states.has("slowed") else 1.0)
+	var slow_factor := 0.08 if states.has("frozen") else (0.55 if states.has("slowed") else 1.0)
+	if states.has("levitating"):
+		slow_factor *= 0.2
 	velocity = desired.normalized() * CHASE_SPEED * slow_factor + impulse
 	move_and_slide()
 	impulse = impulse.move_toward(Vector2.ZERO, 380.0 * delta)
@@ -108,6 +112,10 @@ func apply_world_action(action: Dictionary, unit: float) -> void:
 			states[str(action.get("state", "unstable"))] = float(action.get("duration", 1.0))
 		"REMOVE_STATE":
 			states.erase(str(action.get("state", "")))
+		"CHANGE_TEMPERATURE":
+			temperature += float(action.get("amount", 0.0))
+		"CHANGE_WETNESS":
+			wetness = clampf(wetness + float(action.get("amount", 0.0)), 0.0, 1.0)
 	if health <= 0.0:
 		_die()
 	queue_redraw()
@@ -125,7 +133,7 @@ func get_snapshot(unit: float) -> Dictionary:
 		"velocity": {"x": velocity.x / unit, "y": velocity.y / unit},
 		"radius": BODY_RADIUS / unit,
 		"health": health,
-		"material": {"name": "organic", "mass": 1.0, "temperature": 0.5, "wetness": 0.0, "flammability": 0.35, "conductivity": 0.2, "hardness": 0.2, "brittleness": 0.1},
+		"material": {"name": "organic", "mass": 1.0, "temperature": temperature, "wetness": wetness, "flammability": 0.35, "conductivity": 0.2, "hardness": 0.2, "brittleness": 0.1},
 		"states": state_values
 	}
 
@@ -133,6 +141,10 @@ func get_snapshot(unit: float) -> Dictionary:
 func _draw() -> void:
 	if not visible:
 		return
+	if states.has("levitating"):
+		draw_set_transform(Vector2(0, 12), 0.0, Vector2(1.0, 0.42))
+		draw_circle(Vector2.ZERO, BODY_RADIUS, Color(0.0, 0.0, 0.0, 0.28))
+		draw_set_transform(Vector2(0, -10))
 	if states.has("burning"):
 		draw_circle(Vector2.ZERO, BODY_RADIUS + 7.0, Color(1.0, 0.25, 0.08, 0.3))
 	if states.has("electrified"):
@@ -144,4 +156,3 @@ func _draw() -> void:
 	var health_width := 30.0 * clampf(health / 58.0, 0.0, 1.0)
 	draw_rect(Rect2(-15, -28, 30, 3), Color("3a2026"))
 	draw_rect(Rect2(-15, -28, health_width, 3), Color("ff6b6b"))
-

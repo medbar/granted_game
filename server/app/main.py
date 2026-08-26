@@ -18,7 +18,8 @@ def health() -> dict[str, object]:
     return {
         "status": "ok",
         "anchors": len(service.semantic.anchors),
-        "semantic_model": spell_settings()["semantic_model"],
+        "semantic_backend": service.semantic.backend,
+        "semantic_model": service.semantic.model_name,
     }
 
 
@@ -45,6 +46,8 @@ def debug_config() -> dict[str, object]:
 @app.get("/world/config")
 def world_config() -> dict[str, object]:
     return {
+        "spell": spell_settings(),
         "materials": materials_config(),
         "reactions": reactions_config(),
+        "visuals": visual_mapping(),
     }

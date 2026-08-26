@@ -30,7 +30,7 @@ class SpellService:
         gesture = self.gesture.resolve(request.gesture, request.caster.position)
         intent = self.intent_builder.build(anchors, coherence, gesture, request.caster)
         targets = self.targeting.resolve(intent, request.caster, request.world.objects)
-        actions, rules = self.world.resolve(intent, targets)
+        actions, rules = self.world.resolve(intent, targets, request.world.objects)
         visuals = self.visuals.resolve(intent, targets)
         elapsed = (time.perf_counter() - started) * 1000.0
         debug = DebugInfo(
@@ -66,4 +66,3 @@ class SpellService:
         }
         with self.log_path.open("a", encoding="utf-8") as handle:
             handle.write(json.dumps(record, ensure_ascii=False) + "\n")
-

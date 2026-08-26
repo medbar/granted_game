@@ -16,9 +16,11 @@ There are no `FireballSpell` or `IceWallSpell` classes. The backend activates hi
 - Continuous gesture features: duration, length, displacement, speed, straightness, curvature, closedness, rotation, area, radial movement, direction, strokes, direction changes, angular velocity, and energy.
 - Universal target resolution, material rules, world actions, persistent-effect descriptions, and ten visual primitives.
 - Water ↔ ice, water → steam, ignition/burning, wet electrical conduction, mass-aware force, heat/cold damage, slow, harm, and healing.
+- Lift/levitation, deep freeze, poison, sharp-force and crush/material interactions, water extinguishing, and electrical propagation through a pool.
+- Gameplay-capable projectile, beam, wall, ring, and field entities that continue resolving contacts after `/cast`.
 - F3 developer view for anchors, gesture features, `SpellIntent`, selected targets, fired world rules, and REST latency.
 - Backend failure recovery: time returns to normal and the cast visibly fizzles.
-- 28 automated semantic, gesture, world-rule, golden-scenario, and API tests.
+- 45 automated semantic, gesture, world-rule, service-log, golden-scenario, and API tests.
 
 ## Requirements
 
@@ -28,7 +30,13 @@ There are no `FireballSpell` or `IceWallSpell` classes. The backend activates hi
 
 ## Run
 
-Open two terminals from this folder.
+The simplest launch starts both processes and shuts the backend down when the game closes:
+
+```powershell
+./run_all.ps1 -GodotPath "C:\path\to\Godot_v4.7.2-stable_win64.exe"
+```
+
+Or open two terminals from this folder.
 
 Backend:
 
@@ -75,6 +83,12 @@ uv sync
 uv run pytest
 ```
 
+To run the backend suite, isolated Godot gameplay smoke test, and live Godot↔FastAPI cast scenarios together:
+
+```powershell
+./verify.ps1 -GodotPath "C:\path\to\Godot_v4.7.2-stable_win64_console.exe"
+```
+
 Health and interactive API documentation are available at:
 
 - `http://127.0.0.1:8000/health`
@@ -91,7 +105,7 @@ Health and interactive API documentation are available at:
 | Mass, conductivity, flammability, hardness | `server/config/materials.yaml` |
 | Phase, ignition, conduction, force thresholds | `server/config/reactions.yaml` |
 | Geometry → primitive and appearance colors | `server/config/visual_mapping.yaml` |
-| Client cast scale and backend URL | `client/scripts/main.gd` |
+| Client backend URL, cast scale, snapshot radius, gesture cap, timeout | `client/config/gameplay.json` |
 
 The `.yaml` files use JSON-compatible YAML so the backend can load them with Python's standard library and keep startup lean.
 
@@ -114,7 +128,7 @@ SpellIntentBuilder
 SpellPlan → Godot world actions + runtime visuals
 ```
 
-The default semantic model is a deterministic multilingual character n-gram embedding over rich anchor descriptions. It starts instantly, handles Russian inflection and configured synonyms, and is reproducible. `spell_settings.yaml` also records the intended neural upgrade (`sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`); the REST contract remains unchanged when that resolver is swapped in.
+The default semantic model is a deterministic multilingual character n-gram embedding over rich anchor descriptions. It starts instantly, handles Russian inflection and configured synonyms, and is reproducible. The resolver is configurable: set `semantic_backend` to `sentence_transformer`, run `uv sync --extra embeddings`, and it loads `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` plus cached anchor embeddings without changing the REST contract.
 
 ## Scope intentionally excluded
 

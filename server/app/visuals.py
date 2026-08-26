@@ -12,13 +12,14 @@ class VisualResolver:
 
     def resolve(self, intent: dict[str, Any], targets: list[WorldObject]) -> list[VisualDescriptor]:
         geometry = intent["geometry"]
+        settings = self.config["settings"]
         primitive = "BURST"
         for key, candidate in self.config["geometry_priority"]:
-            if geometry.get(key, 0.0) > 0.24:
+            if geometry.get(key, 0.0) > settings["geometry_threshold"]:
                 primitive = candidate
                 break
-        if not geometry and intent["movement"].get("push", 0.0) > 0.25:
-            primitive = "RING" if intent["targets"].get("around", 0.0) > 0.2 else "BEAM"
+        if not geometry and intent["movement"].get("push", 0.0) > settings["push_threshold"]:
+            primitive = "RING" if intent["targets"].get("around", 0.0) > settings["around_threshold"] else "BEAM"
         appearance = sorted(intent["matter"], key=intent["matter"].get, reverse=True)[:2]
         if not appearance:
             appearance = ["force"]
@@ -30,11 +31,10 @@ class VisualResolver:
                 origin=Vec2(**intent["spatial"]["origin"]),
                 direction=Vec2(**intent["spatial"]["direction"]),
                 radius=intent["spatial"]["radius"],
-                speed=3.5 + intent["properties"].get("fast", 0.0) * 5.5,
+                speed=settings["base_speed"] + intent["properties"].get("fast", 0.0) * settings["fast_speed_bonus"],
                 intensity=min(1.0, intent["power"]),
-                turbulence=max(0.04, 1.0 - intent["coherence"]),
+                turbulence=max(settings["minimum_turbulence"], 1.0 - intent["coherence"]),
                 lifetime=intent["duration"],
                 target=target_position,
             )
         ]
-

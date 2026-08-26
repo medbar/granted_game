@@ -10,6 +10,8 @@ var facing := Vector2.RIGHT
 var movement_enabled := true
 var impulse := Vector2.ZERO
 var states: Dictionary = {}
+var temperature := 0.5
+var wetness := 0.0
 var arena_bounds := Rect2(-600.0, -330.0, 1200.0, 660.0)
 
 
@@ -35,6 +37,10 @@ func _physics_process(delta: float) -> void:
 			float(Input.is_physical_key_pressed(KEY_S)) - float(Input.is_physical_key_pressed(KEY_W))
 		).normalized()
 	var slow_factor := 0.48 if states.has("slowed") else 1.0
+	if states.has("frozen"):
+		slow_factor = 0.1
+	elif states.has("levitating"):
+		slow_factor *= 0.4
 	velocity = input_vector * MOVE_SPEED * slow_factor + impulse
 	move_and_slide()
 	global_position.x = clampf(global_position.x, arena_bounds.position.x + BODY_RADIUS, arena_bounds.end.x - BODY_RADIUS)
@@ -77,6 +83,10 @@ func apply_world_action(action: Dictionary, unit: float) -> void:
 			states[str(action.get("state", "unstable"))] = float(action.get("duration", 1.0))
 		"REMOVE_STATE":
 			states.erase(str(action.get("state", "")))
+		"CHANGE_TEMPERATURE":
+			temperature += float(action.get("amount", 0.0))
+		"CHANGE_WETNESS":
+			wetness = clampf(wetness + float(action.get("amount", 0.0)), 0.0, 1.0)
 
 
 func get_snapshot(unit: float) -> Dictionary:
@@ -91,12 +101,15 @@ func get_snapshot(unit: float) -> Dictionary:
 		"velocity": {"x": velocity.x / unit, "y": velocity.y / unit},
 		"radius": BODY_RADIUS / unit,
 		"health": health,
-		"material": {"name": "organic", "mass": 1.0, "temperature": 0.5, "wetness": 0.0, "flammability": 0.3, "conductivity": 0.25, "hardness": 0.2, "brittleness": 0.1},
+		"material": {"name": "organic", "mass": 1.0, "temperature": temperature, "wetness": wetness, "flammability": 0.3, "conductivity": 0.25, "hardness": 0.2, "brittleness": 0.1},
 		"states": state_values
 	}
 
 
 func _draw() -> void:
+	if states.has("levitating"):
+		draw_ellipse_shadow(Vector2(0, 12))
+		draw_set_transform(Vector2(0, -10))
 	var aura := Color("7f5af0")
 	if states.has("burning"):
 		aura = Color("ff6b35")
@@ -109,3 +122,8 @@ func _draw() -> void:
 	draw_line(facing * 4.0, facing * 30.0, Color("d7b56d"), 4.0, true)
 	draw_circle(facing * 32.0, 4.5, Color("b8f1ff"))
 
+
+func draw_ellipse_shadow(offset: Vector2) -> void:
+	draw_set_transform(offset, 0.0, Vector2(1.0, 0.42))
+	draw_circle(Vector2.ZERO, BODY_RADIUS, Color(0.0, 0.0, 0.0, 0.28))
+	draw_set_transform(Vector2.ZERO)

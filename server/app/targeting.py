@@ -3,6 +3,7 @@ from __future__ import annotations
 import math
 from typing import Any
 
+from .config import spell_settings
 from .models import CasterSnapshot, WorldObject
 
 
@@ -18,6 +19,9 @@ MATERIAL_TAGS = {
 
 
 class TargetResolver:
+    def __init__(self) -> None:
+        self.settings = spell_settings()["targeting"]
+
     def resolve(
         self,
         intent: dict[str, Any],
@@ -32,18 +36,29 @@ class TargetResolver:
         matter = intent["matter"]
         geometry = intent["geometry"]
         logic = intent["logic"]
-        around = target_terms.get("around", 0.0) > 0.2 or geometry.get("ring", 0.0) > 0.45
+        around = target_terms.get("around", 0.0) > self.settings["around_semantic_threshold"] or geometry.get("ring", 0.0) > self.settings["ring_threshold"]
+        self_is_origin = target_terms.get("self", 0.0) > self.settings["self_threshold"] and (
+            target_terms.get("enemy", 0.0) > self.settings["explicit_target_threshold"]
+            or max(
+                intent["movement"].get("push", 0.0),
+                intent["movement"].get("pull", 0.0),
+                intent["movement"].get("spread", 0.0),
+                intent["movement"].get("lift", 0.0),
+            ) > self.settings["explicit_target_threshold"]
+        ) and max(
+            intent["actions"].get("heal", 0.0), intent["matter"].get("life", 0.0)
+        ) < self.settings["healing_self_lock"]
         explicit_tags: set[str] = set()
         for name, tags in MATERIAL_TAGS.items():
-            if matter.get(name, 0.0) > 0.2:
+            if matter.get(name, 0.0) > self.settings["material_target_threshold"]:
                 explicit_tags.update(tags)
-        if target_terms.get("enemy", 0.0) > 0.18:
+        if target_terms.get("enemy", 0.0) > self.settings["explicit_target_threshold"]:
             explicit_tags.add("enemy")
-        if target_terms.get("living", 0.0) > 0.18:
+        if target_terms.get("living", 0.0) > self.settings["explicit_target_threshold"]:
             explicit_tags.add("living")
-        if target_terms.get("inanimate", 0.0) > 0.18:
+        if target_terms.get("inanimate", 0.0) > self.settings["explicit_target_threshold"]:
             explicit_tags.add("inanimate")
-        if target_terms.get("self", 0.0) > 0.45:
+        if target_terms.get("self", 0.0) > 0.45 and not self_is_origin:
             explicit_tags.add("player")
 
         scored: list[tuple[float, WorldObject]] = []
@@ -59,7 +74,7 @@ class TargetResolver:
                 if not matches:
                     continue
                 semantic = 2.4 + matches
-            if obj.id == caster.id and "player" not in explicit_tags:
+            if obj.id == caster.id and ("player" not in explicit_tags or self_is_origin):
                 if intent["logic"].get("except", 0.0) or intent["targets"].get("enemy", 0.0):
                     continue
                 if not around:
@@ -72,17 +87,21 @@ class TargetResolver:
                 spatial = max(0.0, 2.0 - distance / max(radius * 1.8, 1.0))
                 if distance > radius * 2.0 + obj.radius:
                     continue
-            elif geometry.get("line", 0.0) > 0.55 and dot < 0.35:
+            elif geometry.get("line", 0.0) > self.settings["line_threshold"] and dot < self.settings["line_minimum_dot"]:
                 continue
             scored.append((semantic + spatial, obj))
 
         scored.sort(key=lambda item: (-item[0], self._distance(origin, item[1].position), item[1].id))
         if logic.get("all", 0.0) > 0.3:
-            limit = 12
+            limit = int(self.settings["maximum_all_targets"])
         elif logic.get("one", 0.0) > 0.3 or target_terms.get("nearest", 0.0) > 0.3:
             limit = 1
         elif explicit_tags:
             limit = 6 if around else 3
+        elif intent["matter"].get("air", 0.0) > self.settings["distributed_air_threshold"] and max(
+            intent["matter"].get("force", 0.0), intent["movement"].get("push", 0.0)
+        ) > self.settings["distributed_air_threshold"]:
+            limit = int(self.settings["maximum_distributed_targets"])
         else:
             limit = 4 if around else 1
         return [item[1] for item in scored[:limit]]
@@ -90,4 +109,3 @@ class TargetResolver:
     @staticmethod
     def _distance(left: Any, right: Any) -> float:
         return math.hypot(right.x - left.x, right.y - left.y)
-

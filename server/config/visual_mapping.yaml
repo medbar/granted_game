@@ -11,6 +11,7 @@
     ["chain", "TETHER"],
     ["point", "BURST"]
   ],
+  "settings": {"geometry_threshold": 0.24, "push_threshold": 0.25, "around_threshold": 0.2, "base_speed": 3.5, "fast_speed_bonus": 5.5, "minimum_turbulence": 0.04},
   "appearance": {
     "fire": "#ff6b35", "water": "#3aa7ff", "ice": "#a8edff", "steam": "#d9e5e8",
     "air": "#b8f1de", "stone": "#9a9083", "metal": "#d5dae2", "light": "#fff29c",

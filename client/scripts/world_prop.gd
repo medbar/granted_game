@@ -55,6 +55,11 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if health <= 0.0:
+		visible = false
+		collision_layer = 0
+		set_physics_process(false)
+		return
 	velocity = impulse
 	move_and_slide()
 	impulse = impulse.move_toward(Vector2.ZERO, 330.0 * delta)
@@ -118,6 +123,10 @@ func get_snapshot(unit: float) -> Dictionary:
 
 
 func _draw() -> void:
+	if states.has("levitating"):
+		draw_set_transform(Vector2(0, 12), 0.0, Vector2(1.0, 0.42))
+		draw_circle(Vector2.ZERO, 20.0, Color(0.0, 0.0, 0.0, 0.28))
+		draw_set_transform(Vector2(0, -10))
 	if material_name == "ice":
 		draw_circle(Vector2.ZERO, 24.0, Color(0.55, 0.9, 1.0, 0.7))
 		draw_arc(Vector2.ZERO, 24.0, 0.0, TAU, 16, Color("e4fbff"), 3.0)

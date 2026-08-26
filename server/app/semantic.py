@@ -5,6 +5,7 @@ import re
 import unicodedata
 from collections import Counter, defaultdict
 from dataclasses import dataclass
+from functools import lru_cache
 from typing import Any
 
 from .config import anchors_config, spell_settings
@@ -27,13 +28,22 @@ def char_vector(text: str) -> Counter[str]:
     return vector
 
 
-def cosine(left: Counter[str], right: Counter[str]) -> float:
+def vector_norm(vector: Counter[str]) -> float:
+    return math.sqrt(sum(value * value for value in vector.values()))
+
+
+def cosine(
+    left: Counter[str],
+    right: Counter[str],
+    left_norm: float | None = None,
+    right_norm: float | None = None,
+) -> float:
     if not left or not right:
         return 0.0
     shared = left.keys() & right.keys()
     numerator = sum(left[key] * right[key] for key in shared)
-    left_norm = math.sqrt(sum(value * value for value in left.values()))
-    right_norm = math.sqrt(sum(value * value for value in right.values()))
+    left_norm = left_norm if left_norm is not None else vector_norm(left)
+    right_norm = right_norm if right_norm is not None else vector_norm(right)
     return numerator / (left_norm * right_norm) if left_norm and right_norm else 0.0
 
 
@@ -58,6 +68,31 @@ class Anchor:
     weight: float
     mapping: dict[str, float]
     vectors: tuple[Counter[str], ...]
+    vector_norms: tuple[float, ...]
+
+
+@lru_cache(maxsize=1)
+def cached_anchor_embeddings() -> tuple[Anchor, ...]:
+    config = anchors_config()
+    defaults = config.get("defaults", {})
+    anchors: list[Anchor] = []
+    for item in config["anchors"]:
+        phrases = tuple({item["name"], *item.get("phrases", [])})
+        vectors = tuple(char_vector(phrase) for phrase in phrases)
+        anchors.append(
+            Anchor(
+                id=item["id"],
+                family=item["family"],
+                name=item["name"],
+                phrases=phrases,
+                threshold=float(item.get("threshold", defaults.get("threshold", 0.28))),
+                weight=float(item.get("weight", defaults.get("weight", 1.0))),
+                mapping=item.get("mapping", {}),
+                vectors=vectors,
+                vector_norms=tuple(vector_norm(vector) for vector in vectors),
+            )
+        )
+    return tuple(anchors)
 
 
 class SemanticResolver:
@@ -70,38 +105,63 @@ class SemanticResolver:
 
     def __init__(self) -> None:
         self.settings = spell_settings()
-        self.anchors = tuple(self._make_anchor(item) for item in anchors_config()["anchors"])
-
-    @staticmethod
-    def _make_anchor(item: dict[str, Any]) -> Anchor:
-        phrases = tuple({item["name"], *item.get("phrases", [])})
-        return Anchor(
-            id=item["id"],
-            family=item["family"],
-            name=item["name"],
-            phrases=phrases,
-            threshold=float(item.get("threshold", 0.28)),
-            weight=float(item.get("weight", 1.0)),
-            mapping=item.get("mapping", {}),
-            vectors=tuple(char_vector(phrase) for phrase in phrases),
-        )
+        self.anchors = cached_anchor_embeddings()
+        self.backend = self.settings.get("semantic_backend", "char_ngram")
+        self.model_name = self.settings["semantic_model"]
+        self._sentence_model: Any | None = None
+        self._sentence_vectors: dict[str, Any] = {}
+        if self.backend == "sentence_transformer":
+            try:
+                from sentence_transformers import SentenceTransformer
+            except ImportError as error:
+                raise RuntimeError(
+                    "semantic_backend is sentence_transformer; install with `uv sync --extra embeddings`"
+                ) from error
+            self.model_name = self.settings["sentence_transformer_model"]
+            self._sentence_model = SentenceTransformer(self.model_name)
+            self._sentence_vectors = {
+                anchor.id: self._sentence_model.encode(
+                    list(anchor.phrases), normalize_embeddings=True
+                )
+                for anchor in self.anchors
+            }
+        elif self.backend != "char_ngram":
+            raise RuntimeError(f"unsupported semantic_backend: {self.backend}")
 
     def resolve(self, text: str) -> tuple[list[AnchorScore], float]:
         normalized = normalize(text)
         phrase_chunks = chunks(text)
         query_vectors = tuple(char_vector(value) for value in phrase_chunks)
+        query_norms = tuple(vector_norm(vector) for vector in query_vectors)
+        sentence_queries = (
+            self._sentence_model.encode(phrase_chunks, normalize_embeddings=True)
+            if self._sentence_model is not None
+            else None
+        )
         by_family: dict[str, list[AnchorScore]] = defaultdict(list)
 
         for anchor in self.anchors:
-            similarity = max(
-                cosine(query, candidate)
-                for query in query_vectors
-                for candidate in anchor.vectors
+            exact_match = any(
+                len(candidate) >= 3
+                and re.search(rf"(?:^| )({re.escape(candidate)})(?: |$)", normalized)
+                for candidate in (normalize(phrase) for phrase in anchor.phrases)
             )
-            for phrase in anchor.phrases:
-                candidate = normalize(phrase)
-                if len(candidate) >= 3 and re.search(rf"(?:^| )({re.escape(candidate)})(?: |$)", normalized):
-                    similarity = max(similarity, 0.98)
+            if exact_match:
+                similarity = 0.98
+            elif sentence_queries is not None:
+                similarity = max(
+                    float(query @ candidate)
+                    for query in sentence_queries
+                    for candidate in self._sentence_vectors[anchor.id]
+                )
+            else:
+                similarity = max(
+                    cosine(query, candidate, query_norm, candidate_norm)
+                    for query, query_norm in zip(query_vectors, query_norms, strict=True)
+                    for candidate, candidate_norm in zip(
+                        anchor.vectors, anchor.vector_norms, strict=True
+                    )
+                )
             activation = max(0.0, (similarity - anchor.threshold) / (1.0 - anchor.threshold))
             activation = min(1.0, activation * anchor.weight)
             if activation > 0.035:

@@ -1,12 +1,12 @@
 extends Node2D
 
 const UNIT := 64.0
-const CAST_TIME_SCALE := 0.35
-const BACKEND_URL := "http://127.0.0.1:8000"
+const GAMEPLAY_CONFIG_PATH := "res://config/gameplay.json"
 const PlayerScript = preload("res://scripts/player.gd")
 const DwarfScript = preload("res://scripts/dwarf.gd")
 const WorldPropScript = preload("res://scripts/world_prop.gd")
 const MagicEffectScript = preload("res://scripts/magic_effect.gd")
+const RuntimeEffectScript = preload("res://scripts/runtime_effect.gd")
 
 const ARENA := Rect2(-600.0, -330.0, 1200.0, 660.0)
 const WALLS := [
@@ -35,9 +35,18 @@ var current_stroke: Array = []
 var debug_enabled := false
 var last_debug: Dictionary = {}
 var last_spell_text := ""
+var gameplay_config: Dictionary = {}
+var runtime_world_config: Dictionary = {}
+var backend_url := "http://127.0.0.1:8000"
+var cast_time_scale := 0.35
+var snapshot_radius := 12.0
+var max_gesture_points := 256
+var request_timeout_seconds := 2.0
+var runtime_contact_interval := 0.4
 
 var cast_http: HTTPRequest
 var health_http: HTTPRequest
+var config_http: HTTPRequest
 var ui_layer: CanvasLayer
 var cast_tint: ColorRect
 var health_label: Label
@@ -50,12 +59,31 @@ var debug_text: RichTextLabel
 
 
 func _ready() -> void:
+	load_gameplay_config()
 	create_arena()
 	create_actors()
 	create_ui()
 	create_http_clients()
 	request_health()
 	queue_redraw()
+
+
+func load_gameplay_config() -> void:
+	if not FileAccess.file_exists(GAMEPLAY_CONFIG_PATH):
+		return
+	var file := FileAccess.open(GAMEPLAY_CONFIG_PATH, FileAccess.READ)
+	if file == null:
+		return
+	var parsed = JSON.parse_string(file.get_as_text())
+	if typeof(parsed) != TYPE_DICTIONARY:
+		return
+	gameplay_config = parsed
+	backend_url = str(gameplay_config.get("backend_url", backend_url))
+	cast_time_scale = float(gameplay_config.get("cast_time_scale", cast_time_scale))
+	snapshot_radius = float(gameplay_config.get("snapshot_radius", snapshot_radius))
+	max_gesture_points = int(gameplay_config.get("max_gesture_points", max_gesture_points))
+	request_timeout_seconds = float(gameplay_config.get("request_timeout_seconds", request_timeout_seconds))
+	runtime_contact_interval = float(gameplay_config.get("runtime_contact_interval", runtime_contact_interval))
 
 
 func create_arena() -> void:
@@ -161,13 +189,17 @@ func create_ui() -> void:
 
 func create_http_clients() -> void:
 	cast_http = HTTPRequest.new()
-	cast_http.timeout = 2.0
+	cast_http.timeout = request_timeout_seconds
 	cast_http.request_completed.connect(_on_cast_request_completed)
 	add_child(cast_http)
 	health_http = HTTPRequest.new()
 	health_http.timeout = 1.5
 	health_http.request_completed.connect(_on_health_request_completed)
 	add_child(health_http)
+	config_http = HTTPRequest.new()
+	config_http.timeout = request_timeout_seconds
+	config_http.request_completed.connect(_on_config_request_completed)
+	add_child(config_http)
 
 
 func make_label(position_value: Vector2, size_value: Vector2, font_size: int) -> Label:
@@ -196,7 +228,7 @@ func panel_style(background: Color, border: Color, width: int, radius: int) -> S
 
 func request_health() -> void:
 	connection_label.text = "Backend: соединение…"
-	var error := health_http.request(BACKEND_URL + "/health")
+	var error := health_http.request(backend_url + "/health")
 	if error != OK:
 		connection_label.text = "Backend: недоступен"
 		connection_label.modulate = Color("ff8f8f")
@@ -206,9 +238,23 @@ func _on_health_request_completed(result: int, response_code: int, _headers: Pac
 	if result == HTTPRequest.RESULT_SUCCESS and response_code == 200:
 		connection_label.text = "Backend: готов • 100 якорей"
 		connection_label.modulate = Color("78e08f")
+		config_http.request(backend_url + "/world/config")
 	else:
 		connection_label.text = "Backend: запустите server"
 		connection_label.modulate = Color("ffb36b")
+
+
+func _on_config_request_completed(result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray) -> void:
+	if result != HTTPRequest.RESULT_SUCCESS or response_code != 200:
+		return
+	var parsed = JSON.parse_string(body.get_string_from_utf8())
+	if typeof(parsed) != TYPE_DICTIONARY:
+		return
+	runtime_world_config = parsed
+	var server_spell: Dictionary = runtime_world_config.get("spell", {})
+	cast_time_scale = float(server_spell.get("cast_time_scale", cast_time_scale))
+	snapshot_radius = float(server_spell.get("snapshot_radius", snapshot_radius))
+	max_gesture_points = int(server_spell.get("max_gesture_points", max_gesture_points))
 
 
 func _process(_delta: float) -> void:
@@ -272,7 +318,7 @@ func begin_cast() -> void:
 	gesture_strokes.clear()
 	current_stroke = []
 	cast_started_ms = Time.get_ticks_msec()
-	Engine.time_scale = CAST_TIME_SCALE
+	Engine.time_scale = cast_time_scale
 	player.movement_enabled = false
 	cast_tint.color = Color(0.16, 0.31, 0.58, 0.16)
 	cast_label.visible = true
@@ -311,13 +357,13 @@ func confirm_cast() -> void:
 	cast_counter += 1
 	var payload := build_cast_payload(text)
 	var headers := PackedStringArray(["Content-Type: application/json"])
-	var error := cast_http.request(BACKEND_URL + "/cast", headers, HTTPClient.METHOD_POST, JSON.stringify(payload))
+	var error := cast_http.request(backend_url + "/cast", headers, HTTPClient.METHOD_POST, JSON.stringify(payload))
 	if error != OK:
 		cast_failed("backend request could not start")
 
 
 func append_gesture_point(screen_position: Vector2) -> void:
-	if current_stroke.size() + total_gesture_points() >= 256:
+	if current_stroke.size() + total_gesture_points() >= max_gesture_points:
 		return
 	var viewport_size := get_viewport_rect().size
 	var world_position := get_global_mouse_position()
@@ -358,12 +404,15 @@ func build_cast_payload(text: String) -> Dictionary:
 
 
 func collect_world_snapshot() -> Array:
-	var objects: Array = [player.get_snapshot(UNIT), water_snapshot()]
+	var objects: Array = [player.get_snapshot(UNIT)]
+	if player.global_position.distance_to(water_position) <= snapshot_radius * UNIT + water_radius:
+		objects.append(water_snapshot())
 	for dwarf in dwarfs:
-		if dwarf.visible:
+		if dwarf.visible and player.global_position.distance_to(dwarf.global_position) <= snapshot_radius * UNIT:
 			objects.append(dwarf.get_snapshot(UNIT))
 	for prop in props:
-		objects.append(prop.get_snapshot(UNIT))
+		if prop.visible and player.global_position.distance_to(prop.global_position) <= snapshot_radius * UNIT:
+			objects.append(prop.get_snapshot(UNIT))
 	return objects
 
 
@@ -416,6 +465,10 @@ func apply_spell_response(response: Dictionary) -> void:
 
 
 func apply_world_action(action: Dictionary) -> void:
+	var action_type := str(action.get("type", ""))
+	if action_type == "SPAWN_EFFECT_ENTITY":
+		spawn_runtime_effect(action.get("effect", {}))
+		return
 	var target_id := str(action.get("target_id", ""))
 	if target_id == "water_pool_01":
 		match str(action.get("type", "")):
@@ -425,13 +478,97 @@ func apply_world_action(action: Dictionary) -> void:
 				water_state = str(action.get("material", water_state))
 		return
 	if object_index.has(target_id) and is_instance_valid(object_index[target_id]):
-		object_index[target_id].apply_world_action(action, UNIT)
+		if action_type == "DESTROY_OBJECT":
+			object_index[target_id].apply_world_action({"type": "DAMAGE", "amount": 10000.0}, UNIT)
+		else:
+			object_index[target_id].apply_world_action(action, UNIT)
 
 
 func spawn_visual(descriptor: Dictionary) -> void:
 	var effect := MagicEffectScript.new()
 	effect.setup(descriptor, UNIT)
 	add_child(effect)
+
+
+func spawn_runtime_effect(effect_data: Dictionary) -> void:
+	if effect_data.is_empty():
+		return
+	var runtime_effect := RuntimeEffectScript.new()
+	runtime_effect.setup(effect_data, UNIT, self, runtime_contact_interval)
+	add_child(runtime_effect)
+
+
+func get_runtime_candidates() -> Array:
+	var candidates: Array = [
+		{"id": "player", "position": player.global_position, "radius": 18.0}
+	]
+	for dwarf in dwarfs:
+		if dwarf.visible:
+			candidates.append({"id": dwarf.object_id, "position": dwarf.global_position, "radius": 16.0})
+	for prop in props:
+		if prop.visible:
+			candidates.append({"id": prop.object_id, "position": prop.global_position, "radius": 20.0})
+	if water_state != "steam":
+		candidates.append({"id": "water_pool_01", "position": water_position, "radius": water_radius})
+	return candidates
+
+
+func apply_runtime_payload(target_id: String, payload: Dictionary, direction: Vector2) -> void:
+	var snapshot: Dictionary
+	if target_id == "water_pool_01":
+		snapshot = water_snapshot()
+	elif object_index.has(target_id) and is_instance_valid(object_index[target_id]):
+		snapshot = object_index[target_id].get_snapshot(UNIT)
+	else:
+		return
+	var material: Dictionary = snapshot.get("material", {})
+	var tags: Array = snapshot.get("tags", [])
+	var reactions: Dictionary = runtime_world_config.get("reactions", {})
+	var heat_config: Dictionary = reactions.get("heat", {"temperature_delta": 0.52})
+	var cold_config: Dictionary = reactions.get("cold", {"temperature_delta": 0.52, "living_freeze_strength": 0.85})
+	var phases: Dictionary = reactions.get("phase_changes", {"water_freezes_at": 0.25, "water_boils_at": 0.8})
+	var burning: Dictionary = reactions.get("burning", {"flammability_threshold": 0.3, "ignition_strength": 0.35, "duration": 5.0})
+	var electricity_config: Dictionary = reactions.get("electricity", {"wetness_threshold": 0.5, "wet_conductivity_multiplier": 2.0, "base_damage": 5.0, "conductivity_damage": 14.0, "state_duration": 1.6})
+	var force_config: Dictionary = reactions.get("force", {"base_strength": 4.5})
+	var harm_config: Dictionary = reactions.get("harm", {"base_damage": 18.0})
+	var poison_config: Dictionary = reactions.get("poison", {"duration": 5.0})
+	var power := float(payload.get("power", 1.0))
+	var heat := float(payload.get("heat", 0.0))
+	var cold := float(payload.get("cold", 0.0))
+	var electricity := float(payload.get("electricity", 0.0))
+	var force := float(payload.get("force", 0.0))
+	var harm := float(payload.get("harm", 0.0))
+	var poison := float(payload.get("poison", 0.0))
+	if heat > 0.08:
+		apply_world_action({"type": "CHANGE_TEMPERATURE", "target_id": target_id, "amount": heat * power * float(heat_config.get("temperature_delta", 0.52))})
+		if float(material.get("flammability", 0.0)) >= float(burning.get("flammability_threshold", 0.3)) and heat * power >= float(burning.get("ignition_strength", 0.35)):
+			apply_world_action({"type": "ADD_STATE", "target_id": target_id, "state": "burning", "duration": float(burning.get("duration", 5.0))})
+		if tags.has("living"):
+			apply_world_action({"type": "DAMAGE", "target_id": target_id, "amount": float(heat_config.get("living_damage", 12.0)) * heat * power})
+	if cold > 0.08:
+		apply_world_action({"type": "CHANGE_TEMPERATURE", "target_id": target_id, "amount": -cold * power * float(cold_config.get("temperature_delta", 0.52))})
+		if tags.has("living"):
+			apply_world_action({"type": "ADD_STATE", "target_id": target_id, "state": "slowed", "duration": float(cold_config.get("slowed_duration", 3.0))})
+			if cold * power >= float(cold_config.get("living_freeze_strength", 0.85)):
+				apply_world_action({"type": "ADD_STATE", "target_id": target_id, "state": "frozen", "duration": float(cold_config.get("frozen_duration", 1.6))})
+	if electricity > 0.08:
+		var conductivity := float(material.get("conductivity", 0.0))
+		if float(material.get("wetness", 0.0)) >= float(electricity_config.get("wetness_threshold", 0.5)) or tags.has("water"):
+			conductivity *= float(electricity_config.get("wet_conductivity_multiplier", 2.0))
+		apply_world_action({"type": "DAMAGE", "target_id": target_id, "amount": (float(electricity_config.get("base_damage", 5.0)) + float(electricity_config.get("conductivity_damage", 14.0)) * clampf(conductivity, 0.0, 1.0)) * electricity * power})
+		apply_world_action({"type": "ADD_STATE", "target_id": target_id, "state": "electrified", "duration": float(electricity_config.get("state_duration", 1.6))})
+	if force > 0.08:
+		var strength := force * power * float(force_config.get("base_strength", 4.5)) / maxf(0.15, float(material.get("mass", 1.0)))
+		apply_world_action({"type": "APPLY_FORCE", "target_id": target_id, "direction": {"x": direction.x, "y": direction.y}, "strength": strength})
+	if harm > 0.08:
+		apply_world_action({"type": "DAMAGE", "target_id": target_id, "amount": float(harm_config.get("base_damage", 18.0)) * harm * power})
+	if poison > 0.08 and tags.has("living"):
+		apply_world_action({"type": "ADD_STATE", "target_id": target_id, "state": "poisoned", "duration": float(poison_config.get("duration", 5.0))})
+	if target_id == "water_pool_01":
+		if water_state == "water" and water_temperature <= float(phases.get("water_freezes_at", 0.25)):
+			water_state = "ice"
+		elif water_state == "water" and water_temperature >= float(phases.get("water_boils_at", 0.8)):
+			water_state = "steam"
 
 
 func cast_failed(reason: String) -> void:
@@ -508,11 +645,15 @@ func reset_sandbox() -> void:
 	water_state = "water"
 	water_temperature = 0.5
 	player.health = 100.0
+	player.temperature = 0.5
+	player.wetness = 0.0
 	player.global_position = Vector2(-260, 30)
 	player.states.clear()
 	for dwarf in dwarfs:
 		dwarf.health = 58.0
 		dwarf.states.clear()
+		dwarf.temperature = 0.5
+		dwarf.wetness = 0.0
 		dwarf.visible = true
 		dwarf.global_position = dwarf.home
 		dwarf.set_physics_process(true)
@@ -521,6 +662,9 @@ func reset_sandbox() -> void:
 		prop.temperature = 0.5
 		prop.wetness = 0.0
 		prop.states.clear()
+		prop.visible = true
+		prop.collision_layer = 1
+		prop.set_physics_process(true)
 	connection_label.text = "Sandbox reset"
 	connection_label.modulate = Color("d9e5e8")
 

@@ -1,6 +1,8 @@
 param(
     [Parameter(Mandatory = $true)]
-    [string]$GodotPath
+    [string]$GodotPath,
+    [string]$UvPath = "",
+    [switch]$SkipSync
 )
 
 $ErrorActionPreference = "Stop"
@@ -12,16 +14,38 @@ if (-not (Test-Path -LiteralPath $GodotPath -PathType Leaf)) {
     throw "Godot executable was not found at: $GodotPath"
 }
 $godot = (Resolve-Path -LiteralPath $GodotPath).Path
-$uv = Get-Command uv -ErrorAction SilentlyContinue
-if (-not $uv) {
-    throw "uv is required for verification."
+$verificationData = Join-Path $projectRoot ".verification\godot"
+$env:APPDATA = Join-Path $verificationData "roaming"
+$env:LOCALAPPDATA = Join-Path $verificationData "local"
+New-Item -ItemType Directory -Path $env:APPDATA, $env:LOCALAPPDATA -Force | Out-Null
+$uvCommand = $null
+if (-not $SkipSync) {
+    $uvCommand = if ($UvPath) {
+        if (-not (Test-Path -LiteralPath $UvPath -PathType Leaf)) {
+            throw "uv executable was not found at: $UvPath"
+        }
+        (Resolve-Path -LiteralPath $UvPath).Path
+    }
+    else {
+        $command = Get-Command uv -ErrorAction SilentlyContinue
+        if ($command) { $command.Source } else { $null }
+    }
+    if (-not $uvCommand) {
+        throw "uv is required for verification unless -SkipSync is used with an existing server/.venv."
+    }
 }
 
 Push-Location $serverRoot
 try {
-    & $uv.Source sync
-    if ($LASTEXITCODE -ne 0) { throw "uv sync failed" }
-    & $uv.Source run pytest -p no:cacheprovider
+    if (-not $SkipSync) {
+        & $uvCommand sync
+        if ($LASTEXITCODE -ne 0) { throw "uv sync failed" }
+    }
+    $python = Join-Path $serverRoot ".venv\Scripts\python.exe"
+    if (-not (Test-Path -LiteralPath $python -PathType Leaf)) {
+        throw "server/.venv is missing; run verification without -SkipSync first."
+    }
+    & $python -m pytest -p no:cacheprovider
     if ($LASTEXITCODE -ne 0) { throw "backend tests failed" }
 }
 finally {
@@ -31,7 +55,6 @@ finally {
 & $godot --headless --path $clientRoot --script res://tests/smoke_runner.gd
 if ($LASTEXITCODE -ne 0) { throw "Godot client smoke tests failed" }
 
-$python = Join-Path $serverRoot ".venv\Scripts\python.exe"
 $backend = Start-Process -FilePath $python -ArgumentList @("-m", "uvicorn", "app.main:app", "--host", "127.0.0.1", "--port", "8000") -WorkingDirectory $serverRoot -PassThru -WindowStyle Hidden
 try {
     $ready = $false
@@ -58,4 +81,3 @@ finally {
 }
 
 Write-Host "All Granted Game verification gates passed."
-

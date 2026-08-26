@@ -1,5 +1,6 @@
 param(
-    [string]$GodotPath = ""
+    [string]$GodotPath = "",
+    [string]$UvPath = ""
 )
 
 $ErrorActionPreference = "Stop"
@@ -25,14 +26,23 @@ function Resolve-GodotExecutable {
 }
 
 $godot = Resolve-GodotExecutable $GodotPath
-$uv = Get-Command uv -ErrorAction SilentlyContinue
-if (-not $uv) {
+$uvCommand = if ($UvPath) {
+    if (-not (Test-Path -LiteralPath $UvPath -PathType Leaf)) {
+        throw "uv executable was not found at: $UvPath"
+    }
+    (Resolve-Path -LiteralPath $UvPath).Path
+}
+else {
+    $command = Get-Command uv -ErrorAction SilentlyContinue
+    if ($command) { $command.Source } else { $null }
+}
+if (-not $uvCommand) {
     throw "uv is required. Install it from https://docs.astral.sh/uv/getting-started/installation/"
 }
 
 Push-Location $serverRoot
 try {
-    & $uv.Source sync
+    & $uvCommand sync
     if ($LASTEXITCODE -ne 0) {
         throw "Backend dependency setup failed."
     }
@@ -67,4 +77,3 @@ finally {
         Stop-Process -Id $backend.Id -Force
     }
 }
-

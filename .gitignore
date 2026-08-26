@@ -9,3 +9,4 @@ server/cast_debug.jsonl
 client/.godot/
 client/export.cfg
 build/
+.verification/

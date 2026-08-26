@@ -89,6 +89,9 @@ To run the backend suite, isolated Godot gameplay smoke test, and live Godot↔F
 ./verify.ps1 -GodotPath "C:\path\to\Godot_v4.7.2-stable_win64_console.exe"
 ```
 
+If `uv` is not on `PATH`, the PowerShell scripts also accept `-UvPath "C:\path\to\uv.exe"`.
+On an already-synchronized checkout, `verify.ps1 -SkipSync` reuses `server/.venv`.
+
 Health and interactive API documentation are available at:
 
 - `http://127.0.0.1:8000/health`

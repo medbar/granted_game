@@ -1,2 +1,1 @@
-"""Granted Game spell compiler backend."""
-
+"""Granted Game free-form genie wish interpreter backend."""

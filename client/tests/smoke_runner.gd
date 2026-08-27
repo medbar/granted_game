@@ -25,6 +25,8 @@ func run() -> void:
 		await process_frame
 
 	check(game.dwarfs.size() >= 5, "arena contains at least five gnomes")
+	check(is_instance_valid(game.genie), "the player has a genie companion")
+	check(game.genie.companion == game.player, "the genie follows the player rather than replacing them")
 	check(game.props.size() >= 3, "arena contains several physical props")
 	check(game.object_index.has("tree_01"), "arena contains a flammable object")
 	check(game.water_snapshot()["material"]["name"] == "water", "arena exposes a water object")
@@ -58,13 +60,14 @@ func run() -> void:
 
 	attacker.global_position = game.player.global_position + Vector2(180, 0)
 	var enemy_before: Vector2 = attacker.global_position
-	game.begin_cast()
-	check(game.casting, "Space-equivalent cast entry enables cast mode")
-	check(is_equal_approx(Engine.time_scale, game.cast_time_scale), "cast uses configured slow motion")
-	check(game.spell_input.visible and not game.player.movement_enabled, "cast shows text input and suspends WASD")
+	game.begin_wish()
+	check(game.casting, "Space-equivalent input opens a request to the genie")
+	check(game.genie.wish_active, "the genie visibly reacts while listening to a wish")
+	check(is_equal_approx(Engine.time_scale, game.cast_time_scale), "wish entry uses configured slow motion")
+	check(game.spell_input.visible and not game.player.movement_enabled, "wish mode shows text input and suspends WASD")
 	for _frame in range(12):
 		await physics_frame
-	check(attacker.global_position.distance_to(enemy_before) > 0.1, "world simulation continues during cast slow motion")
+	check(attacker.global_position.distance_to(enemy_before) > 0.1, "world simulation continues while the player asks the genie")
 
 	game.spell_input.text = "заморозь воду"
 	game.gesture_strokes = [[
@@ -73,7 +76,8 @@ func run() -> void:
 		{"t_ms": 200, "screen_x": 0.4, "screen_y": 0.5, "world_x": 1.0, "world_y": 1.0}
 	]]
 	var payload: Dictionary = game.build_cast_payload(game.spell_input.text)
-	check(payload["spell_text"] == "заморозь воду", "Cyrillic text survives the client request contract")
+	check(payload["wish_text"] == "заморозь воду", "Cyrillic wish text survives the client request contract")
+	check(is_equal_approx(float(payload["caster"]["position"]["x"]), game.genie.global_position.x / game.UNIT), "wish effects originate from the genie")
 	check(payload["gesture"]["strokes"].size() == 1, "gesture strokes enter the client request contract")
 
 	var response := {
@@ -91,7 +95,7 @@ func run() -> void:
 	check(game.water_state == "ice", "generic world action changes water into ice")
 	check(game.last_debug == response, "response populates developer debug data")
 	game.finish_cast_mode()
-	check(is_equal_approx(Engine.time_scale, 1.0) and not game.casting, "time returns to normal after casting")
+	check(is_equal_approx(Engine.time_scale, 1.0) and not game.casting and not game.genie.wish_active, "time returns to normal after the genie acts")
 
 	var primitives := ["BURST", "PROJECTILE", "BEAM", "LINE", "RING", "FIELD", "CLOUD", "TRAIL", "TETHER", "SURFACE_OVERLAY"]
 	for primitive in primitives:
@@ -105,9 +109,9 @@ func run() -> void:
 	game._input(debug_event)
 	check(game.debug_panel.visible, "F3 opens developer debug information")
 
-	game.begin_cast()
+	game.begin_wish()
 	game.cast_failed("deliberate smoke-test failure")
-	check(not game.casting and is_equal_approx(Engine.time_scale, 1.0), "backend failure fizzles and safely exits cast mode")
+	check(not game.casting and is_equal_approx(Engine.time_scale, 1.0), "backend failure safely exits wish mode")
 	finish()
 
 

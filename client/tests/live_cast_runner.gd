@@ -10,7 +10,7 @@ func _initialize() -> void:
 func check(condition: bool, message: String) -> void:
 	if not condition:
 		failures.append(message)
-		push_error("LIVE CAST: " + message)
+		push_error("LIVE WISH: " + message)
 
 
 func circle_points(center: Vector2, radius: float) -> Array:
@@ -29,8 +29,8 @@ func line_points(origin: Vector2, direction: Vector2) -> Array:
 	]
 
 
-func cast_spell(game, text: String, points: Array) -> bool:
-	game.begin_cast()
+func ask_wish(game, text: String, points: Array) -> bool:
+	game.begin_wish()
 	game.spell_input.text = text
 	game.gesture_strokes = [points]
 	game.confirm_cast()
@@ -50,35 +50,37 @@ func run() -> void:
 		await process_frame
 
 	game.player.global_position = game.water_position - Vector2(145, 0)
+	game.genie.snap_to_companion()
+	await process_frame
 	var pool_center: Vector2 = game.water_position / game.UNIT
-	var freeze_ok: bool = await cast_spell(game, "заморозь воду", circle_points(pool_center, 1.2))
-	check(freeze_ok, "Godot receives a successful /cast response")
+	var freeze_ok: bool = await ask_wish(game, "заморозь воду", circle_points(pool_center, 1.2))
+	check(freeze_ok, "Godot receives a successful /wish response")
 	check(game.water_state == "ice", "live backend response freezes the pool")
 	check(game.last_debug.get("debug", {}).get("selected_targets", []).has("water_pool_01"), "live target resolution selects the pool")
 
 	game.water_state = "water"
 	game.water_temperature = 0.5
-	var steam_ok: bool = await cast_spell(game, "создай огонь в воде", circle_points(pool_center, 0.8))
-	check(steam_ok, "a second live cast completes")
+	var steam_ok: bool = await ask_wish(game, "создай огонь в воде", circle_points(pool_center, 0.8))
+	check(steam_ok, "a second live wish completes")
 	check(game.water_state == "steam", "fire in water resolves through heat and phase rules into steam")
 
 	game.reset_sandbox()
 	game.player.global_position = Vector2(-250, 0)
 	game.dwarfs[0].global_position = Vector2(-50, 0)
 	game.dwarfs[1].global_position = Vector2(10, 35)
-	var origin: Vector2 = game.player.global_position / game.UNIT
-	var push_ok: bool = await cast_spell(game, "сильно отбрось всех врагов передо мной", line_points(origin, Vector2.RIGHT))
-	check(push_ok, "enemy push cast completes")
+	var origin: Vector2 = game.genie.global_position / game.UNIT
+	var push_ok: bool = await ask_wish(game, "сильно отбрось всех врагов передо мной", line_points(origin, Vector2.RIGHT))
+	check(push_ok, "enemy push wish completes")
 	var targets: Array = game.last_debug.get("debug", {}).get("selected_targets", [])
 	check(not targets.has("player"), "'from me' treats self as the force origin, not a target")
 	check(targets.has("dwarf_01") and targets.has("dwarf_02"), "precise all-enemies wording selects multiple enemies")
 
 	Engine.time_scale = 1.0
 	if failures.is_empty():
-		print("LIVE_CAST_OK: Godot and FastAPI completed all integration scenarios")
+		print("LIVE_WISH_OK: the genie and FastAPI completed all integration scenarios")
 		quit(0)
 	else:
-		print("LIVE_CAST_FAILED: %d checks failed" % failures.size())
+		print("LIVE_WISH_FAILED: %d checks failed" % failures.size())
 		for failure in failures:
 			print(" - " + failure)
 		quit(1)

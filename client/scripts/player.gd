@@ -96,7 +96,7 @@ func get_snapshot(unit: float) -> Dictionary:
 	return {
 		"id": "player",
 		"kind": "creature",
-		"tags": ["living", "player", "mage", "organic"],
+		"tags": ["living", "player", "requester", "adventurer", "organic"],
 		"position": {"x": global_position.x / unit, "y": global_position.y / unit},
 		"velocity": {"x": velocity.x / unit, "y": velocity.y / unit},
 		"radius": BODY_RADIUS / unit,
@@ -110,17 +110,19 @@ func _draw() -> void:
 	if states.has("levitating"):
 		draw_ellipse_shadow(Vector2(0, 12))
 		draw_set_transform(Vector2(0, -10))
-	var aura := Color("7f5af0")
+	var aura := Color("d8a854")
 	if states.has("burning"):
 		aura = Color("ff6b35")
 	elif states.has("electrified"):
 		aura = Color("a8edff")
-	draw_circle(Vector2.ZERO, BODY_RADIUS + 6.0, Color(aura, 0.24))
-	draw_circle(Vector2.ZERO, BODY_RADIUS, Color("29234f"))
+	draw_circle(Vector2.ZERO, BODY_RADIUS + 5.0, Color(aura, 0.18))
+	draw_circle(Vector2.ZERO, BODY_RADIUS, Color("493827"))
 	draw_circle(Vector2(0.0, -5.0), 10.0, Color("f2c9a5"))
-	draw_colored_polygon(PackedVector2Array([Vector2(-13, 3), Vector2(13, 3), Vector2(8, 18), Vector2(-8, 18)]), Color("634bb3"))
-	draw_line(facing * 4.0, facing * 30.0, Color("d7b56d"), 4.0, true)
-	draw_circle(facing * 32.0, 4.5, Color("b8f1ff"))
+	draw_colored_polygon(PackedVector2Array([Vector2(-13, 3), Vector2(13, 3), Vector2(8, 18), Vector2(-8, 18)]), Color("9c5f35"))
+	draw_arc(Vector2(0, -7), 9.0, PI, TAU, 12, Color("4a3025"), 4.0)
+	var pointing_hand := facing.normalized() * 18.0
+	draw_line(facing.normalized() * 5.0, pointing_hand, Color("e8b991"), 4.0, true)
+	draw_circle(pointing_hand, 3.0, Color("f2c9a5"))
 
 
 func draw_ellipse_shadow(offset: Vector2) -> void:

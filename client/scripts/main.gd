@@ -3,6 +3,7 @@ extends Node2D
 const UNIT := 64.0
 const GAMEPLAY_CONFIG_PATH := "res://config/gameplay.json"
 const PlayerScript = preload("res://scripts/player.gd")
+const GenieScript = preload("res://scripts/genie.gd")
 const DwarfScript = preload("res://scripts/dwarf.gd")
 const WorldPropScript = preload("res://scripts/world_prop.gd")
 const MagicEffectScript = preload("res://scripts/magic_effect.gd")
@@ -17,6 +18,7 @@ const WALLS := [
 ]
 
 var player: CharacterBody2D
+var genie: Node2D
 var dwarfs: Array[CharacterBody2D] = []
 var props: Array[CharacterBody2D] = []
 var object_index: Dictionary = {}
@@ -104,6 +106,9 @@ func create_actors() -> void:
 	player.arena_bounds = ARENA
 	add_child(player)
 	object_index["player"] = player
+	genie = GenieScript.new()
+	genie.setup(player)
+	add_child(genie)
 	var camera := Camera2D.new()
 	camera.position_smoothing_enabled = true
 	camera.position_smoothing_speed = 5.0
@@ -147,10 +152,10 @@ func create_ui() -> void:
 	connection_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	hint_label = make_label(Vector2(360, 670), Vector2(560, 32), 17)
 	hint_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	hint_label.text = "WASD — движение    SPACE — начать заклинание    F3 — отладка"
+	hint_label.text = "WASD — движение    SPACE — попросить джина    F3 — отладка"
 
 	cast_label = make_label(Vector2(160, 582), Vector2(960, 40), 18)
-	cast_label.text = "CASTING  •  удерживайте ЛКМ и ведите мышью, затем ENTER"
+	cast_label.text = "ЖЕЛАНИЕ  •  напишите просьбу; ЛКМ — указать джину направление; ENTER"
 	cast_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	cast_label.modulate = Color("a8edff")
 	cast_label.visible = false
@@ -158,7 +163,7 @@ func create_ui() -> void:
 	spell_input = LineEdit.new()
 	spell_input.position = Vector2(160, 622)
 	spell_input.size = Vector2(960, 52)
-	spell_input.placeholder_text = "Что должна сделать магия?"
+	spell_input.placeholder_text = "Джин, я желаю…"
 	spell_input.max_length = 300
 	spell_input.add_theme_font_size_override("font_size", 22)
 	spell_input.add_theme_color_override("font_color", Color("eef6ff"))
@@ -281,7 +286,7 @@ func _input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 			return
 		if event.keycode == KEY_SPACE and not casting:
-			begin_cast()
+			begin_wish()
 			get_viewport().set_input_as_handled()
 			return
 		if event.keycode == KEY_ESCAPE and casting:
@@ -320,18 +325,23 @@ func begin_cast() -> void:
 	cast_started_ms = Time.get_ticks_msec()
 	Engine.time_scale = cast_time_scale
 	player.movement_enabled = false
-	cast_tint.color = Color(0.16, 0.31, 0.58, 0.16)
+	genie.set_wish_state(true, false)
+	cast_tint.color = Color(0.06, 0.42, 0.43, 0.16)
 	cast_label.visible = true
 	spell_input.visible = true
 	spell_input.editable = true
 	spell_input.text = ""
 	spell_input.grab_focus()
-	hint_label.text = "ENTER — сотворить    ESC — отменить"
+	hint_label.text = "ENTER — попросить    ESC — передумать"
+
+
+func begin_wish() -> void:
+	begin_cast()
 
 
 func cancel_cast() -> void:
 	finish_cast_mode()
-	connection_label.text = "Заклинание отменено"
+	connection_label.text = "Вы передумали просить джина"
 	connection_label.modulate = Color("d9e5e8")
 
 
@@ -344,7 +354,7 @@ func confirm_cast() -> void:
 		return
 	var text := spell_input.text.strip_edges()
 	if text.is_empty():
-		spell_input.placeholder_text = "Введите хотя бы один символ"
+		spell_input.placeholder_text = "Скажите джину, чего вы желаете"
 		return
 	if drawing_gesture and current_stroke.size() > 1:
 		gesture_strokes.append(current_stroke.duplicate(true))
@@ -352,12 +362,13 @@ func confirm_cast() -> void:
 		current_stroke = []
 	waiting_for_backend = true
 	spell_input.editable = false
-	cast_label.text = "COMPILING MAGIC…  мир продолжает двигаться"
+	cast_label.text = "ДЖИН ИСПОЛНЯЕТ ЖЕЛАНИЕ…  мир продолжает двигаться"
+	genie.set_wish_state(true, true)
 	last_spell_text = text
 	cast_counter += 1
 	var payload := build_cast_payload(text)
 	var headers := PackedStringArray(["Content-Type: application/json"])
-	var error := cast_http.request(backend_url + "/cast", headers, HTTPClient.METHOD_POST, JSON.stringify(payload))
+	var error := cast_http.request(backend_url + "/wish", headers, HTTPClient.METHOD_POST, JSON.stringify(payload))
 	if error != OK:
 		cast_failed("backend request could not start")
 
@@ -388,14 +399,14 @@ func build_cast_payload(text: String) -> Dictionary:
 	for stroke in gesture_strokes:
 		stroke_payload.append({"points": stroke})
 	return {
-		"request_id": "cast-%06d" % cast_counter,
-		"spell_text": text,
+		"request_id": "wish-%06d" % cast_counter,
+		"wish_text": text,
 		"seed": cast_counter,
 		"caster": {
 			"id": "player",
-			"position": {"x": player.global_position.x / UNIT, "y": player.global_position.y / UNIT},
-			"velocity": {"x": player.velocity.x / UNIT, "y": player.velocity.y / UNIT},
-			"facing": {"x": player.facing.x, "y": player.facing.y}
+			"position": {"x": genie.global_position.x / UNIT, "y": genie.global_position.y / UNIT},
+			"velocity": {"x": 0.0, "y": 0.0},
+			"facing": {"x": genie.facing.x, "y": genie.facing.y}
 		},
 		"gesture": {"strokes": stroke_payload},
 		"world": {"objects": collect_world_snapshot()},
@@ -450,7 +461,7 @@ func _on_cast_request_completed(result: int, response_code: int, _headers: Packe
 		return
 	apply_spell_response(parsed)
 	finish_cast_mode()
-	connection_label.text = "Backend: магия скомпилирована"
+	connection_label.text = "Джин: желание исполнено"
 	connection_label.modulate = Color("78e08f")
 
 
@@ -574,14 +585,14 @@ func apply_runtime_payload(target_id: String, payload: Dictionary, direction: Ve
 func cast_failed(reason: String) -> void:
 	spawn_visual({
 		"primitive": "BURST", "appearance": ["force", "darkness"],
-		"origin": {"x": player.global_position.x / UNIT, "y": player.global_position.y / UNIT},
-		"direction": {"x": player.facing.x, "y": player.facing.y},
+		"origin": {"x": genie.global_position.x / UNIT, "y": genie.global_position.y / UNIT},
+		"direction": {"x": genie.facing.x, "y": genie.facing.y},
 		"radius": 0.65, "speed": 0.0, "intensity": 0.35, "turbulence": 0.9, "lifetime": 0.65
 	})
-	last_debug = {"error": reason, "spell_text": last_spell_text}
+	last_debug = {"error": reason, "wish_text": last_spell_text}
 	update_debug_panel()
 	finish_cast_mode()
-	connection_label.text = "Backend error • магия рассеялась"
+	connection_label.text = "Джин не смог исполнить желание"
 	connection_label.modulate = Color("ff8f8f")
 
 
@@ -591,13 +602,14 @@ func finish_cast_mode() -> void:
 	waiting_for_backend = false
 	drawing_gesture = false
 	player.movement_enabled = true
-	cast_tint.color = Color(0.16, 0.31, 0.58, 0.0)
+	genie.set_wish_state(false, false)
+	cast_tint.color = Color(0.06, 0.42, 0.43, 0.0)
 	cast_label.visible = false
-	cast_label.text = "CASTING  •  удерживайте ЛКМ и ведите мышью, затем ENTER"
+	cast_label.text = "ЖЕЛАНИЕ  •  напишите просьбу; ЛКМ — указать джину направление; ENTER"
 	spell_input.visible = false
 	spell_input.editable = true
 	spell_input.release_focus()
-	hint_label.text = "WASD — движение    SPACE — начать заклинание    F3 — отладка    R — сброс"
+	hint_label.text = "WASD — движение    SPACE — попросить джина    F3 — отладка    R — сброс"
 	gesture_strokes.clear()
 	current_stroke = []
 	queue_redraw()
@@ -607,15 +619,15 @@ func update_debug_panel() -> void:
 	if not is_instance_valid(debug_text):
 		return
 	if last_debug.is_empty():
-		debug_text.text = "[b]DEVELOPER MAGIC VIEW[/b]\n\nСотворите первое заклинание.\n\nЗдесь появятся якоря, геометрия жеста, цели, правила мира и задержка REST."
+		debug_text.text = "[b]GENIE WISH VIEW[/b]\n\nПопросите джина исполнить первое желание.\n\nЗдесь появятся якоря, указание жестом, цели, правила мира и задержка REST."
 		return
 	if last_debug.has("error"):
-		debug_text.text = "[b][color=#ff8f8f]BACKEND ERROR[/color][/b]\n\n%s\n\nПоследний текст: %s" % [last_debug["error"], last_debug.get("spell_text", "")]
+		debug_text.text = "[b][color=#ff8f8f]ДЖИН НЕ СПРАВИЛСЯ[/color][/b]\n\n%s\n\nПоследнее желание: %s" % [last_debug["error"], last_debug.get("wish_text", "")]
 		return
 	var interpretation: Dictionary = last_debug.get("interpretation", {})
 	var lines: Array[String] = []
-	lines.append("[b]DEVELOPER MAGIC VIEW[/b]")
-	lines.append("\n[b]Текст[/b]\n\"%s\"" % last_spell_text)
+	lines.append("[b]GENIE WISH VIEW[/b]")
+	lines.append("\n[b]Желание[/b]\n\"%s\"" % last_spell_text)
 	lines.append("\n[b]Coherence[/b]  %.3f" % float(interpretation.get("coherence", 0.0)))
 	lines.append("\n[b]Top anchors[/b]")
 	for anchor in interpretation.get("anchors", []).slice(0, 10):
@@ -628,7 +640,7 @@ func update_debug_panel() -> void:
 	lines.append("radial out/in %.3f / %.3f" % [float(gesture.get("radial_out", 0.0)), float(gesture.get("radial_in", 0.0))])
 	var debug: Dictionary = last_debug.get("debug", {})
 	var intent: Dictionary = debug.get("intent", {})
-	lines.append("\n[b]SpellIntent[/b]")
+	lines.append("\n[b]WishIntent[/b]")
 	lines.append("matter    %s" % JSON.stringify(intent.get("matter", {})))
 	lines.append("actions   %s" % JSON.stringify(intent.get("actions", {})))
 	lines.append("movement  %s" % JSON.stringify(intent.get("movement", {})))
@@ -648,6 +660,7 @@ func reset_sandbox() -> void:
 	player.temperature = 0.5
 	player.wetness = 0.0
 	player.global_position = Vector2(-260, 30)
+	genie.snap_to_companion()
 	player.states.clear()
 	for dwarf in dwarfs:
 		dwarf.health = 58.0
@@ -665,7 +678,7 @@ func reset_sandbox() -> void:
 		prop.visible = true
 		prop.collision_layer = 1
 		prop.set_physics_process(true)
-	connection_label.text = "Sandbox reset"
+	connection_label.text = "Мир и джин готовы"
 	connection_label.modulate = Color("d9e5e8")
 
 
@@ -701,12 +714,12 @@ func _draw() -> void:
 			for point in stroke:
 				polyline.append(Vector2(float(point["world_x"]), float(point["world_y"])) * UNIT)
 			if polyline.size() > 1:
-				draw_polyline(polyline, Color(0.52, 0.93, 1.0, 0.88), 5.0, true)
+				draw_polyline(polyline, Color(1.0, 0.79, 0.3, 0.88), 5.0, true)
 		polyline.clear()
 		for point in current_stroke:
 			polyline.append(Vector2(float(point["world_x"]), float(point["world_y"])) * UNIT)
 		if polyline.size() > 1:
-			draw_polyline(polyline, Color(0.73, 0.97, 1.0, 0.96), 5.0, true)
+			draw_polyline(polyline, Color(0.35, 1.0, 0.9, 0.96), 5.0, true)
 
 
 func _notification(what: int) -> void:

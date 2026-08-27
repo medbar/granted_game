@@ -9,7 +9,7 @@ from .models import CastRequest, CastResponse
 from .service import SpellService
 
 
-app = FastAPI(title="Granted Game Spell Compiler", version="0.1.0")
+app = FastAPI(title="Granted Game Wish Interpreter", version="0.2.0")
 service = SpellService(log_path=Path(__file__).resolve().parents[1] / "cast_debug.jsonl")
 
 
@@ -25,6 +25,12 @@ def health() -> dict[str, object]:
 
 @app.post("/cast", response_model=CastResponse)
 def cast(request: CastRequest) -> CastResponse:
+    return service.cast(request)
+
+
+@app.post("/wish", response_model=CastResponse)
+def wish(request: CastRequest) -> CastResponse:
+    """Interpret a requester's free-form wish and let the genie enact it."""
     return service.cast(request)
 
 

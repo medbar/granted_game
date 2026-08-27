@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import AliasChoices, BaseModel, ConfigDict, Field, field_validator
 
 
 class Vec2(BaseModel):
@@ -82,7 +82,11 @@ class CastOptions(BaseModel):
 
 class CastRequest(BaseModel):
     request_id: str = Field(min_length=1, max_length=80)
-    spell_text: str = Field(min_length=1, max_length=300)
+    spell_text: str = Field(
+        min_length=1,
+        max_length=300,
+        validation_alias=AliasChoices("wish_text", "spell_text"),
+    )
     seed: int = 0
     caster: CasterSnapshot
     gesture: GestureData = Field(default_factory=GestureData)
@@ -94,7 +98,7 @@ class CastRequest(BaseModel):
     def reject_blank_spell(cls, value: str) -> str:
         value = value.strip()
         if not value:
-            raise ValueError("spell_text must not be blank")
+            raise ValueError("wish_text must not be blank")
         return value
 
 
@@ -157,4 +161,3 @@ class CastResponse(BaseModel):
     interpretation: Interpretation
     spell_plan: SpellPlan
     debug: DebugInfo | None = None
-

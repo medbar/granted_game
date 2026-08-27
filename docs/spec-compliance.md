@@ -1,4 +1,4 @@
-# v0 specification compliance audit
+# v0.2 genie-wish specification compliance audit
 
 This audit maps the mandatory v0 requirements in `spec.txt` to executable or source evidence. It intentionally does not claim campaign, production art/audio, progression, multiplayer, or the other features excluded by section 91.
 
@@ -8,16 +8,18 @@ This audit maps the mandatory v0 requirements in `spec.txt` to executable or sou
 |---|---|
 | Godot arena starts | Godot 4.7.2 loads `client/scenes/main.tscn`; `client/tests/smoke_runner.gd` instantiates it. |
 | WASD movement and top-down camera | `player.gd`; smoke runner injects `D` and verifies displacement and a `Camera2D` child. |
+| Player is not a mage; visible genie companion | `player.gd` renders an adventurer without a staff; `genie.gd` follows and hovers beside the player; smoke runner verifies the relationship. |
 | At least five moving, pursuing gnomes | Six `dwarf.gd` actors; smoke runner verifies count and movement during cast; live scenarios place and target multiple gnomes. |
 | Gnome attacks damage the player | Smoke runner places a gnome in attack range and verifies health loss. |
 | Water, physical objects, flammable object | Arena contains the pool, two rocks, two crates, a tree, and a metal box; smoke runner checks them. |
-| Slow-motion Cast without pause | `begin_cast()` uses configured `0.35`; smoke runner verifies `Engine.time_scale` and continued enemy movement. |
-| Unicode/Cyrillic text input | `LineEdit` plus live JSON contract; smoke runner verifies `заморозь воду` survives exactly. |
-| Mouse gesture capture and rendering | Multi-stroke timestamped points in `main.gd`; `_draw()` renders current and completed strokes. |
-| Enter sends `/cast` | `LineEdit.text_submitted → confirm_cast → HTTPRequest POST`; live runner performs real casts. |
+| Slow-motion wish request without pause | `begin_wish()` enters the compatible slow-time controller at `0.35`; smoke runner verifies continued enemy movement. |
+| Unicode/Cyrillic wish input | `LineEdit` plus live JSON contract; smoke runner verifies `заморозь воду` survives exactly as `wish_text`. |
+| Optional direction capture and rendering | Multi-stroke timestamped points in `main.gd`; `_draw()` renders golden/teal guidance strokes. |
+| Enter sends `/wish` | Wish input submission posts to `/wish`; live runner performs real wishes. |
+| Genie is the effect origin | Client request uses the genie's position and facing; smoke runner verifies the serialized origin. |
 | Response execution | Live runner proves water→ice, water→steam, and multi-enemy push from real backend responses. |
 | Ten universal VFX primitives | `magic_effect.gd`; smoke runner instantiates BURST, PROJECTILE, BEAM, LINE, RING, FIELD, CLOUD, TRAIL, TETHER, SURFACE_OVERLAY. |
-| Persistent/runtime effects | `runtime_effect.gd` executes projectile, beam, wall, ring, and field contact payloads after `/cast`. |
+| Persistent/runtime effects | `runtime_effect.gd` executes projectile, beam, wall, ring, and field contact payloads after `/wish`. |
 | Time recovery and backend failure | Smoke runner verifies normal time after success and deliberate error/fizzle. |
 | F3 debug information | Smoke runner toggles F3; panel shows text, anchors, gesture, intent, targets, rules, latency. |
 
@@ -25,7 +27,7 @@ This audit maps the mandatory v0 requirements in `spec.txt` to executable or sou
 
 | Requirement | Evidence |
 |---|---|
-| Separate FastAPI process, `/health`, formal `/cast` schema | `app/main.py`, Pydantic models, API tests, live Uvicorn/Godot runner. |
+| Separate FastAPI process, `/health`, formal `/wish` schema | `app/main.py`, Pydantic alias validation, API tests, live Uvicorn/Godot runner; `/cast` remains compatible. |
 | Configurable embedding model and 100 cached anchors | `SemanticResolver`; cached character n-gram embeddings by default, configurable SentenceTransformer backend; tests verify count/cache/backend. |
 | Russian normalization, similarity, activation, top-K | `semantic.py`; golden phrase and synonym tests. |
 | Gesture features | `gesture.py`; horizontal/vertical line, circle, inward/outward, jab/arc tests. |
@@ -57,11 +59,11 @@ Run all gates with:
 ./verify.ps1 -GodotPath "C:\path\to\Godot_v4.7.2-stable_win64_console.exe"
 ```
 
-Last audited on 2026-08-26 with Godot 4.7.2:
+Last audited on 2026-08-27 with Godot 4.7.2:
 
-- backend: 45 tests passed;
+- backend: 46 tests passed;
 - client headless smoke: `CLIENT_SMOKE_OK`;
-- live engine/server scenarios: `LIVE_CAST_OK`;
+- live engine/server scenarios: `LIVE_WISH_OK`;
 - warmed 30-cast benchmark on the bundled desktop Python: median 112.30 ms, p95 124.71 ms, maximum 130.29 ms;
 - local Git repository has a clean, reviewable history.
 

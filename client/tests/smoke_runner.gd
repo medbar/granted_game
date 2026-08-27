@@ -58,6 +58,19 @@ func run() -> void:
 	check(game.player.health < health_before, "a nearby gnome attacks and damages the player")
 	game.player.health = 100.0
 
+	game.player.facing = Vector2.RIGHT
+	attacker.global_position = game.player.global_position + Vector2(54, 0)
+	var enemy_health_before: float = attacker.health
+	game.player.weapon_cooldown = 0.0
+	game.try_weapon_attack()
+	check(attacker.health < enemy_health_before, "the player's weapon swing damages an enemy in front")
+	check(game.player.weapon_swing_remaining > 0.0, "weapon attack starts a visible swing animation")
+	for _swing in range(2):
+		game.player.weapon_cooldown = 0.0
+		game.try_weapon_attack()
+	check(not attacker.visible, "repeated weapon swings can kill an enemy")
+	game.reset_sandbox()
+
 	attacker.global_position = game.player.global_position + Vector2(180, 0)
 	var enemy_before: Vector2 = attacker.global_position
 	game.begin_wish()
@@ -65,23 +78,22 @@ func run() -> void:
 	check(game.genie.wish_active, "the genie visibly reacts while listening to a wish")
 	check(is_equal_approx(Engine.time_scale, game.cast_time_scale), "wish entry uses configured slow motion")
 	check(game.spell_input.visible and not game.player.movement_enabled, "wish mode shows text input and suspends WASD")
+	var wish_enemy_health: float = attacker.health
+	game.player.weapon_cooldown = 0.0
+	game.try_weapon_attack()
+	check(is_equal_approx(attacker.health, wish_enemy_health), "the weapon cannot attack while asking for a wish")
 	for _frame in range(12):
 		await physics_frame
 	check(attacker.global_position.distance_to(enemy_before) > 0.1, "world simulation continues while the player asks the genie")
 
 	game.spell_input.text = "заморозь воду"
-	game.gesture_strokes = [[
-		{"t_ms": 0, "screen_x": 0.4, "screen_y": 0.5, "world_x": 1.0, "world_y": 1.0},
-		{"t_ms": 100, "screen_x": 0.5, "screen_y": 0.4, "world_x": 2.0, "world_y": 1.0},
-		{"t_ms": 200, "screen_x": 0.4, "screen_y": 0.5, "world_x": 1.0, "world_y": 1.0}
-	]]
 	var payload: Dictionary = game.build_cast_payload(game.spell_input.text)
 	check(payload["wish_text"] == "заморозь воду", "Cyrillic wish text survives the client request contract")
 	check(is_equal_approx(float(payload["caster"]["position"]["x"]), game.genie.global_position.x / game.UNIT), "wish effects originate from the genie")
-	check(payload["gesture"]["strokes"].size() == 1, "gesture strokes enter the client request contract")
+	check(not payload.has("gesture"), "wish requests contain no weapon or gesture input")
 
 	var response := {
-		"interpretation": {"coherence": 0.9, "anchors": [], "gesture_features": {}},
+		"interpretation": {"coherence": 0.9, "anchors": []},
 		"debug": {"intent": {}, "selected_targets": ["water_pool_01"], "world_rules": ["test"], "latency_ms": 1.0},
 		"spell_plan": {
 			"world_actions": [

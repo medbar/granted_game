@@ -5,7 +5,6 @@ import time
 from pathlib import Path
 from typing import Any
 
-from .gesture import GestureResolver
 from .intent import SpellIntentBuilder
 from .models import CastRequest, CastResponse, DebugInfo, Interpretation, SpellPlan
 from .semantic import SemanticResolver
@@ -17,7 +16,6 @@ from .world import WorldResolver
 class SpellService:
     def __init__(self, log_path: Path | None = None) -> None:
         self.semantic = SemanticResolver()
-        self.gesture = GestureResolver()
         self.intent_builder = SpellIntentBuilder()
         self.targeting = TargetResolver()
         self.world = WorldResolver()
@@ -27,8 +25,7 @@ class SpellService:
     def cast(self, request: CastRequest) -> CastResponse:
         started = time.perf_counter()
         anchors, coherence = self.semantic.resolve(request.spell_text)
-        gesture = self.gesture.resolve(request.gesture, request.caster.position)
-        intent = self.intent_builder.build(anchors, coherence, gesture, request.caster)
+        intent = self.intent_builder.build(anchors, coherence, request.caster)
         targets = self.targeting.resolve(intent, request.caster, request.world.objects)
         actions, rules = self.world.resolve(intent, targets, request.world.objects)
         visuals = self.visuals.resolve(intent, targets)
@@ -44,7 +41,6 @@ class SpellService:
             interpretation=Interpretation(
                 coherence=coherence,
                 anchors=anchors,
-                gesture_features=gesture,
             ),
             spell_plan=SpellPlan(
                 duration=intent["duration"],

@@ -2,25 +2,26 @@
 
 Playable top-down prototype where an adventurer asks their floating genie for any wish in natural language. The player is not a mage and never casts a spell themselves:
 
-`free-form wish + optional direction gesture + current world state → genie magic → universal world actions`
+`free-form wish text + genie origin + current world state → genie magic → universal world actions`
 
-The genie is a visible companion that follows the player, listens in slow motion, and becomes the visual and geometric origin of every effect. There are no canned wish or spell classes: the backend activates hidden semantic anchors, merges them with an optional pointing gesture, selects targets from the live world, applies fixed material rules, and returns a generic plan for the genie to enact.
+The genie is a visible companion that follows the player, listens in slow motion, and becomes the origin of every magical effect. There are no canned wish or spell classes: the backend activates hidden semantic anchors from text, selects targets from the live world, applies fixed material rules, and returns a generic plan for the genie to enact.
 
 ## What is implemented
 
 - Real-time top-down arena with an adventurer, their hovering genie, six chasing/attacking gnomes, walls, rocks, crates, a tree, a metal conductor, and a water pool.
+- Separate physical combat: `LMB` swings the adventurer's sword through a short frontal arc, damages and knocks back enemies, and can kill them after repeated hits.
 - `SPACE` asks the genie for a wish at `Engine.time_scale = 0.35`; the world never pauses.
 - Unicode/Cyrillic wish input, up to 300 characters, with `Enter` to ask and `Esc` to reconsider.
-- Optional multi-stroke LMB direction capture, a visible golden/teal guidance trail, and request downsampling capped at 256 points.
+- Wishes are text-only: mouse motion, sword state, and attack data never enter the `/wish` request; the sword is disabled while the wish input is open.
 - Deterministic FastAPI `/wish` pipeline with exactly 100 configurable hidden anchors; `/cast` remains as a compatibility alias.
-- Continuous gesture features: duration, length, displacement, speed, straightness, curvature, closedness, rotation, area, radial movement, direction, strokes, direction changes, angular velocity, and energy.
+- Geometry, scale, movement, and targets are derived from words such as `стена`, `кольцо`, `всех`, and `передо мной`, plus the genie's position/facing and the world snapshot.
 - Universal target resolution, material rules, world actions, persistent-effect descriptions, and ten visual primitives.
 - Water ↔ ice, water → steam, ignition/burning, wet electrical conduction, mass-aware force, heat/cold damage, slow, harm, and healing.
 - Lift/levitation, deep freeze, poison, sharp-force and crush/material interactions, water extinguishing, and electrical propagation through a pool.
 - Gameplay-capable projectile, beam, wall, ring, and field entities that continue resolving contacts after `/wish`.
 - F3 genie-wish view for anchors, direction features, intent, selected targets, fired world rules, and REST latency.
 - Backend failure recovery: time returns to normal and the genie visibly fails near its own position.
-- 46 automated semantic, gesture, world-rule, service-log, golden-scenario, and API tests.
+- 42 automated semantic, text-intent, world-rule, service-log, golden-scenario, and API tests.
 
 ## Requirements
 
@@ -57,9 +58,9 @@ Alternatively, import `client/project.godot` in the Godot Project Manager and pr
 | Input | Action |
 |---|---|
 | `WASD` | Move |
-| Mouse | Point where the genie should act |
+| Mouse | Aim the adventurer and sword |
+| `LMB` | Swing the sword |
 | `Space` | Ask the genie for a wish |
-| Hold `LMB` and move | Optionally describe direction, shape, or area |
 | `Enter` | Ask the genie to fulfill the wish |
 | `Esc` | Reconsider the wish |
 | `F3` | Toggle developer wish interpretation |
@@ -67,12 +68,12 @@ Alternatively, import `client/project.godot` in the Godot Project Manager and pr
 
 Useful first wishes:
 
-- `назад` + a fast forward jab
-- `сильно отбрось всех врагов от меня` + an outward sweep
-- `заморозь воду` + a circle over the pool
+- `назад`
+- `сильно отбрось всех врагов от меня`
+- `заморозь воду`
 - `подожги дерево`
 - `электричество по воде`
-- `маленькое солнце` + a small circle and forward stroke
+- `маленькое солнце`
 - `создай огонь под водой`
 
 ## Test the backend
@@ -108,7 +109,7 @@ Health and interactive API documentation are available at:
 | Mass, conductivity, flammability, hardness | `server/config/materials.yaml` |
 | Phase, ignition, conduction, force thresholds | `server/config/reactions.yaml` |
 | Geometry → primitive and appearance colors | `server/config/visual_mapping.yaml` |
-| Client backend URL, wish-time scale, snapshot radius, direction cap, timeout | `client/config/gameplay.json` |
+| Client backend URL, wish-time scale, snapshot radius, timeout | `client/config/gameplay.json` |
 
 The `.yaml` files use JSON-compatible YAML so the backend can load them with Python's standard library and keep startup lean.
 
@@ -117,8 +118,8 @@ The `.yaml` files use JSON-compatible YAML so the backend can load them with Pyt
 ```text
 Godot world snapshot + genie origin
         │
-wish ── SemanticResolver ── 100 continuous anchor activations
-pointing ─ GestureResolver ── optional geometry, motion, scale, direction
+wish text ── SemanticResolver ── 100 continuous anchor activations
+genie position/facing ────────── text-only direction and origin
         │
         ▼
 Wish interpretation (compatible SpellIntentBuilder)

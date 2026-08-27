@@ -4,6 +4,8 @@ signal health_changed(value: float)
 
 const MOVE_SPEED := 215.0
 const BODY_RADIUS := 18.0
+const WEAPON_SWING_DURATION := 0.24
+const WEAPON_COOLDOWN_DURATION := 0.38
 
 var health := 100.0
 var facing := Vector2.RIGHT
@@ -12,6 +14,8 @@ var impulse := Vector2.ZERO
 var states: Dictionary = {}
 var temperature := 0.5
 var wetness := 0.0
+var weapon_swing_remaining := 0.0
+var weapon_cooldown := 0.0
 var arena_bounds := Rect2(-600.0, -330.0, 1200.0, 660.0)
 
 
@@ -27,6 +31,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	weapon_swing_remaining = maxf(0.0, weapon_swing_remaining - delta)
+	weapon_cooldown = maxf(0.0, weapon_cooldown - delta)
 	facing = global_position.direction_to(get_global_mouse_position())
 	if facing.length_squared() < 0.001:
 		facing = Vector2.RIGHT
@@ -47,6 +53,20 @@ func _physics_process(delta: float) -> void:
 	global_position.y = clampf(global_position.y, arena_bounds.position.y + BODY_RADIUS, arena_bounds.end.y - BODY_RADIUS)
 	impulse = impulse.move_toward(Vector2.ZERO, 520.0 * delta)
 	_tick_states(delta)
+	queue_redraw()
+
+
+func start_weapon_swing() -> bool:
+	if not movement_enabled or weapon_cooldown > 0.0:
+		return false
+	weapon_swing_remaining = WEAPON_SWING_DURATION
+	weapon_cooldown = WEAPON_COOLDOWN_DURATION
+	queue_redraw()
+	return true
+
+
+func cancel_weapon_swing() -> void:
+	weapon_swing_remaining = 0.0
 	queue_redraw()
 
 
@@ -120,9 +140,19 @@ func _draw() -> void:
 	draw_circle(Vector2(0.0, -5.0), 10.0, Color("f2c9a5"))
 	draw_colored_polygon(PackedVector2Array([Vector2(-13, 3), Vector2(13, 3), Vector2(8, 18), Vector2(-8, 18)]), Color("9c5f35"))
 	draw_arc(Vector2(0, -7), 9.0, PI, TAU, 12, Color("4a3025"), 4.0)
-	var pointing_hand := facing.normalized() * 18.0
-	draw_line(facing.normalized() * 5.0, pointing_hand, Color("e8b991"), 4.0, true)
-	draw_circle(pointing_hand, 3.0, Color("f2c9a5"))
+	var weapon_direction := facing.normalized()
+	if weapon_swing_remaining > 0.0:
+		var swing_progress := 1.0 - weapon_swing_remaining / WEAPON_SWING_DURATION
+		weapon_direction = weapon_direction.rotated(lerpf(-1.15, 1.15, swing_progress))
+	var hand := weapon_direction * 12.0
+	var guard := weapon_direction * 24.0
+	var tip := weapon_direction * 48.0
+	var side := weapon_direction.orthogonal()
+	draw_line(Vector2.ZERO, hand, Color("e8b991"), 5.0, true)
+	draw_line(hand, guard, Color("70421f"), 5.0, true)
+	draw_line(guard - side * 6.0, guard + side * 6.0, Color("e2a93b"), 3.0, true)
+	draw_line(guard, tip, Color("dbe9ee"), 6.0, true)
+	draw_line(guard + side * 1.5, tip + side * 1.5, Color("ffffff"), 1.5, true)
 
 
 func draw_ellipse_shadow(offset: Vector2) -> void:

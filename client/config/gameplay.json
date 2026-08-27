@@ -2,7 +2,6 @@
   "backend_url": "http://127.0.0.1:8000",
   "cast_time_scale": 0.35,
   "snapshot_radius": 12.0,
-  "max_gesture_points": 256,
   "request_timeout_seconds": 2.0,
   "runtime_contact_interval": 0.4
 }

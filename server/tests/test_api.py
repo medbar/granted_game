@@ -1,7 +1,7 @@
 from fastapi.testclient import TestClient
 
 from app.main import app
-from conftest import cast_request, line_gesture
+from conftest import cast_request
 
 
 client = TestClient(app)
@@ -15,7 +15,7 @@ def test_health() -> None:
 
 
 def test_cast_contract(world) -> None:
-    payload = cast_request("оттолкни врага", line_gesture(), world).model_dump(mode="json")
+    payload = cast_request("оттолкни врага", world).model_dump(mode="json")
     response = client.post("/cast", json=payload)
     assert response.status_code == 200
     assert response.json()["request_id"] == "test-cast"
@@ -23,13 +23,20 @@ def test_cast_contract(world) -> None:
 
 
 def test_wish_contract_accepts_wish_text(world) -> None:
-    payload = cast_request("заморозь воду", line_gesture(), world).model_dump(mode="json")
+    payload = cast_request("заморозь воду", world).model_dump(mode="json")
     payload["wish_text"] = payload.pop("spell_text")
     payload["request_id"] = "test-wish"
     response = client.post("/wish", json=payload)
     assert response.status_code == 200
     assert response.json()["request_id"] == "test-wish"
     assert response.json()["spell_plan"]["world_actions"]
+
+
+def test_wish_rejects_removed_gesture_input(world) -> None:
+    payload = cast_request("заморозь воду", world).model_dump(mode="json")
+    payload["gesture"] = {"strokes": []}
+    response = client.post("/wish", json=payload)
+    assert response.status_code == 422
 
 
 def test_malformed_request_returns_validation_error() -> None:

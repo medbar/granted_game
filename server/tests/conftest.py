@@ -1,16 +1,11 @@
 from __future__ import annotations
 
-import math
-
 import pytest
 
 from app.models import (
     CastOptions,
     CastRequest,
     CasterSnapshot,
-    GestureData,
-    GesturePoint,
-    GestureStroke,
     MaterialSnapshot,
     Vec2,
     WorldObject,
@@ -60,44 +55,8 @@ def world() -> WorldSnapshot:
     )
 
 
-def stroke(points: list[tuple[float, float]], duration_ms: int = 500) -> GestureData:
-    denominator = max(1, len(points) - 1)
-    return GestureData(
-        strokes=[
-            GestureStroke(
-                points=[
-                    GesturePoint(
-                        t_ms=int(index * duration_ms / denominator),
-                        screen_x=0.5 + x / 20,
-                        screen_y=0.5 + y / 20,
-                        world_x=x,
-                        world_y=y,
-                    )
-                    for index, (x, y) in enumerate(points)
-                ]
-            )
-        ]
-    )
-
-
-def line_gesture() -> GestureData:
-    return stroke([(0.2, 0.0), (1.5, 0.0), (3.0, 0.0)], 260)
-
-
-def circle_gesture(center: tuple[float, float] = (3.0, 2.0), radius: float = 1.4) -> GestureData:
-    points = [
-        (
-            center[0] + math.cos(index * math.tau / 16) * radius,
-            center[1] + math.sin(index * math.tau / 16) * radius,
-        )
-        for index in range(17)
-    ]
-    return stroke(points, 900)
-
-
 def cast_request(
     text: str,
-    gesture: GestureData,
     world: WorldSnapshot,
     debug: bool = True,
 ) -> CastRequest:
@@ -110,8 +69,6 @@ def cast_request(
             position=Vec2(x=0.0, y=0.0),
             facing=Vec2(x=1.0, y=0.0),
         ),
-        gesture=gesture,
         world=world,
         options=CastOptions(debug=debug),
     )
-

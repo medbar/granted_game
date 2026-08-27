@@ -17,29 +17,6 @@ class CasterSnapshot(BaseModel):
     facing: Vec2 = Field(default_factory=lambda: Vec2(x=1.0, y=0.0))
 
 
-class GesturePoint(BaseModel):
-    t_ms: int = Field(ge=0)
-    screen_x: float
-    screen_y: float
-    world_x: float
-    world_y: float
-
-
-class GestureStroke(BaseModel):
-    points: list[GesturePoint] = Field(default_factory=list, max_length=256)
-
-
-class GestureData(BaseModel):
-    strokes: list[GestureStroke] = Field(default_factory=list, max_length=12)
-
-    @field_validator("strokes")
-    @classmethod
-    def validate_total_points(cls, strokes: list[GestureStroke]) -> list[GestureStroke]:
-        if sum(len(stroke.points) for stroke in strokes) > 256:
-            raise ValueError("gesture may contain at most 256 points")
-        return strokes
-
-
 class MaterialSnapshot(BaseModel):
     model_config = ConfigDict(extra="allow")
 
@@ -81,6 +58,8 @@ class CastOptions(BaseModel):
 
 
 class CastRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
     request_id: str = Field(min_length=1, max_length=80)
     spell_text: str = Field(
         min_length=1,
@@ -89,7 +68,6 @@ class CastRequest(BaseModel):
     )
     seed: int = 0
     caster: CasterSnapshot
-    gesture: GestureData = Field(default_factory=GestureData)
     world: WorldSnapshot = Field(default_factory=WorldSnapshot)
     options: CastOptions = Field(default_factory=CastOptions)
 
@@ -111,7 +89,6 @@ class AnchorScore(BaseModel):
 class Interpretation(BaseModel):
     coherence: float
     anchors: list[AnchorScore]
-    gesture_features: dict[str, Any]
 
 
 class WorldAction(BaseModel):

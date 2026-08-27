@@ -8,6 +8,10 @@ const DwarfScript = preload("res://scripts/dwarf.gd")
 const WorldPropScript = preload("res://scripts/world_prop.gd")
 const MagicEffectScript = preload("res://scripts/magic_effect.gd")
 const RuntimeEffectScript = preload("res://scripts/runtime_effect.gd")
+const WEAPON_RANGE := 82.0
+const WEAPON_ARC_DOT := 0.34
+const WEAPON_DAMAGE := 24.0
+const WEAPON_KNOCKBACK := 0.72
 
 const ARENA := Rect2(-600.0, -330.0, 1200.0, 660.0)
 const WALLS := [
@@ -29,11 +33,7 @@ var water_radius := 92.0
 
 var casting := false
 var waiting_for_backend := false
-var drawing_gesture := false
 var cast_counter := 0
-var cast_started_ms := 0
-var gesture_strokes: Array = []
-var current_stroke: Array = []
 var debug_enabled := false
 var last_debug: Dictionary = {}
 var last_spell_text := ""
@@ -42,7 +42,6 @@ var runtime_world_config: Dictionary = {}
 var backend_url := "http://127.0.0.1:8000"
 var cast_time_scale := 0.35
 var snapshot_radius := 12.0
-var max_gesture_points := 256
 var request_timeout_seconds := 2.0
 var runtime_contact_interval := 0.4
 
@@ -83,7 +82,6 @@ func load_gameplay_config() -> void:
 	backend_url = str(gameplay_config.get("backend_url", backend_url))
 	cast_time_scale = float(gameplay_config.get("cast_time_scale", cast_time_scale))
 	snapshot_radius = float(gameplay_config.get("snapshot_radius", snapshot_radius))
-	max_gesture_points = int(gameplay_config.get("max_gesture_points", max_gesture_points))
 	request_timeout_seconds = float(gameplay_config.get("request_timeout_seconds", request_timeout_seconds))
 	runtime_contact_interval = float(gameplay_config.get("runtime_contact_interval", runtime_contact_interval))
 
@@ -152,10 +150,10 @@ func create_ui() -> void:
 	connection_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	hint_label = make_label(Vector2(360, 670), Vector2(560, 32), 17)
 	hint_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	hint_label.text = "WASD — движение    SPACE — попросить джина    F3 — отладка"
+	hint_label.text = "WASD — движение    ЛКМ — удар оружием    SPACE — желание джину"
 
 	cast_label = make_label(Vector2(160, 582), Vector2(960, 40), 18)
-	cast_label.text = "ЖЕЛАНИЕ  •  напишите просьбу; ЛКМ — указать джину направление; ENTER"
+	cast_label.text = "ЖЕЛАНИЕ ДЖИНУ  •  только текст, затем ENTER"
 	cast_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	cast_label.modulate = Color("a8edff")
 	cast_label.visible = false
@@ -259,7 +257,6 @@ func _on_config_request_completed(result: int, response_code: int, _headers: Pac
 	var server_spell: Dictionary = runtime_world_config.get("spell", {})
 	cast_time_scale = float(server_spell.get("cast_time_scale", cast_time_scale))
 	snapshot_radius = float(server_spell.get("snapshot_radius", snapshot_radius))
-	max_gesture_points = int(server_spell.get("max_gesture_points", max_gesture_points))
 
 
 func _process(_delta: float) -> void:
@@ -294,37 +291,17 @@ func _input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 			return
 
-	if not casting or waiting_for_backend:
-		return
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		if event.pressed:
-			drawing_gesture = true
-			current_stroke = []
-			append_gesture_point(event.position)
-		else:
-			if drawing_gesture:
-				append_gesture_point(event.position)
-				if current_stroke.size() > 1:
-					gesture_strokes.append(current_stroke.duplicate(true))
-			drawing_gesture = false
-			current_stroke = []
-		get_viewport().set_input_as_handled()
-	elif event is InputEventMouseMotion and drawing_gesture:
-		var world_position := get_global_mouse_position()
-		if current_stroke.is_empty() or Vector2(current_stroke[-1]["world_x"] * UNIT, current_stroke[-1]["world_y"] * UNIT).distance_to(world_position) >= 5.0:
-			append_gesture_point(event.position)
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and not casting:
+		try_weapon_attack()
 		get_viewport().set_input_as_handled()
 
 
 func begin_cast() -> void:
 	casting = true
 	waiting_for_backend = false
-	drawing_gesture = false
-	gesture_strokes.clear()
-	current_stroke = []
-	cast_started_ms = Time.get_ticks_msec()
 	Engine.time_scale = cast_time_scale
 	player.movement_enabled = false
+	player.cancel_weapon_swing()
 	genie.set_wish_state(true, false)
 	cast_tint.color = Color(0.06, 0.42, 0.43, 0.16)
 	cast_label.visible = true
@@ -356,10 +333,6 @@ func confirm_cast() -> void:
 	if text.is_empty():
 		spell_input.placeholder_text = "Скажите джину, чего вы желаете"
 		return
-	if drawing_gesture and current_stroke.size() > 1:
-		gesture_strokes.append(current_stroke.duplicate(true))
-		drawing_gesture = false
-		current_stroke = []
 	waiting_for_backend = true
 	spell_input.editable = false
 	cast_label.text = "ДЖИН ИСПОЛНЯЕТ ЖЕЛАНИЕ…  мир продолжает двигаться"
@@ -373,31 +346,7 @@ func confirm_cast() -> void:
 		cast_failed("backend request could not start")
 
 
-func append_gesture_point(screen_position: Vector2) -> void:
-	if current_stroke.size() + total_gesture_points() >= max_gesture_points:
-		return
-	var viewport_size := get_viewport_rect().size
-	var world_position := get_global_mouse_position()
-	current_stroke.append({
-		"t_ms": Time.get_ticks_msec() - cast_started_ms,
-		"screen_x": clampf(screen_position.x / viewport_size.x, 0.0, 1.0),
-		"screen_y": clampf(screen_position.y / viewport_size.y, 0.0, 1.0),
-		"world_x": world_position.x / UNIT,
-		"world_y": world_position.y / UNIT
-	})
-
-
-func total_gesture_points() -> int:
-	var total := 0
-	for stroke in gesture_strokes:
-		total += stroke.size()
-	return total
-
-
 func build_cast_payload(text: String) -> Dictionary:
-	var stroke_payload: Array = []
-	for stroke in gesture_strokes:
-		stroke_payload.append({"points": stroke})
 	return {
 		"request_id": "wish-%06d" % cast_counter,
 		"wish_text": text,
@@ -408,7 +357,6 @@ func build_cast_payload(text: String) -> Dictionary:
 			"velocity": {"x": 0.0, "y": 0.0},
 			"facing": {"x": genie.facing.x, "y": genie.facing.y}
 		},
-		"gesture": {"strokes": stroke_payload},
 		"world": {"objects": collect_world_snapshot()},
 		"options": {"debug": true}
 	}
@@ -600,18 +548,15 @@ func finish_cast_mode() -> void:
 	Engine.time_scale = 1.0
 	casting = false
 	waiting_for_backend = false
-	drawing_gesture = false
 	player.movement_enabled = true
 	genie.set_wish_state(false, false)
 	cast_tint.color = Color(0.06, 0.42, 0.43, 0.0)
 	cast_label.visible = false
-	cast_label.text = "ЖЕЛАНИЕ  •  напишите просьбу; ЛКМ — указать джину направление; ENTER"
+	cast_label.text = "ЖЕЛАНИЕ ДЖИНУ  •  только текст, затем ENTER"
 	spell_input.visible = false
 	spell_input.editable = true
 	spell_input.release_focus()
-	hint_label.text = "WASD — движение    SPACE — попросить джина    F3 — отладка    R — сброс"
-	gesture_strokes.clear()
-	current_stroke = []
+	hint_label.text = "WASD — движение    ЛКМ — удар оружием    SPACE — желание джину"
 	queue_redraw()
 
 
@@ -619,7 +564,7 @@ func update_debug_panel() -> void:
 	if not is_instance_valid(debug_text):
 		return
 	if last_debug.is_empty():
-		debug_text.text = "[b]GENIE WISH VIEW[/b]\n\nПопросите джина исполнить первое желание.\n\nЗдесь появятся якоря, указание жестом, цели, правила мира и задержка REST."
+		debug_text.text = "[b]GENIE WISH VIEW[/b]\n\nПопросите джина исполнить первое желание.\n\nЗдесь появятся смысловые якоря, цели, правила мира и задержка REST."
 		return
 	if last_debug.has("error"):
 		debug_text.text = "[b][color=#ff8f8f]ДЖИН НЕ СПРАВИЛСЯ[/color][/b]\n\n%s\n\nПоследнее желание: %s" % [last_debug["error"], last_debug.get("wish_text", "")]
@@ -632,12 +577,6 @@ func update_debug_panel() -> void:
 	lines.append("\n[b]Top anchors[/b]")
 	for anchor in interpretation.get("anchors", []).slice(0, 10):
 		lines.append("%-16s %.3f" % [str(anchor.get("id", "")), float(anchor.get("score", 0.0))])
-	var gesture: Dictionary = interpretation.get("gesture_features", {})
-	lines.append("\n[b]Gesture[/b]")
-	lines.append("straightness  %.3f" % float(gesture.get("straightness", 0.0)))
-	lines.append("closedness    %.3f" % float(gesture.get("closedness", 0.0)))
-	lines.append("speed         %.3f" % float(gesture.get("speed", 0.0)))
-	lines.append("radial out/in %.3f / %.3f" % [float(gesture.get("radial_out", 0.0)), float(gesture.get("radial_in", 0.0))])
 	var debug: Dictionary = last_debug.get("debug", {})
 	var intent: Dictionary = debug.get("intent", {})
 	lines.append("\n[b]WishIntent[/b]")
@@ -664,6 +603,8 @@ func reset_sandbox() -> void:
 	player.states.clear()
 	for dwarf in dwarfs:
 		dwarf.health = 58.0
+		dwarf.dead_for = 0.0
+		dwarf.attack_cooldown = 0.0
 		dwarf.states.clear()
 		dwarf.temperature = 0.5
 		dwarf.wetness = 0.0
@@ -707,19 +648,32 @@ func _draw() -> void:
 			draw_arc(water_position, water_radius - 6.0, 0.0, TAU, 48, Color(0.45, 0.82, 1.0, 0.42), 3.0)
 	var fallback_font := ThemeDB.fallback_font
 	draw_string(fallback_font, water_position + Vector2(-42, 5), water_state.to_upper(), HORIZONTAL_ALIGNMENT_CENTER, 84, 14, Color(0.88, 0.96, 1.0, 0.62))
-	if casting:
-		var polyline := PackedVector2Array()
-		for stroke in gesture_strokes:
-			polyline.clear()
-			for point in stroke:
-				polyline.append(Vector2(float(point["world_x"]), float(point["world_y"])) * UNIT)
-			if polyline.size() > 1:
-				draw_polyline(polyline, Color(1.0, 0.79, 0.3, 0.88), 5.0, true)
-		polyline.clear()
-		for point in current_stroke:
-			polyline.append(Vector2(float(point["world_x"]), float(point["world_y"])) * UNIT)
-		if polyline.size() > 1:
-			draw_polyline(polyline, Color(0.35, 1.0, 0.9, 0.96), 5.0, true)
+
+
+func try_weapon_attack() -> void:
+	if casting or not player.start_weapon_swing():
+		return
+	var direction: Vector2 = player.facing.normalized()
+	var hit_count := 0
+	for dwarf in dwarfs:
+		if not dwarf.visible:
+			continue
+		var offset: Vector2 = dwarf.global_position - player.global_position
+		var distance := offset.length()
+		if distance > WEAPON_RANGE + 16.0 or distance <= 0.001:
+			continue
+		if offset.normalized().dot(direction) < WEAPON_ARC_DOT:
+			continue
+		dwarf.apply_world_action({
+			"type": "APPLY_FORCE",
+			"direction": {"x": direction.x, "y": direction.y},
+			"strength": WEAPON_KNOCKBACK
+		}, UNIT)
+		dwarf.apply_world_action({"type": "DAMAGE", "amount": WEAPON_DAMAGE}, UNIT)
+		hit_count += 1
+	if hit_count > 0:
+		connection_label.text = "Оружие: попадание"
+		connection_label.modulate = Color("ffd27a")
 
 
 func _notification(what: int) -> void:

@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "id": "world-control",
+  "version": "1.0.0",
+  "description": "Глобальные параметры времени, света и состояния игры.",
+  "enabled_by_default": true,
+  "capabilities": [
+    {"name":"shutdown_game","signature":"shutdown_game()","description":"Запросить выключение игры.","mutates_world":true},
+    {"name":"set_game_paused","signature":"set_game_paused(paused=True)","description":"Поставить мир на паузу или продолжить.","mutates_world":true},
+    {"name":"set_game_speed","signature":"set_game_speed(multiplier)","description":"Изменить скорость мира.","mutates_world":true},
+    {"name":"set_light_level","signature":"set_light_level(level)","description":"Изменить глобальную освещённость.","mutates_world":true}
+  ]
+}

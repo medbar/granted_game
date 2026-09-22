@@ -52,7 +52,7 @@ finally {
 }
 
 $python = Join-Path $serverRoot ".venv\Scripts\python.exe"
-$backend = Start-Process -FilePath $python -ArgumentList @("-m", "uvicorn", "app.main:app", "--host", "127.0.0.1", "--port", "8000") -WorkingDirectory $serverRoot -PassThru -WindowStyle Hidden
+$backend = Start-Process -FilePath $python -ArgumentList @("-m", "uvicorn", "app.main:app", "--host", "127.0.0.1", "--port", "8000", "--no-access-log") -WorkingDirectory $serverRoot -PassThru -WindowStyle Hidden
 try {
     $ready = $false
     for ($attempt = 0; $attempt -lt 30; $attempt++) {

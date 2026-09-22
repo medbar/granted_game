@@ -1,10 +1,18 @@
 from fastapi.testclient import TestClient
 
-from app.main import app
+from app.main import app, bounded_request_id
 from conftest import cast_request
 
 
 client = TestClient(app)
+
+
+def test_long_session_request_ids_are_shortened_stably() -> None:
+    original = "eval-" + "very-long-strategy-and-level-name-" * 4
+    shortened = bounded_request_id(original)
+    assert len(shortened) <= 80
+    assert shortened == bounded_request_id(original)
+    assert shortened != bounded_request_id(original + "different")
 
 
 def test_health() -> None:

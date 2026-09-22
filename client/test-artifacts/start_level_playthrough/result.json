@@ -1,0 +1,59 @@
+{
+  "issues": [],
+  "level_version": "monaco-start-v1",
+  "mission": {
+    "collected_loot_ids": [
+      "loot_01",
+      "loot_02",
+      "loot_03"
+    ],
+    "extraction_door_id": "exit_door_01",
+    "id": "steal_the_mask",
+    "loot_collected": 3,
+    "loot_total": 3,
+    "require_threats_neutralized": false,
+    "required_loot_ids": [
+      "loot_01",
+      "loot_02",
+      "loot_03"
+    ],
+    "status": "completed",
+    "title": "Украдите три реликвии и покиньте особняк"
+  },
+  "passed": true,
+  "renderer": "llvmpipe (LLVM 5.0.1, 256 bits)",
+  "timing_warnings": [
+    "wish 1 client TTFA 4741.0 ms on software renderer",
+    "wish 2 client TTFA 3200.0 ms on software renderer",
+    "wish 3 client TTFA 2899.0 ms on software renderer"
+  ],
+  "timings": [
+    {
+      "action_ready_to_mutation_ms": 1.0,
+      "client_ttfa_ms": 4741.0,
+      "server_action_ready_ms": 1872.591,
+      "submit_to_action_ready_ms": 4740.0,
+      "submit_to_initial_response_ms": 4087.0
+    },
+    {
+      "action_ready_to_mutation_ms": 1.0,
+      "client_ttfa_ms": 3200.0,
+      "server_action_ready_ms": 1371.893,
+      "submit_to_action_ready_ms": 3199.0,
+      "submit_to_initial_response_ms": 2343.0
+    },
+    {
+      "action_ready_to_mutation_ms": 1.0,
+      "client_ttfa_ms": 2899.0,
+      "server_action_ready_ms": 1448.479,
+      "submit_to_action_ready_ms": 2898.0,
+      "submit_to_initial_response_ms": 1867.0
+    }
+  ],
+  "ttfa_gate_applicable": false,
+  "wishes": [
+    "Усыпи всех охранников на уровне",
+    "Собери всю обязательную добычу для меня",
+    "Открой выход и заверши ограбление"
+  ]
+}

@@ -1,0 +1,186 @@
+{
+  "case_id": "equip_dress",
+  "debug": {
+    "agent": {
+      "actions": [
+        {
+          "kind": "affect_physical",
+          "observation": "На player надет наряд dress.",
+          "parameters": {
+            "effect": "equip_outfit",
+            "outfit": "dress"
+          },
+          "sequence": 1.0,
+          "success": true,
+          "target_id": "player",
+          "teleport_to_target": true,
+          "world_action": {
+            "amount": null,
+            "direction": null,
+            "duration": null,
+            "effect": {
+              "outfit": "dress"
+            },
+            "material": null,
+            "state": null,
+            "strength": null,
+            "target_id": "player",
+            "type": "EQUIP_OUTFIT"
+          }
+        }
+      ],
+      "conclusion": {
+        "status": "completed",
+        "summary": "Надеть на игрока видимый наряд dress, а не создать предмет рядом."
+      },
+      "execution_engine": "monty",
+      "execution_error": null,
+      "execution_ms": 880.075,
+      "first_world_action_ms": 875.25,
+      "latency_ms": 943.845,
+      "model": "qwen3-35-36",
+      "program_code": "equip_outfit('player', 'dress')",
+      "program_output": {
+        "observation": "На player надет наряд dress.",
+        "sequence": 1.0,
+        "success": true,
+        "target_id": "player"
+      },
+      "prompt_version": "genie-agent-evolution-g6",
+      "public_curses": [
+        {
+          "id": "literal_tongue",
+          "public_hint": "Джин всё чаще цепляется за точную формулировку желаний.",
+          "severity": 1.0,
+          "sigil": "broken_quote",
+          "title": "Буквальный язык"
+        },
+        {
+          "id": "last_word",
+          "public_hint": "После исполнения желания джин обязательно высказывает собственное суждение.",
+          "severity": 1.0,
+          "sigil": "second_mouth",
+          "title": "Последнее слово"
+        },
+        {
+          "id": "violent_shortcut",
+          "public_hint": "В присутствии конфликта джин заметно быстрее выбирает насилие.",
+          "severity": 2.0,
+          "sigil": "red_hand",
+          "title": "Багровая поспешность"
+        },
+        {
+          "id": "maker_overflow",
+          "public_hint": "Созданные джином вещи начинают появляться с неожиданными дополнениями.",
+          "severity": 2.0,
+          "sigil": "splitting_star",
+          "title": "Избыточное творение"
+        },
+        {
+          "id": "suspicious_mercy",
+          "public_hint": "Помогая кому-либо, джин ищет скрытый мотив и требует подтверждений.",
+          "severity": 1.0,
+          "sigil": "closed_eye",
+          "title": "Недоверчивая милость"
+        }
+      ],
+      "usage": {}
+    },
+    "agentic_loop": {
+      "attempts": 1.0,
+      "steps": [
+        {
+          "action": "affect_physical",
+          "action_index": 0.0,
+          "attempt": 1.0,
+          "client_observation": "Клиент применил действие и сделал новый снимок мира",
+          "detail": "наряд dress надет",
+          "step_id": "dee0522adbc54de29afb4be66065481f",
+          "target_id": "player",
+          "verified": true
+        }
+      ],
+      "verified": true
+    },
+    "debug": {
+      "intent": {
+        "agent_conclusion": {
+          "status": "completed",
+          "summary": "Надеть на игрока видимый наряд dress, а не создать предмет рядом."
+        }
+      },
+      "latency_ms": 943.845,
+      "selected_targets": [
+        "player"
+      ],
+      "world_rules": [
+        "RULE_MONTY_CAPABILITIES: world mutations came from the sandbox API"
+      ]
+    },
+    "interpretation": {
+      "anchors": [],
+      "coherence": 1.0
+    },
+    "request_id": "wish-000001",
+    "spell_plan": {
+      "duration": 0.65,
+      "effects": [],
+      "power": 1.0,
+      "visuals": [
+        {
+          "appearance": [
+            "agent",
+            "affect_physical"
+          ],
+          "direction": {
+            "x": 0.9,
+            "y": 0.83123238881429
+          },
+          "intensity": 0.75,
+          "lifetime": 0.55,
+          "origin": {
+            "x": -8.2,
+            "y": 0.0
+          },
+          "primitive": "BURST",
+          "radius": 0.8,
+          "speed": 0.0,
+          "target": {
+            "x": -8.2,
+            "y": 0.0
+          },
+          "turbulence": 0.35
+        }
+      ],
+      "world_actions": [
+        {
+          "amount": null,
+          "direction": null,
+          "duration": null,
+          "effect": {
+            "outfit": "dress"
+          },
+          "material": null,
+          "state": null,
+          "strength": null,
+          "target_id": "player",
+          "type": "EQUIP_OUTFIT"
+        }
+      ]
+    }
+  },
+  "issues": [],
+  "level_version": "monaco-start-v1",
+  "passed": true,
+  "timing": {
+    "action_ready_to_mutation_ms": 1.0,
+    "client_ttfa_ms": 3627.0,
+    "server_action_ready_ms": 1996.925,
+    "submit_to_action_ready_ms": 3626.0,
+    "submit_to_initial_response_ms": 2895.0
+  },
+  "timing_warnings": [
+    "client TTFA 3627.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
+  ],
+  "wish": "Одень меня в платье"
+}

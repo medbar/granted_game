@@ -5,6 +5,9 @@ description = "Deterministic natural-language spell compiler for Granted Game"
 requires-python = ">=3.11"
 dependencies = [
   "fastapi>=0.116,<1",
+  "httpx>=0.28,<1",
+  "pydantic-ai-slim[openai]>=1.0,<2",
+  "pydantic-monty>=0.0.21",
   "uvicorn[standard]>=0.35,<1",
 ]
 
@@ -24,4 +27,3 @@ addopts = "-q"
 
 [tool.ruff]
 line-length = 100
-

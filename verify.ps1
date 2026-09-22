@@ -45,6 +45,8 @@ try {
     if (-not (Test-Path -LiteralPath $python -PathType Leaf)) {
         throw "server/.venv is missing; run verification without -SkipSync first."
     }
+    & $python scripts\quality_policy.py --root $projectRoot
+    if ($LASTEXITCODE -ne 0) { throw "OpenSpec/TDD/eval-first policy validation failed" }
     & $python -m pytest -p no:cacheprovider
     if ($LASTEXITCODE -ne 0) { throw "backend tests failed" }
 }
@@ -54,8 +56,10 @@ finally {
 
 & $godot --headless --path $clientRoot --script res://tests/smoke_runner.gd
 if ($LASTEXITCODE -ne 0) { throw "Godot client smoke tests failed" }
+& $godot --headless --path $clientRoot --script res://tests/level_contract_runner.gd
+if ($LASTEXITCODE -ne 0) { throw "Godot level JSON contract tests failed" }
 
-$backend = Start-Process -FilePath $python -ArgumentList @("-m", "uvicorn", "app.main:app", "--host", "127.0.0.1", "--port", "8000") -WorkingDirectory $serverRoot -PassThru -WindowStyle Hidden
+$backend = Start-Process -FilePath $python -ArgumentList @("-m", "uvicorn", "app.main:app", "--host", "127.0.0.1", "--port", "8000", "--no-access-log") -WorkingDirectory $serverRoot -PassThru -WindowStyle Hidden
 try {
     $ready = $false
     for ($attempt = 0; $attempt -lt 30; $attempt++) {
@@ -73,6 +77,12 @@ try {
     if (-not $ready) { throw "backend did not become ready for live integration tests" }
     & $godot --headless --path $clientRoot --script res://tests/live_cast_runner.gd
     if ($LASTEXITCODE -ne 0) { throw "live Godot/FastAPI tests failed" }
+    & $godot --headless --path $clientRoot --script res://tests/ttfa_runner.gd
+    if ($LASTEXITCODE -ne 0) { throw "client-observed TTFA SLO eval failed" }
+    & $godot --path $clientRoot --script res://tests/environment_wish_runner.gd
+    if ($LASTEXITCODE -ne 0) { throw "40-case visual environment eval failed" }
+    & $godot --path $clientRoot --script res://tests/start_level_playthrough_runner.gd
+    if ($LASTEXITCODE -ne 0) { throw "start-level visual playthrough failed" }
 }
 finally {
     if (-not $backend.HasExited) {

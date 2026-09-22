@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "id": "physical",
+  "version": "1.0.0",
+  "description": "Физические, материальные и трансформирующие воздействия.",
+  "enabled_by_default": true,
+  "capabilities": [
+    {"name":"damage","signature":"damage(id, amount=60)","description":"Нанести урон.","mutates_world":true},
+    {"name":"heal","signature":"heal(id, amount=24)","description":"Исцелить цель.","mutates_world":true},
+    {"name":"destroy","signature":"destroy(id)","description":"Уничтожить цель.","mutates_world":true},
+    {"name":"destroy_all","signature":"destroy_all(tag)","description":"Уничтожить все цели с тегом.","mutates_world":true},
+    {"name":"apply_force","signature":"apply_force(id, x=1, y=0, strength=6)","description":"Приложить направленную силу.","mutates_world":true},
+    {"name":"apply_state","signature":"apply_state(id, state, intensity=1, duration=4)","description":"Добавить поддерживаемое состояние.","mutates_world":true},
+    {"name":"set_material","signature":"set_material(id, material)","description":"Изменить материал.","mutates_world":true},
+    {"name":"transform","signature":"transform(id, form)","description":"Изменить форму и поведение объекта.","mutates_world":true},
+    {"name":"change_temperature","signature":"change_temperature(id, amount)","description":"Изменить температуру.","mutates_world":true},
+    {"name":"install_doors","signature":"install_doors()","description":"Установить проходы и двери в стенах.","mutates_world":true},
+    {"name":"equip_outfit","signature":"equip_outfit(id, outfit)","description":"Надеть наряд на живую цель.","mutates_world":true}
+  ]
+}

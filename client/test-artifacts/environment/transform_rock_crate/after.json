@@ -1,0 +1,3282 @@
+{
+  "level": {
+    "bounds": {
+      "height": 10.0,
+      "width": 19.0,
+      "x": -9.5,
+      "y": -5.0
+    },
+    "doors": [
+      {
+        "connects": [
+          "entrance",
+          "outside"
+        ],
+        "extraction": true,
+        "id": "exit_door_01",
+        "locked": false,
+        "material": "metal",
+        "open": false,
+        "rect": {
+          "height": 2.6,
+          "width": 0.35,
+          "x": -9.55,
+          "y": -1.3
+        }
+      },
+      {
+        "connects": [
+          "archives",
+          "entrance"
+        ],
+        "id": "door_archives",
+        "locked": false,
+        "material": "wood",
+        "open": false,
+        "rect": {
+          "height": 0.4,
+          "width": 0.7,
+          "x": -8.25,
+          "y": -2.38
+        }
+      },
+      {
+        "connects": [
+          "entrance",
+          "staff"
+        ],
+        "id": "door_staff",
+        "locked": false,
+        "material": "wood",
+        "open": false,
+        "rect": {
+          "height": 0.4,
+          "width": 0.7,
+          "x": -8.2,
+          "y": 1.58
+        }
+      },
+      {
+        "connects": [
+          "entrance",
+          "gallery"
+        ],
+        "id": "door_gallery",
+        "locked": false,
+        "material": "metal",
+        "open": true,
+        "rect": {
+          "height": 0.9,
+          "width": 0.4,
+          "x": -6.28,
+          "y": -0.45
+        }
+      },
+      {
+        "connects": [
+          "gallery",
+          "security"
+        ],
+        "id": "door_security",
+        "locked": true,
+        "material": "metal",
+        "open": false,
+        "rect": {
+          "height": 0.7,
+          "width": 0.4,
+          "x": -0.63,
+          "y": -3.25
+        }
+      },
+      {
+        "connects": [
+          "gallery",
+          "courtyard"
+        ],
+        "id": "door_courtyard",
+        "locked": false,
+        "material": "glass",
+        "open": true,
+        "rect": {
+          "height": 0.8,
+          "width": 0.4,
+          "x": -0.63,
+          "y": -0.6
+        }
+      },
+      {
+        "connects": [
+          "gallery",
+          "lounge"
+        ],
+        "id": "door_lounge",
+        "locked": false,
+        "material": "wood",
+        "open": false,
+        "rect": {
+          "height": 0.7,
+          "width": 0.4,
+          "x": -0.63,
+          "y": 2.85
+        }
+      },
+      {
+        "connects": [
+          "security",
+          "vault"
+        ],
+        "id": "door_vault",
+        "locked": true,
+        "material": "reinforced_metal",
+        "open": false,
+        "rect": {
+          "height": 0.7,
+          "width": 0.4,
+          "x": 3.17,
+          "y": -3.25
+        }
+      },
+      {
+        "connects": [
+          "courtyard",
+          "safe"
+        ],
+        "id": "door_safe",
+        "locked": true,
+        "material": "reinforced_metal",
+        "open": false,
+        "rect": {
+          "height": 0.7,
+          "width": 0.4,
+          "x": 3.17,
+          "y": 1.9
+        }
+      },
+      {
+        "connects": [
+          "vault",
+          "service"
+        ],
+        "id": "door_service_north",
+        "locked": false,
+        "material": "metal",
+        "open": false,
+        "rect": {
+          "height": 0.7,
+          "width": 0.4,
+          "x": 6.12,
+          "y": -3.0
+        }
+      },
+      {
+        "connects": [
+          "safe",
+          "service"
+        ],
+        "id": "door_service_south",
+        "locked": false,
+        "material": "metal",
+        "open": false,
+        "rect": {
+          "height": 0.7,
+          "width": 0.4,
+          "x": 6.12,
+          "y": 1.2
+        }
+      }
+    ],
+    "entities": [
+      {
+        "health": 100.0,
+        "id": "player",
+        "kind": "creature",
+        "material": {
+          "name": "organic"
+        },
+        "position": {
+          "x": -8.2,
+          "y": 0.0
+        },
+        "properties": {
+          "outfit": "thief_blue",
+          "prototype": "player",
+          "room_id": "entrance"
+        },
+        "tags": [
+          "living",
+          "player",
+          "requester"
+        ]
+      },
+      {
+        "health": 58.0,
+        "id": "guard_01",
+        "kind": "creature",
+        "material": {
+          "flammability": 0.35,
+          "name": "organic"
+        },
+        "position": {
+          "x": -3.5,
+          "y": 0.0
+        },
+        "properties": {
+          "facing_degrees": 0.0,
+          "patrol": "gallery_loop",
+          "prototype": "enemy",
+          "room_id": "gallery"
+        },
+        "tags": [
+          "living",
+          "enemy",
+          "guard"
+        ]
+      },
+      {
+        "health": 58.0,
+        "id": "guard_02",
+        "kind": "creature",
+        "material": {
+          "flammability": 0.35,
+          "name": "organic"
+        },
+        "position": {
+          "x": 1.2,
+          "y": -3.3
+        },
+        "properties": {
+          "facing_degrees": 140.0,
+          "patrol": "security_vault",
+          "prototype": "enemy",
+          "room_id": "security"
+        },
+        "tags": [
+          "living",
+          "enemy",
+          "guard"
+        ]
+      },
+      {
+        "health": 58.0,
+        "id": "guard_03",
+        "kind": "creature",
+        "material": {
+          "flammability": 0.35,
+          "name": "organic"
+        },
+        "position": {
+          "x": 5.0,
+          "y": 2.0
+        },
+        "properties": {
+          "facing_degrees": 220.0,
+          "patrol": "safe_service",
+          "prototype": "enemy",
+          "room_id": "safe"
+        },
+        "tags": [
+          "living",
+          "enemy",
+          "guard"
+        ]
+      },
+      {
+        "health": 70.0,
+        "id": "npc_01",
+        "kind": "creature",
+        "material": {
+          "name": "organic"
+        },
+        "position": {
+          "x": -8.0,
+          "y": 3.2
+        },
+        "properties": {
+          "prototype": "npc",
+          "room_id": "staff"
+        },
+        "tags": [
+          "living",
+          "npc",
+          "friendly",
+          "staff"
+        ]
+      },
+      {
+        "health": 80.0,
+        "id": "rock_01",
+        "kind": "prop",
+        "material": {
+          "hardness": 0.9,
+          "name": "stone"
+        },
+        "position": {
+          "x": -4.7,
+          "y": 2.9
+        },
+        "properties": {
+          "prototype": "rock",
+          "room_id": "gallery"
+        },
+        "tags": [
+          "rock",
+          "stone",
+          "inanimate"
+        ]
+      },
+      {
+        "health": 80.0,
+        "id": "rock_02",
+        "kind": "prop",
+        "material": {
+          "hardness": 0.9,
+          "name": "stone"
+        },
+        "position": {
+          "x": 1.9,
+          "y": 3.3
+        },
+        "properties": {
+          "prototype": "rock",
+          "room_id": "lounge"
+        },
+        "tags": [
+          "rock",
+          "stone",
+          "inanimate"
+        ]
+      },
+      {
+        "health": 40.0,
+        "id": "crate_01",
+        "kind": "prop",
+        "material": {
+          "flammability": 0.9,
+          "name": "wood"
+        },
+        "position": {
+          "x": -7.0,
+          "y": -3.4
+        },
+        "properties": {
+          "prototype": "crate",
+          "room_id": "archives"
+        },
+        "tags": [
+          "crate",
+          "wood",
+          "inanimate"
+        ]
+      },
+      {
+        "health": 40.0,
+        "id": "crate_02",
+        "kind": "prop",
+        "material": {
+          "flammability": 0.9,
+          "name": "wood"
+        },
+        "position": {
+          "x": 7.7,
+          "y": 3.3
+        },
+        "properties": {
+          "prototype": "crate",
+          "room_id": "service"
+        },
+        "tags": [
+          "crate",
+          "wood",
+          "inanimate"
+        ]
+      },
+      {
+        "health": 65.0,
+        "id": "tree_01",
+        "kind": "prop",
+        "material": {
+          "flammability": 0.8,
+          "name": "wood"
+        },
+        "position": {
+          "x": 2.0,
+          "y": 0.5
+        },
+        "properties": {
+          "prototype": "tree",
+          "room_id": "courtyard"
+        },
+        "tags": [
+          "tree",
+          "wood",
+          "plant",
+          "inanimate"
+        ]
+      },
+      {
+        "health": 55.0,
+        "id": "metal_01",
+        "kind": "prop",
+        "material": {
+          "conductivity": 0.95,
+          "name": "metal"
+        },
+        "position": {
+          "x": 0.4,
+          "y": -3.8
+        },
+        "properties": {
+          "prototype": "terminal",
+          "room_id": "security"
+        },
+        "tags": [
+          "metal",
+          "terminal",
+          "inanimate"
+        ]
+      },
+      {
+        "id": "water_pool_01",
+        "kind": "terrain",
+        "material": {
+          "conductivity": 0.65,
+          "name": "water",
+          "wetness": 1.0
+        },
+        "position": {
+          "x": 1.25,
+          "y": 0.45
+        },
+        "properties": {
+          "prototype": "water_pool",
+          "room_id": "courtyard"
+        },
+        "radius": 0.85,
+        "tags": [
+          "water",
+          "wet",
+          "surface"
+        ]
+      },
+      {
+        "id": "loot_01",
+        "kind": "item",
+        "material": {
+          "name": "gold"
+        },
+        "position": {
+          "x": -8.2,
+          "y": -3.4
+        },
+        "properties": {
+          "collected": false,
+          "prototype": "diamond",
+          "required": true,
+          "room_id": "archives"
+        },
+        "tags": [
+          "loot",
+          "valuable",
+          "gold",
+          "required"
+        ]
+      },
+      {
+        "id": "loot_02",
+        "kind": "item",
+        "material": {
+          "name": "gold"
+        },
+        "position": {
+          "x": 4.8,
+          "y": -2.6
+        },
+        "properties": {
+          "collected": false,
+          "prototype": "gold_idol",
+          "required": true,
+          "room_id": "vault"
+        },
+        "tags": [
+          "loot",
+          "valuable",
+          "gold",
+          "required"
+        ]
+      },
+      {
+        "id": "loot_03",
+        "kind": "item",
+        "material": {
+          "name": "gold"
+        },
+        "position": {
+          "x": 4.8,
+          "y": 2.8
+        },
+        "properties": {
+          "collected": false,
+          "prototype": "crown",
+          "required": true,
+          "room_id": "safe"
+        },
+        "tags": [
+          "loot",
+          "valuable",
+          "gold",
+          "required"
+        ]
+      }
+    ],
+    "extraction_zone": {
+      "height": 2.0,
+      "width": 0.95,
+      "x": -10.45,
+      "y": -1.0
+    },
+    "id": "monaco_start",
+    "mission": {
+      "extraction_door_id": "exit_door_01",
+      "id": "steal_the_mask",
+      "require_threats_neutralized": false,
+      "required_loot_ids": [
+        "loot_01",
+        "loot_02",
+        "loot_03"
+      ],
+      "title": "Украдите три реликвии и покиньте особняк"
+    },
+    "name": "Особняк Лазурной Маски",
+    "palette": {
+      "blueprint": "071724",
+      "danger": "ff476f",
+      "door": "f0c45b",
+      "label": "d6f6f5",
+      "loot": "ffe45c",
+      "safe": "55efc4",
+      "void": "05080f",
+      "wall": "02070d",
+      "wall_accent": "35d6e4"
+    },
+    "rendering": {
+      "fog_alpha": 0.16,
+      "grid_step": 1.0,
+      "room_label_px": 14.0,
+      "vision_cone_angle_degrees": 58.0,
+      "vision_cone_length": 3.7,
+      "wall_outline_px": 3.0
+    },
+    "rooms": [
+      {
+        "color": "0d5368",
+        "floor_pattern": "files",
+        "id": "archives",
+        "name": "АРХИВЫ",
+        "rect": {
+          "height": 2.4,
+          "width": 3.0,
+          "x": -9.2,
+          "y": -4.7
+        },
+        "tags": [
+          "records",
+          "loot"
+        ]
+      },
+      {
+        "color": "0b4656",
+        "floor_pattern": "tile",
+        "id": "entrance",
+        "name": "ВЕСТИБЮЛЬ",
+        "rect": {
+          "height": 3.6,
+          "width": 3.0,
+          "x": -9.2,
+          "y": -2.0
+        },
+        "tags": [
+          "entry",
+          "extraction"
+        ]
+      },
+      {
+        "color": "60431f",
+        "floor_pattern": "wood",
+        "id": "staff",
+        "name": "СЛУЖЕБНАЯ",
+        "rect": {
+          "height": 2.6,
+          "width": 3.0,
+          "x": -9.2,
+          "y": 1.9
+        },
+        "tags": [
+          "staff"
+        ]
+      },
+      {
+        "color": "183d62",
+        "floor_pattern": "marble",
+        "id": "gallery",
+        "name": "ГАЛЕРЕЯ",
+        "rect": {
+          "height": 9.2,
+          "width": 5.1,
+          "x": -5.9,
+          "y": -4.7
+        },
+        "tags": [
+          "corridor",
+          "display"
+        ]
+      },
+      {
+        "color": "6a1f50",
+        "floor_pattern": "tech",
+        "id": "security",
+        "name": "ОХРАНА",
+        "rect": {
+          "height": 2.8,
+          "width": 3.4,
+          "x": -0.3,
+          "y": -4.7
+        },
+        "tags": [
+          "security",
+          "terminal"
+        ]
+      },
+      {
+        "color": "12634f",
+        "floor_pattern": "garden",
+        "id": "courtyard",
+        "name": "ЗИМНИЙ САД",
+        "rect": {
+          "height": 4.0,
+          "width": 3.4,
+          "x": -0.3,
+          "y": -1.6
+        },
+        "tags": [
+          "water",
+          "garden"
+        ]
+      },
+      {
+        "color": "51407a",
+        "floor_pattern": "carpet",
+        "id": "lounge",
+        "name": "САЛОН",
+        "rect": {
+          "height": 1.8,
+          "width": 3.4,
+          "x": -0.3,
+          "y": 2.7
+        },
+        "tags": [
+          "social"
+        ]
+      },
+      {
+        "color": "783629",
+        "floor_pattern": "vault",
+        "id": "vault",
+        "name": "ХРАНИЛИЩЕ",
+        "rect": {
+          "height": 4.5,
+          "width": 2.7,
+          "x": 3.5,
+          "y": -4.7
+        },
+        "tags": [
+          "vault",
+          "loot"
+        ]
+      },
+      {
+        "color": "6f2341",
+        "floor_pattern": "vault",
+        "id": "safe",
+        "name": "СЕЙФ",
+        "rect": {
+          "height": 4.4,
+          "width": 2.7,
+          "x": 3.5,
+          "y": 0.1
+        },
+        "tags": [
+          "safe",
+          "loot"
+        ]
+      },
+      {
+        "color": "59421b",
+        "floor_pattern": "utility",
+        "id": "service",
+        "name": "ТЕХНИЧЕСКИЙ КОРИДОР",
+        "rect": {
+          "height": 9.2,
+          "width": 2.7,
+          "x": 6.5,
+          "y": -4.7
+        },
+        "tags": [
+          "service",
+          "alternate_route"
+        ]
+      }
+    ],
+    "runtime": {
+      "game_time_scale": 1.0,
+      "light_level": 1.0,
+      "mission": {
+        "collected_loot_ids": [],
+        "extraction_door_id": "exit_door_01",
+        "id": "steal_the_mask",
+        "loot_collected": 0,
+        "loot_total": 3,
+        "require_threats_neutralized": false,
+        "required_loot_ids": [
+          "loot_01",
+          "loot_02",
+          "loot_03"
+        ],
+        "status": "active",
+        "title": "Украдите три реликвии и покиньте особняк"
+      },
+      "world_paused": false
+    },
+    "schema_version": 1.0,
+    "unit_px": 60.0,
+    "version": "monaco-start-v1",
+    "walls": [
+      {
+        "id": "wall_01",
+        "rect": {
+          "height": 0.25,
+          "width": 19.0,
+          "x": -9.5,
+          "y": -5.0
+        }
+      },
+      {
+        "id": "wall_02",
+        "rect": {
+          "height": 0.25,
+          "width": 19.0,
+          "x": -9.5,
+          "y": 4.75
+        }
+      },
+      {
+        "id": "wall_03",
+        "rect": {
+          "height": 3.7,
+          "width": 0.25,
+          "x": -9.5,
+          "y": -5.0
+        }
+      },
+      {
+        "id": "wall_04",
+        "rect": {
+          "height": 3.7,
+          "width": 0.25,
+          "x": -9.5,
+          "y": 1.3
+        }
+      },
+      {
+        "id": "wall_05",
+        "rect": {
+          "height": 10.0,
+          "width": 0.25,
+          "x": 9.25,
+          "y": -5.0
+        }
+      },
+      {
+        "id": "wall_06",
+        "rect": {
+          "height": 1.65,
+          "width": 0.25,
+          "x": -6.2,
+          "y": -5.0
+        }
+      },
+      {
+        "id": "wall_07",
+        "rect": {
+          "height": 2.2,
+          "width": 0.25,
+          "x": -6.2,
+          "y": -2.65
+        }
+      },
+      {
+        "id": "wall_08",
+        "rect": {
+          "height": 2.0,
+          "width": 0.25,
+          "x": -6.2,
+          "y": 0.45
+        }
+      },
+      {
+        "id": "wall_09",
+        "rect": {
+          "height": 1.85,
+          "width": 0.25,
+          "x": -6.2,
+          "y": 3.15
+        }
+      },
+      {
+        "id": "wall_10",
+        "rect": {
+          "height": 1.75,
+          "width": 0.25,
+          "x": -0.55,
+          "y": -5.0
+        }
+      },
+      {
+        "id": "wall_11",
+        "rect": {
+          "height": 1.95,
+          "width": 0.25,
+          "x": -0.55,
+          "y": -2.55
+        }
+      },
+      {
+        "id": "wall_12",
+        "rect": {
+          "height": 2.65,
+          "width": 0.25,
+          "x": -0.55,
+          "y": 0.2
+        }
+      },
+      {
+        "id": "wall_13",
+        "rect": {
+          "height": 1.45,
+          "width": 0.25,
+          "x": -0.55,
+          "y": 3.55
+        }
+      },
+      {
+        "id": "wall_14",
+        "rect": {
+          "height": 1.75,
+          "width": 0.25,
+          "x": 3.25,
+          "y": -5.0
+        }
+      },
+      {
+        "id": "wall_15",
+        "rect": {
+          "height": 2.2,
+          "width": 0.25,
+          "x": 3.25,
+          "y": -2.55
+        }
+      },
+      {
+        "id": "wall_16",
+        "rect": {
+          "height": 1.55,
+          "width": 0.25,
+          "x": 3.25,
+          "y": 0.35
+        }
+      },
+      {
+        "id": "wall_17",
+        "rect": {
+          "height": 2.4,
+          "width": 0.25,
+          "x": 3.25,
+          "y": 2.6
+        }
+      },
+      {
+        "id": "wall_18",
+        "rect": {
+          "height": 2.0,
+          "width": 0.25,
+          "x": 6.2,
+          "y": -5.0
+        }
+      },
+      {
+        "id": "wall_19",
+        "rect": {
+          "height": 3.5,
+          "width": 0.25,
+          "x": 6.2,
+          "y": -2.3
+        }
+      },
+      {
+        "id": "wall_20",
+        "rect": {
+          "height": 3.1,
+          "width": 0.25,
+          "x": 6.2,
+          "y": 1.9
+        }
+      },
+      {
+        "id": "wall_21",
+        "rect": {
+          "height": 0.25,
+          "width": 1.0,
+          "x": -9.25,
+          "y": -2.3
+        }
+      },
+      {
+        "id": "wall_22",
+        "rect": {
+          "height": 0.25,
+          "width": 1.35,
+          "x": -7.55,
+          "y": -2.3
+        }
+      },
+      {
+        "id": "wall_23",
+        "rect": {
+          "height": 0.25,
+          "width": 1.05,
+          "x": -9.25,
+          "y": 1.65
+        }
+      },
+      {
+        "id": "wall_24",
+        "rect": {
+          "height": 0.25,
+          "width": 1.3,
+          "x": -7.5,
+          "y": 1.65
+        }
+      },
+      {
+        "id": "wall_25",
+        "rect": {
+          "height": 0.25,
+          "width": 1.25,
+          "x": -0.3,
+          "y": -1.9
+        }
+      },
+      {
+        "id": "wall_26",
+        "rect": {
+          "height": 0.25,
+          "width": 1.45,
+          "x": 1.65,
+          "y": -1.9
+        }
+      },
+      {
+        "id": "wall_27",
+        "rect": {
+          "height": 0.25,
+          "width": 1.2,
+          "x": -0.3,
+          "y": 2.45
+        }
+      },
+      {
+        "id": "wall_28",
+        "rect": {
+          "height": 0.25,
+          "width": 1.5,
+          "x": 1.6,
+          "y": 2.45
+        }
+      },
+      {
+        "id": "wall_29",
+        "rect": {
+          "height": 0.25,
+          "width": 1.0,
+          "x": 3.5,
+          "y": -0.15
+        }
+      },
+      {
+        "id": "wall_30",
+        "rect": {
+          "height": 0.25,
+          "width": 1.0,
+          "x": 5.2,
+          "y": -0.15
+        }
+      },
+      {
+        "id": "wall_31",
+        "rect": {
+          "height": 0.25,
+          "width": 1.0,
+          "x": 6.45,
+          "y": -1.15
+        }
+      },
+      {
+        "id": "wall_32",
+        "rect": {
+          "height": 0.25,
+          "width": 1.1,
+          "x": 8.15,
+          "y": -1.15
+        }
+      }
+    ]
+  },
+  "mission": {
+    "collected_loot_ids": [],
+    "extraction_door_id": "exit_door_01",
+    "id": "steal_the_mask",
+    "loot_collected": 0,
+    "loot_total": 3,
+    "require_threats_neutralized": false,
+    "required_loot_ids": [
+      "loot_01",
+      "loot_02",
+      "loot_03"
+    ],
+    "status": "active",
+    "title": "Украдите три реликвии и покиньте особняк"
+  },
+  "schema_version": 1,
+  "world": {
+    "objects": [
+      {
+        "health": 100.0,
+        "id": "player",
+        "kind": "creature",
+        "material": {
+          "brittleness": 0.1,
+          "conductivity": 0.25,
+          "flammability": 0.3,
+          "hardness": 0.2,
+          "mass": 1.0,
+          "name": "organic",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": -8.2,
+          "y": 0.0
+        },
+        "properties": {
+          "collected_loot_ids": [],
+          "game_time_scale": 1.0,
+          "inventory": [],
+          "invisible": false,
+          "light_level": 1.0,
+          "mission_status": "active",
+          "outfit": "thief_blue",
+          "passes_walls": false,
+          "removed": false,
+          "visible": true,
+          "world_paused": false
+        },
+        "radius": 0.3,
+        "states": [],
+        "tags": [
+          "living",
+          "player",
+          "requester",
+          "adventurer",
+          "organic"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_01",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 0.0,
+          "y": -4.875
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 0.25,
+          "width": 19.0
+        },
+        "radius": 9.5,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_02",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 0.0,
+          "y": 4.875
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 0.25,
+          "width": 19.0
+        },
+        "radius": 9.5,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_03",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": -9.375,
+          "y": -3.15
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 3.7,
+          "width": 0.25
+        },
+        "radius": 1.85,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_04",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": -9.375,
+          "y": 3.15
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 3.7,
+          "width": 0.25
+        },
+        "radius": 1.85,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_05",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 9.375,
+          "y": 0.0
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 10.0,
+          "width": 0.25
+        },
+        "radius": 5.0,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_06",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": -6.075,
+          "y": -4.175
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 1.65,
+          "width": 0.25
+        },
+        "radius": 0.825,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_07",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": -6.075,
+          "y": -1.55
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 2.2,
+          "width": 0.25
+        },
+        "radius": 1.1,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_08",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": -6.075,
+          "y": 1.45
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 2.0,
+          "width": 0.25
+        },
+        "radius": 1.0,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_09",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": -6.075,
+          "y": 4.075
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 1.85,
+          "width": 0.25
+        },
+        "radius": 0.925,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_10",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": -0.425,
+          "y": -4.125
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 1.75,
+          "width": 0.25
+        },
+        "radius": 0.875,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_11",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": -0.425,
+          "y": -1.575
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 1.95,
+          "width": 0.25
+        },
+        "radius": 0.975,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_12",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": -0.425,
+          "y": 1.525
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 2.65,
+          "width": 0.25
+        },
+        "radius": 1.325,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_13",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": -0.425,
+          "y": 4.275
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 1.45,
+          "width": 0.25
+        },
+        "radius": 0.725,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_14",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 3.375,
+          "y": -4.125
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 1.75,
+          "width": 0.25
+        },
+        "radius": 0.875,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_15",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 3.375,
+          "y": -1.45
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 2.2,
+          "width": 0.25
+        },
+        "radius": 1.1,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_16",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 3.375,
+          "y": 1.125
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 1.55,
+          "width": 0.25
+        },
+        "radius": 0.775,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_17",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 3.375,
+          "y": 3.8
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 2.4,
+          "width": 0.25
+        },
+        "radius": 1.2,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_18",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 6.325,
+          "y": -4.0
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 2.0,
+          "width": 0.25
+        },
+        "radius": 1.0,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_19",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 6.325,
+          "y": -0.55
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 3.5,
+          "width": 0.25
+        },
+        "radius": 1.75,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_20",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 6.325,
+          "y": 3.45
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 3.1,
+          "width": 0.25
+        },
+        "radius": 1.55,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_21",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": -8.75,
+          "y": -2.175
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 0.25,
+          "width": 1.0
+        },
+        "radius": 0.5,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_22",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": -6.875,
+          "y": -2.175
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 0.25,
+          "width": 1.35
+        },
+        "radius": 0.675,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_23",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": -8.725,
+          "y": 1.775
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 0.25,
+          "width": 1.05
+        },
+        "radius": 0.525,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_24",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": -6.85,
+          "y": 1.775
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 0.25,
+          "width": 1.3
+        },
+        "radius": 0.65,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_25",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 0.325,
+          "y": -1.775
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 0.25,
+          "width": 1.25
+        },
+        "radius": 0.625,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_26",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 2.375,
+          "y": -1.775
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 0.25,
+          "width": 1.45
+        },
+        "radius": 0.725,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_27",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 0.3,
+          "y": 2.575
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 0.25,
+          "width": 1.2
+        },
+        "radius": 0.6,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_28",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 2.35,
+          "y": 2.575
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 0.25,
+          "width": 1.5
+        },
+        "radius": 0.75,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_29",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 4.0,
+          "y": -0.025
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 0.25,
+          "width": 1.0
+        },
+        "radius": 0.5,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_30",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 5.7,
+          "y": -0.025
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 0.25,
+          "width": 1.0
+        },
+        "radius": 0.5,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_31",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 6.95,
+          "y": -1.025
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 0.25,
+          "width": 1.0
+        },
+        "radius": 0.5,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "wall_32",
+        "kind": "structure",
+        "material": {
+          "brittleness": 0.25,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.95,
+          "mass": 20.0,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 8.7,
+          "y": -1.025
+        },
+        "properties": {
+          "door_installed": false,
+          "height": 0.25,
+          "width": 1.1
+        },
+        "radius": 0.55,
+        "states": [],
+        "tags": [
+          "wall",
+          "structure",
+          "inanimate",
+          "stone"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "health": 100.0,
+        "id": "exit_door_01",
+        "kind": "door",
+        "material": {
+          "brittleness": 0.2,
+          "conductivity": 0.8,
+          "flammability": 0.0,
+          "hardness": 0.85,
+          "mass": 8.0,
+          "name": "metal",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": -9.375,
+          "y": 0.0
+        },
+        "properties": {
+          "connects": [
+            "entrance",
+            "outside"
+          ],
+          "extraction": true,
+          "height": 2.6,
+          "locked": false,
+          "open": false,
+          "prototype": "door",
+          "width": 0.35
+        },
+        "radius": 1.3,
+        "states": [],
+        "tags": [
+          "door",
+          "structure",
+          "inanimate",
+          "metal",
+          "exit",
+          "extraction"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "health": 100.0,
+        "id": "door_archives",
+        "kind": "door",
+        "material": {
+          "brittleness": 0.2,
+          "conductivity": 0.8,
+          "flammability": 0.0,
+          "hardness": 0.85,
+          "mass": 8.0,
+          "name": "metal",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": -7.9,
+          "y": -2.18000005086263
+        },
+        "properties": {
+          "connects": [
+            "archives",
+            "entrance"
+          ],
+          "extraction": false,
+          "height": 0.4,
+          "locked": false,
+          "open": false,
+          "prototype": "door",
+          "width": 0.7
+        },
+        "radius": 0.35,
+        "states": [],
+        "tags": [
+          "door",
+          "structure",
+          "inanimate",
+          "wood"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "health": 100.0,
+        "id": "door_staff",
+        "kind": "door",
+        "material": {
+          "brittleness": 0.2,
+          "conductivity": 0.8,
+          "flammability": 0.0,
+          "hardness": 0.85,
+          "mass": 8.0,
+          "name": "metal",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": -7.85,
+          "y": 1.78000005086263
+        },
+        "properties": {
+          "connects": [
+            "entrance",
+            "staff"
+          ],
+          "extraction": false,
+          "height": 0.4,
+          "locked": false,
+          "open": false,
+          "prototype": "door",
+          "width": 0.7
+        },
+        "radius": 0.35,
+        "states": [],
+        "tags": [
+          "door",
+          "structure",
+          "inanimate",
+          "wood"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "health": 100.0,
+        "id": "door_gallery",
+        "kind": "door",
+        "material": {
+          "brittleness": 0.2,
+          "conductivity": 0.8,
+          "flammability": 0.0,
+          "hardness": 0.85,
+          "mass": 8.0,
+          "name": "metal",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": -6.07999979654948,
+          "y": 0.0
+        },
+        "properties": {
+          "connects": [
+            "entrance",
+            "gallery"
+          ],
+          "extraction": false,
+          "height": 0.9,
+          "locked": false,
+          "open": true,
+          "prototype": "door",
+          "width": 0.4
+        },
+        "radius": 0.45,
+        "states": [],
+        "tags": [
+          "door",
+          "structure",
+          "inanimate",
+          "metal"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "health": 100.0,
+        "id": "door_security",
+        "kind": "door",
+        "material": {
+          "brittleness": 0.2,
+          "conductivity": 0.8,
+          "flammability": 0.0,
+          "hardness": 0.85,
+          "mass": 8.0,
+          "name": "metal",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": -0.429999987284342,
+          "y": -2.9
+        },
+        "properties": {
+          "connects": [
+            "gallery",
+            "security"
+          ],
+          "extraction": false,
+          "height": 0.7,
+          "locked": true,
+          "open": false,
+          "prototype": "door",
+          "width": 0.4
+        },
+        "radius": 0.35,
+        "states": [],
+        "tags": [
+          "door",
+          "structure",
+          "inanimate",
+          "metal",
+          "locked"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "health": 100.0,
+        "id": "door_courtyard",
+        "kind": "door",
+        "material": {
+          "brittleness": 0.2,
+          "conductivity": 0.8,
+          "flammability": 0.0,
+          "hardness": 0.85,
+          "mass": 8.0,
+          "name": "metal",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": -0.429999987284342,
+          "y": -0.2
+        },
+        "properties": {
+          "connects": [
+            "gallery",
+            "courtyard"
+          ],
+          "extraction": false,
+          "height": 0.8,
+          "locked": false,
+          "open": true,
+          "prototype": "door",
+          "width": 0.4
+        },
+        "radius": 0.4,
+        "states": [],
+        "tags": [
+          "door",
+          "structure",
+          "inanimate",
+          "glass"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "health": 100.0,
+        "id": "door_lounge",
+        "kind": "door",
+        "material": {
+          "brittleness": 0.2,
+          "conductivity": 0.8,
+          "flammability": 0.0,
+          "hardness": 0.85,
+          "mass": 8.0,
+          "name": "metal",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": -0.429999987284342,
+          "y": 3.2
+        },
+        "properties": {
+          "connects": [
+            "gallery",
+            "lounge"
+          ],
+          "extraction": false,
+          "height": 0.7,
+          "locked": false,
+          "open": false,
+          "prototype": "door",
+          "width": 0.4
+        },
+        "radius": 0.35,
+        "states": [],
+        "tags": [
+          "door",
+          "structure",
+          "inanimate",
+          "wood"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "health": 100.0,
+        "id": "door_vault",
+        "kind": "door",
+        "material": {
+          "brittleness": 0.2,
+          "conductivity": 0.8,
+          "flammability": 0.0,
+          "hardness": 0.85,
+          "mass": 8.0,
+          "name": "metal",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 3.36999994913737,
+          "y": -2.9
+        },
+        "properties": {
+          "connects": [
+            "security",
+            "vault"
+          ],
+          "extraction": false,
+          "height": 0.7,
+          "locked": true,
+          "open": false,
+          "prototype": "door",
+          "width": 0.4
+        },
+        "radius": 0.35,
+        "states": [],
+        "tags": [
+          "door",
+          "structure",
+          "inanimate",
+          "reinforced_metal",
+          "locked"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "health": 100.0,
+        "id": "door_safe",
+        "kind": "door",
+        "material": {
+          "brittleness": 0.2,
+          "conductivity": 0.8,
+          "flammability": 0.0,
+          "hardness": 0.85,
+          "mass": 8.0,
+          "name": "metal",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 3.36999994913737,
+          "y": 2.25
+        },
+        "properties": {
+          "connects": [
+            "courtyard",
+            "safe"
+          ],
+          "extraction": false,
+          "height": 0.7,
+          "locked": true,
+          "open": false,
+          "prototype": "door",
+          "width": 0.4
+        },
+        "radius": 0.35,
+        "states": [],
+        "tags": [
+          "door",
+          "structure",
+          "inanimate",
+          "reinforced_metal",
+          "locked"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "health": 100.0,
+        "id": "door_service_north",
+        "kind": "door",
+        "material": {
+          "brittleness": 0.2,
+          "conductivity": 0.8,
+          "flammability": 0.0,
+          "hardness": 0.85,
+          "mass": 8.0,
+          "name": "metal",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 6.32000020345052,
+          "y": -2.65
+        },
+        "properties": {
+          "connects": [
+            "vault",
+            "service"
+          ],
+          "extraction": false,
+          "height": 0.7,
+          "locked": false,
+          "open": false,
+          "prototype": "door",
+          "width": 0.4
+        },
+        "radius": 0.35,
+        "states": [],
+        "tags": [
+          "door",
+          "structure",
+          "inanimate",
+          "metal"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "health": 100.0,
+        "id": "door_service_south",
+        "kind": "door",
+        "material": {
+          "brittleness": 0.2,
+          "conductivity": 0.8,
+          "flammability": 0.0,
+          "hardness": 0.85,
+          "mass": 8.0,
+          "name": "metal",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 6.32000020345052,
+          "y": 1.55
+        },
+        "properties": {
+          "connects": [
+            "safe",
+            "service"
+          ],
+          "extraction": false,
+          "height": 0.7,
+          "locked": false,
+          "open": false,
+          "prototype": "door",
+          "width": 0.4
+        },
+        "radius": 0.35,
+        "states": [],
+        "tags": [
+          "door",
+          "structure",
+          "inanimate",
+          "metal"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "id": "water_pool_01",
+        "kind": "terrain",
+        "material": {
+          "brittleness": 0.0,
+          "conductivity": 0.65,
+          "flammability": 0.0,
+          "hardness": 0.0,
+          "mass": 1.0,
+          "name": "water",
+          "temperature": 0.5,
+          "wetness": 1.0
+        },
+        "position": {
+          "x": 1.25,
+          "y": 0.45
+        },
+        "radius": 0.85,
+        "states": [],
+        "tags": [
+          "water",
+          "terrain",
+          "surface",
+          "wet"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "health": 58.0,
+        "id": "guard_01",
+        "kind": "creature",
+        "material": {
+          "brittleness": 0.1,
+          "conductivity": 0.2,
+          "flammability": 0.35,
+          "hardness": 0.2,
+          "mass": 1.0,
+          "name": "organic",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": -5.39812520345052,
+          "y": 0.292605940500895
+        },
+        "properties": {
+          "aggro_target": "",
+          "prototype": "enemy",
+          "removed": false,
+          "visible": true
+        },
+        "radius": 0.266666666666667,
+        "states": [],
+        "tags": [
+          "living",
+          "enemy",
+          "guard",
+          "dwarf",
+          "organic"
+        ],
+        "velocity": {
+          "x": 0.684723218282064,
+          "y": 1.10505841573079
+        }
+      },
+      {
+        "health": 58.0,
+        "id": "guard_02",
+        "kind": "creature",
+        "material": {
+          "brittleness": 0.1,
+          "conductivity": 0.2,
+          "flammability": 0.35,
+          "hardness": 0.2,
+          "mass": 1.0,
+          "name": "organic",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 0.261646715799967,
+          "y": -2.1677729288737
+        },
+        "properties": {
+          "aggro_target": "",
+          "prototype": "enemy",
+          "removed": false,
+          "visible": true
+        },
+        "radius": 0.266666666666667,
+        "states": [],
+        "tags": [
+          "living",
+          "enemy",
+          "guard",
+          "dwarf",
+          "organic"
+        ],
+        "velocity": {
+          "x": 0.69510809580485,
+          "y": 0.0
+        }
+      },
+      {
+        "health": 58.0,
+        "id": "guard_03",
+        "kind": "creature",
+        "material": {
+          "brittleness": 0.1,
+          "conductivity": 0.2,
+          "flammability": 0.35,
+          "hardness": 0.2,
+          "mass": 1.0,
+          "name": "organic",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 4.09949951171875,
+          "y": 4.02837651570638
+        },
+        "properties": {
+          "aggro_target": "",
+          "prototype": "enemy",
+          "removed": false,
+          "visible": true
+        },
+        "radius": 0.266666666666667,
+        "states": [],
+        "tags": [
+          "living",
+          "enemy",
+          "guard",
+          "dwarf",
+          "organic"
+        ],
+        "velocity": {
+          "x": 0.705384318033854,
+          "y": 1.09198582967122
+        }
+      },
+      {
+        "health": 70.0,
+        "id": "npc_01",
+        "kind": "creature",
+        "material": {
+          "brittleness": 0.1,
+          "conductivity": 0.2,
+          "flammability": 0.35,
+          "hardness": 0.2,
+          "mass": 1.0,
+          "name": "organic",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": -7.44351857503255,
+          "y": 2.38344268798828
+        },
+        "properties": {
+          "aggro_target": "",
+          "initial_prototype": "npc",
+          "prototype": "npc",
+          "removed": false,
+          "visible": true
+        },
+        "radius": 0.266666666666667,
+        "states": [],
+        "tags": [
+          "living",
+          "npc",
+          "villager",
+          "friendly",
+          "organic"
+        ],
+        "velocity": {
+          "x": -0.363820934295654,
+          "y": 0.292253430684408
+        }
+      },
+      {
+        "health": 80.0,
+        "id": "rock_01",
+        "kind": "prop",
+        "material": {
+          "brittleness": 0.4,
+          "conductivity": 0.1,
+          "flammability": 0.9,
+          "hardness": 0.35,
+          "mass": 0.8,
+          "name": "wood",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": -4.7,
+          "y": 2.9
+        },
+        "properties": {
+          "collected": false,
+          "door_installed": false,
+          "hidden": false,
+          "initial_prototype": "rock",
+          "prototype": "crate",
+          "removed": false,
+          "room_id": "gallery",
+          "visible": true
+        },
+        "radius": 0.35,
+        "states": [],
+        "tags": [
+          "rock",
+          "stone",
+          "inanimate",
+          "wood",
+          "prop",
+          "crate"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "health": 80.0,
+        "id": "rock_02",
+        "kind": "prop",
+        "material": {
+          "brittleness": 0.6,
+          "conductivity": 0.1,
+          "flammability": 0.0,
+          "hardness": 0.9,
+          "mass": 2.5,
+          "name": "stone",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 1.9,
+          "y": 3.3
+        },
+        "properties": {
+          "collected": false,
+          "door_installed": false,
+          "hidden": false,
+          "initial_prototype": "rock",
+          "prototype": "rock",
+          "removed": false,
+          "room_id": "lounge",
+          "visible": true
+        },
+        "radius": 0.35,
+        "states": [],
+        "tags": [
+          "rock",
+          "stone",
+          "inanimate",
+          "prop",
+          "rock"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "health": 40.0,
+        "id": "crate_01",
+        "kind": "prop",
+        "material": {
+          "brittleness": 0.4,
+          "conductivity": 0.1,
+          "flammability": 0.9,
+          "hardness": 0.35,
+          "mass": 0.8,
+          "name": "wood",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": -7.0,
+          "y": -3.4
+        },
+        "properties": {
+          "collected": false,
+          "door_installed": false,
+          "hidden": false,
+          "initial_prototype": "crate",
+          "prototype": "crate",
+          "removed": false,
+          "room_id": "archives",
+          "visible": true
+        },
+        "radius": 0.35,
+        "states": [],
+        "tags": [
+          "crate",
+          "wood",
+          "inanimate",
+          "prop"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "health": 40.0,
+        "id": "crate_02",
+        "kind": "prop",
+        "material": {
+          "brittleness": 0.4,
+          "conductivity": 0.1,
+          "flammability": 0.9,
+          "hardness": 0.35,
+          "mass": 0.8,
+          "name": "wood",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 7.7,
+          "y": 3.3
+        },
+        "properties": {
+          "collected": false,
+          "door_installed": false,
+          "hidden": false,
+          "initial_prototype": "crate",
+          "prototype": "crate",
+          "removed": false,
+          "room_id": "service",
+          "visible": true
+        },
+        "radius": 0.35,
+        "states": [],
+        "tags": [
+          "crate",
+          "wood",
+          "inanimate",
+          "prop"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "health": 65.0,
+        "id": "tree_01",
+        "kind": "prop",
+        "material": {
+          "brittleness": 0.6,
+          "conductivity": 0.1,
+          "flammability": 0.8,
+          "hardness": 0.4,
+          "mass": 1.2,
+          "name": "wood",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 2.0,
+          "y": 0.5
+        },
+        "properties": {
+          "collected": false,
+          "door_installed": false,
+          "hidden": false,
+          "initial_prototype": "tree",
+          "prototype": "tree",
+          "removed": false,
+          "room_id": "courtyard",
+          "visible": true
+        },
+        "radius": 0.35,
+        "states": [],
+        "tags": [
+          "tree",
+          "wood",
+          "plant",
+          "inanimate",
+          "prop",
+          "plant",
+          "tree"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "health": 55.0,
+        "id": "metal_01",
+        "kind": "prop",
+        "material": {
+          "brittleness": 0.6,
+          "conductivity": 0.95,
+          "flammability": 0.0,
+          "hardness": 0.9,
+          "mass": 2.5,
+          "name": "metal",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 0.217859888076782,
+          "y": -4.46562856038411
+        },
+        "properties": {
+          "collected": false,
+          "door_installed": false,
+          "hidden": false,
+          "initial_prototype": "terminal",
+          "prototype": "terminal",
+          "removed": false,
+          "room_id": "security",
+          "visible": true
+        },
+        "radius": 0.35,
+        "states": [],
+        "tags": [
+          "metal",
+          "terminal",
+          "inanimate",
+          "prop"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "health": 80.0,
+        "id": "loot_01",
+        "kind": "prop",
+        "material": {
+          "brittleness": 0.35,
+          "conductivity": 0.35,
+          "flammability": 0.0,
+          "hardness": 0.72,
+          "mass": 0.25,
+          "name": "gold",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": -8.2,
+          "y": -3.4
+        },
+        "properties": {
+          "collected": false,
+          "door_installed": false,
+          "hidden": false,
+          "initial_prototype": "loot",
+          "prototype": "loot",
+          "removed": false,
+          "required": true,
+          "room_id": "archives",
+          "visible": true
+        },
+        "radius": 0.35,
+        "states": [],
+        "tags": [
+          "loot",
+          "valuable",
+          "gold",
+          "required",
+          "inanimate",
+          "prop",
+          "loot",
+          "valuable",
+          "heist_objective"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "health": 80.0,
+        "id": "loot_02",
+        "kind": "prop",
+        "material": {
+          "brittleness": 0.35,
+          "conductivity": 0.35,
+          "flammability": 0.0,
+          "hardness": 0.72,
+          "mass": 0.25,
+          "name": "gold",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 4.8,
+          "y": -2.6
+        },
+        "properties": {
+          "collected": false,
+          "door_installed": false,
+          "hidden": false,
+          "initial_prototype": "loot",
+          "prototype": "loot",
+          "removed": false,
+          "required": true,
+          "room_id": "vault",
+          "visible": true
+        },
+        "radius": 0.35,
+        "states": [],
+        "tags": [
+          "loot",
+          "valuable",
+          "gold",
+          "required",
+          "inanimate",
+          "prop",
+          "loot",
+          "valuable",
+          "heist_objective"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "health": 80.0,
+        "id": "loot_03",
+        "kind": "prop",
+        "material": {
+          "brittleness": 0.35,
+          "conductivity": 0.35,
+          "flammability": 0.0,
+          "hardness": 0.72,
+          "mass": 0.25,
+          "name": "gold",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 4.8655507405599,
+          "y": 3.19692560831706
+        },
+        "properties": {
+          "collected": false,
+          "door_installed": false,
+          "hidden": false,
+          "initial_prototype": "loot",
+          "prototype": "loot",
+          "removed": false,
+          "required": true,
+          "room_id": "safe",
+          "visible": true
+        },
+        "radius": 0.35,
+        "states": [],
+        "tags": [
+          "loot",
+          "valuable",
+          "gold",
+          "required",
+          "inanimate",
+          "prop",
+          "loot",
+          "valuable",
+          "heist_objective"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      }
+    ]
+  }
+}

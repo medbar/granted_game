@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "id": "perception",
+  "version": "1.0.0",
+  "description": "Поиск и осмотр доступного сериализованного мира.",
+  "enabled_by_default": true,
+  "capabilities": [
+    {"name":"observe_area","signature":"observe_area()","description":"Полный public snapshot уже доступен в prompt; обозначает осмотр.","mutates_world":false},
+    {"name":"nearest","signature":"nearest(tag, from_id='player') -> id|None","description":"Ближайшая сущность с тегом.","mutates_world":false},
+    {"name":"all_with_tag","signature":"all_with_tag(tag, limit=16) -> list[id]","description":"Ограниченный список сущностей с тегом.","mutates_world":false},
+    {"name":"inspect","signature":"inspect(id) -> receipt","description":"Публичные свойства известной сущности.","mutates_world":false}
+  ]
+}

@@ -23,7 +23,7 @@
     {"id":"FORCE","family":"matter","name":"сила","phrases":["магическая сила","импульс","кинетическая энергия","force"]},
 
     {"id":"CREATE","family":"action","name":"создать","phrases":["создай","сделай","породи","появись","сотворить","create"]},
-    {"id":"DESTROY","family":"action","name":"уничтожить","phrases":["уничтожь","разрушь","сломай","разбей","умри","destroy"]},
+    {"id":"DESTROY","family":"action","name":"уничтожить","phrases":["уничтожь","убей","убить","прикончи","ликвидируй","разрушь","сломай","разбей","умри","destroy"]},
     {"id":"IGNITE","family":"action","name":"зажечь","phrases":["зажги","подожги","воспламени","пусть горит","ignite"]},
     {"id":"EXTINGUISH","family":"action","name":"потушить","phrases":["потуши","угаси","убери огонь","extinguish"]},
     {"id":"FREEZE","family":"action","name":"заморозить","phrases":["заморозь","замерзни","обледени","преврати в лед","freeze"]},

@@ -1,0 +1,46 @@
+schema: granted-eval-first
+
+context: |
+  Language: Russian. All artifacts are written in Russian while OpenSpec structural headings
+  and SHALL/MUST keywords remain in English.
+  Product: Granted is a Godot 4.7 game with a FastAPI/PydanticAI genie agent.
+  The authoritative product outcome is the state observed in the running game world, not the
+  generated Python text, action name, HTTP success, or the genie's spoken claim.
+  Server tests use pytest. Client tests use headless Godot. Agent evaluations live under
+  server/evals and save reports under ignored server/runtime directories.
+  The project follows strict TDD and eval-first development for every behavior change.
+  Live-model evaluations supplement deterministic tests and never replace them.
+
+rules:
+  proposal:
+    - Classify the change as deterministic server, agent behavior, player-visible client, observability, or tooling; list every applicable class.
+    - State the measurable player or world outcome and explicitly list non-goals.
+    - For a bug, cite the failed wish or trajectory that proves the current behavior is wrong.
+  specs:
+    - Every scenario must describe an observable world, API, metric, or UI postcondition.
+    - Never accept generated code, an action label, HTTP 200, or spoken text as proof of wish fulfillment.
+    - Include failure and retry behavior for agentic features.
+  eval-plan:
+    - Map every changed scenario to a deterministic test and, for agent behavior, an eval case with a world-state oracle.
+    - Define the RED observation before implementation and the required GREEN gates after implementation.
+    - Mark any live-model or client-in-loop gate explicitly; do not silently replace it with a fixture.
+  design:
+    - Explain how the design preserves authoritative world-state verification and visible player feedback.
+    - Prefer the smallest implementation that can make the planned failing test pass.
+    - Identify observability needed to diagnose a failed wish without reading model reasoning.
+  tasks:
+    - Order work as baseline, RED test/eval, minimal GREEN implementation, refactor, full evaluation, and review.
+    - No production-code task may precede the task that creates and observes its failing test or eval.
+    - Every task must name its verification command or observable evidence.
+
+operations:
+  apply:
+    guidance:
+      - Follow tasks in order and record a genuine RED result before changing production behavior.
+      - Add or update the eval case before prompt, tool, world, or client behavior that is intended to satisfy it.
+      - Run the narrowest test first, then all gates required by openspec/quality-gates.json.
+      - Do not mark a task complete when only a fallback action, HTTP success, generated program, or hidden speech occurred.
+  archive:
+    guidance:
+      - Archive only after OpenSpec validation, policy validation, all mandatory tests, and all change-specific eval gates pass.
+      - Preserve the final evaluation report path and the reviewed player-visible trajectory in the change artifacts.

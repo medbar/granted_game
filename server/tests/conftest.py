@@ -1,7 +1,8 @@
 from __future__ import annotations
 
-import pytest
+import os
 
+import pytest
 from app.models import (
     CastOptions,
     CastRequest,
@@ -11,6 +12,10 @@ from app.models import (
     WorldObject,
     WorldSnapshot,
 )
+
+
+os.environ["GRANTED_SEMANTIC_BACKEND"] = "char_ngram"
+os.environ["GRANTED_AGENT_MODE"] = "false"
 
 
 @pytest.fixture

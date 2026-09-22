@@ -14,6 +14,8 @@ var impulse := Vector2.ZERO
 var states: Dictionary = {}
 var temperature := 0.5
 var wetness := 0.0
+var inventory: Array[String] = []
+var outfit := ""
 var weapon_swing_remaining := 0.0
 var weapon_cooldown := 0.0
 var arena_bounds := Rect2(-600.0, -330.0, 1200.0, 660.0)
@@ -53,6 +55,8 @@ func _physics_process(delta: float) -> void:
 	global_position.y = clampf(global_position.y, arena_bounds.position.y + BODY_RADIUS, arena_bounds.end.y - BODY_RADIUS)
 	impulse = impulse.move_toward(Vector2.ZERO, 520.0 * delta)
 	_tick_states(delta)
+	collision_mask = 0 if states.has("phased") else 1
+	modulate.a = 0.22 if states.has("invisible") else 1.0
 	queue_redraw()
 
 
@@ -100,19 +104,38 @@ func apply_world_action(action: Dictionary, unit: float) -> void:
 			var direction_data: Dictionary = action.get("direction", {})
 			impulse += Vector2(float(direction_data.get("x", 0.0)), float(direction_data.get("y", 0.0))) * float(action.get("strength", 0.0)) * unit
 		"ADD_STATE":
-			states[str(action.get("state", "unstable"))] = float(action.get("duration", 1.0))
+			var state_name := str(action.get("state", "unstable"))
+			states[state_name] = float(action.get("duration", 1.0))
+			if state_name == "wet":
+				wetness = 1.0
 		"REMOVE_STATE":
 			states.erase(str(action.get("state", "")))
 		"CHANGE_TEMPERATURE":
 			temperature += float(action.get("amount", 0.0))
 		"CHANGE_WETNESS":
 			wetness = clampf(wetness + float(action.get("amount", 0.0)), 0.0, 1.0)
+		"ADD_INVENTORY_ITEM":
+			var effect: Dictionary = action.get("effect", {})
+			var prototype := str(effect.get("prototype", "item"))
+			inventory.append(prototype)
+		"EQUIP_OUTFIT":
+			var outfit_effect: Dictionary = action.get("effect", {})
+			outfit = str(outfit_effect.get("outfit", ""))
+	queue_redraw()
 
 
 func get_snapshot(unit: float) -> Dictionary:
 	var state_values: Array = []
 	for state_name in states:
 		state_values.append({"name": state_name, "strength": 1.0, "remaining_duration": states[state_name], "source": "magic"})
+	var snapshot_properties := {
+		"inventory": inventory.duplicate(),
+		"outfit": outfit,
+		"passes_walls": states.has("phased"),
+		"invisible": states.has("invisible"),
+		"visible": true,
+		"removed": false
+	}
 	return {
 		"id": "player",
 		"kind": "creature",
@@ -122,7 +145,8 @@ func get_snapshot(unit: float) -> Dictionary:
 		"radius": BODY_RADIUS / unit,
 		"health": health,
 		"material": {"name": "organic", "mass": 1.0, "temperature": temperature, "wetness": wetness, "flammability": 0.3, "conductivity": 0.25, "hardness": 0.2, "brittleness": 0.1},
-		"states": state_values
+		"states": state_values,
+		"properties": snapshot_properties
 	}
 
 
@@ -138,7 +162,22 @@ func _draw() -> void:
 	draw_circle(Vector2.ZERO, BODY_RADIUS + 5.0, Color(aura, 0.18))
 	draw_circle(Vector2.ZERO, BODY_RADIUS, Color("493827"))
 	draw_circle(Vector2(0.0, -5.0), 10.0, Color("f2c9a5"))
-	draw_colored_polygon(PackedVector2Array([Vector2(-13, 3), Vector2(13, 3), Vector2(8, 18), Vector2(-8, 18)]), Color("9c5f35"))
+	match outfit:
+		"dress":
+			draw_colored_polygon(PackedVector2Array([Vector2(-11, 1), Vector2(11, 1), Vector2(22, 23), Vector2(-22, 23)]), Color("8f4fb3"))
+			draw_polyline(PackedVector2Array([Vector2(-11, 1), Vector2(11, 1), Vector2(22, 23), Vector2(-22, 23), Vector2(-11, 1)]), Color("efc7ff"), 3.0)
+			draw_circle(Vector2(0, 7), 3.0, Color("f6cf65"))
+		"robe":
+			draw_colored_polygon(PackedVector2Array([Vector2(-14, 1), Vector2(14, 1), Vector2(17, 22), Vector2(-17, 22)]), Color("315f9b"))
+			draw_line(Vector2(0, 2), Vector2(0, 21), Color("9fc7ff"), 3.0)
+		"armor":
+			draw_colored_polygon(PackedVector2Array([Vector2(-16, 1), Vector2(16, 1), Vector2(12, 19), Vector2(-12, 19)]), Color("778794"))
+			draw_rect(Rect2(-10, 5, 20, 10), Color("c9d4da"), false, 3.0)
+		"cloak":
+			draw_colored_polygon(PackedVector2Array([Vector2(-16, 0), Vector2(16, 0), Vector2(20, 23), Vector2(-20, 23)]), Color("7b263d"))
+			draw_circle(Vector2(0, 3), 3.0, Color("e2b84f"))
+		_:
+			draw_colored_polygon(PackedVector2Array([Vector2(-13, 3), Vector2(13, 3), Vector2(8, 18), Vector2(-8, 18)]), Color("9c5f35"))
 	draw_arc(Vector2(0, -7), 9.0, PI, TAU, 12, Color("4a3025"), 4.0)
 	var weapon_direction := facing.normalized()
 	if weapon_swing_remaining > 0.0:

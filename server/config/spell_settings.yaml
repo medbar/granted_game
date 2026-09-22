@@ -1,7 +1,9 @@
 {
-  "semantic_backend": "char_ngram",
+  "semantic_backend": "aitunnel",
   "semantic_model": "deterministic-multilingual-char-ngram-v1",
   "sentence_transformer_model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+  "aitunnel_embedding_model": "pplx-embed-v1-0.6b",
+  "aitunnel_base_url": "https://api.aitunnel.ru/v1",
   "base_power": 1.0,
   "cast_time_scale": 0.35,
   "snapshot_radius": 12.0,

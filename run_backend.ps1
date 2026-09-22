@@ -23,7 +23,7 @@ try {
     }
     & $uvCommand sync
     if ($LASTEXITCODE -ne 0) { throw "uv sync failed" }
-    & $uvCommand run uvicorn app.main:app --host 127.0.0.1 --port 8000
+    & $uvCommand run uvicorn app.main:app --host 127.0.0.1 --port 8000 --no-access-log
 }
 finally {
     Pop-Location

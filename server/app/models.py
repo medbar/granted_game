@@ -47,10 +47,12 @@ class WorldObject(BaseModel):
     health: float | None = None
     material: MaterialSnapshot = Field(default_factory=MaterialSnapshot)
     states: list[ObjectState | str] = Field(default_factory=list)
+    properties: dict[str, Any] = Field(default_factory=dict)
 
 
 class WorldSnapshot(BaseModel):
     objects: list[WorldObject] = Field(default_factory=list, max_length=128)
+    level: dict[str, Any] | None = None
 
 
 class CastOptions(BaseModel):

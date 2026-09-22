@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "selection": "Use the union of required_gates for every applicable change class.",
+  "change_classes": {
+    "deterministic_server": {
+      "required_gates": ["quality_policy", "server_tests"]
+    },
+    "agent_behavior": {
+      "required_gates": [
+        "quality_policy",
+        "server_tests",
+        "environment_evolution",
+        "monty_live_model",
+        "agent_level_live_model"
+      ]
+    },
+    "player_visible": {
+      "required_gates": [
+        "quality_policy",
+        "server_tests",
+        "godot_smoke",
+        "godot_client_loop",
+        "trajectory_review"
+      ]
+    },
+    "observability": {
+      "required_gates": ["quality_policy", "server_tests"]
+    },
+    "tooling": {
+      "required_gates": ["quality_policy", "server_tests"]
+    }
+  },
+  "gates": {
+    "quality_policy": {
+      "kind": "automated",
+      "command": "server/.venv/Scripts/python.exe server/scripts/quality_policy.py --root .",
+      "evidence": "zero validation errors"
+    },
+    "server_tests": {
+      "kind": "automated",
+      "command": "server/.venv/Scripts/python.exe -m pytest server/tests -p no:cacheprovider",
+      "evidence": "pytest pass count and zero failures"
+    },
+    "environment_evolution": {
+      "kind": "live-model-eval",
+      "command": "server/.venv/Scripts/python.exe server/scripts/run_agent_evolution.py --generation <next-generation>",
+      "evidence": "server/runtime/evolution/generation-<n>.json with every selected postcondition passing"
+    },
+    "monty_live_model": {
+      "kind": "live-model-eval",
+      "command": "server/.venv/Scripts/python.exe server/scripts/run_monty_evals.py",
+      "evidence": "server/runtime/evals/monty-*.json reviewed case by case"
+    },
+    "agent_level_live_model": {
+      "kind": "live-model-eval",
+      "command": "server/.venv/Scripts/python.exe server/scripts/run_agent_levels.py --concurrency 1 --max-turns 4",
+      "evidence": "server/runtime/evals/agent-levels-*.json with world state and retries reviewed"
+    },
+    "godot_smoke": {
+      "kind": "automated-client",
+      "command": "<GodotPath> --headless --path client --script res://tests/smoke_runner.gd",
+      "evidence": "Godot exits 0 with no CLIENT SMOKE failures"
+    },
+    "godot_client_loop": {
+      "kind": "automated-client-in-loop",
+      "command": "Run live_cast_runner.gd, ttfa_runner.gd, environment_wish_runner.gd, and start_level_playthrough_runner.gd with <GodotPath> --path client --script res://tests/<runner>",
+      "evidence": "Godot exits 0; TTFA report has every client mutation <=2000 ms; 40/40 scene postconditions and the completed start mission have paired before/after/result/PNG artifacts"
+    },
+    "trajectory_review": {
+      "kind": "manual-review",
+      "command": "Open /observer and the final runtime trajectory for the changed wish cases",
+      "evidence": "completed trajectory checklist in eval-plan.md"
+    }
+  }
+}

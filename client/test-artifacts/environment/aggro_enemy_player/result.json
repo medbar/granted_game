@@ -1,0 +1,187 @@
+{
+  "case_id": "aggro_enemy_player",
+  "debug": {
+    "agent": {
+      "actions": [
+        {
+          "kind": "affect_mind",
+          "observation": "guard_01 теперь преследует player.",
+          "parameters": {
+            "aggro_target": "player",
+            "influence": "attack and pursue player",
+            "strength": 1.0
+          },
+          "sequence": 1.0,
+          "success": true,
+          "target_id": "guard_01",
+          "teleport_to_target": true,
+          "world_action": {
+            "amount": null,
+            "direction": null,
+            "duration": null,
+            "effect": {
+              "aggro_target": "player"
+            },
+            "material": null,
+            "state": null,
+            "strength": null,
+            "target_id": "guard_01",
+            "type": "SET_AGGRO_TARGET"
+          }
+        }
+      ],
+      "conclusion": {
+        "status": "completed",
+        "summary": "Явно направить агрессию врага на игрока."
+      },
+      "execution_engine": "monty",
+      "execution_error": null,
+      "execution_ms": 301.742,
+      "first_world_action_ms": 238.821,
+      "latency_ms": 310.043,
+      "model": "qwen3-35-36",
+      "program_code": "enemy = nearest('enemy')\nset_aggro(enemy, 'player')",
+      "program_output": {
+        "observation": "guard_01 теперь преследует player.",
+        "sequence": 1.0,
+        "success": true,
+        "target_id": "guard_01"
+      },
+      "prompt_version": "genie-agent-evolution-g6",
+      "public_curses": [
+        {
+          "id": "literal_tongue",
+          "public_hint": "Джин всё чаще цепляется за точную формулировку желаний.",
+          "severity": 1.0,
+          "sigil": "broken_quote",
+          "title": "Буквальный язык"
+        },
+        {
+          "id": "last_word",
+          "public_hint": "После исполнения желания джин обязательно высказывает собственное суждение.",
+          "severity": 1.0,
+          "sigil": "second_mouth",
+          "title": "Последнее слово"
+        },
+        {
+          "id": "violent_shortcut",
+          "public_hint": "В присутствии конфликта джин заметно быстрее выбирает насилие.",
+          "severity": 2.0,
+          "sigil": "red_hand",
+          "title": "Багровая поспешность"
+        },
+        {
+          "id": "maker_overflow",
+          "public_hint": "Созданные джином вещи начинают появляться с неожиданными дополнениями.",
+          "severity": 2.0,
+          "sigil": "splitting_star",
+          "title": "Избыточное творение"
+        },
+        {
+          "id": "suspicious_mercy",
+          "public_hint": "Помогая кому-либо, джин ищет скрытый мотив и требует подтверждений.",
+          "severity": 1.0,
+          "sigil": "closed_eye",
+          "title": "Недоверчивая милость"
+        }
+      ],
+      "usage": {}
+    },
+    "agentic_loop": {
+      "attempts": 1.0,
+      "steps": [
+        {
+          "action": "affect_mind",
+          "action_index": 0.0,
+          "attempt": 1.0,
+          "client_observation": "Клиент применил действие и сделал новый снимок мира",
+          "detail": "агро на player подтверждено",
+          "step_id": "2eeadbab76c746b2b3a13ce8cb7b0042",
+          "target_id": "guard_01",
+          "verified": true
+        }
+      ],
+      "verified": true
+    },
+    "debug": {
+      "intent": {
+        "agent_conclusion": {
+          "status": "completed",
+          "summary": "Явно направить агрессию врага на игрока."
+        }
+      },
+      "latency_ms": 310.043,
+      "selected_targets": [
+        "guard_01"
+      ],
+      "world_rules": [
+        "RULE_MONTY_CAPABILITIES: world mutations came from the sandbox API"
+      ]
+    },
+    "interpretation": {
+      "anchors": [],
+      "coherence": 1.0
+    },
+    "request_id": "wish-000001",
+    "spell_plan": {
+      "duration": 0.65,
+      "effects": [],
+      "power": 1.0,
+      "visuals": [
+        {
+          "appearance": [
+            "agent",
+            "affect_mind"
+          ],
+          "direction": {
+            "x": 5.22803573608398,
+            "y": 1.46635201772054
+          },
+          "intensity": 0.75,
+          "lifetime": 0.55,
+          "origin": {
+            "x": -3.87196426391602,
+            "y": 0.633761088053385
+          },
+          "primitive": "BURST",
+          "radius": 0.8,
+          "speed": 0.0,
+          "target": {
+            "x": -3.87196426391602,
+            "y": 0.633761088053385
+          },
+          "turbulence": 0.35
+        }
+      ],
+      "world_actions": [
+        {
+          "amount": null,
+          "direction": null,
+          "duration": null,
+          "effect": {
+            "aggro_target": "player"
+          },
+          "material": null,
+          "state": null,
+          "strength": null,
+          "target_id": "guard_01",
+          "type": "SET_AGGRO_TARGET"
+        }
+      ]
+    }
+  },
+  "issues": [],
+  "level_version": "monaco-start-v1",
+  "passed": true,
+  "timing": {
+    "action_ready_to_mutation_ms": 1.0,
+    "client_ttfa_ms": 6186.0,
+    "server_action_ready_ms": 758.764,
+    "submit_to_action_ready_ms": 6185.0,
+    "submit_to_initial_response_ms": 5269.0
+  },
+  "timing_warnings": [
+    "client TTFA 6186.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
+  ],
+  "wish": "Заставь врага агриться на игрока"
+}

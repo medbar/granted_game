@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "id": "social",
+  "version": "1.0.0",
+  "description": "Речь, намерения и воздействие на разум живых существ.",
+  "enabled_by_default": true,
+  "capabilities": [
+    {"name":"set_aggro","signature":"set_aggro(actor_id, target_id='player')","description":"Направить агрессию живой цели.","mutates_world":true},
+    {"name":"affect_mind","signature":"affect_mind(id, influence, strength=1)","description":"Изменить мысли живой цели.","mutates_world":true},
+    {"name":"speak","signature":"speak(id, message)","description":"Произнести видимую реплику возле цели.","mutates_world":false}
+  ]
+}

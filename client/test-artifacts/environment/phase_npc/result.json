@@ -1,0 +1,184 @@
+{
+  "case_id": "phase_npc",
+  "debug": {
+    "agent": {
+      "actions": [
+        {
+          "kind": "affect_physical",
+          "observation": "На npc_01 наложено состояние phased.",
+          "parameters": {
+            "duration": 60.0,
+            "effect": "add_state",
+            "state": "phased",
+            "strength": 1.0
+          },
+          "sequence": 1.0,
+          "success": true,
+          "target_id": "npc_01",
+          "teleport_to_target": true,
+          "world_action": {
+            "amount": null,
+            "direction": null,
+            "duration": 60.0,
+            "effect": null,
+            "material": null,
+            "state": "phased",
+            "strength": 1.0,
+            "target_id": "npc_01",
+            "type": "ADD_STATE"
+          }
+        }
+      ],
+      "conclusion": {
+        "status": "completed",
+        "summary": "Сделать выбранного персонажа фазовым для прохождения сквозь стены."
+      },
+      "execution_engine": "monty",
+      "execution_error": null,
+      "execution_ms": 43.131,
+      "first_world_action_ms": 4.795,
+      "latency_ms": 50.333,
+      "model": "qwen3-35-36",
+      "program_code": "apply_state(nearest('npc'), 'phased', duration=60)",
+      "program_output": {
+        "observation": "На npc_01 наложено состояние phased.",
+        "sequence": 1.0,
+        "success": true,
+        "target_id": "npc_01"
+      },
+      "prompt_version": "genie-agent-evolution-g6",
+      "public_curses": [
+        {
+          "id": "literal_tongue",
+          "public_hint": "Джин всё чаще цепляется за точную формулировку желаний.",
+          "severity": 1.0,
+          "sigil": "broken_quote",
+          "title": "Буквальный язык"
+        },
+        {
+          "id": "last_word",
+          "public_hint": "После исполнения желания джин обязательно высказывает собственное суждение.",
+          "severity": 1.0,
+          "sigil": "second_mouth",
+          "title": "Последнее слово"
+        },
+        {
+          "id": "violent_shortcut",
+          "public_hint": "В присутствии конфликта джин заметно быстрее выбирает насилие.",
+          "severity": 2.0,
+          "sigil": "red_hand",
+          "title": "Багровая поспешность"
+        },
+        {
+          "id": "maker_overflow",
+          "public_hint": "Созданные джином вещи начинают появляться с неожиданными дополнениями.",
+          "severity": 2.0,
+          "sigil": "splitting_star",
+          "title": "Избыточное творение"
+        },
+        {
+          "id": "suspicious_mercy",
+          "public_hint": "Помогая кому-либо, джин ищет скрытый мотив и требует подтверждений.",
+          "severity": 1.0,
+          "sigil": "closed_eye",
+          "title": "Недоверчивая милость"
+        }
+      ],
+      "usage": {}
+    },
+    "agentic_loop": {
+      "attempts": 1.0,
+      "steps": [
+        {
+          "action": "affect_physical",
+          "action_index": 0.0,
+          "attempt": 1.0,
+          "client_observation": "Клиент применил действие и сделал новый снимок мира",
+          "detail": "состояние phased подтверждено",
+          "step_id": "a5ebb5e00f3d4ec3b7f0d8830e7f50fd",
+          "target_id": "npc_01",
+          "verified": true
+        }
+      ],
+      "verified": true
+    },
+    "debug": {
+      "intent": {
+        "agent_conclusion": {
+          "status": "completed",
+          "summary": "Сделать выбранного персонажа фазовым для прохождения сквозь стены."
+        }
+      },
+      "latency_ms": 50.333,
+      "selected_targets": [
+        "npc_01"
+      ],
+      "world_rules": [
+        "RULE_MONTY_CAPABILITIES: world mutations came from the sandbox API"
+      ]
+    },
+    "interpretation": {
+      "anchors": [],
+      "coherence": 1.0
+    },
+    "request_id": "wish-000001",
+    "spell_plan": {
+      "duration": 0.65,
+      "effects": [],
+      "power": 1.0,
+      "visuals": [
+        {
+          "appearance": [
+            "agent",
+            "affect_physical"
+          ],
+          "direction": {
+            "x": 0.987131245930989,
+            "y": 4.25774873097737
+          },
+          "intensity": 0.75,
+          "lifetime": 0.55,
+          "origin": {
+            "x": -8.11286875406901,
+            "y": 3.42147318522135
+          },
+          "primitive": "BURST",
+          "radius": 0.8,
+          "speed": 0.0,
+          "target": {
+            "x": -8.11286875406901,
+            "y": 3.42147318522135
+          },
+          "turbulence": 0.35
+        }
+      ],
+      "world_actions": [
+        {
+          "amount": null,
+          "direction": null,
+          "duration": 60.0,
+          "effect": null,
+          "material": null,
+          "state": "phased",
+          "strength": 1.0,
+          "target_id": "npc_01",
+          "type": "ADD_STATE"
+        }
+      ]
+    }
+  },
+  "issues": [],
+  "level_version": "monaco-start-v1",
+  "passed": true,
+  "timing": {
+    "action_ready_to_mutation_ms": 0.0,
+    "client_ttfa_ms": 3276.0,
+    "server_action_ready_ms": 517.522,
+    "submit_to_action_ready_ms": 3276.0,
+    "submit_to_initial_response_ms": 2564.0
+  },
+  "timing_warnings": [
+    "client TTFA 3276.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
+  ],
+  "wish": "Сделай так, чтобы НПС проходил сквозь стены"
+}

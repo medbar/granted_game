@@ -121,6 +121,17 @@ def test_poison_adds_damage_over_time_state_to_living_target() -> None:
     assert any("POISON_LIVING" in rule for rule in rules)
 
 
+def test_explicit_destroy_intent_destroys_selected_target() -> None:
+    target = obj("organic")
+    target.tags.extend(["living", "enemy"])
+    actions, rules = WorldResolver().resolve(
+        intent(actions={"destroy": 0.98}),
+        [target],
+    )
+    assert any(action.type == "DESTROY_OBJECT" for action in actions)
+    assert any("RULE_DESTROY" in rule for rule in rules)
+
+
 def test_lift_creates_levitating_state() -> None:
     actions, rules = WorldResolver().resolve(intent(movement={"lift": 1.0}), [obj("stone")])
     assert any(action.state == "levitating" for action in actions)

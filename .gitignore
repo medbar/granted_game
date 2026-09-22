@@ -1,4 +1,7 @@
 .venv/
+server/.env
+server/runtime/
+server/server.*.log
 .uv-bootstrap/
 .uv-cache/
 __pycache__/
@@ -10,3 +13,6 @@ client/.godot/
 client/export.cfg
 build/
 .verification/
+client/client.*.log
+tools/godot-*/
+tools/Godot_*.zip

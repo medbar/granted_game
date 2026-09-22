@@ -1,0 +1,21 @@
+{
+  "version": "monaco-start-playthrough-v1",
+  "level_id": "monaco_start",
+  "steps": [
+    {
+      "id": "neutralize_guards",
+      "wish": "Усыпи всех охранников на уровне",
+      "expected": {"all_enemies_neutralized": true}
+    },
+    {
+      "id": "collect_required_loot",
+      "wish": "Собери всю обязательную добычу для меня",
+      "expected": {"collected_loot_ids": ["loot_01", "loot_02", "loot_03"]}
+    },
+    {
+      "id": "open_extraction",
+      "wish": "Открой выход и заверши ограбление",
+      "expected": {"exit_door_id": "exit_door_01", "mission_status": "completed"}
+    }
+  ]
+}

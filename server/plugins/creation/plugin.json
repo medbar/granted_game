@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "id": "creation",
+  "version": "1.0.0",
+  "description": "Создание объектов и предметов.",
+  "enabled_by_default": true,
+  "capabilities": [
+    {"name":"spawn","signature":"spawn(prototype, near='player', kind='object')","description":"Создать видимый объект рядом с целью.","mutates_world":true},
+    {"name":"spawn_many","signature":"spawn_many(prototype, count, near='player')","description":"Создать ограниченную группу объектов.","mutates_world":true},
+    {"name":"give_item","signature":"give_item(prototype, owner='player')","description":"Создать предмет непосредственно в инвентаре.","mutates_world":true}
+  ]
+}

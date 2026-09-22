@@ -174,7 +174,11 @@ class WorldResolver:
             result.append(WorldAction(type="ADD_STATE", target_id=target.id, state="poisoned", strength=round(channels["poison"] * power, 4), duration=self.config["poison"]["duration"]))
             rules.append("RULE_POISON_LIVING: poison adds damage over time to living matter")
 
-        if channels["harm"] > 0.08:
+        destroy = intent["actions"].get("destroy", 0.0)
+        if destroy >= 0.75:
+            result.append(WorldAction(type="DESTROY_OBJECT", target_id=target.id))
+            rules.append("RULE_DESTROY: explicit destructive intent destroys its target")
+        elif channels["harm"] > 0.08:
             result.append(WorldAction(type="DAMAGE", target_id=target.id, amount=round(self.config["harm"]["base_damage"] * channels["harm"] * power, 3)))
             rules.append("RULE_HARM: destructive intent reduces integrity")
         if channels["heal"] > 0.08 and "living" in tags:

@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "id": "heist",
+  "version": "1.0.0",
+  "description": "Честные взаимодействия с дверями, добычей и целями ограбления.",
+  "enabled_by_default": true,
+  "capabilities": [
+    {"name":"interact","signature":"interact(id, interaction)","description":"Взаимодействовать с известным объектом.","mutates_world":true},
+    {"name":"collect","signature":"collect(id)","description":"Забрать конкретную доступную ценность.","mutates_world":true}
+  ]
+}

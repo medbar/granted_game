@@ -1,0 +1,65 @@
+{
+  "version": "monty-wishes-v1",
+  "cases": [
+    {
+      "id": "kill_enemy",
+      "wish": "Убей врага",
+      "program": "enemy = nearest('enemy')\ndestroy(enemy)",
+      "expected": {"count": 1, "types": ["DESTROY_OBJECT"], "targets": ["dwarf_01"]}
+    },
+    {
+      "id": "burn_enemy",
+      "wish": "Подожги врага",
+      "program": "enemy = nearest('enemy')\napply_state(enemy, 'burn', intensity=0.7, duration=4)",
+      "expected": {"count": 1, "types": ["ADD_STATE"], "targets": ["dwarf_01"], "states": ["burning"]}
+    },
+    {
+      "id": "bathe_enemy_in_blood",
+      "wish": "Искупай врага в крови",
+      "program": "enemy = nearest('enemy')\nspawn('blood_pool', near=enemy)\napply_state(enemy, 'soaked_in_blood', duration=12)",
+      "expected": {"count": 2, "types": ["CREATE_OBJECT", "ADD_STATE"], "targets": ["dwarf_01", "dwarf_01"], "states": ["blood_soaked"], "prototypes": ["blood_pool"]}
+    },
+    {
+      "id": "freeze_all_water",
+      "wish": "Заморозь всю воду на карте",
+      "program": "waters = all_with_tag('water', limit=16)\nfor water in waters:\n    apply_state(water, 'frozen', duration=30)",
+      "expected": {"count": 2, "types": ["CHANGE_MATERIAL_STATE", "CHANGE_MATERIAL_STATE"], "targets": ["water_pool_01", "water_barrel_01"], "materials": ["ice", "ice"]}
+    },
+    {
+      "id": "push_enemy",
+      "wish": "Оттолкни врага далеко от меня",
+      "program": "enemy = nearest('enemy')\napply_force(enemy, x=1, y=0, strength=8)",
+      "expected": {"count": 1, "types": ["APPLY_FORCE"], "targets": ["dwarf_01"]}
+    },
+    {
+      "id": "heal_player",
+      "wish": "Полностью исцели меня",
+      "program": "heal('player', amount=100)",
+      "expected": {"count": 1, "types": ["HEAL"], "targets": ["player"]}
+    },
+    {
+      "id": "golden_rock",
+      "wish": "Преврати ближайший камень в золото",
+      "program": "rock = nearest('rock')\nset_material(rock, 'gold')",
+      "expected": {"count": 1, "types": ["CHANGE_MATERIAL_STATE"], "targets": ["rock_01"], "materials": ["gold"]}
+    },
+    {
+      "id": "create_sword",
+      "wish": "Создай меч рядом со мной",
+      "program": "spawn('sword', near='player', kind='item')",
+      "expected": {"count": 1, "types": ["CREATE_OBJECT"], "targets": ["player"], "prototypes": ["sword"]}
+    },
+    {
+      "id": "pacify_enemy_mind",
+      "wish": "Успокой врага и заставь его отказаться от боя",
+      "program": "enemy = nearest('enemy')\naffect_mind(enemy, 'успокойся, стань другом игрока и не сражайся', strength=1)",
+      "expected": {"count": 1, "types": ["ADD_STATE"], "targets": ["dwarf_01"], "states": ["influenced"]}
+    },
+    {
+      "id": "make_villager_speak",
+      "wish": "Попроси мирного жителя поприветствовать меня",
+      "program": "villager = nearest('friendly')\nspeak(villager, 'Поприветствуй хозяина джина')",
+      "expected": {"count": 1, "types": ["SPEAK"], "targets": ["npc_01"]}
+    }
+  ]
+}

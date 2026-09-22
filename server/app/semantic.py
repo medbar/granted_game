@@ -1,18 +1,33 @@
 from __future__ import annotations
 
 import math
+import os
 import re
+import ssl
 import unicodedata
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 from functools import lru_cache
 from typing import Any
 
+import httpx
+
 from .config import anchors_config, spell_settings
 from .models import AnchorScore
 
 
 TOKEN_RE = re.compile(r"[a-zа-я0-9-]+", re.IGNORECASE)
+
+
+def system_ssl_context() -> ssl.SSLContext:
+    """Use the Windows trust store as well as Python's bundled CA certificates."""
+    context = ssl.create_default_context()
+    enum_certificates = getattr(ssl, "enum_certificates", None)
+    if enum_certificates is not None:
+        for certificate, encoding, _trust in enum_certificates("ROOT"):
+            if encoding == "x509_asn":
+                context.load_verify_locations(cadata=certificate)
+    return context
 
 
 def normalize(text: str) -> str:
@@ -106,10 +121,13 @@ class SemanticResolver:
     def __init__(self) -> None:
         self.settings = spell_settings()
         self.anchors = cached_anchor_embeddings()
-        self.backend = self.settings.get("semantic_backend", "char_ngram")
+        self.backend = os.getenv(
+            "GRANTED_SEMANTIC_BACKEND", self.settings.get("semantic_backend", "char_ngram")
+        )
         self.model_name = self.settings["semantic_model"]
         self._sentence_model: Any | None = None
         self._sentence_vectors: dict[str, Any] = {}
+        self._remote_vectors: dict[str, tuple[tuple[float, ...], ...]] = {}
         if self.backend == "sentence_transformer":
             try:
                 from sentence_transformers import SentenceTransformer
@@ -125,8 +143,78 @@ class SemanticResolver:
                 )
                 for anchor in self.anchors
             }
+        elif self.backend == "aitunnel":
+            self.model_name = os.getenv(
+                "AITUNNEL_EMBEDDING_MODEL",
+                self.settings.get("aitunnel_embedding_model", "pplx-embed-v1-0.6b"),
+            )
+            self._api_key = os.getenv("AITUNNEL_API_KEY", "").strip()
+            self._base_url = os.getenv(
+                "AITUNNEL_BASE_URL",
+                self.settings.get("aitunnel_base_url", "https://api.aitunnel.ru/v1"),
+            ).rstrip("/")
+            if not self._api_key:
+                raise RuntimeError(
+                    "semantic_backend is aitunnel; set AITUNNEL_API_KEY in server/.env"
+                )
+            self._http = httpx.Client(
+                verify=system_ssl_context(),
+                timeout=float(os.getenv("AITUNNEL_TIMEOUT_SECONDS", "30")),
+            )
+            phrase_owner: list[str] = []
+            phrases: list[str] = []
+            for anchor in self.anchors:
+                for phrase in anchor.phrases:
+                    phrase_owner.append(anchor.id)
+                    phrases.append(phrase)
+            embedded = self._embed_remote(phrases)
+            grouped: dict[str, list[tuple[float, ...]]] = defaultdict(list)
+            for anchor_id, vector in zip(phrase_owner, embedded, strict=True):
+                grouped[anchor_id].append(vector)
+            self._remote_vectors = {
+                anchor_id: tuple(vectors) for anchor_id, vectors in grouped.items()
+            }
         elif self.backend != "char_ngram":
             raise RuntimeError(f"unsupported semantic_backend: {self.backend}")
+
+    def _embed_remote(self, texts: list[str]) -> list[tuple[float, ...]]:
+        vectors: list[tuple[float, ...]] = []
+        batch_size = int(os.getenv("AITUNNEL_BATCH_SIZE", "128"))
+        if batch_size < 1:
+            raise RuntimeError("AITUNNEL_BATCH_SIZE must be at least 1")
+        try:
+            for start in range(0, len(texts), batch_size):
+                batch = texts[start : start + batch_size]
+                response = self._http.post(
+                    f"{self._base_url}/embeddings",
+                    headers={"Authorization": f"Bearer {self._api_key}"},
+                    json={"model": self.model_name, "input": batch},
+                )
+                response.raise_for_status()
+                payload = response.json()
+                ordered = sorted(payload["data"], key=lambda item: item["index"])
+                vectors.extend(
+                    tuple(float(value) for value in item["embedding"]) for item in ordered
+                )
+        except (httpx.HTTPError, KeyError, TypeError, ValueError) as error:
+            detail = ""
+            if isinstance(error, httpx.HTTPStatusError):
+                detail = f"; response={error.response.text[:500]}"
+            raise RuntimeError(f"AITUNNEL embedding request failed: {error}{detail}") from error
+        if len(vectors) != len(texts):
+            raise RuntimeError(
+                f"AITUNNEL returned {len(vectors)} embeddings for {len(texts)} inputs"
+            )
+        return vectors
+
+    @staticmethod
+    def _dense_cosine(left: tuple[float, ...], right: tuple[float, ...]) -> float:
+        if len(left) != len(right) or not left:
+            raise RuntimeError("AITUNNEL returned inconsistent embedding dimensions")
+        numerator = sum(a * b for a, b in zip(left, right, strict=True))
+        left_norm = math.sqrt(sum(value * value for value in left))
+        right_norm = math.sqrt(sum(value * value for value in right))
+        return numerator / (left_norm * right_norm) if left_norm and right_norm else 0.0
 
     def resolve(self, text: str) -> tuple[list[AnchorScore], float]:
         normalized = normalize(text)
@@ -138,6 +226,7 @@ class SemanticResolver:
             if self._sentence_model is not None
             else None
         )
+        remote_queries = self._embed_remote(phrase_chunks) if self.backend == "aitunnel" else None
         by_family: dict[str, list[AnchorScore]] = defaultdict(list)
 
         for anchor in self.anchors:
@@ -153,6 +242,12 @@ class SemanticResolver:
                     float(query @ candidate)
                     for query in sentence_queries
                     for candidate in self._sentence_vectors[anchor.id]
+                )
+            elif remote_queries is not None:
+                similarity = max(
+                    self._dense_cosine(query, candidate)
+                    for query in remote_queries
+                    for candidate in self._remote_vectors[anchor.id]
                 )
             else:
                 similarity = max(

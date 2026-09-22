@@ -1,0 +1,47 @@
+{
+  "cases": [
+    {
+      "case_id": "create_wall",
+      "issues": [],
+      "passed": true,
+      "timing": {
+        "action_ready_to_mutation_ms": 3.0,
+        "client_ttfa_ms": 1370.0,
+        "server_action_ready_ms": 815.703,
+        "submit_to_action_ready_ms": 1367.0,
+        "submit_to_initial_response_ms": 997.0
+      },
+      "world_changed": true
+    },
+    {
+      "case_id": "equip_dress",
+      "issues": [],
+      "passed": true,
+      "timing": {
+        "action_ready_to_mutation_ms": 430.0,
+        "client_ttfa_ms": 1075.0,
+        "server_action_ready_ms": 96.024,
+        "submit_to_action_ready_ms": 645.0,
+        "submit_to_initial_response_ms": 322.0
+      },
+      "world_changed": true
+    },
+    {
+      "case_id": "darken_world",
+      "issues": [],
+      "passed": true,
+      "timing": {
+        "action_ready_to_mutation_ms": 496.0,
+        "client_ttfa_ms": 1303.0,
+        "server_action_ready_ms": 126.693,
+        "submit_to_action_ready_ms": 807.0,
+        "submit_to_initial_response_ms": 448.0
+      },
+      "world_changed": true
+    }
+  ],
+  "failed": 0,
+  "passed": 3,
+  "slo_ms": 2000.0,
+  "total": 3
+}

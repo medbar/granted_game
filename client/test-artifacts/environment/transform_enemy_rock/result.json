@@ -59,9 +59,9 @@
       },
       "execution_engine": "monty",
       "execution_error": null,
-      "execution_ms": 363.743,
-      "first_world_action_ms": 208.555,
-      "latency_ms": 371.357,
+      "execution_ms": 41.924,
+      "first_world_action_ms": 14.606,
+      "latency_ms": 98.75,
       "model": "qwen3-35-36",
       "program_code": "target = nearest('enemy')\nif target:\n    transform(target, 'rock')\nspeak('player', 'Прямое и недвусмысленное превращение.')",
       "program_output": {
@@ -119,7 +119,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "форма rock подтверждена",
-          "step_id": "ad14030cd14248cab66406388f960c39",
+          "step_id": "c9769e70433440a3829c6da8e0134672",
           "target_id": "guard_01",
           "verified": true
         },
@@ -129,7 +129,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "реплика показана клиентом",
-          "step_id": "e474ad922e674beeb2b14cbf6e068daf",
+          "step_id": "45f7d32653f94103aea39577c6f73070",
           "target_id": "player",
           "verified": true
         }
@@ -143,7 +143,7 @@
           "summary": "Превратить enemy в rock."
         }
       },
-      "latency_ms": 371.357,
+      "latency_ms": 98.75,
       "selected_targets": [
         "guard_01",
         "player"
@@ -168,21 +168,21 @@
             "affect_physical"
           ],
           "direction": {
-            "x": 5.20179824829102,
-            "y": 1.49686444600423
+            "x": 5.29182383219401,
+            "y": 1.39105396270752
           },
           "intensity": 0.75,
           "lifetime": 0.55,
           "origin": {
-            "x": -3.89820175170898,
-            "y": 0.668248176574707
+            "x": -3.80817616780599,
+            "y": 0.546203549702962
           },
           "primitive": "BURST",
           "radius": 0.8,
           "speed": 0.0,
           "target": {
-            "x": -3.89820175170898,
-            "y": 0.668248176574707
+            "x": -3.80817616780599,
+            "y": 0.546203549702962
           },
           "turbulence": 0.35
         },
@@ -193,7 +193,7 @@
           ],
           "direction": {
             "x": 0.9,
-            "y": 0.828616269429525
+            "y": 0.844850413004557
           },
           "intensity": 0.75,
           "lifetime": 0.55,
@@ -245,14 +245,12 @@
   "level_version": "monaco-start-v1",
   "passed": true,
   "timing": {
-    "action_ready_to_mutation_ms": 0.0,
-    "client_ttfa_ms": 9604.0,
-    "server_action_ready_ms": 1762.086,
-    "submit_to_action_ready_ms": 9604.0,
-    "submit_to_initial_response_ms": 8145.0
+    "action_ready_to_mutation_ms": 1.0,
+    "client_ttfa_ms": 1347.0,
+    "server_action_ready_ms": 270.762,
+    "submit_to_action_ready_ms": 1346.0,
+    "submit_to_initial_response_ms": 673.0
   },
-  "timing_warnings": [
-    "client TTFA 9604.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-  ],
+  "timing_warnings": [],
   "wish": "Преврати врага в камень"
 }

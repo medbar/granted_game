@@ -36,9 +36,9 @@
       },
       "execution_engine": "monty",
       "execution_error": null,
-      "execution_ms": 301.742,
-      "first_world_action_ms": 238.821,
-      "latency_ms": 310.043,
+      "execution_ms": 13.562,
+      "first_world_action_ms": 42.772,
+      "latency_ms": 98.022,
       "model": "qwen3-35-36",
       "program_code": "enemy = nearest('enemy')\nset_aggro(enemy, 'player')",
       "program_output": {
@@ -96,7 +96,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "агро на player подтверждено",
-          "step_id": "2eeadbab76c746b2b3a13ce8cb7b0042",
+          "step_id": "88cb0063038e44b1ad26509f6ecc6f20",
           "target_id": "guard_01",
           "verified": true
         }
@@ -110,7 +110,7 @@
           "summary": "Явно направить агрессию врага на игрока."
         }
       },
-      "latency_ms": 310.043,
+      "latency_ms": 98.022,
       "selected_targets": [
         "guard_01"
       ],
@@ -134,21 +134,21 @@
             "affect_mind"
           ],
           "direction": {
-            "x": 5.22803573608398,
-            "y": 1.46635201772054
+            "x": 5.29182383219401,
+            "y": 1.38522040049235
           },
           "intensity": 0.75,
           "lifetime": 0.55,
           "origin": {
-            "x": -3.87196426391602,
-            "y": 0.633761088053385
+            "x": -3.80817616780599,
+            "y": 0.546203549702962
           },
           "primitive": "BURST",
           "radius": 0.8,
           "speed": 0.0,
           "target": {
-            "x": -3.87196426391602,
-            "y": 0.633761088053385
+            "x": -3.80817616780599,
+            "y": 0.546203549702962
           },
           "turbulence": 0.35
         }
@@ -174,14 +174,12 @@
   "level_version": "monaco-start-v1",
   "passed": true,
   "timing": {
-    "action_ready_to_mutation_ms": 1.0,
-    "client_ttfa_ms": 6186.0,
-    "server_action_ready_ms": 758.764,
-    "submit_to_action_ready_ms": 6185.0,
-    "submit_to_initial_response_ms": 5269.0
+    "action_ready_to_mutation_ms": 3.0,
+    "client_ttfa_ms": 1230.0,
+    "server_action_ready_ms": 334.691,
+    "submit_to_action_ready_ms": 1227.0,
+    "submit_to_initial_response_ms": 685.0
   },
-  "timing_warnings": [
-    "client TTFA 6186.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-  ],
+  "timing_warnings": [],
   "wish": "Заставь врага агриться на игрока"
 }

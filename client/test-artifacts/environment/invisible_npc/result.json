@@ -35,9 +35,9 @@
       },
       "execution_engine": "monty",
       "execution_error": null,
-      "execution_ms": 60.337,
-      "first_world_action_ms": 26.599,
-      "latency_ms": 81.669,
+      "execution_ms": 48.796,
+      "first_world_action_ms": 62.152,
+      "latency_ms": 120.169,
       "model": "qwen3-35-36",
       "program_code": "apply_state(nearest('npc'), 'invisible', duration=60)",
       "program_output": {
@@ -95,7 +95,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "состояние invisible подтверждено",
-          "step_id": "4d669d1edd1b43a3aacc2a412740fea2",
+          "step_id": "a603cef6380b48ab9a5cefd479c6e30b",
           "target_id": "npc_01",
           "verified": true
         }
@@ -109,7 +109,7 @@
           "summary": "Сделать выбранного персонажа невидимым."
         }
       },
-      "latency_ms": 81.669,
+      "latency_ms": 120.169,
       "selected_targets": [
         "npc_01"
       ],
@@ -133,21 +133,21 @@
             "affect_physical"
           ],
           "direction": {
-            "x": 0.966212463378909,
-            "y": 4.28291409810384
+            "x": 1.01503245035807,
+            "y": 4.22207679748535
           },
           "intensity": 0.75,
           "lifetime": 0.55,
           "origin": {
-            "x": -8.13378753662109,
-            "y": 3.45425567626953
+            "x": -8.08496754964193,
+            "y": 3.37472457885742
           },
           "primitive": "BURST",
           "radius": 0.8,
           "speed": 0.0,
           "target": {
-            "x": -8.13378753662109,
-            "y": 3.45425567626953
+            "x": -8.08496754964193,
+            "y": 3.37472457885742
           },
           "turbulence": 0.35
         }
@@ -172,13 +172,11 @@
   "passed": true,
   "timing": {
     "action_ready_to_mutation_ms": 1.0,
-    "client_ttfa_ms": 3800.0,
-    "server_action_ready_ms": 636.566,
-    "submit_to_action_ready_ms": 3799.0,
-    "submit_to_initial_response_ms": 2956.0
+    "client_ttfa_ms": 1292.0,
+    "server_action_ready_ms": 254.307,
+    "submit_to_action_ready_ms": 1291.0,
+    "submit_to_initial_response_ms": 714.0
   },
-  "timing_warnings": [
-    "client TTFA 3800.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-  ],
+  "timing_warnings": [],
   "wish": "Сделай НПС невидимым"
 }

@@ -35,9 +35,9 @@
       },
       "execution_engine": "monty",
       "execution_error": null,
-      "execution_ms": 40.543,
-      "first_world_action_ms": 21.862,
-      "latency_ms": 1502.781,
+      "execution_ms": 178.201,
+      "first_world_action_ms": 49.664,
+      "latency_ms": 373.855,
       "model": "qwen3-35-36",
       "program_code": "spawn('key', near='player')",
       "program_output": {
@@ -95,7 +95,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "новый объект key найден",
-          "step_id": "c096c979d4894e22b47ceaabc6bc454b",
+          "step_id": "e874372345ea4a7d86a2bb6432ce68e9",
           "target_id": "player",
           "verified": true
         }
@@ -109,7 +109,7 @@
           "summary": "Создать физический объект key рядом с игроком."
         }
       },
-      "latency_ms": 1502.781,
+      "latency_ms": 373.855,
       "selected_targets": [
         "player"
       ],
@@ -134,7 +134,7 @@
           ],
           "direction": {
             "x": 0.9,
-            "y": 0.830829111735026
+            "y": 0.836834462483724
           },
           "intensity": 0.75,
           "lifetime": 0.55,
@@ -175,13 +175,13 @@
   "passed": true,
   "timing": {
     "action_ready_to_mutation_ms": 1.0,
-    "client_ttfa_ms": 6502.0,
-    "server_action_ready_ms": 2751.548,
-    "submit_to_action_ready_ms": 6501.0,
-    "submit_to_initial_response_ms": 4421.0
+    "client_ttfa_ms": 2584.0,
+    "server_action_ready_ms": 721.91,
+    "submit_to_action_ready_ms": 2583.0,
+    "submit_to_initial_response_ms": 1934.0
   },
   "timing_warnings": [
-    "client TTFA 6502.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
+    "client TTFA 2584.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
   ],
   "wish": "Призови ключ перед игроком"
 }

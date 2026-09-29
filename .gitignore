@@ -16,3 +16,4 @@ build/
 client/client.*.log
 tools/godot-*/
 tools/Godot_*.zip
+client/test-artifacts/**/*.png.import

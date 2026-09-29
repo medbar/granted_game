@@ -35,9 +35,9 @@
       },
       "execution_engine": "monty",
       "execution_error": null,
-      "execution_ms": 12.995,
-      "first_world_action_ms": 14.043,
-      "latency_ms": 20.397,
+      "execution_ms": 45.631,
+      "first_world_action_ms": 21.402,
+      "latency_ms": 80.047,
       "model": "qwen3-35-36",
       "program_code": "apply_state('player', 'wet', duration=30)",
       "program_output": {
@@ -95,7 +95,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "состояние wet подтверждено",
-          "step_id": "2cdf16967b164eed82471469e34d72a0",
+          "step_id": "324ce271ab11497c93a5f4f0a90341a9",
           "target_id": "player",
           "verified": true
         }
@@ -109,7 +109,7 @@
           "summary": "Сделать выбранного персонажа мокрым."
         }
       },
-      "latency_ms": 20.397,
+      "latency_ms": 80.047,
       "selected_targets": [
         "player"
       ],
@@ -134,7 +134,7 @@
           ],
           "direction": {
             "x": 0.9,
-            "y": 0.833575121561686
+            "y": 0.835751215616862
           },
           "intensity": 0.75,
           "lifetime": 0.55,
@@ -171,14 +171,12 @@
   "level_version": "monaco-start-v1",
   "passed": true,
   "timing": {
-    "action_ready_to_mutation_ms": 0.0,
-    "client_ttfa_ms": 3148.0,
-    "server_action_ready_ms": 464.647,
-    "submit_to_action_ready_ms": 3148.0,
-    "submit_to_initial_response_ms": 2512.0
+    "action_ready_to_mutation_ms": 1.0,
+    "client_ttfa_ms": 1222.0,
+    "server_action_ready_ms": 254.316,
+    "submit_to_action_ready_ms": 1221.0,
+    "submit_to_initial_response_ms": 627.0
   },
-  "timing_warnings": [
-    "client TTFA 3148.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-  ],
+  "timing_warnings": [],
   "wish": "Сделай игрока мокрым"
 }

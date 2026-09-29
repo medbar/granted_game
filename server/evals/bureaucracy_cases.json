@@ -1,0 +1,170 @@
+{
+  "version": "bureaucracy-v1",
+  "cases": [
+    {
+      "id": "emergency_exit",
+      "wish": "Пусть эта дверь считается аварийным выходом",
+      "decision": {
+        "effect": "open_exit",
+        "target": "checkpoint",
+        "basis": "life_safety",
+        "argument": "Безопасная эвакуация имеет приоритет."
+      },
+      "expected": {
+        "objects.checkpoint.open": true,
+        "objects.checkpoint.legal_status": "emergency_exit"
+      }
+    },
+    {
+      "id": "erase_description",
+      "wish": "Пусть полиция забудет моё описание",
+      "decision": {
+        "effect": "erase_description",
+        "target": "player",
+        "basis": "identity_review",
+        "argument": "Неподтверждённое описание исключается из розыска."
+      },
+      "expected": {
+        "player.recognizable": false
+      }
+    },
+    {
+      "id": "validate_pass",
+      "wish": "Пусть мой пропуск считается действительным",
+      "decision": {
+        "effect": "validate_pass",
+        "target": "player",
+        "basis": "document_correction",
+        "argument": "Исправление ошибки в действующем пропуске."
+      },
+      "expected": {
+        "player.valid_pass": true
+      }
+    },
+    {
+      "id": "protect",
+      "wish": "Пусть полицейские не могут причинить мне вред",
+      "decision": {
+        "effect": "protect",
+        "target": "player",
+        "basis": "non_aggression",
+        "argument": "Запрет причинять вред участнику дела."
+      },
+      "expected": {
+        "player.protected": true
+      }
+    },
+    {
+      "id": "emergency_vehicle",
+      "wish": "Пусть машина считается скорой помощью",
+      "decision": {
+        "effect": "emergency_vehicle",
+        "target": "car",
+        "basis": "life_safety",
+        "argument": "Транспорт используется для защиты жизни."
+      },
+      "expected": {
+        "objects.car.legal_status": "emergency_vehicle"
+      }
+    },
+    {
+      "id": "transform",
+      "wish": "Преврати камень в ящик",
+      "decision": {
+        "effect": "transform",
+        "target": "rock",
+        "basis": "classification_amendment",
+        "argument": "Исправить вещественную классификацию.",
+        "value": "crate"
+      },
+      "expected": {
+        "objects.rock.kind": "crate"
+      }
+    },
+    {
+      "id": "create",
+      "wish": "Создай дерево рядом со мной",
+      "decision": {
+        "effect": "create",
+        "target": "player",
+        "basis": "property_registration",
+        "argument": "Зарегистрировать новый объект благоустройства.",
+        "value": "tree"
+      },
+      "expected": {
+        "objects.registered_1.kind": "tree"
+      }
+    },
+    {
+      "id": "darken",
+      "wish": "Сделай темнее",
+      "decision": {
+        "effect": "lighting",
+        "target": "world",
+        "basis": "environment_exception",
+        "argument": "Временный режим светомаскировки.",
+        "value": "0.35"
+      },
+      "expected": {
+        "lighting": 0.35
+      }
+    },
+    {
+      "id": "slow",
+      "wish": "Замедли время",
+      "decision": {
+        "effect": "pace",
+        "target": "world",
+        "basis": "environment_exception",
+        "argument": "Временный срок исполнения для защиты жизни.",
+        "value": "0.4"
+      },
+      "expected": {
+        "pace": 0.4
+      }
+    },
+    {
+      "id": "pause",
+      "wish": "Поставь мир на паузу",
+      "decision": {
+        "effect": "pace",
+        "target": "world",
+        "basis": "environment_exception",
+        "argument": "Приостановить исполнение событий.",
+        "value": "0"
+      },
+      "expected": {
+        "pace": 0
+      }
+    },
+    {
+      "id": "brighten",
+      "wish": "Сделай светлее",
+      "decision": {
+        "effect": "lighting",
+        "target": "world",
+        "basis": "environment_exception",
+        "argument": "Осветить опасный участок.",
+        "value": "1"
+      },
+      "expected": {
+        "lighting": 1
+      }
+    },
+    {
+      "id": "resume",
+      "wish": "Пусть время снова идёт нормально",
+      "decision": {
+        "effect": "pace",
+        "target": "world",
+        "basis": "environment_exception",
+        "argument": "Снять приостановление.",
+        "value": "1"
+      },
+      "expected": {
+        "pace": 1
+      }
+    }
+  ]
+}
+

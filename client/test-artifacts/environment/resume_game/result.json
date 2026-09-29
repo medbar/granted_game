@@ -35,9 +35,9 @@
       },
       "execution_engine": "monty",
       "execution_error": null,
-      "execution_ms": 40.573,
-      "first_world_action_ms": 29.385,
-      "latency_ms": 70.672,
+      "execution_ms": 11.595,
+      "first_world_action_ms": 109.0,
+      "latency_ms": 156.679,
       "model": "qwen3-35-36",
       "program_code": "set_game_paused(False)",
       "program_output": {
@@ -95,7 +95,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "состояние паузы подтверждено: False",
-          "step_id": "bba17c18c8da4b97bb65b1d34a0f06ce",
+          "step_id": "de7d47cbd5d3444085865666dd6f786b",
           "target_id": "player",
           "verified": true
         }
@@ -109,7 +109,7 @@
           "summary": "Снять игру с паузы и продолжить течение мира."
         }
       },
-      "latency_ms": 70.672,
+      "latency_ms": 156.679,
       "selected_targets": [
         "player"
       ],
@@ -134,7 +134,7 @@
           ],
           "direction": {
             "x": 0.9,
-            "y": 0.832707595825195
+            "y": 0.838121795654297
           },
           "intensity": 0.75,
           "lifetime": 0.55,
@@ -174,13 +174,11 @@
   "passed": true,
   "timing": {
     "action_ready_to_mutation_ms": 1.0,
-    "client_ttfa_ms": 5406.0,
-    "server_action_ready_ms": 867.721,
-    "submit_to_action_ready_ms": 5405.0,
-    "submit_to_initial_response_ms": 4293.0
+    "client_ttfa_ms": 1859.0,
+    "server_action_ready_ms": 596.662,
+    "submit_to_action_ready_ms": 1858.0,
+    "submit_to_initial_response_ms": 1162.0
   },
-  "timing_warnings": [
-    "client TTFA 5406.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-  ],
+  "timing_warnings": [],
   "wish": "Сними с паузы игру"
 }

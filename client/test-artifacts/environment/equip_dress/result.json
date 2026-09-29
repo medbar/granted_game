@@ -35,9 +35,9 @@
       },
       "execution_engine": "monty",
       "execution_error": null,
-      "execution_ms": 880.075,
-      "first_world_action_ms": 875.25,
-      "latency_ms": 943.845,
+      "execution_ms": 137.553,
+      "first_world_action_ms": 65.583,
+      "latency_ms": 467.808,
       "model": "qwen3-35-36",
       "program_code": "equip_outfit('player', 'dress')",
       "program_output": {
@@ -95,7 +95,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "наряд dress надет",
-          "step_id": "dee0522adbc54de29afb4be66065481f",
+          "step_id": "f13e3a6904034993a8833b8ff0df5143",
           "target_id": "player",
           "verified": true
         }
@@ -109,7 +109,7 @@
           "summary": "Надеть на игрока видимый наряд dress, а не создать предмет рядом."
         }
       },
-      "latency_ms": 943.845,
+      "latency_ms": 467.808,
       "selected_targets": [
         "player"
       ],
@@ -134,7 +134,7 @@
           ],
           "direction": {
             "x": 0.9,
-            "y": 0.83123238881429
+            "y": 0.836706097920736
           },
           "intensity": 0.75,
           "lifetime": 0.55,
@@ -174,13 +174,13 @@
   "passed": true,
   "timing": {
     "action_ready_to_mutation_ms": 1.0,
-    "client_ttfa_ms": 3627.0,
-    "server_action_ready_ms": 1996.925,
-    "submit_to_action_ready_ms": 3626.0,
-    "submit_to_initial_response_ms": 2895.0
+    "client_ttfa_ms": 2700.0,
+    "server_action_ready_ms": 1327.278,
+    "submit_to_action_ready_ms": 2699.0,
+    "submit_to_initial_response_ms": 1938.0
   },
   "timing_warnings": [
-    "client TTFA 3627.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
+    "client TTFA 2700.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
   ],
   "wish": "Одень меня в платье"
 }

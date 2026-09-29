@@ -35,9 +35,9 @@
       },
       "execution_engine": "monty",
       "execution_error": null,
-      "execution_ms": 213.661,
-      "first_world_action_ms": 392.776,
-      "latency_ms": 400.406,
+      "execution_ms": 52.544,
+      "first_world_action_ms": 91.213,
+      "latency_ms": 158.291,
       "model": "qwen3-35-36",
       "program_code": "spawn('portal', near='player')",
       "program_output": {
@@ -95,7 +95,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "новый объект portal найден",
-          "step_id": "e23cdb5548a947a2a117c353996694ec",
+          "step_id": "76d54f85158545719fbf46d15b15c30c",
           "target_id": "player",
           "verified": true
         }
@@ -109,7 +109,7 @@
           "summary": "Создать физический объект portal рядом с игроком."
         }
       },
-      "latency_ms": 400.406,
+      "latency_ms": 158.291,
       "selected_targets": [
         "player"
       ],
@@ -134,7 +134,7 @@
           ],
           "direction": {
             "x": 0.9,
-            "y": 0.829152552286784
+            "y": 0.823327445983887
           },
           "intensity": 0.75,
           "lifetime": 0.55,
@@ -174,14 +174,14 @@
   "level_version": "monaco-start-v1",
   "passed": true,
   "timing": {
-    "action_ready_to_mutation_ms": 0.0,
-    "client_ttfa_ms": 3982.0,
-    "server_action_ready_ms": 1007.23,
-    "submit_to_action_ready_ms": 3982.0,
-    "submit_to_initial_response_ms": 2773.0
+    "action_ready_to_mutation_ms": 2.0,
+    "client_ttfa_ms": 2419.0,
+    "server_action_ready_ms": 516.08,
+    "submit_to_action_ready_ms": 2417.0,
+    "submit_to_initial_response_ms": 1433.0
   },
   "timing_warnings": [
-    "client TTFA 3982.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
+    "client TTFA 2419.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
   ],
   "wish": "Создай портал возле меня"
 }

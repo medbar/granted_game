@@ -15,6 +15,7 @@ from .config import anchors_config
 from .config import materials_config, reactions_config, spell_settings, visual_mapping
 from .models import CastOptions, CastRequest, CastResponse, CasterSnapshot, Vec2
 from .observer import router as observer_router
+from .reality_api import prepare_lawyer, router as reality_router
 from .plugins import PluginToggleRequest
 from .service import SpellService
 from .sim_world import (
@@ -32,11 +33,13 @@ async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
     # This keeps one-time initialization out of the player's first wish latency.
     if agent_mode_enabled():
         agent_service()
+        prepare_lawyer()
     yield
 
 
 app = FastAPI(title="Granted Game Wish Interpreter", version="0.2.0", lifespan=lifespan)
 app.include_router(observer_router)
+app.include_router(reality_router)
 _spell_service: SpellService | None = None
 _agent_service: GenieAgentService | None = None
 _session_store = SessionStore()

@@ -3,9 +3,11 @@ schema: granted-eval-first
 context: |
   Language: Russian. All artifacts are written in Russian while OpenSpec structural headings
   and SHALL/MUST keywords remain in English.
-  Product: Granted is a Godot 4.7 game with a FastAPI/PydanticAI genie agent.
+  Product: Bureaucracy of Reality is a Godot 4.7 action/stealth game with a FastAPI/PydanticAI
+  devil attorney. Canon lives in docs/Bureaucracy_of_Reality_Obsidian_Vault. The old Granted
+  genie/Monaco scene remains an explicit legacy prototype with regression tests.
   The authoritative product outcome is the state observed in the running game world, not the
-  generated Python text, action name, HTTP success, or the genie's spoken claim.
+  generated Python text, action name, HTTP success, or the lawyer's spoken claim.
   Server tests use pytest. Client tests use headless Godot. Agent evaluations live under
   server/evals and save reports under ignored server/runtime directories.
   The project follows strict TDD and eval-first development for every behavior change.

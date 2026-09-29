@@ -35,9 +35,9 @@
       },
       "execution_engine": "monty",
       "execution_error": null,
-      "execution_ms": 361.621,
-      "first_world_action_ms": 355.848,
-      "latency_ms": 429.674,
+      "execution_ms": 47.062,
+      "first_world_action_ms": 20.964,
+      "latency_ms": 75.262,
       "model": "qwen3-35-36",
       "program_code": "spawn('sword', near='player')",
       "program_output": {
@@ -95,7 +95,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "новый объект sword найден",
-          "step_id": "c5f96a67edc842e793cb9e7c39804061",
+          "step_id": "cf3b97f8cd54424598c481e79fd4f306",
           "target_id": "player",
           "verified": true
         }
@@ -109,7 +109,7 @@
           "summary": "Создать физический объект sword рядом с игроком."
         }
       },
-      "latency_ms": 429.674,
+      "latency_ms": 75.262,
       "selected_targets": [
         "player"
       ],
@@ -134,7 +134,7 @@
           ],
           "direction": {
             "x": 0.9,
-            "y": 0.821584256490072
+            "y": 0.824242464701335
           },
           "intensity": 0.75,
           "lifetime": 0.55,
@@ -175,13 +175,11 @@
   "passed": true,
   "timing": {
     "action_ready_to_mutation_ms": 2.0,
-    "client_ttfa_ms": 3303.0,
-    "server_action_ready_ms": 776.722,
-    "submit_to_action_ready_ms": 3301.0,
-    "submit_to_initial_response_ms": 2589.0
+    "client_ttfa_ms": 1097.0,
+    "server_action_ready_ms": 135.465,
+    "submit_to_action_ready_ms": 1095.0,
+    "submit_to_initial_response_ms": 571.0
   },
-  "timing_warnings": [
-    "client TTFA 3303.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-  ],
+  "timing_warnings": [],
   "wish": "Создай меч рядом со мной"
 }

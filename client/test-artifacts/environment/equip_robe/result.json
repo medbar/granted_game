@@ -35,9 +35,9 @@
       },
       "execution_engine": "monty",
       "execution_error": null,
-      "execution_ms": 64.848,
-      "first_world_action_ms": 63.915,
-      "latency_ms": 146.183,
+      "execution_ms": 149.28,
+      "first_world_action_ms": 60.053,
+      "latency_ms": 210.01,
       "model": "qwen3-35-36",
       "program_code": "equip_outfit('player', 'robe')",
       "program_output": {
@@ -95,7 +95,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "наряд robe надет",
-          "step_id": "f23d58cf85e64a6fa98f2cabb0b1908f",
+          "step_id": "4393b7129684446c89a340866e0d1120",
           "target_id": "player",
           "verified": true
         }
@@ -109,7 +109,7 @@
           "summary": "Надеть на игрока видимый наряд robe, а не создать предмет рядом."
         }
       },
-      "latency_ms": 146.183,
+      "latency_ms": 210.01,
       "selected_targets": [
         "player"
       ],
@@ -134,7 +134,7 @@
           ],
           "direction": {
             "x": 0.9,
-            "y": 0.829237111409505
+            "y": 0.825553385416667
           },
           "intensity": 0.75,
           "lifetime": 0.55,
@@ -173,14 +173,12 @@
   "level_version": "monaco-start-v1",
   "passed": true,
   "timing": {
-    "action_ready_to_mutation_ms": 1.0,
-    "client_ttfa_ms": 5328.0,
-    "server_action_ready_ms": 816.653,
-    "submit_to_action_ready_ms": 5327.0,
-    "submit_to_initial_response_ms": 3698.0
+    "action_ready_to_mutation_ms": 2.0,
+    "client_ttfa_ms": 1985.0,
+    "server_action_ready_ms": 382.52,
+    "submit_to_action_ready_ms": 1983.0,
+    "submit_to_initial_response_ms": 1239.0
   },
-  "timing_warnings": [
-    "client TTFA 5328.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-  ],
+  "timing_warnings": [],
   "wish": "Наряди игрока в мантию"
 }

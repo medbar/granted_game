@@ -35,9 +35,9 @@
       },
       "execution_engine": "monty",
       "execution_error": null,
-      "execution_ms": 4.913,
-      "first_world_action_ms": 71.759,
-      "latency_ms": 78.641,
+      "execution_ms": 52.207,
+      "first_world_action_ms": 16.029,
+      "latency_ms": 246.26,
       "model": "qwen3-35-36",
       "program_code": "apply_state(nearest('enemy'), 'wet', duration=30)",
       "program_output": {
@@ -95,7 +95,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "состояние wet подтверждено",
-          "step_id": "5b18d0fc4f28420281da54129a9fe603",
+          "step_id": "c357bfcd8d1146a1b0e872a8070ff65d",
           "target_id": "guard_01",
           "verified": true
         }
@@ -109,7 +109,7 @@
           "summary": "Сделать выбранного персонажа мокрым."
         }
       },
-      "latency_ms": 78.641,
+      "latency_ms": 246.26,
       "selected_targets": [
         "guard_01"
       ],
@@ -133,21 +133,21 @@
             "affect_physical"
           ],
           "direction": {
-            "x": 5.22803573608398,
-            "y": 1.46609884897868
+            "x": 5.00772654215495,
+            "y": 1.72977898915609
           },
           "intensity": 0.75,
           "lifetime": 0.55,
           "origin": {
-            "x": -3.87196426391602,
-            "y": 0.633761088053385
+            "x": -4.09227345784505,
+            "y": 0.901281929016113
           },
           "primitive": "BURST",
           "radius": 0.8,
           "speed": 0.0,
           "target": {
-            "x": -3.87196426391602,
-            "y": 0.633761088053385
+            "x": -4.09227345784505,
+            "y": 0.901281929016113
           },
           "turbulence": 0.35
         }
@@ -171,14 +171,14 @@
   "level_version": "monaco-start-v1",
   "passed": true,
   "timing": {
-    "action_ready_to_mutation_ms": 1.0,
-    "client_ttfa_ms": 4526.0,
-    "server_action_ready_ms": 874.75,
-    "submit_to_action_ready_ms": 4525.0,
-    "submit_to_initial_response_ms": 3849.0
+    "action_ready_to_mutation_ms": 2.0,
+    "client_ttfa_ms": 2079.0,
+    "server_action_ready_ms": 761.701,
+    "submit_to_action_ready_ms": 2077.0,
+    "submit_to_initial_response_ms": 1422.0
   },
   "timing_warnings": [
-    "client TTFA 4526.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
+    "client TTFA 2079.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
   ],
   "wish": "Облей врага водой, чтобы он стал мокрым"
 }

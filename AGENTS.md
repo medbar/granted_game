@@ -1,4 +1,4 @@
-# Granted agent instructions
+# Bureaucracy of Reality agent instructions
 
 ## Canonical setting knowledge base
 
@@ -25,7 +25,7 @@ proposals, tests, and eval oracles must cite or reflect the relevant vault const
 ## Primary workflow: OpenSpec
 
 OpenSpec is the source of truth for planned and shipped behavior. Before changing observable
-server, genie-agent, world, or client behavior, create or continue a change under
+server, lawyer-agent, legal reality, world, or client behavior, create or continue a change under
 `openspec/changes/` using the default `granted-eval-first` schema. Read `openspec/config.yaml`,
 the active change artifacts, and `openspec/quality-gates.json` before implementation.
 
@@ -49,8 +49,9 @@ current while implementing; never skip them for an observable behavior change.
    in the change's `eval-plan.md`.
 5. Make the smallest production change that can pass the new case.
 6. Run the narrow test/eval to GREEN, then refactor while keeping it green.
-7. Select the union of gates for all applicable classes in `openspec/quality-gates.json` and run
-   every selected automated/live gate.
+7. Select the union of gates for all applicable classes in `openspec/quality-gates.json` using
+   the default `legal` profile and run every selected automated/live gate. Use `legacy_genie`
+   explicitly only when changing the archived genie prototype; it is not evidence for current laws.
 8. For player-visible behavior, inspect a real client trajectory and the final game world. Record
    report paths and complete the trajectory checklist.
 9. Validate OpenSpec and the quality policy, then sync and archive the change.
@@ -63,3 +64,12 @@ honest failure outcome.
 Live-model evals supplement deterministic tests; they never replace them. Do not weaken or delete
 a test merely to make a prompt or implementation green. Prompt evolution must compare against the
 same frozen eval set and review regressions case by case, not only by aggregate score.
+
+## Legal evaluation contract
+
+The primary suite is `server/evals/legal_cases.json`, executed by `run_legal_evals.py`.
+Check the legal basis, authoritative world effect, scope for player/NPCs, collateral changes,
+precedent creation/reuse/persistence, and honest refusal without mutation. Do not derive expected
+answers from production `LAWS`. A passed refusal test is not a fulfilled petition. Live runs must
+use actual model answers, report excluded cases, and never substitute frozen decisions on failure.
+Keep proposal-only vault ideas separate from the seven implemented prototype laws.

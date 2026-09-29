@@ -33,9 +33,9 @@
       },
       "execution_engine": "monty",
       "execution_error": null,
-      "execution_ms": 81.49,
-      "first_world_action_ms": 101.827,
-      "latency_ms": 183.712,
+      "execution_ms": 61.889,
+      "first_world_action_ms": 52.587,
+      "latency_ms": 159.927,
       "model": "qwen3-35-36",
       "program_code": "rock = nearest('rock')\ndestroy(rock)",
       "program_output": {
@@ -93,7 +93,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "цель уничтожена",
-          "step_id": "9dcf6bfaa38748c2a9d668446b25dfcf",
+          "step_id": "0c86d69c05b340fa8b1eef55a19ac52d",
           "target_id": "rock_01",
           "verified": true
         }
@@ -107,7 +107,7 @@
           "summary": "Полностью уничтожить ближайший камень."
         }
       },
-      "latency_ms": 183.712,
+      "latency_ms": 159.927,
       "selected_targets": [
         "rock_01"
       ],
@@ -132,7 +132,7 @@
           ],
           "direction": {
             "x": 4.4,
-            "y": 3.72484232584635
+            "y": 3.72636858622233
           },
           "intensity": 0.75,
           "lifetime": 0.55,
@@ -170,13 +170,13 @@
   "passed": true,
   "timing": {
     "action_ready_to_mutation_ms": 1.0,
-    "client_ttfa_ms": 4313.0,
-    "server_action_ready_ms": 769.407,
-    "submit_to_action_ready_ms": 4312.0,
-    "submit_to_initial_response_ms": 3615.0
+    "client_ttfa_ms": 2328.0,
+    "server_action_ready_ms": 366.222,
+    "submit_to_action_ready_ms": 2327.0,
+    "submit_to_initial_response_ms": 1505.0
   },
   "timing_warnings": [
-    "client TTFA 4313.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
+    "client TTFA 2328.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
   ],
   "wish": "Полностью уничтожь камень"
 }

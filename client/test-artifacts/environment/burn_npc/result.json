@@ -35,9 +35,9 @@
       },
       "execution_engine": "monty",
       "execution_error": null,
-      "execution_ms": 764.229,
-      "first_world_action_ms": 760.678,
-      "latency_ms": 833.611,
+      "execution_ms": 50.861,
+      "first_world_action_ms": 85.033,
+      "latency_ms": 152.265,
       "model": "qwen3-35-36",
       "program_code": "apply_state(nearest('npc'), 'burning', duration=30)",
       "program_output": {
@@ -95,7 +95,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "состояние burning подтверждено",
-          "step_id": "c490a3a9e55b4356beceb64fbcccafdb",
+          "step_id": "f2ec0aa1e8fa407eb8ea91752f3b473d",
           "target_id": "npc_01",
           "verified": true
         }
@@ -109,7 +109,7 @@
           "summary": "Поджечь выбранного персонажа."
         }
       },
-      "latency_ms": 833.611,
+      "latency_ms": 152.265,
       "selected_targets": [
         "npc_01"
       ],
@@ -133,21 +133,21 @@
             "affect_physical"
           ],
           "direction": {
-            "x": 0.991217549641929,
-            "y": 4.25149389902751
+            "x": 1.00327758789062,
+            "y": 4.23274389902751
           },
           "intensity": 0.75,
           "lifetime": 0.55,
           "origin": {
-            "x": -8.10878245035807,
-            "y": 3.41485544840495
+            "x": -8.09672241210938,
+            "y": 3.39488067626953
           },
           "primitive": "BURST",
           "radius": 0.8,
           "speed": 0.0,
           "target": {
-            "x": -8.10878245035807,
-            "y": 3.41485544840495
+            "x": -8.09672241210938,
+            "y": 3.39488067626953
           },
           "turbulence": 0.35
         }
@@ -171,14 +171,14 @@
   "level_version": "monaco-start-v1",
   "passed": true,
   "timing": {
-    "action_ready_to_mutation_ms": 1.0,
-    "client_ttfa_ms": 3365.0,
-    "server_action_ready_ms": 1602.493,
-    "submit_to_action_ready_ms": 3364.0,
-    "submit_to_initial_response_ms": 2201.0
+    "action_ready_to_mutation_ms": 3.0,
+    "client_ttfa_ms": 2118.0,
+    "server_action_ready_ms": 445.084,
+    "submit_to_action_ready_ms": 2115.0,
+    "submit_to_initial_response_ms": 1301.0
   },
   "timing_warnings": [
-    "client TTFA 3365.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
+    "client TTFA 2118.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
   ],
   "wish": "Подожги НПС"
 }

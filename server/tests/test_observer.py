@@ -72,3 +72,33 @@ def test_trajectory_lookup_is_bounded_to_safe_request_ids(tmp_path) -> None:
         pass
     else:
         raise AssertionError("unsafe request id was accepted")
+
+
+def test_observer_explains_legal_petition_and_actual_world_diff(monkeypatch):
+    from app import observer
+    trace = {
+        "setting": "bureaucracy",
+        "response": {"status": "completed", "message": "Проход открыт", "basis": "life_safety"},
+        "attempts": [{"attempt": 1, "verified": False, "error": "missing target"},
+                     {"attempt": 2, "verified": True, "petition": {"effect": "open_exit"}}],
+        "before": {"objects": {"checkpoint": {"open": False}}, "player": {"x": 1}},
+        "after": {"objects": {"checkpoint": {"open": True}}, "player": {"x": 2}},
+    }
+    monkeypatch.setattr(observer, "read_events", lambda: [{"request_id": "bor-test", "event": "agent.run.completed"}])
+    monkeypatch.setattr(observer, "load_trajectory", lambda request_id: trace)
+    payload = TestClient(app).get("/observer/api/requests/bor-test").json()
+    legal = payload["bureaucracy"]
+    assert legal["status"] == "completed" and legal["basis"] == "life_safety"
+    assert legal["attempts"][0]["error"] == "missing target"
+    assert {"path": "objects.checkpoint.open", "before": False, "after": True} in legal["changes"]
+    assert trace["before"]["objects"]["checkpoint"]["open"] is False
+    page = TestClient(app).get("/observer").text
+    assert "renderBureaucracy(data.bureaucracy)" in page
+
+
+def test_observer_failed_legal_case_does_not_invent_world_changes():
+    from app import observer
+    trace = {"setting": "bureaucracy", "response": {"status": "failed", "message": "Мир не изменён"},
+             "before": {"objects": {}}, "after": {"objects": {}}, "attempts": []}
+    assert observer.summarize_bureaucracy(trace)["changes"] == []
+    assert observer.summarize_bureaucracy({"program": {"code": "inspect()"}}) is None

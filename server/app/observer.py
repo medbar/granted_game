@@ -204,6 +204,25 @@ def load_trajectory(request_id: str, directory: Path = TRAJECTORY_DIR) -> dict[s
     return None
 
 
+def summarize_bureaucracy(trajectory: dict[str, Any] | None) -> dict[str, Any] | None:
+    if not trajectory or trajectory.get("setting") != "bureaucracy":
+        return None
+    changes: list[dict[str, Any]] = []
+
+    def compare(before, after, path):
+        if isinstance(before, dict) and isinstance(after, dict):
+            for key in sorted(before.keys() | after.keys()):
+                compare(before.get(key), after.get(key), f"{path}.{key}")
+        elif before != after:
+            changes.append({"path": path, "before": before, "after": after})
+
+    before, after = trajectory.get("before", {}), trajectory.get("after", {})
+    for field in ("objects", "player", "lighting", "pace", "precedents"):
+        compare(before.get(field), after.get(field), field)
+    return {**trajectory.get("response", {}), "attempts": trajectory.get("attempts", []),
+            "changes": changes}
+
+
 @router.get("", response_class=HTMLResponse)
 def observer_page() -> HTMLResponse:
     return HTMLResponse(PAGE_PATH.read_text(encoding="utf-8"), headers={"Cache-Control": "no-store"})
@@ -253,11 +272,13 @@ def observer_request(request_id: str) -> JSONResponse:
     )
     events = events[latest_start:]
     failed = any(event.get("event") in {"agent.run.failed", "agent.loop.failed"} for event in events)
+    trajectory = None if failed else load_trajectory(request_id)
     return JSONResponse(
         {
             "request_id": request_id,
             "events": events,
-            "trajectory": None if failed else load_trajectory(request_id),
+            "trajectory": trajectory,
+            "bureaucracy": summarize_bureaucracy(trajectory),
         },
         headers={"Cache-Control": "no-store"},
     )

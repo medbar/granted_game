@@ -38,9 +38,9 @@
       },
       "execution_engine": "monty",
       "execution_error": null,
-      "execution_ms": 119.593,
-      "first_world_action_ms": 41.382,
-      "latency_ms": 128.384,
+      "execution_ms": 114.087,
+      "first_world_action_ms": 32.279,
+      "latency_ms": 206.541,
       "model": "qwen3-35-36",
       "program_code": "give_item('magic_key', owner='player')",
       "program_output": {
@@ -98,7 +98,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "magic_key найден в рюкзаке",
-          "step_id": "272421a4a83e44de9519ae1fd59cf1b3",
+          "step_id": "47e1cfed980f4430a6a765c3fa96872b",
           "target_id": "player",
           "verified": true
         }
@@ -112,7 +112,7 @@
           "summary": "Положить magic_key непосредственно в рюкзак игрока."
         }
       },
-      "latency_ms": 128.384,
+      "latency_ms": 206.541,
       "selected_targets": [
         "player"
       ],
@@ -137,7 +137,7 @@
           ],
           "direction": {
             "x": 0.9,
-            "y": 0.835486729939779
+            "y": 0.833931732177734
           },
           "intensity": 0.75,
           "lifetime": 0.55,
@@ -179,13 +179,13 @@
   "passed": true,
   "timing": {
     "action_ready_to_mutation_ms": 1.0,
-    "client_ttfa_ms": 3451.0,
-    "server_action_ready_ms": 576.194,
-    "submit_to_action_ready_ms": 3450.0,
-    "submit_to_initial_response_ms": 2722.0
+    "client_ttfa_ms": 3156.0,
+    "server_action_ready_ms": 1165.841,
+    "submit_to_action_ready_ms": 3155.0,
+    "submit_to_initial_response_ms": 1921.0
   },
   "timing_warnings": [
-    "client TTFA 3451.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
+    "client TTFA 3156.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
   ],
   "wish": "Положи магический ключ в рюкзак игрока"
 }

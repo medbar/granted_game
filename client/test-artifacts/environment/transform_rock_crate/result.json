@@ -59,9 +59,9 @@
       },
       "execution_engine": "monty",
       "execution_error": null,
-      "execution_ms": 355.391,
-      "first_world_action_ms": 115.854,
-      "latency_ms": 407.934,
+      "execution_ms": 54.358,
+      "first_world_action_ms": 16.912,
+      "latency_ms": 84.464,
       "model": "qwen3-35-36",
       "program_code": "target = nearest('rock')\nif target:\n    transform(target, 'crate')\nspeak('player', 'Прямое и недвусмысленное превращение.')",
       "program_output": {
@@ -119,7 +119,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "форма crate подтверждена",
-          "step_id": "c65015c735fb414b9eaf2fac1a36dd3f",
+          "step_id": "82a5ae91bed9472db918c9014c1b5782",
           "target_id": "rock_01",
           "verified": true
         },
@@ -129,7 +129,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "реплика показана клиентом",
-          "step_id": "a903e52e169a46a48c7c2a49c319a475",
+          "step_id": "5bcbaffb1a2a40c5923ac89d8952092c",
           "target_id": "player",
           "verified": true
         }
@@ -143,7 +143,7 @@
           "summary": "Превратить rock в crate."
         }
       },
-      "latency_ms": 407.934,
+      "latency_ms": 84.464,
       "selected_targets": [
         "rock_01",
         "player"
@@ -169,7 +169,7 @@
           ],
           "direction": {
             "x": 4.4,
-            "y": 3.72902838389079
+            "y": 3.73600616455078
           },
           "intensity": 0.75,
           "lifetime": 0.55,
@@ -193,7 +193,7 @@
           ],
           "direction": {
             "x": 0.9,
-            "y": 0.829028383890788
+            "y": 0.836006164550781
           },
           "intensity": 0.75,
           "lifetime": 0.55,
@@ -245,14 +245,12 @@
   "level_version": "monaco-start-v1",
   "passed": true,
   "timing": {
-    "action_ready_to_mutation_ms": 0.0,
-    "client_ttfa_ms": 5063.0,
-    "server_action_ready_ms": 1859.968,
-    "submit_to_action_ready_ms": 5063.0,
-    "submit_to_initial_response_ms": 4444.0
+    "action_ready_to_mutation_ms": 1.0,
+    "client_ttfa_ms": 1519.0,
+    "server_action_ready_ms": 380.688,
+    "submit_to_action_ready_ms": 1518.0,
+    "submit_to_initial_response_ms": 759.0
   },
-  "timing_warnings": [
-    "client TTFA 5063.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-  ],
+  "timing_warnings": [],
   "wish": "Преврати камень в коробку"
 }

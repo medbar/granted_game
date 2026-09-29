@@ -1,0 +1,2128 @@
+{
+  "schema_version": 2,
+  "suite_id": "legal-reality-v1",
+  "scope": "Законы первого квартала; неутверждённые юрисдикции не входят в oracle.",
+  "canonical_sources": [
+    "03 Legal Reality/Bureaucracy of Reality.md",
+    "03 Legal Reality/Precedents.md",
+    "07 Design Decisions/ADR-002 - Devil Is an Attorney.md",
+    "07 Design Decisions/ADR-003 - Reality Uses Precedent.md"
+  ],
+  "cases": [
+    {
+      "id": "emergency_exit",
+      "category": "access_scope",
+      "live_model": true,
+      "laws": [
+        "life_safety"
+      ],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Пусть дверь кордона считается аварийным выходом",
+          "fixtures": [
+            {
+              "effect": "open_exit",
+              "target": "checkpoint",
+              "basis": "life_safety",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": ""
+            }
+          ],
+          "expected": {
+            "status": "completed",
+            "basis": "life_safety",
+            "state": {
+              "objects.checkpoint.open": true,
+              "objects.checkpoint.legal_status": "emergency_exit",
+              "case_count": 1,
+              "attention": 2
+            },
+            "precedents": [
+              {
+                "basis": "life_safety",
+                "scope": "doors:emergency_exit",
+                "uses": 1
+              }
+            ],
+            "require_mutation": true
+          },
+          "allowed_changes": [
+            "objects.checkpoint.open",
+            "objects.checkpoint.legal_status",
+            "precedents",
+            "case_count",
+            "attention"
+          ],
+          "probes": [
+            {
+              "kind": "cross",
+              "actor": "player",
+              "door": "checkpoint",
+              "driving": false,
+              "expected": true
+            },
+            {
+              "kind": "cross",
+              "actor": "police_1",
+              "door": "checkpoint",
+              "driving": false,
+              "expected": true
+            },
+            {
+              "kind": "cross",
+              "actor": "npc",
+              "door": "checkpoint",
+              "driving": false,
+              "expected": true
+            },
+            {
+              "kind": "cross",
+              "actor": "player",
+              "door": "side_gate",
+              "driving": false,
+              "expected": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "archive_exit",
+      "category": "access_scope",
+      "live_model": true,
+      "laws": [
+        "life_safety"
+      ],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Признай дверь городского архива side_gate аварийным выходом",
+          "fixtures": [
+            {
+              "effect": "open_exit",
+              "target": "side_gate",
+              "basis": "life_safety",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": ""
+            }
+          ],
+          "expected": {
+            "status": "completed",
+            "basis": "life_safety",
+            "state": {
+              "objects.side_gate.open": true,
+              "objects.side_gate.legal_status": "emergency_exit",
+              "case_count": 1,
+              "attention": 2
+            },
+            "precedents": [
+              {
+                "basis": "life_safety",
+                "scope": "doors:emergency_exit",
+                "uses": 1
+              }
+            ],
+            "require_mutation": true
+          },
+          "allowed_changes": [
+            "objects.side_gate.open",
+            "objects.side_gate.legal_status",
+            "precedents",
+            "case_count",
+            "attention"
+          ],
+          "probes": [
+            {
+              "kind": "cross",
+              "actor": "player",
+              "door": "side_gate",
+              "driving": false,
+              "expected": true
+            },
+            {
+              "kind": "cross",
+              "actor": "police_1",
+              "door": "side_gate",
+              "driving": false,
+              "expected": true
+            },
+            {
+              "kind": "cross",
+              "actor": "player",
+              "door": "checkpoint",
+              "driving": false,
+              "expected": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "personal_pass",
+      "category": "access_scope",
+      "live_model": true,
+      "laws": [
+        "document_correction"
+      ],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Исправь мой пропуск, чтобы кордон признал его действительным",
+          "fixtures": [
+            {
+              "effect": "validate_pass",
+              "target": "player",
+              "basis": "document_correction",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": ""
+            }
+          ],
+          "expected": {
+            "status": "completed",
+            "basis": "document_correction",
+            "state": {
+              "player.valid_pass": true,
+              "objects.checkpoint.open": false,
+              "case_count": 1,
+              "attention": 2
+            },
+            "precedents": [
+              {
+                "basis": "document_correction",
+                "scope": "validate_pass",
+                "uses": 1
+              }
+            ],
+            "require_mutation": true
+          },
+          "allowed_changes": [
+            "player.valid_pass",
+            "precedents",
+            "case_count",
+            "attention"
+          ],
+          "probes": [
+            {
+              "kind": "cross",
+              "actor": "player",
+              "door": "checkpoint",
+              "driving": false,
+              "expected": true
+            },
+            {
+              "kind": "cross",
+              "actor": "police_1",
+              "door": "checkpoint",
+              "driving": false,
+              "expected": false
+            },
+            {
+              "kind": "cross",
+              "actor": "npc",
+              "door": "checkpoint",
+              "driving": false,
+              "expected": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "identity_exclusion",
+      "category": "identity",
+      "live_model": true,
+      "laws": [
+        "identity_review"
+      ],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Исключи моё неподтверждённое описание из полицейского розыска",
+          "fixtures": [
+            {
+              "effect": "erase_description",
+              "target": "player",
+              "basis": "identity_review",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": ""
+            }
+          ],
+          "expected": {
+            "status": "completed",
+            "basis": "identity_review",
+            "state": {
+              "player.recognizable": false,
+              "case_count": 1,
+              "attention": 2
+            },
+            "precedents": [
+              {
+                "basis": "identity_review",
+                "scope": "erase_description",
+                "uses": 1
+              }
+            ],
+            "require_mutation": true
+          },
+          "allowed_changes": [
+            "player.recognizable",
+            "precedents",
+            "case_count",
+            "attention"
+          ],
+          "probes": [
+            {
+              "kind": "detection",
+              "actor": "police_1",
+              "distance": 20,
+              "expected": false
+            }
+          ]
+        }
+      ],
+      "before_probes": [
+        {
+          "kind": "detection",
+          "actor": "police_1",
+          "distance": 20,
+          "expected": true
+        }
+      ]
+    },
+    {
+      "id": "protective_injunction",
+      "category": "harm",
+      "live_model": true,
+      "laws": [
+        "non_aggression"
+      ],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Добейся запрета причинять мне физический вред",
+          "fixtures": [
+            {
+              "effect": "protect",
+              "target": "player",
+              "basis": "non_aggression",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": ""
+            }
+          ],
+          "expected": {
+            "status": "completed",
+            "basis": "non_aggression",
+            "state": {
+              "player.protected": true,
+              "case_count": 1,
+              "attention": 2
+            },
+            "precedents": [
+              {
+                "basis": "non_aggression",
+                "scope": "protect",
+                "uses": 1
+              }
+            ],
+            "require_mutation": true
+          },
+          "allowed_changes": [
+            "player.protected",
+            "precedents",
+            "case_count",
+            "attention"
+          ],
+          "probes": [
+            {
+              "kind": "damage",
+              "amount": 30,
+              "expected": 100
+            }
+          ]
+        }
+      ],
+      "before_probes": [
+        {
+          "kind": "damage",
+          "amount": 30,
+          "expected": 70
+        }
+      ]
+    },
+    {
+      "id": "emergency_vehicle",
+      "category": "access_scope",
+      "live_model": true,
+      "laws": [
+        "life_safety"
+      ],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Признай машину экстренным транспортом для спасения жизни",
+          "fixtures": [
+            {
+              "effect": "emergency_vehicle",
+              "target": "car",
+              "basis": "life_safety",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": ""
+            }
+          ],
+          "expected": {
+            "status": "completed",
+            "basis": "life_safety",
+            "state": {
+              "objects.car.legal_status": "emergency_vehicle",
+              "objects.car.kind": "car",
+              "case_count": 1,
+              "attention": 2
+            },
+            "precedents": [
+              {
+                "basis": "life_safety",
+                "scope": "emergency_vehicle",
+                "uses": 1
+              }
+            ],
+            "require_mutation": true
+          },
+          "allowed_changes": [
+            "objects.car.legal_status",
+            "precedents",
+            "case_count",
+            "attention"
+          ],
+          "probes": [
+            {
+              "kind": "cross",
+              "actor": "player",
+              "door": "checkpoint",
+              "driving": false,
+              "expected": false
+            },
+            {
+              "kind": "cross",
+              "actor": "player",
+              "door": "checkpoint",
+              "driving": true,
+              "expected": true
+            },
+            {
+              "kind": "cross",
+              "actor": "police_1",
+              "door": "checkpoint",
+              "driving": false,
+              "expected": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reclassify_property",
+      "category": "classification",
+      "live_model": true,
+      "laws": [
+        "classification_amendment"
+      ],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Перерегистрируй камень как ящик: измени его вещественную категорию",
+          "fixtures": [
+            {
+              "effect": "transform",
+              "target": "rock",
+              "basis": "classification_amendment",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": "crate"
+            }
+          ],
+          "expected": {
+            "status": "completed",
+            "basis": "classification_amendment",
+            "state": {
+              "objects.rock.kind": "crate",
+              "objects.rock.name": "crate",
+              "objects.rock.legal_status": "reclassified",
+              "case_count": 1,
+              "attention": 2
+            },
+            "precedents": [
+              {
+                "basis": "classification_amendment",
+                "scope": "reclassification:crate",
+                "uses": 1
+              }
+            ],
+            "require_mutation": true
+          },
+          "allowed_changes": [
+            "objects.rock.kind",
+            "objects.rock.name",
+            "objects.rock.legal_status",
+            "precedents",
+            "case_count",
+            "attention"
+          ],
+          "probes": []
+        }
+      ]
+    },
+    {
+      "id": "reclassify_pursuer",
+      "category": "classification",
+      "live_model": true,
+      "laws": [
+        "classification_amendment"
+      ],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Пусть полицейский police_1 юридически считается камнем и становится камнем",
+          "fixtures": [
+            {
+              "effect": "transform",
+              "target": "police_1",
+              "basis": "classification_amendment",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": "rock"
+            }
+          ],
+          "expected": {
+            "status": "completed",
+            "basis": "classification_amendment",
+            "state": {
+              "objects.police_1.kind": "rock",
+              "objects.police_1.name": "rock",
+              "objects.police_1.legal_status": "reclassified",
+              "case_count": 1,
+              "attention": 2
+            },
+            "precedents": [
+              {
+                "basis": "classification_amendment",
+                "scope": "reclassification:rock",
+                "uses": 1
+              }
+            ],
+            "require_mutation": true
+          },
+          "allowed_changes": [
+            "objects.police_1.kind",
+            "objects.police_1.name",
+            "objects.police_1.legal_status",
+            "precedents",
+            "case_count",
+            "attention"
+          ],
+          "probes": [
+            {
+              "kind": "detection",
+              "actor": "police_1",
+              "distance": 20,
+              "expected": false
+            }
+          ]
+        }
+      ],
+      "before_probes": [
+        {
+          "kind": "detection",
+          "actor": "police_1",
+          "distance": 20,
+          "expected": true
+        }
+      ]
+    },
+    {
+      "id": "register_tree",
+      "category": "registration",
+      "live_model": true,
+      "laws": [
+        "property_registration"
+      ],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Зарегистрируй новое дерево рядом со мной, чтобы оно появилось в мире",
+          "fixtures": [
+            {
+              "effect": "create",
+              "target": "player",
+              "basis": "property_registration",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": "tree"
+            }
+          ],
+          "expected": {
+            "status": "completed",
+            "basis": "property_registration",
+            "state": {
+              "objects.registered_1.kind": "tree",
+              "objects.registered_1.legal_status": "registered",
+              "objects.registered_1.x": 255,
+              "objects.registered_1.y": 380,
+              "case_count": 1,
+              "attention": 2
+            },
+            "precedents": [
+              {
+                "basis": "property_registration",
+                "scope": "registration:tree",
+                "uses": 1
+              }
+            ],
+            "require_mutation": true
+          },
+          "allowed_changes": [
+            "objects.registered_1",
+            "precedents",
+            "case_count",
+            "attention"
+          ],
+          "probes": []
+        }
+      ]
+    },
+    {
+      "id": "lighting_exception",
+      "category": "environment",
+      "live_model": true,
+      "laws": [
+        "environment_exception"
+      ],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Установи режим светомаскировки: сделай темнее",
+          "fixtures": [
+            {
+              "effect": "lighting",
+              "target": "world",
+              "basis": "environment_exception",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": "0.35"
+            }
+          ],
+          "expected": {
+            "status": "completed",
+            "basis": "environment_exception",
+            "state": {
+              "lighting": 0.35,
+              "case_count": 1,
+              "attention": 2
+            },
+            "precedents": [
+              {
+                "basis": "environment_exception",
+                "scope": "lighting:0.35",
+                "uses": 1
+              }
+            ],
+            "require_mutation": true
+          },
+          "allowed_changes": [
+            "lighting",
+            "precedents",
+            "case_count",
+            "attention"
+          ],
+          "probes": [
+            {
+              "kind": "detection",
+              "actor": "police_1",
+              "distance": 100,
+              "expected": false
+            }
+          ]
+        }
+      ],
+      "before_probes": [
+        {
+          "kind": "detection",
+          "actor": "police_1",
+          "distance": 100,
+          "expected": true
+        }
+      ]
+    },
+    {
+      "id": "restore_light",
+      "category": "environment",
+      "live_model": true,
+      "laws": [
+        "environment_exception"
+      ],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Установи полное освещение квартала, сделай светлее",
+          "fixtures": [
+            {
+              "effect": "lighting",
+              "target": "world",
+              "basis": "environment_exception",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": "1"
+            }
+          ],
+          "expected": {
+            "status": "completed",
+            "basis": "environment_exception",
+            "state": {
+              "lighting": 1,
+              "case_count": 1,
+              "attention": 2
+            },
+            "precedents": [
+              {
+                "basis": "environment_exception",
+                "scope": "lighting:1",
+                "uses": 1
+              }
+            ],
+            "require_mutation": true
+          },
+          "allowed_changes": [
+            "lighting",
+            "precedents",
+            "case_count",
+            "attention"
+          ],
+          "probes": [
+            {
+              "kind": "detection",
+              "actor": "police_1",
+              "distance": 180,
+              "expected": true
+            }
+          ]
+        }
+      ],
+      "before_probes": [
+        {
+          "kind": "detection",
+          "actor": "police_1",
+          "distance": 180,
+          "expected": false
+        }
+      ]
+    },
+    {
+      "id": "slow_execution",
+      "category": "environment",
+      "live_model": true,
+      "laws": [
+        "environment_exception"
+      ],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Введи временное исключение: замедли ход событий",
+          "fixtures": [
+            {
+              "effect": "pace",
+              "target": "world",
+              "basis": "environment_exception",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": "0.4"
+            }
+          ],
+          "expected": {
+            "status": "completed",
+            "basis": "environment_exception",
+            "state": {
+              "pace": 0.4,
+              "case_count": 1,
+              "attention": 2
+            },
+            "precedents": [
+              {
+                "basis": "environment_exception",
+                "scope": "pace:0.4",
+                "uses": 1
+              }
+            ],
+            "require_mutation": true
+          },
+          "allowed_changes": [
+            "pace",
+            "precedents",
+            "case_count",
+            "attention"
+          ],
+          "probes": [
+            {
+              "kind": "motion",
+              "dt": 0.1,
+              "expected": 6.2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "speed_execution",
+      "category": "environment",
+      "live_model": true,
+      "laws": [
+        "environment_exception"
+      ],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Введи временное исключение: ускорь ход событий",
+          "fixtures": [
+            {
+              "effect": "pace",
+              "target": "world",
+              "basis": "environment_exception",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": "1.8"
+            }
+          ],
+          "expected": {
+            "status": "completed",
+            "basis": "environment_exception",
+            "state": {
+              "pace": 1.8,
+              "case_count": 1,
+              "attention": 2
+            },
+            "precedents": [
+              {
+                "basis": "environment_exception",
+                "scope": "pace:1.8",
+                "uses": 1
+              }
+            ],
+            "require_mutation": true
+          },
+          "allowed_changes": [
+            "pace",
+            "precedents",
+            "case_count",
+            "attention"
+          ],
+          "probes": [
+            {
+              "kind": "motion",
+              "dt": 0.1,
+              "expected": 27.9
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "suspend_execution",
+      "category": "environment",
+      "live_model": true,
+      "laws": [
+        "environment_exception"
+      ],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Приостанови исполнение событий: поставь мир на паузу",
+          "fixtures": [
+            {
+              "effect": "pace",
+              "target": "world",
+              "basis": "environment_exception",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": "0"
+            }
+          ],
+          "expected": {
+            "status": "completed",
+            "basis": "environment_exception",
+            "state": {
+              "pace": 0,
+              "case_count": 1,
+              "attention": 2
+            },
+            "precedents": [
+              {
+                "basis": "environment_exception",
+                "scope": "pace:0",
+                "uses": 1
+              }
+            ],
+            "require_mutation": true
+          },
+          "allowed_changes": [
+            "pace",
+            "precedents",
+            "case_count",
+            "attention"
+          ],
+          "probes": [
+            {
+              "kind": "motion",
+              "dt": 0.1,
+              "expected": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "resume_execution",
+      "category": "environment",
+      "live_model": true,
+      "laws": [
+        "environment_exception"
+      ],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Приостанови исполнение событий: поставь мир на паузу",
+          "fixtures": [
+            {
+              "effect": "pace",
+              "target": "world",
+              "basis": "environment_exception",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": "0"
+            }
+          ],
+          "expected": {
+            "status": "completed",
+            "basis": "environment_exception",
+            "state": {
+              "pace": 0,
+              "case_count": 1,
+              "attention": 2
+            },
+            "precedents": [
+              {
+                "basis": "environment_exception",
+                "scope": "pace:0",
+                "uses": 1
+              }
+            ],
+            "require_mutation": true
+          },
+          "allowed_changes": [
+            "pace",
+            "precedents",
+            "case_count",
+            "attention"
+          ],
+          "probes": [
+            {
+              "kind": "motion",
+              "dt": 0.1,
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "id": "resume",
+          "operation": "petition",
+          "wish": "Сними приостановление: пусть время снова идёт нормально",
+          "fixtures": [
+            {
+              "effect": "pace",
+              "target": "world",
+              "basis": "environment_exception",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": "1"
+            }
+          ],
+          "expected": {
+            "status": "completed",
+            "basis": "environment_exception",
+            "state": {
+              "pace": 1,
+              "case_count": 2,
+              "attention": 3
+            },
+            "precedents": [
+              {
+                "basis": "environment_exception",
+                "scope": "pace:0",
+                "uses": 1
+              },
+              {
+                "basis": "environment_exception",
+                "scope": "pace:1",
+                "uses": 1
+              }
+            ],
+            "require_mutation": true
+          },
+          "allowed_changes": [
+            "pace",
+            "precedents",
+            "case_count",
+            "attention"
+          ],
+          "probes": [
+            {
+              "kind": "motion",
+              "dt": 0.1,
+              "expected": 15.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reuse_precedent",
+      "category": "precedent",
+      "live_model": true,
+      "laws": [
+        "life_safety"
+      ],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Пусть дверь кордона считается аварийным выходом",
+          "fixtures": [
+            {
+              "effect": "open_exit",
+              "target": "checkpoint",
+              "basis": "life_safety",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": ""
+            }
+          ],
+          "expected": {
+            "status": "completed",
+            "basis": "life_safety",
+            "state": {
+              "objects.checkpoint.open": true,
+              "objects.checkpoint.legal_status": "emergency_exit",
+              "case_count": 1,
+              "attention": 2
+            },
+            "precedents": [
+              {
+                "basis": "life_safety",
+                "scope": "doors:emergency_exit",
+                "uses": 1
+              }
+            ],
+            "require_mutation": true
+          },
+          "allowed_changes": [
+            "objects.checkpoint.open",
+            "objects.checkpoint.legal_status",
+            "precedents",
+            "case_count",
+            "attention"
+          ],
+          "probes": [
+            {
+              "kind": "cross",
+              "actor": "player",
+              "door": "checkpoint",
+              "driving": false,
+              "expected": true
+            },
+            {
+              "kind": "cross",
+              "actor": "police_1",
+              "door": "checkpoint",
+              "driving": false,
+              "expected": true
+            },
+            {
+              "kind": "cross",
+              "actor": "npc",
+              "door": "checkpoint",
+              "driving": false,
+              "expected": true
+            },
+            {
+              "kind": "cross",
+              "actor": "player",
+              "door": "side_gate",
+              "driving": false,
+              "expected": false
+            }
+          ]
+        },
+        {
+          "id": "second_door",
+          "operation": "petition",
+          "wish": "Признай дверь городского архива side_gate аварийным выходом",
+          "fixtures": [
+            {
+              "effect": "open_exit",
+              "target": "side_gate",
+              "basis": "life_safety",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": ""
+            }
+          ],
+          "expected": {
+            "status": "completed",
+            "basis": "life_safety",
+            "state": {
+              "objects.side_gate.open": true,
+              "objects.side_gate.legal_status": "emergency_exit",
+              "case_count": 2,
+              "attention": 2
+            },
+            "precedents": [
+              {
+                "basis": "life_safety",
+                "scope": "doors:emergency_exit",
+                "uses": 2
+              }
+            ],
+            "require_mutation": true
+          },
+          "allowed_changes": [
+            "objects.side_gate.open",
+            "objects.side_gate.legal_status",
+            "precedents",
+            "case_count",
+            "attention"
+          ],
+          "probes": [
+            {
+              "kind": "cross",
+              "actor": "player",
+              "door": "checkpoint",
+              "driving": false,
+              "expected": true
+            },
+            {
+              "kind": "cross",
+              "actor": "police_1",
+              "door": "checkpoint",
+              "driving": false,
+              "expected": true
+            },
+            {
+              "kind": "cross",
+              "actor": "police_1",
+              "door": "side_gate",
+              "driving": false,
+              "expected": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "separate_precedent_scopes",
+      "category": "precedent",
+      "live_model": true,
+      "laws": [
+        "classification_amendment"
+      ],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Перерегистрируй камень как ящик: измени его вещественную категорию",
+          "fixtures": [
+            {
+              "effect": "transform",
+              "target": "rock",
+              "basis": "classification_amendment",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": "crate"
+            }
+          ],
+          "expected": {
+            "status": "completed",
+            "basis": "classification_amendment",
+            "state": {
+              "objects.rock.kind": "crate",
+              "objects.rock.name": "crate",
+              "objects.rock.legal_status": "reclassified",
+              "case_count": 1,
+              "attention": 2
+            },
+            "precedents": [
+              {
+                "basis": "classification_amendment",
+                "scope": "reclassification:crate",
+                "uses": 1
+              }
+            ],
+            "require_mutation": true
+          },
+          "allowed_changes": [
+            "objects.rock.kind",
+            "objects.rock.name",
+            "objects.rock.legal_status",
+            "precedents",
+            "case_count",
+            "attention"
+          ],
+          "probes": []
+        },
+        {
+          "id": "restore_category",
+          "operation": "petition",
+          "wish": "Объект rock теперь ящик. Переклассифицируй его обратно в камень.",
+          "fixtures": [
+            {
+              "effect": "transform",
+              "target": "rock",
+              "basis": "classification_amendment",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": "rock"
+            }
+          ],
+          "expected": {
+            "status": "completed",
+            "basis": "classification_amendment",
+            "state": {
+              "objects.rock.kind": "rock",
+              "objects.rock.name": "rock",
+              "objects.rock.legal_status": "reclassified",
+              "case_count": 2,
+              "attention": 3
+            },
+            "precedents": [
+              {
+                "basis": "classification_amendment",
+                "scope": "reclassification:crate",
+                "uses": 1
+              },
+              {
+                "basis": "classification_amendment",
+                "scope": "reclassification:rock",
+                "uses": 1
+              }
+            ],
+            "require_mutation": true
+          },
+          "allowed_changes": [
+            "objects.rock.kind",
+            "objects.rock.name",
+            "objects.rock.legal_status",
+            "precedents",
+            "case_count",
+            "attention"
+          ],
+          "probes": []
+        }
+      ]
+    },
+    {
+      "id": "personal_then_public",
+      "category": "access_scope",
+      "live_model": true,
+      "laws": [
+        "document_correction",
+        "life_safety"
+      ],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Исправь мой пропуск, чтобы кордон признал его действительным",
+          "fixtures": [
+            {
+              "effect": "validate_pass",
+              "target": "player",
+              "basis": "document_correction",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": ""
+            }
+          ],
+          "expected": {
+            "status": "completed",
+            "basis": "document_correction",
+            "state": {
+              "player.valid_pass": true,
+              "objects.checkpoint.open": false,
+              "case_count": 1,
+              "attention": 2
+            },
+            "precedents": [
+              {
+                "basis": "document_correction",
+                "scope": "validate_pass",
+                "uses": 1
+              }
+            ],
+            "require_mutation": true
+          },
+          "allowed_changes": [
+            "player.valid_pass",
+            "precedents",
+            "case_count",
+            "attention"
+          ],
+          "probes": [
+            {
+              "kind": "cross",
+              "actor": "player",
+              "door": "checkpoint",
+              "driving": false,
+              "expected": true
+            },
+            {
+              "kind": "cross",
+              "actor": "police_1",
+              "door": "checkpoint",
+              "driving": false,
+              "expected": false
+            },
+            {
+              "kind": "cross",
+              "actor": "npc",
+              "door": "checkpoint",
+              "driving": false,
+              "expected": false
+            }
+          ]
+        },
+        {
+          "id": "public_exit",
+          "operation": "petition",
+          "wish": "Пусть дверь кордона считается аварийным выходом",
+          "fixtures": [
+            {
+              "effect": "open_exit",
+              "target": "checkpoint",
+              "basis": "life_safety",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": ""
+            }
+          ],
+          "expected": {
+            "status": "completed",
+            "basis": "life_safety",
+            "state": {
+              "objects.checkpoint.open": true,
+              "objects.checkpoint.legal_status": "emergency_exit",
+              "case_count": 2,
+              "attention": 3
+            },
+            "precedents": [
+              {
+                "basis": "document_correction",
+                "scope": "validate_pass",
+                "uses": 1
+              },
+              {
+                "basis": "life_safety",
+                "scope": "doors:emergency_exit",
+                "uses": 1
+              }
+            ],
+            "require_mutation": true
+          },
+          "allowed_changes": [
+            "objects.checkpoint.open",
+            "objects.checkpoint.legal_status",
+            "precedents",
+            "case_count",
+            "attention"
+          ],
+          "probes": [
+            {
+              "kind": "cross",
+              "actor": "player",
+              "door": "checkpoint",
+              "driving": false,
+              "expected": true
+            },
+            {
+              "kind": "cross",
+              "actor": "police_1",
+              "door": "checkpoint",
+              "driving": false,
+              "expected": true
+            },
+            {
+              "kind": "cross",
+              "actor": "npc",
+              "door": "checkpoint",
+              "driving": false,
+              "expected": true
+            },
+            {
+              "kind": "cross",
+              "actor": "police_1",
+              "door": "side_gate",
+              "driving": false,
+              "expected": false
+            },
+            {
+              "kind": "cross",
+              "actor": "player",
+              "door": "side_gate",
+              "driving": false,
+              "expected": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "precedent_survives_reload",
+      "category": "persistence",
+      "live_model": true,
+      "laws": [
+        "life_safety"
+      ],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Пусть дверь кордона считается аварийным выходом",
+          "fixtures": [
+            {
+              "effect": "open_exit",
+              "target": "checkpoint",
+              "basis": "life_safety",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": ""
+            }
+          ],
+          "expected": {
+            "status": "completed",
+            "basis": "life_safety",
+            "state": {
+              "objects.checkpoint.open": true,
+              "objects.checkpoint.legal_status": "emergency_exit",
+              "case_count": 1,
+              "attention": 2
+            },
+            "precedents": [
+              {
+                "basis": "life_safety",
+                "scope": "doors:emergency_exit",
+                "uses": 1
+              }
+            ],
+            "require_mutation": true
+          },
+          "allowed_changes": [
+            "objects.checkpoint.open",
+            "objects.checkpoint.legal_status",
+            "precedents",
+            "case_count",
+            "attention"
+          ],
+          "probes": [
+            {
+              "kind": "cross",
+              "actor": "player",
+              "door": "checkpoint",
+              "driving": false,
+              "expected": true
+            },
+            {
+              "kind": "cross",
+              "actor": "police_1",
+              "door": "checkpoint",
+              "driving": false,
+              "expected": true
+            },
+            {
+              "kind": "cross",
+              "actor": "npc",
+              "door": "checkpoint",
+              "driving": false,
+              "expected": true
+            },
+            {
+              "kind": "cross",
+              "actor": "player",
+              "door": "side_gate",
+              "driving": false,
+              "expected": false
+            }
+          ]
+        },
+        {
+          "id": "reload",
+          "operation": "reload",
+          "expected": {
+            "status": "reloaded",
+            "state": {
+              "objects.checkpoint.open": true
+            },
+            "precedents": [
+              {
+                "basis": "life_safety",
+                "scope": "doors:emergency_exit",
+                "uses": 1
+              }
+            ]
+          },
+          "allowed_changes": [],
+          "probes": [
+            {
+              "kind": "cross",
+              "actor": "police_1",
+              "door": "checkpoint",
+              "driving": false,
+              "expected": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "idempotent_registration",
+      "category": "idempotency",
+      "live_model": true,
+      "laws": [
+        "property_registration"
+      ],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Зарегистрируй новое дерево рядом со мной, чтобы оно появилось в мире",
+          "fixtures": [
+            {
+              "effect": "create",
+              "target": "player",
+              "basis": "property_registration",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": "tree"
+            }
+          ],
+          "expected": {
+            "status": "completed",
+            "basis": "property_registration",
+            "state": {
+              "objects.registered_1.kind": "tree",
+              "objects.registered_1.legal_status": "registered",
+              "objects.registered_1.x": 255,
+              "objects.registered_1.y": 380,
+              "case_count": 1,
+              "attention": 2
+            },
+            "precedents": [
+              {
+                "basis": "property_registration",
+                "scope": "registration:tree",
+                "uses": 1
+              }
+            ],
+            "require_mutation": true
+          },
+          "allowed_changes": [
+            "objects.registered_1",
+            "precedents",
+            "case_count",
+            "attention"
+          ],
+          "probes": []
+        },
+        {
+          "id": "replay",
+          "operation": "replay",
+          "wish": "Повтор доставки той же заявки",
+          "expected": {
+            "status": "completed",
+            "basis": "property_registration",
+            "state": {
+              "objects.registered_1.kind": "tree",
+              "objects.registered_1.legal_status": "registered",
+              "objects.registered_1.x": 255,
+              "objects.registered_1.y": 380,
+              "case_count": 1,
+              "attention": 2
+            },
+            "precedents": [
+              {
+                "basis": "property_registration",
+                "scope": "registration:tree",
+                "uses": 1
+              }
+            ],
+            "require_mutation": false
+          },
+          "allowed_changes": [],
+          "probes": [],
+          "replay_of": "petition"
+        }
+      ]
+    },
+    {
+      "id": "unsupported_retroactive_contract",
+      "category": "refusal",
+      "live_model": true,
+      "laws": [],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Вернись на сто лет в прошлое и отмени само существование договора. Не меняй свет или скорость времени.",
+          "fixtures": [
+            {
+              "effect": "unsupported",
+              "target": "player",
+              "basis": "none",
+              "argument": "Действующие нормы не допускают отмену прошлого."
+            }
+          ],
+          "expected": {
+            "status": "failed",
+            "attempts": 3,
+            "state": {
+              "case_count": 0,
+              "attention": 1
+            },
+            "precedents": [],
+            "require_mutation": false
+          },
+          "allowed_changes": [],
+          "probes": []
+        }
+      ]
+    },
+    {
+      "id": "contract_required",
+      "category": "authority",
+      "live_model": false,
+      "laws": [
+        "life_safety"
+      ],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Открой кордон без подписания договора с адвокатом",
+          "fixtures": [
+            {
+              "effect": "open_exit",
+              "target": "checkpoint",
+              "basis": "life_safety",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": ""
+            }
+          ],
+          "expected": {
+            "status": "rejected",
+            "attempts": 0,
+            "state": {
+              "contract_signed": false,
+              "case_count": 0,
+              "attention": 0
+            },
+            "precedents": [],
+            "require_mutation": false
+          },
+          "allowed_changes": [],
+          "probes": []
+        }
+      ],
+      "contracted": false
+    },
+    {
+      "id": "invented_law",
+      "category": "refusal",
+      "live_model": false,
+      "laws": [
+        "life_safety"
+      ],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Подать заведомо недопустимое ходатайство для проверки границ закона.",
+          "fixtures": [
+            {
+              "effect": "open_exit",
+              "target": "checkpoint",
+              "basis": "supreme_wish",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": ""
+            }
+          ],
+          "expected": {
+            "status": "failed",
+            "attempts": 3,
+            "state": {
+              "case_count": 0,
+              "attention": 1
+            },
+            "precedents": [],
+            "require_mutation": false
+          },
+          "allowed_changes": [],
+          "probes": []
+        }
+      ]
+    },
+    {
+      "id": "incompatible_legal_basis",
+      "category": "refusal",
+      "live_model": false,
+      "laws": [
+        "life_safety",
+        "non_aggression"
+      ],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Подать заведомо недопустимое ходатайство для проверки границ закона.",
+          "fixtures": [
+            {
+              "effect": "protect",
+              "target": "player",
+              "basis": "life_safety",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": ""
+            }
+          ],
+          "expected": {
+            "status": "failed",
+            "attempts": 3,
+            "state": {
+              "case_count": 0,
+              "attention": 1
+            },
+            "precedents": [],
+            "require_mutation": false
+          },
+          "allowed_changes": [],
+          "probes": []
+        }
+      ]
+    },
+    {
+      "id": "incompatible_target",
+      "category": "refusal",
+      "live_model": false,
+      "laws": [
+        "life_safety"
+      ],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Подать заведомо недопустимое ходатайство для проверки границ закона.",
+          "fixtures": [
+            {
+              "effect": "open_exit",
+              "target": "car",
+              "basis": "life_safety",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": ""
+            }
+          ],
+          "expected": {
+            "status": "failed",
+            "attempts": 3,
+            "state": {
+              "case_count": 0,
+              "attention": 1
+            },
+            "precedents": [],
+            "require_mutation": false
+          },
+          "allowed_changes": [],
+          "probes": []
+        }
+      ]
+    },
+    {
+      "id": "missing_target",
+      "category": "refusal",
+      "live_model": false,
+      "laws": [
+        "life_safety"
+      ],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Подать заведомо недопустимое ходатайство для проверки границ закона.",
+          "fixtures": [
+            {
+              "effect": "open_exit",
+              "target": "door_not_in_world",
+              "basis": "life_safety",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": ""
+            }
+          ],
+          "expected": {
+            "status": "failed",
+            "attempts": 3,
+            "state": {
+              "case_count": 0,
+              "attention": 1
+            },
+            "precedents": [],
+            "require_mutation": false
+          },
+          "allowed_changes": [],
+          "probes": []
+        }
+      ]
+    },
+    {
+      "id": "unknown_classification",
+      "category": "refusal",
+      "live_model": false,
+      "laws": [
+        "classification_amendment"
+      ],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Подать заведомо недопустимое ходатайство для проверки границ закона.",
+          "fixtures": [
+            {
+              "effect": "transform",
+              "target": "rock",
+              "basis": "classification_amendment",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": "dragon"
+            }
+          ],
+          "expected": {
+            "status": "failed",
+            "attempts": 3,
+            "state": {
+              "case_count": 0,
+              "attention": 1
+            },
+            "precedents": [],
+            "require_mutation": false
+          },
+          "allowed_changes": [],
+          "probes": []
+        }
+      ]
+    },
+    {
+      "id": "lighting_beyond_limit",
+      "category": "refusal",
+      "live_model": false,
+      "laws": [
+        "environment_exception"
+      ],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Подать заведомо недопустимое ходатайство для проверки границ закона.",
+          "fixtures": [
+            {
+              "effect": "lighting",
+              "target": "world",
+              "basis": "environment_exception",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": "-1"
+            }
+          ],
+          "expected": {
+            "status": "failed",
+            "attempts": 3,
+            "state": {
+              "case_count": 0,
+              "attention": 1
+            },
+            "precedents": [],
+            "require_mutation": false
+          },
+          "allowed_changes": [],
+          "probes": []
+        }
+      ]
+    },
+    {
+      "id": "pace_beyond_limit",
+      "category": "refusal",
+      "live_model": false,
+      "laws": [
+        "environment_exception"
+      ],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Подать заведомо недопустимое ходатайство для проверки границ закона.",
+          "fixtures": [
+            {
+              "effect": "pace",
+              "target": "world",
+              "basis": "environment_exception",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": "100"
+            }
+          ],
+          "expected": {
+            "status": "failed",
+            "attempts": 3,
+            "state": {
+              "case_count": 0,
+              "attention": 1
+            },
+            "precedents": [],
+            "require_mutation": false
+          },
+          "allowed_changes": [],
+          "probes": []
+        }
+      ]
+    },
+    {
+      "id": "nonfinite_exception",
+      "category": "refusal",
+      "live_model": false,
+      "laws": [
+        "environment_exception"
+      ],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Подать заведомо недопустимое ходатайство для проверки границ закона.",
+          "fixtures": [
+            {
+              "effect": "pace",
+              "target": "world",
+              "basis": "environment_exception",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": "nan"
+            }
+          ],
+          "expected": {
+            "status": "failed",
+            "attempts": 3,
+            "state": {
+              "case_count": 0,
+              "attention": 1
+            },
+            "precedents": [],
+            "require_mutation": false
+          },
+          "allowed_changes": [],
+          "probes": []
+        }
+      ]
+    },
+    {
+      "id": "repair_rejected_basis",
+      "category": "retry",
+      "live_model": false,
+      "laws": [
+        "life_safety"
+      ],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Пусть дверь кордона считается аварийным выходом",
+          "fixtures": [
+            {
+              "effect": "open_exit",
+              "target": "checkpoint",
+              "basis": "invented",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": ""
+            },
+            {
+              "effect": "open_exit",
+              "target": "checkpoint",
+              "basis": "life_safety",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": ""
+            }
+          ],
+          "expected": {
+            "status": "completed",
+            "basis": "life_safety",
+            "state": {
+              "objects.checkpoint.open": true,
+              "objects.checkpoint.legal_status": "emergency_exit",
+              "case_count": 1,
+              "attention": 2
+            },
+            "precedents": [
+              {
+                "basis": "life_safety",
+                "scope": "doors:emergency_exit",
+                "uses": 1
+              }
+            ],
+            "require_mutation": true,
+            "attempts": 2,
+            "feedback_received": true
+          },
+          "allowed_changes": [
+            "objects.checkpoint.open",
+            "objects.checkpoint.legal_status",
+            "precedents",
+            "case_count",
+            "attention"
+          ],
+          "probes": [
+            {
+              "kind": "cross",
+              "actor": "player",
+              "door": "checkpoint",
+              "driving": false,
+              "expected": true
+            },
+            {
+              "kind": "cross",
+              "actor": "police_1",
+              "door": "checkpoint",
+              "driving": false,
+              "expected": true
+            },
+            {
+              "kind": "cross",
+              "actor": "npc",
+              "door": "checkpoint",
+              "driving": false,
+              "expected": true
+            },
+            {
+              "kind": "cross",
+              "actor": "player",
+              "door": "side_gate",
+              "driving": false,
+              "expected": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "refusal_preserves_precedent",
+      "category": "refusal",
+      "live_model": false,
+      "laws": [
+        "life_safety"
+      ],
+      "steps": [
+        {
+          "id": "petition",
+          "operation": "petition",
+          "wish": "Пусть дверь кордона считается аварийным выходом",
+          "fixtures": [
+            {
+              "effect": "open_exit",
+              "target": "checkpoint",
+              "basis": "life_safety",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": ""
+            }
+          ],
+          "expected": {
+            "status": "completed",
+            "basis": "life_safety",
+            "state": {
+              "objects.checkpoint.open": true,
+              "objects.checkpoint.legal_status": "emergency_exit",
+              "case_count": 1,
+              "attention": 2
+            },
+            "precedents": [
+              {
+                "basis": "life_safety",
+                "scope": "doors:emergency_exit",
+                "uses": 1
+              }
+            ],
+            "require_mutation": true
+          },
+          "allowed_changes": [
+            "objects.checkpoint.open",
+            "objects.checkpoint.legal_status",
+            "precedents",
+            "case_count",
+            "attention"
+          ],
+          "probes": [
+            {
+              "kind": "cross",
+              "actor": "player",
+              "door": "checkpoint",
+              "driving": false,
+              "expected": true
+            },
+            {
+              "kind": "cross",
+              "actor": "police_1",
+              "door": "checkpoint",
+              "driving": false,
+              "expected": true
+            },
+            {
+              "kind": "cross",
+              "actor": "npc",
+              "door": "checkpoint",
+              "driving": false,
+              "expected": true
+            },
+            {
+              "kind": "cross",
+              "actor": "player",
+              "door": "side_gate",
+              "driving": false,
+              "expected": false
+            }
+          ]
+        },
+        {
+          "id": "refused",
+          "operation": "petition",
+          "wish": "Недопустимая попытка изменить правило без подходящего основания",
+          "fixtures": [
+            {
+              "effect": "protect",
+              "target": "player",
+              "basis": "invented",
+              "argument": "Применить указанную норму к заявленной цели.",
+              "value": ""
+            }
+          ],
+          "expected": {
+            "status": "failed",
+            "attempts": 3,
+            "state": {
+              "case_count": 1,
+              "attention": 2
+            },
+            "precedents": [
+              {
+                "basis": "life_safety",
+                "scope": "doors:emergency_exit",
+                "uses": 1
+              }
+            ],
+            "require_mutation": false
+          },
+          "allowed_changes": [],
+          "probes": []
+        }
+      ]
+    }
+  ]
+}

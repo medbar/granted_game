@@ -35,9 +35,9 @@
       },
       "execution_engine": "monty",
       "execution_error": null,
-      "execution_ms": 37.88,
-      "first_world_action_ms": 64.315,
-      "latency_ms": 103.243,
+      "execution_ms": 11.884,
+      "first_world_action_ms": 46.661,
+      "latency_ms": 96.861,
       "model": "qwen3-35-36",
       "program_code": "apply_state('player', 'burning', duration=30)",
       "program_output": {
@@ -95,7 +95,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "состояние burning подтверждено",
-          "step_id": "ee4c82fe7d5645bda2625a3f66a91e27",
+          "step_id": "3b523a82bf374572af2ab2b47602fe9b",
           "target_id": "player",
           "verified": true
         }
@@ -109,7 +109,7 @@
           "summary": "Поджечь выбранного персонажа."
         }
       },
-      "latency_ms": 103.243,
+      "latency_ms": 96.861,
       "selected_targets": [
         "player"
       ],
@@ -134,7 +134,7 @@
           ],
           "direction": {
             "x": 0.9,
-            "y": 0.830185508728027
+            "y": 0.824440574645996
           },
           "intensity": 0.75,
           "lifetime": 0.55,
@@ -171,14 +171,12 @@
   "level_version": "monaco-start-v1",
   "passed": true,
   "timing": {
-    "action_ready_to_mutation_ms": 0.0,
-    "client_ttfa_ms": 2603.0,
-    "server_action_ready_ms": 745.47,
-    "submit_to_action_ready_ms": 2603.0,
-    "submit_to_initial_response_ms": 1890.0
+    "action_ready_to_mutation_ms": 2.0,
+    "client_ttfa_ms": 1060.0,
+    "server_action_ready_ms": 201.679,
+    "submit_to_action_ready_ms": 1058.0,
+    "submit_to_initial_response_ms": 512.0
   },
-  "timing_warnings": [
-    "client TTFA 2603.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-  ],
+  "timing_warnings": [],
   "wish": "Подожги игрока"
 }

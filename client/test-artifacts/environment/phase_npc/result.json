@@ -35,9 +35,9 @@
       },
       "execution_engine": "monty",
       "execution_error": null,
-      "execution_ms": 43.131,
-      "first_world_action_ms": 4.795,
-      "latency_ms": 50.333,
+      "execution_ms": 48.959,
+      "first_world_action_ms": 68.886,
+      "latency_ms": 127.564,
       "model": "qwen3-35-36",
       "program_code": "apply_state(nearest('npc'), 'phased', duration=60)",
       "program_output": {
@@ -95,7 +95,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "состояние phased подтверждено",
-          "step_id": "a5ebb5e00f3d4ec3b7f0d8830e7f50fd",
+          "step_id": "e51527606ce74bc3ba769ec0e2e34f3f",
           "target_id": "npc_01",
           "verified": true
         }
@@ -109,7 +109,7 @@
           "summary": "Сделать выбранного персонажа фазовым для прохождения сквозь стены."
         }
       },
-      "latency_ms": 50.333,
+      "latency_ms": 127.564,
       "selected_targets": [
         "npc_01"
       ],
@@ -133,21 +133,21 @@
             "affect_physical"
           ],
           "direction": {
-            "x": 0.987131245930989,
-            "y": 4.25774873097737
+            "x": 0.96193339029948,
+            "y": 4.28595581054687
           },
           "intensity": 0.75,
           "lifetime": 0.55,
           "origin": {
-            "x": -8.11286875406901,
-            "y": 3.42147318522135
+            "x": -8.13806660970052,
+            "y": 3.46075057983398
           },
           "primitive": "BURST",
           "radius": 0.8,
           "speed": 0.0,
           "target": {
-            "x": -8.11286875406901,
-            "y": 3.42147318522135
+            "x": -8.13806660970052,
+            "y": 3.46075057983398
           },
           "turbulence": 0.35
         }
@@ -171,14 +171,12 @@
   "level_version": "monaco-start-v1",
   "passed": true,
   "timing": {
-    "action_ready_to_mutation_ms": 0.0,
-    "client_ttfa_ms": 3276.0,
-    "server_action_ready_ms": 517.522,
-    "submit_to_action_ready_ms": 3276.0,
-    "submit_to_initial_response_ms": 2564.0
+    "action_ready_to_mutation_ms": 2.0,
+    "client_ttfa_ms": 1761.0,
+    "server_action_ready_ms": 374.759,
+    "submit_to_action_ready_ms": 1759.0,
+    "submit_to_initial_response_ms": 1154.0
   },
-  "timing_warnings": [
-    "client TTFA 3276.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-  ],
+  "timing_warnings": [],
   "wish": "Сделай так, чтобы НПС проходил сквозь стены"
 }

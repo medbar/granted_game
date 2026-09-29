@@ -35,9 +35,9 @@
       },
       "execution_engine": "monty",
       "execution_error": null,
-      "execution_ms": 447.057,
-      "first_world_action_ms": 446.376,
-      "latency_ms": 455.47,
+      "execution_ms": 47.056,
+      "first_world_action_ms": 16.67,
+      "latency_ms": 147.868,
       "model": "qwen3-35-36",
       "program_code": "apply_state('player', 'phased', duration=60)",
       "program_output": {
@@ -95,7 +95,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "состояние phased подтверждено",
-          "step_id": "35ac18a31f8844e496a269cbabbbe522",
+          "step_id": "d306c0cca1ba4fa9b4ebc194a78a7c16",
           "target_id": "player",
           "verified": true
         }
@@ -109,7 +109,7 @@
           "summary": "Сделать выбранного персонажа фазовым для прохождения сквозь стены."
         }
       },
-      "latency_ms": 455.47,
+      "latency_ms": 147.868,
       "selected_targets": [
         "player"
       ],
@@ -134,7 +134,7 @@
           ],
           "direction": {
             "x": 0.9,
-            "y": 0.830709902445475
+            "y": 0.82421391805013
           },
           "intensity": 0.75,
           "lifetime": 0.55,
@@ -172,13 +172,11 @@
   "passed": true,
   "timing": {
     "action_ready_to_mutation_ms": 1.0,
-    "client_ttfa_ms": 3652.0,
-    "server_action_ready_ms": 987.421,
-    "submit_to_action_ready_ms": 3651.0,
-    "submit_to_initial_response_ms": 2231.0
+    "client_ttfa_ms": 1334.0,
+    "server_action_ready_ms": 276.508,
+    "submit_to_action_ready_ms": 1333.0,
+    "submit_to_initial_response_ms": 719.0
   },
-  "timing_warnings": [
-    "client TTFA 3652.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-  ],
+  "timing_warnings": [],
   "wish": "Сделай так, чтобы игрок проходил сквозь стены"
 }

@@ -35,9 +35,9 @@
       },
       "execution_engine": "monty",
       "execution_error": null,
-      "execution_ms": 80.773,
-      "first_world_action_ms": 44.775,
-      "latency_ms": 129.354,
+      "execution_ms": 11.356,
+      "first_world_action_ms": 45.457,
+      "latency_ms": 146.505,
       "model": "qwen3-35-36",
       "program_code": "set_light_level(0.3)",
       "program_output": {
@@ -95,7 +95,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "освещённость подтверждена: 0.3",
-          "step_id": "077098542cf844b7be725d3f326d9868",
+          "step_id": "207cad84095c475e85aef4efa4d251a8",
           "target_id": "player",
           "verified": true
         }
@@ -109,7 +109,7 @@
           "summary": "Заметно затемнить весь игровой мир."
         }
       },
-      "latency_ms": 129.354,
+      "latency_ms": 146.505,
       "selected_targets": [
         "player"
       ],
@@ -134,7 +134,7 @@
           ],
           "direction": {
             "x": 0.9,
-            "y": 0.82329273223877
+            "y": 0.843669319152832
           },
           "intensity": 0.75,
           "lifetime": 0.55,
@@ -174,13 +174,11 @@
   "passed": true,
   "timing": {
     "action_ready_to_mutation_ms": 1.0,
-    "client_ttfa_ms": 6664.0,
-    "server_action_ready_ms": 898.932,
-    "submit_to_action_ready_ms": 6663.0,
-    "submit_to_initial_response_ms": 5475.0
+    "client_ttfa_ms": 1597.0,
+    "server_action_ready_ms": 425.996,
+    "submit_to_action_ready_ms": 1596.0,
+    "submit_to_initial_response_ms": 993.0
   },
-  "timing_warnings": [
-    "client TTFA 6664.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-  ],
+  "timing_warnings": [],
   "wish": "Погаси свет во всём мире"
 }

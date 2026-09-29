@@ -1,4 +1,4 @@
-# Разработка Granted
+# Разработка Bureaucracy of Reality
 
 Основной процесс проекта — OpenSpec с project-local схемой `granted-eval-first`. Её отличие от
 обычного spec-driven процесса: после требований и до дизайна обязательно создаётся `eval-plan.md`.
@@ -14,31 +14,40 @@
 5. Только после RED меняйте production-код или промпт; доведите узкую проверку до GREEN и
    отрефакторьте.
 6. Выберите все классы change и объедините их `required_gates` из
-   `openspec/quality-gates.json`. Запустите каждый gate и запишите результаты/пути к отчётам.
+   `openspec/quality-gates.json` в профиле `legal` (по умолчанию). Запустите каждый gate и
+   запишите результаты/пути к отчётам.
 7. Для видимых игровых изменений проверьте реальную траекторию через игру и `/observer`.
 8. Выполните `openspec validate <change> --strict` и policy check. После ревью синхронизируйте
    specs и архивируйте change.
 
-Для агентных изменений минимальный полный набор означает: frozen pytest-oracle, 40 environment
-cases, 10 Monty wishes, 20×3 agent levels, Godot client-in-loop и ручной просмотр связанных
-before/after/result/PNG. Успех серверной сессии и player-visible conclusion проверяются вместе.
-Изменения wish pipeline дополнительно обязаны пройти `client/tests/ttfa_runner.gd`: временем первого
-действия считается только фактическая мутация Godot world, а лимит каждого поддерживаемого кейса —
-2000 мс. Реплика, HTTP-ответ и начало анимации не являются oracle.
+Для текущего адвоката обязательны полный pytest, 32 frozen-сценария законов и 21 live-сценарий.
+Ещё 11 frozen-only сценариев не засчитываются как live-успехи. Для видимых изменений дополнительно
+нужны legal smoke, реальный клиентский прогон и просмотр before/after/result/PNG.
+Старые 40 environment / 10 Monty / 20×3 agent levels и старый TTFA-runner относятся к профилю
+`legacy_genie`: это регрессии архивного режима, а не критерии исполнения законов новой кампании.
+Текущий юридический отчёт измеряет длительность шага, но не обещает измерение TTFA.
 
 ## Что считается выполнением желания
 
 Только требуемое постусловие в авторитетном состоянии мира и его видимое отражение в клиенте.
-Сгенерированный код, имя действия, ответ HTTP 200, слова джина или посторонний fallback не являются
+Сгенерированный код, имя действия, ответ HTTP 200, слова адвоката или посторонний fallback не являются
 успехом. Невыполненное после retry желание остаётся красным в eval и явно показывается игроку.
+
+Проверяются также основание, область действия, права игрока/NPC, отсутствие побочных изменений,
+запись и повторное использование прецедента. PASS теста ожидаемого отказа не означает исполнение:
+для этого отчёт отдельно хранит `passed` и `decision_status`. Сетевая ошибка не считается отказом.
+Ожидаемые значения фиксируются независимо от production `LAWS`; live-ответ нельзя подменить fixture.
 
 ## Уровни проверки
 
-- `deterministic_server`: policy validator и весь pytest.
-- `agent_behavior`: дополнительно 40 environment cases, live Monty cases и live agent levels.
-- `player_visible`: дополнительно Godot smoke, client-in-loop и ручное trajectory review.
-- `observability` и `tooling`: policy validator и pytest; добавляйте более узкие проверки в
-  acceptance matrix конкретного change.
+- `deterministic_server`: policy validator, весь pytest, legal frozen.
+- `agent_behavior`: policy validator, весь pytest, legal frozen и live.
+- `player_visible`: policy validator, весь pytest, legal smoke/client и ручное trajectory review.
+- `observability`: policy validator и pytest.
+- `tooling`: policy validator, pytest и legal frozen.
+
+Классы объединяются: изменение поведения адвоката в игре требует как `agent_behavior`, так и
+`player_visible`. Явный `-Profile legacy_genie` выбирает прежнюю матрицу архивного режима.
 
 Команды и ожидаемые evidence хранятся в `openspec/quality-gates.json`. Полный локальный серверный
 цикл начинается так:
@@ -46,9 +55,13 @@ before/after/result/PNG. Успех серверной сессии и player-vi
 ```powershell
 server\.venv\Scripts\python.exe server\scripts\quality_policy.py --root .
 server\.venv\Scripts\python.exe -m pytest server\tests -p no:cacheprovider
+server\.venv\Scripts\python.exe server\scripts\run_legal_evals.py --mode frozen
+server\.venv\Scripts\python.exe server\scripts\run_legal_evals.py --mode live
 ```
 
-Для стандартного server + Godot набора используйте `verify.ps1`. Установка CLI для разработки:
+Для полного legal + Godot набора используйте `verify.ps1 -GodotPath <exe> -SkipSync`:
+тестовый сервер запускается отдельно на 8003, текущий сервер игры на 8000 не затрагивается.
+Формат сценариев и артефактов описан в `server/evals/README.md`. Установка CLI для разработки:
 
 ```powershell
 npm install -g @fission-ai/openspec@latest

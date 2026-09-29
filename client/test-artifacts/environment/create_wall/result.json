@@ -35,9 +35,9 @@
       },
       "execution_engine": "monty",
       "execution_error": null,
-      "execution_ms": 17.357,
-      "first_world_action_ms": 17.016,
-      "latency_ms": 24.872,
+      "execution_ms": 14.634,
+      "first_world_action_ms": 15.668,
+      "latency_ms": 38.56,
       "model": "qwen3-35-36",
       "program_code": "spawn('wall', near='player')",
       "program_output": {
@@ -95,7 +95,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "новый объект wall найден",
-          "step_id": "accfce9f75cc45f6bc3d741e559bd0fd",
+          "step_id": "9b5031733b5842d3b3f0ab2f0dd17e13",
           "target_id": "player",
           "verified": true
         }
@@ -109,7 +109,7 @@
           "summary": "Создать 1 физических стен рядом с игроком."
         }
       },
-      "latency_ms": 24.872,
+      "latency_ms": 38.56,
       "selected_targets": [
         "player"
       ],
@@ -134,7 +134,7 @@
           ],
           "direction": {
             "x": 0.9,
-            "y": 0.831369781494141
+            "y": 0.847323163350423
           },
           "intensity": 0.75,
           "lifetime": 0.55,
@@ -175,13 +175,11 @@
   "passed": true,
   "timing": {
     "action_ready_to_mutation_ms": 1.0,
-    "client_ttfa_ms": 3511.0,
-    "server_action_ready_ms": 1094.469,
-    "submit_to_action_ready_ms": 3510.0,
-    "submit_to_initial_response_ms": 2650.0
+    "client_ttfa_ms": 1180.0,
+    "server_action_ready_ms": 204.634,
+    "submit_to_action_ready_ms": 1179.0,
+    "submit_to_initial_response_ms": 611.0
   },
-  "timing_warnings": [
-    "client TTFA 3511.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-  ],
+  "timing_warnings": [],
   "wish": "Создай стену перед игроком"
 }

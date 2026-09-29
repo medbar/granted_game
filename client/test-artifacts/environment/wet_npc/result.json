@@ -35,9 +35,9 @@
       },
       "execution_engine": "monty",
       "execution_error": null,
-      "execution_ms": 177.004,
-      "first_world_action_ms": 36.377,
-      "latency_ms": 342.983,
+      "execution_ms": 76.449,
+      "first_world_action_ms": 52.475,
+      "latency_ms": 206.578,
       "model": "qwen3-35-36",
       "program_code": "apply_state(nearest('npc'), 'wet', duration=30)",
       "program_output": {
@@ -95,7 +95,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "состояние wet подтверждено",
-          "step_id": "6d2aa98e7acb460db2138def7b57ee91",
+          "step_id": "89cc32f3149f472eaf6cd18cd05ca201",
           "target_id": "npc_01",
           "verified": true
         }
@@ -109,7 +109,7 @@
           "summary": "Сделать выбранного персонажа мокрым."
         }
       },
-      "latency_ms": 342.983,
+      "latency_ms": 206.578,
       "selected_targets": [
         "npc_01"
       ],
@@ -133,21 +133,21 @@
             "affect_physical"
           ],
           "direction": {
-            "x": 0.9704600016276,
-            "y": 4.2763931274414
+            "x": 0.991217549641929,
+            "y": 4.25164604187012
           },
           "intensity": 0.75,
           "lifetime": 0.55,
           "origin": {
-            "x": -8.1295399983724,
-            "y": 3.44774017333984
+            "x": -8.10878245035807,
+            "y": 3.41485544840495
           },
           "primitive": "BURST",
           "radius": 0.8,
           "speed": 0.0,
           "target": {
-            "x": -8.1295399983724,
-            "y": 3.44774017333984
+            "x": -8.10878245035807,
+            "y": 3.41485544840495
           },
           "turbulence": 0.35
         }
@@ -172,13 +172,13 @@
   "passed": true,
   "timing": {
     "action_ready_to_mutation_ms": 1.0,
-    "client_ttfa_ms": 2741.0,
-    "server_action_ready_ms": 716.065,
-    "submit_to_action_ready_ms": 2740.0,
-    "submit_to_initial_response_ms": 1760.0
+    "client_ttfa_ms": 2215.0,
+    "server_action_ready_ms": 601.898,
+    "submit_to_action_ready_ms": 2214.0,
+    "submit_to_initial_response_ms": 1377.0
   },
   "timing_warnings": [
-    "client TTFA 2741.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
+    "client TTFA 2215.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
   ],
   "wish": "Сделай НПС мокрым"
 }

@@ -37,9 +37,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 361.621,
-          "first_world_action_ms": 355.848,
-          "latency_ms": 429.674,
+          "execution_ms": 47.062,
+          "first_world_action_ms": 20.964,
+          "latency_ms": 75.262,
           "model": "qwen3-35-36",
           "program_code": "spawn('sword', near='player')",
           "program_output": {
@@ -97,7 +97,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "новый объект sword найден",
-              "step_id": "c5f96a67edc842e793cb9e7c39804061",
+              "step_id": "cf3b97f8cd54424598c481e79fd4f306",
               "target_id": "player",
               "verified": true
             }
@@ -111,7 +111,7 @@
               "summary": "Создать физический объект sword рядом с игроком."
             }
           },
-          "latency_ms": 429.674,
+          "latency_ms": 75.262,
           "selected_targets": [
             "player"
           ],
@@ -136,7 +136,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.821584256490072
+                "y": 0.824242464701335
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -177,14 +177,12 @@
       "passed": true,
       "timing": {
         "action_ready_to_mutation_ms": 2.0,
-        "client_ttfa_ms": 3303.0,
-        "server_action_ready_ms": 776.722,
-        "submit_to_action_ready_ms": 3301.0,
-        "submit_to_initial_response_ms": 2589.0
+        "client_ttfa_ms": 1097.0,
+        "server_action_ready_ms": 135.465,
+        "submit_to_action_ready_ms": 1095.0,
+        "submit_to_initial_response_ms": 571.0
       },
-      "timing_warnings": [
-        "client TTFA 3303.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-      ],
+      "timing_warnings": [],
       "wish": "Создай меч рядом со мной"
     },
     {
@@ -224,9 +222,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 17.357,
-          "first_world_action_ms": 17.016,
-          "latency_ms": 24.872,
+          "execution_ms": 14.634,
+          "first_world_action_ms": 15.668,
+          "latency_ms": 38.56,
           "model": "qwen3-35-36",
           "program_code": "spawn('wall', near='player')",
           "program_output": {
@@ -284,7 +282,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "новый объект wall найден",
-              "step_id": "accfce9f75cc45f6bc3d741e559bd0fd",
+              "step_id": "9b5031733b5842d3b3f0ab2f0dd17e13",
               "target_id": "player",
               "verified": true
             }
@@ -298,7 +296,7 @@
               "summary": "Создать 1 физических стен рядом с игроком."
             }
           },
-          "latency_ms": 24.872,
+          "latency_ms": 38.56,
           "selected_targets": [
             "player"
           ],
@@ -323,7 +321,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.831369781494141
+                "y": 0.847323163350423
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -364,14 +362,12 @@
       "passed": true,
       "timing": {
         "action_ready_to_mutation_ms": 1.0,
-        "client_ttfa_ms": 3511.0,
-        "server_action_ready_ms": 1094.469,
-        "submit_to_action_ready_ms": 3510.0,
-        "submit_to_initial_response_ms": 2650.0
+        "client_ttfa_ms": 1180.0,
+        "server_action_ready_ms": 204.634,
+        "submit_to_action_ready_ms": 1179.0,
+        "submit_to_initial_response_ms": 611.0
       },
-      "timing_warnings": [
-        "client TTFA 3511.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-      ],
+      "timing_warnings": [],
       "wish": "Создай стену перед игроком"
     },
     {
@@ -486,9 +482,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 130.575,
-          "first_world_action_ms": 79.899,
-          "latency_ms": 154.446,
+          "execution_ms": 40.669,
+          "first_world_action_ms": 15.569,
+          "latency_ms": 63.74,
           "model": "qwen3-35-36",
           "program_code": "for _ in range(4):\n    spawn('wall', near='player')",
           "program_output": null,
@@ -541,7 +537,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "новый объект wall найден",
-              "step_id": "c09dab2cee5040a4ba6fbcf20ac550a2",
+              "step_id": "94148ab7393e4b69b4cf5d8907be014f",
               "target_id": "player",
               "verified": true
             },
@@ -551,7 +547,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "новый объект wall найден",
-              "step_id": "eff0dfa545784a1a9fedf599600d7026",
+              "step_id": "40c2f8fd2ae04ad698269149066575b5",
               "target_id": "player",
               "verified": true
             },
@@ -561,7 +557,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "новый объект wall найден",
-              "step_id": "66cdbc60adb04c98810f60e31aa09077",
+              "step_id": "7ba96422d4b84077b1cace28dc6cfbb5",
               "target_id": "player",
               "verified": true
             },
@@ -571,7 +567,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "новый объект wall найден",
-              "step_id": "2fa4476e13f6454abd930c8208eb6999",
+              "step_id": "90e3d8491c0a48baafeff822edc018f6",
               "target_id": "player",
               "verified": true
             }
@@ -585,7 +581,7 @@
               "summary": "Создать 4 физических стен рядом с игроком."
             }
           },
-          "latency_ms": 154.446,
+          "latency_ms": 63.74,
           "selected_targets": [
             "player"
           ],
@@ -610,7 +606,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.836425844828288
+                "y": 0.838905906677246
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -634,7 +630,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.836425844828288
+                "y": 0.838905906677246
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -658,7 +654,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.836425844828288
+                "y": 0.838905906677246
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -682,7 +678,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.836425844828288
+                "y": 0.838905906677246
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -765,14 +761,12 @@
       "passed": true,
       "timing": {
         "action_ready_to_mutation_ms": 1.0,
-        "client_ttfa_ms": 5169.0,
-        "server_action_ready_ms": 1345.384,
-        "submit_to_action_ready_ms": 5168.0,
-        "submit_to_initial_response_ms": 4380.0
+        "client_ttfa_ms": 1173.0,
+        "server_action_ready_ms": 239.698,
+        "submit_to_action_ready_ms": 1172.0,
+        "submit_to_initial_response_ms": 618.0
       },
-      "timing_warnings": [
-        "client TTFA 5169.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-      ],
+      "timing_warnings": [],
       "wish": "Создай четыре стены вокруг игрока"
     },
     {
@@ -812,9 +806,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 447.057,
-          "first_world_action_ms": 446.376,
-          "latency_ms": 455.47,
+          "execution_ms": 47.056,
+          "first_world_action_ms": 16.67,
+          "latency_ms": 147.868,
           "model": "qwen3-35-36",
           "program_code": "apply_state('player', 'phased', duration=60)",
           "program_output": {
@@ -872,7 +866,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "состояние phased подтверждено",
-              "step_id": "35ac18a31f8844e496a269cbabbbe522",
+              "step_id": "d306c0cca1ba4fa9b4ebc194a78a7c16",
               "target_id": "player",
               "verified": true
             }
@@ -886,7 +880,7 @@
               "summary": "Сделать выбранного персонажа фазовым для прохождения сквозь стены."
             }
           },
-          "latency_ms": 455.47,
+          "latency_ms": 147.868,
           "selected_targets": [
             "player"
           ],
@@ -911,7 +905,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.830709902445475
+                "y": 0.82421391805013
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -949,14 +943,12 @@
       "passed": true,
       "timing": {
         "action_ready_to_mutation_ms": 1.0,
-        "client_ttfa_ms": 3652.0,
-        "server_action_ready_ms": 987.421,
-        "submit_to_action_ready_ms": 3651.0,
-        "submit_to_initial_response_ms": 2231.0
+        "client_ttfa_ms": 1334.0,
+        "server_action_ready_ms": 276.508,
+        "submit_to_action_ready_ms": 1333.0,
+        "submit_to_initial_response_ms": 719.0
       },
-      "timing_warnings": [
-        "client TTFA 3652.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-      ],
+      "timing_warnings": [],
       "wish": "Сделай так, чтобы игрок проходил сквозь стены"
     },
     {
@@ -996,9 +988,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 67.381,
-          "first_world_action_ms": 7.41,
-          "latency_ms": 76.007,
+          "execution_ms": 16.321,
+          "first_world_action_ms": 20.54,
+          "latency_ms": 75.106,
           "model": "qwen3-35-36",
           "program_code": "apply_state(nearest('enemy'), 'phased', duration=60)",
           "program_output": {
@@ -1056,7 +1048,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "состояние phased подтверждено",
-              "step_id": "951a1c3ad10f4aa286d2b426470e18bb",
+              "step_id": "9046381de8c2493abfce1ea56ab206cc",
               "target_id": "guard_01",
               "verified": true
             }
@@ -1070,7 +1062,7 @@
               "summary": "Сделать выбранного персонажа фазовым для прохождения сквозь стены."
             }
           },
-          "latency_ms": 76.007,
+          "latency_ms": 75.106,
           "selected_targets": [
             "guard_01"
           ],
@@ -1094,21 +1086,21 @@
                 "affect_physical"
               ],
               "direction": {
-                "x": 5.2666259765625,
-                "y": 1.41771729787191
+                "x": 5.24100290934245,
+                "y": 1.45576667785645
               },
               "intensity": 0.75,
               "lifetime": 0.55,
               "origin": {
-                "x": -3.8333740234375,
-                "y": 0.581457328796387
+                "x": -3.85899709065755,
+                "y": 0.6164031346639
               },
               "primitive": "BURST",
               "radius": 0.8,
               "speed": 0.0,
               "target": {
-                "x": -3.8333740234375,
-                "y": 0.581457328796387
+                "x": -3.85899709065755,
+                "y": 0.6164031346639
               },
               "turbulence": 0.35
             }
@@ -1133,14 +1125,12 @@
       "passed": true,
       "timing": {
         "action_ready_to_mutation_ms": 1.0,
-        "client_ttfa_ms": 4555.0,
-        "server_action_ready_ms": 926.371,
-        "submit_to_action_ready_ms": 4554.0,
-        "submit_to_initial_response_ms": 3757.0
+        "client_ttfa_ms": 1186.0,
+        "server_action_ready_ms": 226.634,
+        "submit_to_action_ready_ms": 1185.0,
+        "submit_to_initial_response_ms": 588.0
       },
-      "timing_warnings": [
-        "client TTFA 4555.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-      ],
+      "timing_warnings": [],
       "wish": "Сделай так, чтобы враг проходил сквозь стены"
     },
     {
@@ -1180,9 +1170,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 43.131,
-          "first_world_action_ms": 4.795,
-          "latency_ms": 50.333,
+          "execution_ms": 48.959,
+          "first_world_action_ms": 68.886,
+          "latency_ms": 127.564,
           "model": "qwen3-35-36",
           "program_code": "apply_state(nearest('npc'), 'phased', duration=60)",
           "program_output": {
@@ -1240,7 +1230,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "состояние phased подтверждено",
-              "step_id": "a5ebb5e00f3d4ec3b7f0d8830e7f50fd",
+              "step_id": "e51527606ce74bc3ba769ec0e2e34f3f",
               "target_id": "npc_01",
               "verified": true
             }
@@ -1254,7 +1244,7 @@
               "summary": "Сделать выбранного персонажа фазовым для прохождения сквозь стены."
             }
           },
-          "latency_ms": 50.333,
+          "latency_ms": 127.564,
           "selected_targets": [
             "npc_01"
           ],
@@ -1278,21 +1268,21 @@
                 "affect_physical"
               ],
               "direction": {
-                "x": 0.987131245930989,
-                "y": 4.25774873097737
+                "x": 0.96193339029948,
+                "y": 4.28595581054687
               },
               "intensity": 0.75,
               "lifetime": 0.55,
               "origin": {
-                "x": -8.11286875406901,
-                "y": 3.42147318522135
+                "x": -8.13806660970052,
+                "y": 3.46075057983398
               },
               "primitive": "BURST",
               "radius": 0.8,
               "speed": 0.0,
               "target": {
-                "x": -8.11286875406901,
-                "y": 3.42147318522135
+                "x": -8.13806660970052,
+                "y": 3.46075057983398
               },
               "turbulence": 0.35
             }
@@ -1316,15 +1306,13 @@
       "level_version": "monaco-start-v1",
       "passed": true,
       "timing": {
-        "action_ready_to_mutation_ms": 0.0,
-        "client_ttfa_ms": 3276.0,
-        "server_action_ready_ms": 517.522,
-        "submit_to_action_ready_ms": 3276.0,
-        "submit_to_initial_response_ms": 2564.0
+        "action_ready_to_mutation_ms": 2.0,
+        "client_ttfa_ms": 1761.0,
+        "server_action_ready_ms": 374.759,
+        "submit_to_action_ready_ms": 1759.0,
+        "submit_to_initial_response_ms": 1154.0
       },
-      "timing_warnings": [
-        "client TTFA 3276.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-      ],
+      "timing_warnings": [],
       "wish": "Сделай так, чтобы НПС проходил сквозь стены"
     },
     {
@@ -1364,9 +1352,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 37.88,
-          "first_world_action_ms": 64.315,
-          "latency_ms": 103.243,
+          "execution_ms": 11.884,
+          "first_world_action_ms": 46.661,
+          "latency_ms": 96.861,
           "model": "qwen3-35-36",
           "program_code": "apply_state('player', 'burning', duration=30)",
           "program_output": {
@@ -1424,7 +1412,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "состояние burning подтверждено",
-              "step_id": "ee4c82fe7d5645bda2625a3f66a91e27",
+              "step_id": "3b523a82bf374572af2ab2b47602fe9b",
               "target_id": "player",
               "verified": true
             }
@@ -1438,7 +1426,7 @@
               "summary": "Поджечь выбранного персонажа."
             }
           },
-          "latency_ms": 103.243,
+          "latency_ms": 96.861,
           "selected_targets": [
             "player"
           ],
@@ -1463,7 +1451,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.830185508728027
+                "y": 0.824440574645996
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -1500,15 +1488,13 @@
       "level_version": "monaco-start-v1",
       "passed": true,
       "timing": {
-        "action_ready_to_mutation_ms": 0.0,
-        "client_ttfa_ms": 2603.0,
-        "server_action_ready_ms": 745.47,
-        "submit_to_action_ready_ms": 2603.0,
-        "submit_to_initial_response_ms": 1890.0
+        "action_ready_to_mutation_ms": 2.0,
+        "client_ttfa_ms": 1060.0,
+        "server_action_ready_ms": 201.679,
+        "submit_to_action_ready_ms": 1058.0,
+        "submit_to_initial_response_ms": 512.0
       },
-      "timing_warnings": [
-        "client TTFA 2603.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-      ],
+      "timing_warnings": [],
       "wish": "Подожги игрока"
     },
     {
@@ -1548,9 +1534,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 178.474,
-          "first_world_action_ms": 176.51,
-          "latency_ms": 257.857,
+          "execution_ms": 47.057,
+          "first_world_action_ms": 30.049,
+          "latency_ms": 125.253,
           "model": "qwen3-35-36",
           "program_code": "apply_state(nearest('enemy'), 'burning', duration=30)",
           "program_output": {
@@ -1608,7 +1594,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "состояние burning подтверждено",
-              "step_id": "ee0fb11f146946fd881c5aba4920a441",
+              "step_id": "2f1ba48e92284a7d99af49281516cf43",
               "target_id": "guard_01",
               "verified": true
             }
@@ -1622,7 +1608,7 @@
               "summary": "Поджечь выбранного персонажа."
             }
           },
-          "latency_ms": 257.857,
+          "latency_ms": 125.253,
           "selected_targets": [
             "guard_01"
           ],
@@ -1646,21 +1632,21 @@
                 "affect_physical"
               ],
               "direction": {
-                "x": 5.21496709187826,
-                "y": 1.4835262298584
+                "x": 5.2666259765625,
+                "y": 1.41656913757324
               },
               "intensity": 0.75,
               "lifetime": 0.55,
               "origin": {
-                "x": -3.88503290812174,
-                "y": 0.651042683919271
+                "x": -3.8333740234375,
+                "y": 0.581457328796387
               },
               "primitive": "BURST",
               "radius": 0.8,
               "speed": 0.0,
               "target": {
-                "x": -3.88503290812174,
-                "y": 0.651042683919271
+                "x": -3.8333740234375,
+                "y": 0.581457328796387
               },
               "turbulence": 0.35
             }
@@ -1685,14 +1671,12 @@
       "passed": true,
       "timing": {
         "action_ready_to_mutation_ms": 1.0,
-        "client_ttfa_ms": 5747.0,
-        "server_action_ready_ms": 1447.385,
-        "submit_to_action_ready_ms": 5746.0,
-        "submit_to_initial_response_ms": 5056.0
+        "client_ttfa_ms": 1867.0,
+        "server_action_ready_ms": 425.682,
+        "submit_to_action_ready_ms": 1866.0,
+        "submit_to_initial_response_ms": 969.0
       },
-      "timing_warnings": [
-        "client TTFA 5747.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-      ],
+      "timing_warnings": [],
       "wish": "Подожги врага"
     },
     {
@@ -1732,9 +1716,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 764.229,
-          "first_world_action_ms": 760.678,
-          "latency_ms": 833.611,
+          "execution_ms": 50.861,
+          "first_world_action_ms": 85.033,
+          "latency_ms": 152.265,
           "model": "qwen3-35-36",
           "program_code": "apply_state(nearest('npc'), 'burning', duration=30)",
           "program_output": {
@@ -1792,7 +1776,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "состояние burning подтверждено",
-              "step_id": "c490a3a9e55b4356beceb64fbcccafdb",
+              "step_id": "f2ec0aa1e8fa407eb8ea91752f3b473d",
               "target_id": "npc_01",
               "verified": true
             }
@@ -1806,7 +1790,7 @@
               "summary": "Поджечь выбранного персонажа."
             }
           },
-          "latency_ms": 833.611,
+          "latency_ms": 152.265,
           "selected_targets": [
             "npc_01"
           ],
@@ -1830,21 +1814,21 @@
                 "affect_physical"
               ],
               "direction": {
-                "x": 0.991217549641929,
-                "y": 4.25149389902751
+                "x": 1.00327758789062,
+                "y": 4.23274389902751
               },
               "intensity": 0.75,
               "lifetime": 0.55,
               "origin": {
-                "x": -8.10878245035807,
-                "y": 3.41485544840495
+                "x": -8.09672241210938,
+                "y": 3.39488067626953
               },
               "primitive": "BURST",
               "radius": 0.8,
               "speed": 0.0,
               "target": {
-                "x": -8.10878245035807,
-                "y": 3.41485544840495
+                "x": -8.09672241210938,
+                "y": 3.39488067626953
               },
               "turbulence": 0.35
             }
@@ -1868,14 +1852,14 @@
       "level_version": "monaco-start-v1",
       "passed": true,
       "timing": {
-        "action_ready_to_mutation_ms": 1.0,
-        "client_ttfa_ms": 3365.0,
-        "server_action_ready_ms": 1602.493,
-        "submit_to_action_ready_ms": 3364.0,
-        "submit_to_initial_response_ms": 2201.0
+        "action_ready_to_mutation_ms": 3.0,
+        "client_ttfa_ms": 2118.0,
+        "server_action_ready_ms": 445.084,
+        "submit_to_action_ready_ms": 2115.0,
+        "submit_to_initial_response_ms": 1301.0
       },
       "timing_warnings": [
-        "client TTFA 3365.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
+        "client TTFA 2118.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
       ],
       "wish": "Подожги НПС"
     },
@@ -1916,9 +1900,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 12.995,
-          "first_world_action_ms": 14.043,
-          "latency_ms": 20.397,
+          "execution_ms": 45.631,
+          "first_world_action_ms": 21.402,
+          "latency_ms": 80.047,
           "model": "qwen3-35-36",
           "program_code": "apply_state('player', 'wet', duration=30)",
           "program_output": {
@@ -1976,7 +1960,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "состояние wet подтверждено",
-              "step_id": "2cdf16967b164eed82471469e34d72a0",
+              "step_id": "324ce271ab11497c93a5f4f0a90341a9",
               "target_id": "player",
               "verified": true
             }
@@ -1990,7 +1974,7 @@
               "summary": "Сделать выбранного персонажа мокрым."
             }
           },
-          "latency_ms": 20.397,
+          "latency_ms": 80.047,
           "selected_targets": [
             "player"
           ],
@@ -2015,7 +1999,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.833575121561686
+                "y": 0.835751215616862
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -2052,15 +2036,13 @@
       "level_version": "monaco-start-v1",
       "passed": true,
       "timing": {
-        "action_ready_to_mutation_ms": 0.0,
-        "client_ttfa_ms": 3148.0,
-        "server_action_ready_ms": 464.647,
-        "submit_to_action_ready_ms": 3148.0,
-        "submit_to_initial_response_ms": 2512.0
+        "action_ready_to_mutation_ms": 1.0,
+        "client_ttfa_ms": 1222.0,
+        "server_action_ready_ms": 254.316,
+        "submit_to_action_ready_ms": 1221.0,
+        "submit_to_initial_response_ms": 627.0
       },
-      "timing_warnings": [
-        "client TTFA 3148.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-      ],
+      "timing_warnings": [],
       "wish": "Сделай игрока мокрым"
     },
     {
@@ -2100,9 +2082,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 4.913,
-          "first_world_action_ms": 71.759,
-          "latency_ms": 78.641,
+          "execution_ms": 52.207,
+          "first_world_action_ms": 16.029,
+          "latency_ms": 246.26,
           "model": "qwen3-35-36",
           "program_code": "apply_state(nearest('enemy'), 'wet', duration=30)",
           "program_output": {
@@ -2160,7 +2142,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "состояние wet подтверждено",
-              "step_id": "5b18d0fc4f28420281da54129a9fe603",
+              "step_id": "c357bfcd8d1146a1b0e872a8070ff65d",
               "target_id": "guard_01",
               "verified": true
             }
@@ -2174,7 +2156,7 @@
               "summary": "Сделать выбранного персонажа мокрым."
             }
           },
-          "latency_ms": 78.641,
+          "latency_ms": 246.26,
           "selected_targets": [
             "guard_01"
           ],
@@ -2198,21 +2180,21 @@
                 "affect_physical"
               ],
               "direction": {
-                "x": 5.22803573608398,
-                "y": 1.46609884897868
+                "x": 5.00772654215495,
+                "y": 1.72977898915609
               },
               "intensity": 0.75,
               "lifetime": 0.55,
               "origin": {
-                "x": -3.87196426391602,
-                "y": 0.633761088053385
+                "x": -4.09227345784505,
+                "y": 0.901281929016113
               },
               "primitive": "BURST",
               "radius": 0.8,
               "speed": 0.0,
               "target": {
-                "x": -3.87196426391602,
-                "y": 0.633761088053385
+                "x": -4.09227345784505,
+                "y": 0.901281929016113
               },
               "turbulence": 0.35
             }
@@ -2236,14 +2218,14 @@
       "level_version": "monaco-start-v1",
       "passed": true,
       "timing": {
-        "action_ready_to_mutation_ms": 1.0,
-        "client_ttfa_ms": 4526.0,
-        "server_action_ready_ms": 874.75,
-        "submit_to_action_ready_ms": 4525.0,
-        "submit_to_initial_response_ms": 3849.0
+        "action_ready_to_mutation_ms": 2.0,
+        "client_ttfa_ms": 2079.0,
+        "server_action_ready_ms": 761.701,
+        "submit_to_action_ready_ms": 2077.0,
+        "submit_to_initial_response_ms": 1422.0
       },
       "timing_warnings": [
-        "client TTFA 4526.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
+        "client TTFA 2079.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
       ],
       "wish": "Облей врага водой, чтобы он стал мокрым"
     },
@@ -2284,9 +2266,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 177.004,
-          "first_world_action_ms": 36.377,
-          "latency_ms": 342.983,
+          "execution_ms": 76.449,
+          "first_world_action_ms": 52.475,
+          "latency_ms": 206.578,
           "model": "qwen3-35-36",
           "program_code": "apply_state(nearest('npc'), 'wet', duration=30)",
           "program_output": {
@@ -2344,7 +2326,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "состояние wet подтверждено",
-              "step_id": "6d2aa98e7acb460db2138def7b57ee91",
+              "step_id": "89cc32f3149f472eaf6cd18cd05ca201",
               "target_id": "npc_01",
               "verified": true
             }
@@ -2358,7 +2340,7 @@
               "summary": "Сделать выбранного персонажа мокрым."
             }
           },
-          "latency_ms": 342.983,
+          "latency_ms": 206.578,
           "selected_targets": [
             "npc_01"
           ],
@@ -2382,21 +2364,21 @@
                 "affect_physical"
               ],
               "direction": {
-                "x": 0.9704600016276,
-                "y": 4.2763931274414
+                "x": 0.991217549641929,
+                "y": 4.25164604187012
               },
               "intensity": 0.75,
               "lifetime": 0.55,
               "origin": {
-                "x": -8.1295399983724,
-                "y": 3.44774017333984
+                "x": -8.10878245035807,
+                "y": 3.41485544840495
               },
               "primitive": "BURST",
               "radius": 0.8,
               "speed": 0.0,
               "target": {
-                "x": -8.1295399983724,
-                "y": 3.44774017333984
+                "x": -8.10878245035807,
+                "y": 3.41485544840495
               },
               "turbulence": 0.35
             }
@@ -2421,13 +2403,13 @@
       "passed": true,
       "timing": {
         "action_ready_to_mutation_ms": 1.0,
-        "client_ttfa_ms": 2741.0,
-        "server_action_ready_ms": 716.065,
-        "submit_to_action_ready_ms": 2740.0,
-        "submit_to_initial_response_ms": 1760.0
+        "client_ttfa_ms": 2215.0,
+        "server_action_ready_ms": 601.898,
+        "submit_to_action_ready_ms": 2214.0,
+        "submit_to_initial_response_ms": 1377.0
       },
       "timing_warnings": [
-        "client TTFA 2741.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
+        "client TTFA 2215.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
       ],
       "wish": "Сделай НПС мокрым"
     },
@@ -2468,9 +2450,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 272.63,
-          "first_world_action_ms": 37.354,
-          "latency_ms": 279.914,
+          "execution_ms": 82.913,
+          "first_world_action_ms": 14.082,
+          "latency_ms": 109.056,
           "model": "qwen3-35-36",
           "program_code": "apply_state('player', 'invisible', duration=60)",
           "program_output": {
@@ -2528,7 +2510,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "состояние invisible подтверждено",
-              "step_id": "28c145603c16495994f76aedb28eb17f",
+              "step_id": "3c9140e6f8d943dab4b8ec8edaa10a0d",
               "target_id": "player",
               "verified": true
             }
@@ -2542,7 +2524,7 @@
               "summary": "Сделать выбранного персонажа невидимым."
             }
           },
-          "latency_ms": 279.914,
+          "latency_ms": 109.056,
           "selected_targets": [
             "player"
           ],
@@ -2567,7 +2549,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.83666140238444
+                "y": 0.842685508728027
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -2605,14 +2587,12 @@
       "passed": true,
       "timing": {
         "action_ready_to_mutation_ms": 1.0,
-        "client_ttfa_ms": 2088.0,
-        "server_action_ready_ms": 697.044,
-        "submit_to_action_ready_ms": 2087.0,
-        "submit_to_initial_response_ms": 1041.0
+        "client_ttfa_ms": 1205.0,
+        "server_action_ready_ms": 345.128,
+        "submit_to_action_ready_ms": 1204.0,
+        "submit_to_initial_response_ms": 629.0
       },
-      "timing_warnings": [
-        "client TTFA 2088.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-      ],
+      "timing_warnings": [],
       "wish": "Сделай игрока невидимым"
     },
     {
@@ -2652,9 +2632,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 36.006,
-          "first_world_action_ms": 31.212,
-          "latency_ms": 44.474,
+          "execution_ms": 21.466,
+          "first_world_action_ms": 53.635,
+          "latency_ms": 121.358,
           "model": "qwen3-35-36",
           "program_code": "apply_state(nearest('enemy'), 'invisible', duration=60)",
           "program_output": {
@@ -2712,7 +2692,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "состояние invisible подтверждено",
-              "step_id": "e248a17ea5de4be88d4df299bd4219d8",
+              "step_id": "41d6212a04454ddeb0686d0e871da7a9",
               "target_id": "guard_01",
               "verified": true
             }
@@ -2726,7 +2706,7 @@
               "summary": "Сделать выбранного персонажа невидимым."
             }
           },
-          "latency_ms": 44.474,
+          "latency_ms": 121.358,
           "selected_targets": [
             "guard_01"
           ],
@@ -2751,7 +2731,7 @@
               ],
               "direction": {
                 "x": 5.25386683146159,
-                "y": 1.43339799245199
+                "y": 1.4327418645223
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -2788,15 +2768,13 @@
       "level_version": "monaco-start-v1",
       "passed": true,
       "timing": {
-        "action_ready_to_mutation_ms": 1.0,
-        "client_ttfa_ms": 2043.0,
-        "server_action_ready_ms": 324.999,
-        "submit_to_action_ready_ms": 2042.0,
-        "submit_to_initial_response_ms": 740.0
+        "action_ready_to_mutation_ms": 2.0,
+        "client_ttfa_ms": 1322.0,
+        "server_action_ready_ms": 362.946,
+        "submit_to_action_ready_ms": 1320.0,
+        "submit_to_initial_response_ms": 749.0
       },
-      "timing_warnings": [
-        "client TTFA 2043.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-      ],
+      "timing_warnings": [],
       "wish": "Сделай врага невидимым"
     },
     {
@@ -2836,9 +2814,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 60.337,
-          "first_world_action_ms": 26.599,
-          "latency_ms": 81.669,
+          "execution_ms": 48.796,
+          "first_world_action_ms": 62.152,
+          "latency_ms": 120.169,
           "model": "qwen3-35-36",
           "program_code": "apply_state(nearest('npc'), 'invisible', duration=60)",
           "program_output": {
@@ -2896,7 +2874,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "состояние invisible подтверждено",
-              "step_id": "4d669d1edd1b43a3aacc2a412740fea2",
+              "step_id": "a603cef6380b48ab9a5cefd479c6e30b",
               "target_id": "npc_01",
               "verified": true
             }
@@ -2910,7 +2888,7 @@
               "summary": "Сделать выбранного персонажа невидимым."
             }
           },
-          "latency_ms": 81.669,
+          "latency_ms": 120.169,
           "selected_targets": [
             "npc_01"
           ],
@@ -2934,21 +2912,21 @@
                 "affect_physical"
               ],
               "direction": {
-                "x": 0.966212463378909,
-                "y": 4.28291409810384
+                "x": 1.01503245035807,
+                "y": 4.22207679748535
               },
               "intensity": 0.75,
               "lifetime": 0.55,
               "origin": {
-                "x": -8.13378753662109,
-                "y": 3.45425567626953
+                "x": -8.08496754964193,
+                "y": 3.37472457885742
               },
               "primitive": "BURST",
               "radius": 0.8,
               "speed": 0.0,
               "target": {
-                "x": -8.13378753662109,
-                "y": 3.45425567626953
+                "x": -8.08496754964193,
+                "y": 3.37472457885742
               },
               "turbulence": 0.35
             }
@@ -2973,14 +2951,12 @@
       "passed": true,
       "timing": {
         "action_ready_to_mutation_ms": 1.0,
-        "client_ttfa_ms": 3800.0,
-        "server_action_ready_ms": 636.566,
-        "submit_to_action_ready_ms": 3799.0,
-        "submit_to_initial_response_ms": 2956.0
+        "client_ttfa_ms": 1292.0,
+        "server_action_ready_ms": 254.307,
+        "submit_to_action_ready_ms": 1291.0,
+        "submit_to_initial_response_ms": 714.0
       },
-      "timing_warnings": [
-        "client TTFA 3800.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-      ],
+      "timing_warnings": [],
       "wish": "Сделай НПС невидимым"
     },
     {
@@ -3021,9 +2997,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 301.742,
-          "first_world_action_ms": 238.821,
-          "latency_ms": 310.043,
+          "execution_ms": 13.562,
+          "first_world_action_ms": 42.772,
+          "latency_ms": 98.022,
           "model": "qwen3-35-36",
           "program_code": "enemy = nearest('enemy')\nset_aggro(enemy, 'player')",
           "program_output": {
@@ -3081,7 +3057,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "агро на player подтверждено",
-              "step_id": "2eeadbab76c746b2b3a13ce8cb7b0042",
+              "step_id": "88cb0063038e44b1ad26509f6ecc6f20",
               "target_id": "guard_01",
               "verified": true
             }
@@ -3095,7 +3071,7 @@
               "summary": "Явно направить агрессию врага на игрока."
             }
           },
-          "latency_ms": 310.043,
+          "latency_ms": 98.022,
           "selected_targets": [
             "guard_01"
           ],
@@ -3119,21 +3095,21 @@
                 "affect_mind"
               ],
               "direction": {
-                "x": 5.22803573608398,
-                "y": 1.46635201772054
+                "x": 5.29182383219401,
+                "y": 1.38522040049235
               },
               "intensity": 0.75,
               "lifetime": 0.55,
               "origin": {
-                "x": -3.87196426391602,
-                "y": 0.633761088053385
+                "x": -3.80817616780599,
+                "y": 0.546203549702962
               },
               "primitive": "BURST",
               "radius": 0.8,
               "speed": 0.0,
               "target": {
-                "x": -3.87196426391602,
-                "y": 0.633761088053385
+                "x": -3.80817616780599,
+                "y": 0.546203549702962
               },
               "turbulence": 0.35
             }
@@ -3159,15 +3135,13 @@
       "level_version": "monaco-start-v1",
       "passed": true,
       "timing": {
-        "action_ready_to_mutation_ms": 1.0,
-        "client_ttfa_ms": 6186.0,
-        "server_action_ready_ms": 758.764,
-        "submit_to_action_ready_ms": 6185.0,
-        "submit_to_initial_response_ms": 5269.0
+        "action_ready_to_mutation_ms": 3.0,
+        "client_ttfa_ms": 1230.0,
+        "server_action_ready_ms": 334.691,
+        "submit_to_action_ready_ms": 1227.0,
+        "submit_to_initial_response_ms": 685.0
       },
-      "timing_warnings": [
-        "client TTFA 6186.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-      ],
+      "timing_warnings": [],
       "wish": "Заставь врага агриться на игрока"
     },
     {
@@ -3210,9 +3184,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 647.391,
-          "first_world_action_ms": 647.65,
-          "latency_ms": 654.473,
+          "execution_ms": 98.593,
+          "first_world_action_ms": 68.956,
+          "latency_ms": 212.401,
           "model": "qwen3-35-36",
           "program_code": "give_item('sword', owner='player')",
           "program_output": {
@@ -3270,7 +3244,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "sword найден в рюкзаке",
-              "step_id": "9915394ecd574878b700a548d26d86db",
+              "step_id": "3d2da26994bb4bdc9d5eaf50cad36e55",
               "target_id": "player",
               "verified": true
             }
@@ -3284,7 +3258,7 @@
               "summary": "Положить sword непосредственно в рюкзак игрока."
             }
           },
-          "latency_ms": 654.473,
+          "latency_ms": 212.401,
           "selected_targets": [
             "player"
           ],
@@ -3309,7 +3283,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.825858879089356
+                "y": 0.846034876505534
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -3350,14 +3324,14 @@
       "level_version": "monaco-start-v1",
       "passed": true,
       "timing": {
-        "action_ready_to_mutation_ms": 1.0,
-        "client_ttfa_ms": 6536.0,
-        "server_action_ready_ms": 2127.716,
-        "submit_to_action_ready_ms": 6535.0,
-        "submit_to_initial_response_ms": 5136.0
+        "action_ready_to_mutation_ms": 2.0,
+        "client_ttfa_ms": 3011.0,
+        "server_action_ready_ms": 779.837,
+        "submit_to_action_ready_ms": 3009.0,
+        "submit_to_initial_response_ms": 1873.0
       },
       "timing_warnings": [
-        "client TTFA 6536.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
+        "client TTFA 3011.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
       ],
       "wish": "Создай меч прямо в рюкзаке игрока"
     },
@@ -3401,9 +3375,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 119.593,
-          "first_world_action_ms": 41.382,
-          "latency_ms": 128.384,
+          "execution_ms": 114.087,
+          "first_world_action_ms": 32.279,
+          "latency_ms": 206.541,
           "model": "qwen3-35-36",
           "program_code": "give_item('magic_key', owner='player')",
           "program_output": {
@@ -3461,7 +3435,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "magic_key найден в рюкзаке",
-              "step_id": "272421a4a83e44de9519ae1fd59cf1b3",
+              "step_id": "47e1cfed980f4430a6a765c3fa96872b",
               "target_id": "player",
               "verified": true
             }
@@ -3475,7 +3449,7 @@
               "summary": "Положить magic_key непосредственно в рюкзак игрока."
             }
           },
-          "latency_ms": 128.384,
+          "latency_ms": 206.541,
           "selected_targets": [
             "player"
           ],
@@ -3500,7 +3474,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.835486729939779
+                "y": 0.833931732177734
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -3542,13 +3516,13 @@
       "passed": true,
       "timing": {
         "action_ready_to_mutation_ms": 1.0,
-        "client_ttfa_ms": 3451.0,
-        "server_action_ready_ms": 576.194,
-        "submit_to_action_ready_ms": 3450.0,
-        "submit_to_initial_response_ms": 2722.0
+        "client_ttfa_ms": 3156.0,
+        "server_action_ready_ms": 1165.841,
+        "submit_to_action_ready_ms": 3155.0,
+        "submit_to_initial_response_ms": 1921.0
       },
       "timing_warnings": [
-        "client TTFA 3451.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
+        "client TTFA 3156.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
       ],
       "wish": "Положи магический ключ в рюкзак игрока"
     },
@@ -3589,9 +3563,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 95.382,
-          "first_world_action_ms": 25.578,
-          "latency_ms": 102.867,
+          "execution_ms": 54.661,
+          "first_world_action_ms": 66.254,
+          "latency_ms": 189.444,
           "model": "qwen3-35-36",
           "program_code": "enemy = nearest('enemy')\nspawn('trap', near=enemy)",
           "program_output": {
@@ -3649,7 +3623,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "новый объект trap найден",
-              "step_id": "e3882adfbec74dc285fe3858d797aa37",
+              "step_id": "57a974640106425ebb6b454ac6138974",
               "target_id": "guard_01",
               "verified": true
             }
@@ -3663,7 +3637,7 @@
               "summary": "Создать видимую ловушку у выбранной цели."
             }
           },
-          "latency_ms": 102.867,
+          "latency_ms": 189.444,
           "selected_targets": [
             "guard_01"
           ],
@@ -3687,21 +3661,21 @@
                 "create_object"
               ],
               "direction": {
-                "x": 5.18853098551432,
-                "y": 1.51284529368083
+                "x": 5.30425898234049,
+                "y": 1.37099157969157
               },
               "intensity": 0.75,
               "lifetime": 0.55,
               "origin": {
-                "x": -3.91146901448568,
-                "y": 0.685377820332845
+                "x": -3.79574101765951,
+                "y": 0.528460629781087
               },
               "primitive": "BURST",
               "radius": 0.8,
               "speed": 0.0,
               "target": {
-                "x": -3.91146901448568,
-                "y": 0.685377820332845
+                "x": -3.79574101765951,
+                "y": 0.528460629781087
               },
               "turbulence": 0.35
             }
@@ -3728,15 +3702,13 @@
       "level_version": "monaco-start-v1",
       "passed": true,
       "timing": {
-        "action_ready_to_mutation_ms": 0.0,
-        "client_ttfa_ms": 3042.0,
-        "server_action_ready_ms": 390.02,
-        "submit_to_action_ready_ms": 3042.0,
-        "submit_to_initial_response_ms": 1980.0
+        "action_ready_to_mutation_ms": 2.0,
+        "client_ttfa_ms": 1807.0,
+        "server_action_ready_ms": 586.116,
+        "submit_to_action_ready_ms": 1805.0,
+        "submit_to_initial_response_ms": 1190.0
       },
-      "timing_warnings": [
-        "client TTFA 3042.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-      ],
+      "timing_warnings": [],
       "wish": "Создай ловушку рядом с врагом"
     },
     {
@@ -3774,9 +3746,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 81.49,
-          "first_world_action_ms": 101.827,
-          "latency_ms": 183.712,
+          "execution_ms": 61.889,
+          "first_world_action_ms": 52.587,
+          "latency_ms": 159.927,
           "model": "qwen3-35-36",
           "program_code": "rock = nearest('rock')\ndestroy(rock)",
           "program_output": {
@@ -3834,7 +3806,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "цель уничтожена",
-              "step_id": "9dcf6bfaa38748c2a9d668446b25dfcf",
+              "step_id": "0c86d69c05b340fa8b1eef55a19ac52d",
               "target_id": "rock_01",
               "verified": true
             }
@@ -3848,7 +3820,7 @@
               "summary": "Полностью уничтожить ближайший камень."
             }
           },
-          "latency_ms": 183.712,
+          "latency_ms": 159.927,
           "selected_targets": [
             "rock_01"
           ],
@@ -3873,7 +3845,7 @@
               ],
               "direction": {
                 "x": 4.4,
-                "y": 3.72484232584635
+                "y": 3.72636858622233
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -3911,13 +3883,13 @@
       "passed": true,
       "timing": {
         "action_ready_to_mutation_ms": 1.0,
-        "client_ttfa_ms": 4313.0,
-        "server_action_ready_ms": 769.407,
-        "submit_to_action_ready_ms": 4312.0,
-        "submit_to_initial_response_ms": 3615.0
+        "client_ttfa_ms": 2328.0,
+        "server_action_ready_ms": 366.222,
+        "submit_to_action_ready_ms": 2327.0,
+        "submit_to_initial_response_ms": 1505.0
       },
       "timing_warnings": [
-        "client TTFA 4313.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
+        "client TTFA 2328.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
       ],
       "wish": "Полностью уничтожь камень"
     },
@@ -3958,9 +3930,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 125.375,
-          "first_world_action_ms": 18.532,
-          "latency_ms": 133.013,
+          "execution_ms": 16.457,
+          "first_world_action_ms": 18.292,
+          "latency_ms": 81.722,
           "model": "qwen3-35-36",
           "program_code": "spawn('shield', near='player')",
           "program_output": {
@@ -4018,7 +3990,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "новый объект shield найден",
-              "step_id": "652b4813f8ca4727ac69122de6b3fa16",
+              "step_id": "6867c480ac044216b7995003374e1b36",
               "target_id": "player",
               "verified": true
             }
@@ -4032,7 +4004,7 @@
               "summary": "Создать физический объект shield рядом с игроком."
             }
           },
-          "latency_ms": 133.013,
+          "latency_ms": 81.722,
           "selected_targets": [
             "player"
           ],
@@ -4057,7 +4029,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.830223910013835
+                "y": 0.821865145365397
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -4097,15 +4069,13 @@
       "level_version": "monaco-start-v1",
       "passed": true,
       "timing": {
-        "action_ready_to_mutation_ms": 1.0,
-        "client_ttfa_ms": 3166.0,
-        "server_action_ready_ms": 709.294,
-        "submit_to_action_ready_ms": 3165.0,
-        "submit_to_initial_response_ms": 1779.0
+        "action_ready_to_mutation_ms": 2.0,
+        "client_ttfa_ms": 1301.0,
+        "server_action_ready_ms": 312.937,
+        "submit_to_action_ready_ms": 1299.0,
+        "submit_to_initial_response_ms": 704.0
       },
-      "timing_warnings": [
-        "client TTFA 3166.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-      ],
+      "timing_warnings": [],
       "wish": "Сотвори щит рядом со мной"
     },
     {
@@ -4145,9 +4115,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 40.543,
-          "first_world_action_ms": 21.862,
-          "latency_ms": 1502.781,
+          "execution_ms": 178.201,
+          "first_world_action_ms": 49.664,
+          "latency_ms": 373.855,
           "model": "qwen3-35-36",
           "program_code": "spawn('key', near='player')",
           "program_output": {
@@ -4205,7 +4175,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "новый объект key найден",
-              "step_id": "c096c979d4894e22b47ceaabc6bc454b",
+              "step_id": "e874372345ea4a7d86a2bb6432ce68e9",
               "target_id": "player",
               "verified": true
             }
@@ -4219,7 +4189,7 @@
               "summary": "Создать физический объект key рядом с игроком."
             }
           },
-          "latency_ms": 1502.781,
+          "latency_ms": 373.855,
           "selected_targets": [
             "player"
           ],
@@ -4244,7 +4214,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.830829111735026
+                "y": 0.836834462483724
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -4285,13 +4255,13 @@
       "passed": true,
       "timing": {
         "action_ready_to_mutation_ms": 1.0,
-        "client_ttfa_ms": 6502.0,
-        "server_action_ready_ms": 2751.548,
-        "submit_to_action_ready_ms": 6501.0,
-        "submit_to_initial_response_ms": 4421.0
+        "client_ttfa_ms": 2584.0,
+        "server_action_ready_ms": 721.91,
+        "submit_to_action_ready_ms": 2583.0,
+        "submit_to_initial_response_ms": 1934.0
       },
       "timing_warnings": [
-        "client TTFA 6502.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
+        "client TTFA 2584.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
       ],
       "wish": "Призови ключ перед игроком"
     },
@@ -4332,9 +4302,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 213.661,
-          "first_world_action_ms": 392.776,
-          "latency_ms": 400.406,
+          "execution_ms": 52.544,
+          "first_world_action_ms": 91.213,
+          "latency_ms": 158.291,
           "model": "qwen3-35-36",
           "program_code": "spawn('portal', near='player')",
           "program_output": {
@@ -4392,7 +4362,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "новый объект portal найден",
-              "step_id": "e23cdb5548a947a2a117c353996694ec",
+              "step_id": "76d54f85158545719fbf46d15b15c30c",
               "target_id": "player",
               "verified": true
             }
@@ -4406,7 +4376,7 @@
               "summary": "Создать физический объект portal рядом с игроком."
             }
           },
-          "latency_ms": 400.406,
+          "latency_ms": 158.291,
           "selected_targets": [
             "player"
           ],
@@ -4431,7 +4401,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.829152552286784
+                "y": 0.823327445983887
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -4471,14 +4441,14 @@
       "level_version": "monaco-start-v1",
       "passed": true,
       "timing": {
-        "action_ready_to_mutation_ms": 0.0,
-        "client_ttfa_ms": 3982.0,
-        "server_action_ready_ms": 1007.23,
-        "submit_to_action_ready_ms": 3982.0,
-        "submit_to_initial_response_ms": 2773.0
+        "action_ready_to_mutation_ms": 2.0,
+        "client_ttfa_ms": 2419.0,
+        "server_action_ready_ms": 516.08,
+        "submit_to_action_ready_ms": 2417.0,
+        "submit_to_initial_response_ms": 1433.0
       },
       "timing_warnings": [
-        "client TTFA 3982.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
+        "client TTFA 2419.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
       ],
       "wish": "Создай портал возле меня"
     },
@@ -4548,9 +4518,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 64.59,
-          "first_world_action_ms": 34.559,
-          "latency_ms": 100.559,
+          "execution_ms": 13.759,
+          "first_world_action_ms": 37.662,
+          "latency_ms": 59.082,
           "model": "qwen3-35-36",
           "program_code": "spawn_many('enemy', 3, near='player')\nspawn_many('npc', 2, near='player')",
           "program_output": {
@@ -4608,7 +4578,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "создано 3 объектов enemy",
-              "step_id": "ee178477693f419fa61913aeca451b26",
+              "step_id": "0b0b7ced9a3c450d93bc044f49107c19",
               "target_id": "player",
               "verified": true
             },
@@ -4618,7 +4588,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "создано 2 объектов npc",
-              "step_id": "594cf9ed523040418268b11072430a9d",
+              "step_id": "233fd1312e3e45658e0d2865df22de8f",
               "target_id": "player",
               "verified": true
             }
@@ -4632,7 +4602,7 @@
               "summary": "Создать настоящих действующих персонажей — врагов: 3, NPC: 2."
             }
           },
-          "latency_ms": 100.559,
+          "latency_ms": 59.082,
           "selected_targets": [
             "player"
           ],
@@ -4657,7 +4627,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.837627283732096
+                "y": 0.823937161763509
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -4681,7 +4651,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.837627283732096
+                "y": 0.823937161763509
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -4737,15 +4707,13 @@
       "level_version": "monaco-start-v1",
       "passed": true,
       "timing": {
-        "action_ready_to_mutation_ms": 1.0,
-        "client_ttfa_ms": 6851.0,
-        "server_action_ready_ms": 1006.248,
-        "submit_to_action_ready_ms": 6850.0,
-        "submit_to_initial_response_ms": 5513.0
+        "action_ready_to_mutation_ms": 2.0,
+        "client_ttfa_ms": 1187.0,
+        "server_action_ready_ms": 233.851,
+        "submit_to_action_ready_ms": 1185.0,
+        "submit_to_initial_response_ms": 556.0
       },
-      "timing_warnings": [
-        "client TTFA 6851.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-      ],
+      "timing_warnings": [],
       "wish": "Создай 3 врагов и 2 NPC"
     },
     {
@@ -4785,9 +4753,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 880.075,
-          "first_world_action_ms": 875.25,
-          "latency_ms": 943.845,
+          "execution_ms": 137.553,
+          "first_world_action_ms": 65.583,
+          "latency_ms": 467.808,
           "model": "qwen3-35-36",
           "program_code": "equip_outfit('player', 'dress')",
           "program_output": {
@@ -4845,7 +4813,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "наряд dress надет",
-              "step_id": "dee0522adbc54de29afb4be66065481f",
+              "step_id": "f13e3a6904034993a8833b8ff0df5143",
               "target_id": "player",
               "verified": true
             }
@@ -4859,7 +4827,7 @@
               "summary": "Надеть на игрока видимый наряд dress, а не создать предмет рядом."
             }
           },
-          "latency_ms": 943.845,
+          "latency_ms": 467.808,
           "selected_targets": [
             "player"
           ],
@@ -4884,7 +4852,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.83123238881429
+                "y": 0.836706097920736
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -4924,13 +4892,13 @@
       "passed": true,
       "timing": {
         "action_ready_to_mutation_ms": 1.0,
-        "client_ttfa_ms": 3627.0,
-        "server_action_ready_ms": 1996.925,
-        "submit_to_action_ready_ms": 3626.0,
-        "submit_to_initial_response_ms": 2895.0
+        "client_ttfa_ms": 2700.0,
+        "server_action_ready_ms": 1327.278,
+        "submit_to_action_ready_ms": 2699.0,
+        "submit_to_initial_response_ms": 1938.0
       },
       "timing_warnings": [
-        "client TTFA 3627.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
+        "client TTFA 2700.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
       ],
       "wish": "Одень меня в платье"
     },
@@ -4971,9 +4939,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 64.848,
-          "first_world_action_ms": 63.915,
-          "latency_ms": 146.183,
+          "execution_ms": 149.28,
+          "first_world_action_ms": 60.053,
+          "latency_ms": 210.01,
           "model": "qwen3-35-36",
           "program_code": "equip_outfit('player', 'robe')",
           "program_output": {
@@ -5031,7 +4999,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "наряд robe надет",
-              "step_id": "f23d58cf85e64a6fa98f2cabb0b1908f",
+              "step_id": "4393b7129684446c89a340866e0d1120",
               "target_id": "player",
               "verified": true
             }
@@ -5045,7 +5013,7 @@
               "summary": "Надеть на игрока видимый наряд robe, а не создать предмет рядом."
             }
           },
-          "latency_ms": 146.183,
+          "latency_ms": 210.01,
           "selected_targets": [
             "player"
           ],
@@ -5070,7 +5038,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.829237111409505
+                "y": 0.825553385416667
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -5109,15 +5077,13 @@
       "level_version": "monaco-start-v1",
       "passed": true,
       "timing": {
-        "action_ready_to_mutation_ms": 1.0,
-        "client_ttfa_ms": 5328.0,
-        "server_action_ready_ms": 816.653,
-        "submit_to_action_ready_ms": 5327.0,
-        "submit_to_initial_response_ms": 3698.0
+        "action_ready_to_mutation_ms": 2.0,
+        "client_ttfa_ms": 1985.0,
+        "server_action_ready_ms": 382.52,
+        "submit_to_action_ready_ms": 1983.0,
+        "submit_to_initial_response_ms": 1239.0
       },
-      "timing_warnings": [
-        "client TTFA 5328.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-      ],
+      "timing_warnings": [],
       "wish": "Наряди игрока в мантию"
     },
     {
@@ -5157,9 +5123,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 344.078,
-          "first_world_action_ms": 343.885,
-          "latency_ms": 410.868,
+          "execution_ms": 416.178,
+          "first_world_action_ms": 49.379,
+          "latency_ms": 688.249,
           "model": "qwen3-35-36",
           "program_code": "equip_outfit('player', 'armor')",
           "program_output": {
@@ -5217,7 +5183,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "наряд armor надет",
-              "step_id": "d87edca81af847f991b505a35af1dfdd",
+              "step_id": "9d1ef5c887294f18bb5447e487a4a2c3",
               "target_id": "player",
               "verified": true
             }
@@ -5231,7 +5197,7 @@
               "summary": "Надеть на игрока видимый наряд armor, а не создать предмет рядом."
             }
           },
-          "latency_ms": 410.868,
+          "latency_ms": 688.249,
           "selected_targets": [
             "player"
           ],
@@ -5256,7 +5222,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.830938084920247
+                "y": 0.831634839375814
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -5295,14 +5261,14 @@
       "level_version": "monaco-start-v1",
       "passed": true,
       "timing": {
-        "action_ready_to_mutation_ms": 0.0,
-        "client_ttfa_ms": 2393.0,
-        "server_action_ready_ms": 714.949,
-        "submit_to_action_ready_ms": 2393.0,
-        "submit_to_initial_response_ms": 1337.0
+        "action_ready_to_mutation_ms": 1.0,
+        "client_ttfa_ms": 4728.0,
+        "server_action_ready_ms": 1229.137,
+        "submit_to_action_ready_ms": 4727.0,
+        "submit_to_initial_response_ms": 4045.0
       },
       "timing_warnings": [
-        "client TTFA 2393.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
+        "client TTFA 4728.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
       ],
       "wish": "Одень игрока в броню"
     },
@@ -5343,9 +5309,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 42.535,
-          "first_world_action_ms": 32.077,
-          "latency_ms": 49.489,
+          "execution_ms": 218.615,
+          "first_world_action_ms": 46.633,
+          "latency_ms": 592.365,
           "model": "qwen3-35-36",
           "program_code": "equip_outfit('player', 'cloak')",
           "program_output": {
@@ -5403,7 +5369,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "наряд cloak надет",
-              "step_id": "727587e5f1f94ffbaaa5e830ff4ed537",
+              "step_id": "5b12fadd9a1a4f26ad38da48eb7af312",
               "target_id": "player",
               "verified": true
             }
@@ -5417,7 +5383,7 @@
               "summary": "Надеть на игрока видимый наряд cloak, а не создать предмет рядом."
             }
           },
-          "latency_ms": 49.489,
+          "latency_ms": 592.365,
           "selected_targets": [
             "player"
           ],
@@ -5442,7 +5408,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.835350735982259
+                "y": 0.832353655497233
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -5481,14 +5447,14 @@
       "level_version": "monaco-start-v1",
       "passed": true,
       "timing": {
-        "action_ready_to_mutation_ms": 1.0,
-        "client_ttfa_ms": 3280.0,
-        "server_action_ready_ms": 688.083,
-        "submit_to_action_ready_ms": 3279.0,
-        "submit_to_initial_response_ms": 2544.0
+        "action_ready_to_mutation_ms": 2.0,
+        "client_ttfa_ms": 3458.0,
+        "server_action_ready_ms": 1834.963,
+        "submit_to_action_ready_ms": 3456.0,
+        "submit_to_initial_response_ms": 2883.0
       },
       "timing_warnings": [
-        "client TTFA 3280.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
+        "client TTFA 3458.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
       ],
       "wish": "Накинь на меня плащ"
     },
@@ -5553,9 +5519,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 355.391,
-          "first_world_action_ms": 115.854,
-          "latency_ms": 407.934,
+          "execution_ms": 54.358,
+          "first_world_action_ms": 16.912,
+          "latency_ms": 84.464,
           "model": "qwen3-35-36",
           "program_code": "target = nearest('rock')\nif target:\n    transform(target, 'crate')\nspeak('player', 'Прямое и недвусмысленное превращение.')",
           "program_output": {
@@ -5613,7 +5579,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "форма crate подтверждена",
-              "step_id": "c65015c735fb414b9eaf2fac1a36dd3f",
+              "step_id": "82a5ae91bed9472db918c9014c1b5782",
               "target_id": "rock_01",
               "verified": true
             },
@@ -5623,7 +5589,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "реплика показана клиентом",
-              "step_id": "a903e52e169a46a48c7c2a49c319a475",
+              "step_id": "5bcbaffb1a2a40c5923ac89d8952092c",
               "target_id": "player",
               "verified": true
             }
@@ -5637,7 +5603,7 @@
               "summary": "Превратить rock в crate."
             }
           },
-          "latency_ms": 407.934,
+          "latency_ms": 84.464,
           "selected_targets": [
             "rock_01",
             "player"
@@ -5663,7 +5629,7 @@
               ],
               "direction": {
                 "x": 4.4,
-                "y": 3.72902838389079
+                "y": 3.73600616455078
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -5687,7 +5653,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.829028383890788
+                "y": 0.836006164550781
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -5739,15 +5705,13 @@
       "level_version": "monaco-start-v1",
       "passed": true,
       "timing": {
-        "action_ready_to_mutation_ms": 0.0,
-        "client_ttfa_ms": 5063.0,
-        "server_action_ready_ms": 1859.968,
-        "submit_to_action_ready_ms": 5063.0,
-        "submit_to_initial_response_ms": 4444.0
+        "action_ready_to_mutation_ms": 1.0,
+        "client_ttfa_ms": 1519.0,
+        "server_action_ready_ms": 380.688,
+        "submit_to_action_ready_ms": 1518.0,
+        "submit_to_initial_response_ms": 759.0
       },
-      "timing_warnings": [
-        "client TTFA 5063.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-      ],
+      "timing_warnings": [],
       "wish": "Преврати камень в коробку"
     },
     {
@@ -5811,9 +5775,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 363.743,
-          "first_world_action_ms": 208.555,
-          "latency_ms": 371.357,
+          "execution_ms": 41.924,
+          "first_world_action_ms": 14.606,
+          "latency_ms": 98.75,
           "model": "qwen3-35-36",
           "program_code": "target = nearest('enemy')\nif target:\n    transform(target, 'rock')\nspeak('player', 'Прямое и недвусмысленное превращение.')",
           "program_output": {
@@ -5871,7 +5835,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "форма rock подтверждена",
-              "step_id": "ad14030cd14248cab66406388f960c39",
+              "step_id": "c9769e70433440a3829c6da8e0134672",
               "target_id": "guard_01",
               "verified": true
             },
@@ -5881,7 +5845,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "реплика показана клиентом",
-              "step_id": "e474ad922e674beeb2b14cbf6e068daf",
+              "step_id": "45f7d32653f94103aea39577c6f73070",
               "target_id": "player",
               "verified": true
             }
@@ -5895,7 +5859,7 @@
               "summary": "Превратить enemy в rock."
             }
           },
-          "latency_ms": 371.357,
+          "latency_ms": 98.75,
           "selected_targets": [
             "guard_01",
             "player"
@@ -5920,21 +5884,21 @@
                 "affect_physical"
               ],
               "direction": {
-                "x": 5.20179824829102,
-                "y": 1.49686444600423
+                "x": 5.29182383219401,
+                "y": 1.39105396270752
               },
               "intensity": 0.75,
               "lifetime": 0.55,
               "origin": {
-                "x": -3.89820175170898,
-                "y": 0.668248176574707
+                "x": -3.80817616780599,
+                "y": 0.546203549702962
               },
               "primitive": "BURST",
               "radius": 0.8,
               "speed": 0.0,
               "target": {
-                "x": -3.89820175170898,
-                "y": 0.668248176574707
+                "x": -3.80817616780599,
+                "y": 0.546203549702962
               },
               "turbulence": 0.35
             },
@@ -5945,7 +5909,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.828616269429525
+                "y": 0.844850413004557
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -5997,15 +5961,13 @@
       "level_version": "monaco-start-v1",
       "passed": true,
       "timing": {
-        "action_ready_to_mutation_ms": 0.0,
-        "client_ttfa_ms": 9604.0,
-        "server_action_ready_ms": 1762.086,
-        "submit_to_action_ready_ms": 9604.0,
-        "submit_to_initial_response_ms": 8145.0
+        "action_ready_to_mutation_ms": 1.0,
+        "client_ttfa_ms": 1347.0,
+        "server_action_ready_ms": 270.762,
+        "submit_to_action_ready_ms": 1346.0,
+        "submit_to_initial_response_ms": 673.0
       },
-      "timing_warnings": [
-        "client TTFA 9604.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-      ],
+      "timing_warnings": [],
       "wish": "Преврати врага в камень"
     },
     {
@@ -6069,9 +6031,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 929.663,
-          "first_world_action_ms": 926.256,
-          "latency_ms": 999.409,
+          "execution_ms": 62.823,
+          "first_world_action_ms": 56.481,
+          "latency_ms": 166.307,
           "model": "qwen3-35-36",
           "program_code": "target = nearest('npc')\nif target:\n    transform(target, 'enemy')\nspeak('player', 'Прямое и недвусмысленное превращение.')",
           "program_output": {
@@ -6129,7 +6091,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "форма enemy подтверждена",
-              "step_id": "2271042080c041e7b3e8924585cd9f7f",
+              "step_id": "00f1a71c76cb419fb5008996a7019199",
               "target_id": "npc_01",
               "verified": true
             },
@@ -6139,7 +6101,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "реплика показана клиентом",
-              "step_id": "acd375cf773747acb0fb049a26441003",
+              "step_id": "0a63e04f99c1478da2104e87bf0793e3",
               "target_id": "player",
               "verified": true
             }
@@ -6153,7 +6115,7 @@
               "summary": "Превратить npc в enemy."
             }
           },
-          "latency_ms": 999.409,
+          "latency_ms": 166.307,
           "selected_targets": [
             "npc_01",
             "player"
@@ -6178,21 +6140,21 @@
                 "affect_physical"
               ],
               "direction": {
-                "x": 0.97885996500651,
-                "y": 4.2642791112264
+                "x": 0.96193339029948,
+                "y": 4.28604297637939
               },
               "intensity": 0.75,
               "lifetime": 0.55,
               "origin": {
-                "x": -8.12114003499349,
-                "y": 3.43464762369792
+                "x": -8.13806660970052,
+                "y": 3.46075057983398
               },
               "primitive": "BURST",
               "radius": 0.8,
               "speed": 0.0,
               "target": {
-                "x": -8.12114003499349,
-                "y": 3.43464762369792
+                "x": -8.13806660970052,
+                "y": 3.46075057983398
               },
               "turbulence": 0.35
             },
@@ -6203,7 +6165,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.829631487528483
+                "y": 0.82529239654541
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -6256,14 +6218,12 @@
       "passed": true,
       "timing": {
         "action_ready_to_mutation_ms": 1.0,
-        "client_ttfa_ms": 5284.0,
-        "server_action_ready_ms": 2109.584,
-        "submit_to_action_ready_ms": 5283.0,
-        "submit_to_initial_response_ms": 3281.0
+        "client_ttfa_ms": 1761.0,
+        "server_action_ready_ms": 525.262,
+        "submit_to_action_ready_ms": 1760.0,
+        "submit_to_initial_response_ms": 977.0
       },
-      "timing_warnings": [
-        "client TTFA 5284.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-      ],
+      "timing_warnings": [],
       "wish": "Преврати NPC во врага"
     },
     {
@@ -6327,9 +6287,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 900.998,
-          "first_world_action_ms": 324.809,
-          "latency_ms": 912.054,
+          "execution_ms": 17.187,
+          "first_world_action_ms": 49.736,
+          "latency_ms": 113.337,
           "model": "qwen3-35-36",
           "program_code": "target = nearest('crate')\nif target:\n    transform(target, 'tree')\nspeak('player', 'Прямое и недвусмысленное превращение.')",
           "program_output": {
@@ -6387,7 +6347,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "форма tree подтверждена",
-              "step_id": "062bd25ba05341caa93e4d13795b1bd8",
+              "step_id": "2ce3f6d5053942b6b54396bc00df45e6",
               "target_id": "crate_01",
               "verified": true
             },
@@ -6397,7 +6357,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "реплика показана клиентом",
-              "step_id": "37ffc888bbe84b17b38cb282181996c2",
+              "step_id": "d22c500154cc46e79d7a51b622e5adbe",
               "target_id": "player",
               "verified": true
             }
@@ -6411,7 +6371,7 @@
               "summary": "Превратить crate в tree."
             }
           },
-          "latency_ms": 912.054,
+          "latency_ms": 113.337,
           "selected_targets": [
             "crate_01",
             "player"
@@ -6437,7 +6397,7 @@
               ],
               "direction": {
                 "x": 2.1,
-                "y": -2.56593780517578
+                "y": -2.56695639292399
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -6461,7 +6421,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.834062194824219
+                "y": 0.833043607076009
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -6514,14 +6474,12 @@
       "passed": true,
       "timing": {
         "action_ready_to_mutation_ms": 1.0,
-        "client_ttfa_ms": 9210.0,
-        "server_action_ready_ms": 2210.647,
-        "submit_to_action_ready_ms": 9209.0,
-        "submit_to_initial_response_ms": 3059.0
+        "client_ttfa_ms": 1537.0,
+        "server_action_ready_ms": 323.748,
+        "submit_to_action_ready_ms": 1536.0,
+        "submit_to_initial_response_ms": 661.0
       },
-      "timing_warnings": [
-        "client TTFA 9210.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-      ],
+      "timing_warnings": [],
       "wish": "Преврати ящик в дерево"
     },
     {
@@ -6561,9 +6519,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 386.165,
-          "first_world_action_ms": 384.577,
-          "latency_ms": 393.78,
+          "execution_ms": 14.206,
+          "first_world_action_ms": 97.651,
+          "latency_ms": 154.931,
           "model": "qwen3-35-36",
           "program_code": "set_game_paused(True)",
           "program_output": {
@@ -6621,7 +6579,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "состояние паузы подтверждено: True",
-              "step_id": "81e896add7a94b35b350024771c71004",
+              "step_id": "24a5d7488e3e41a199342cb81196d8e7",
               "target_id": "player",
               "verified": true
             }
@@ -6635,7 +6593,7 @@
               "summary": "Поставить игровой мир на настоящую паузу."
             }
           },
-          "latency_ms": 393.78,
+          "latency_ms": 154.931,
           "selected_targets": [
             "player"
           ],
@@ -6660,7 +6618,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.837015597025553
+                "y": 0.825691159566244
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -6700,14 +6658,12 @@
       "passed": true,
       "timing": {
         "action_ready_to_mutation_ms": 1.0,
-        "client_ttfa_ms": 2955.0,
-        "server_action_ready_ms": 635.053,
-        "submit_to_action_ready_ms": 2954.0,
-        "submit_to_initial_response_ms": 1839.0
+        "client_ttfa_ms": 1610.0,
+        "server_action_ready_ms": 381.697,
+        "submit_to_action_ready_ms": 1609.0,
+        "submit_to_initial_response_ms": 890.0
       },
-      "timing_warnings": [
-        "client TTFA 2955.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-      ],
+      "timing_warnings": [],
       "wish": "Поставь игру на паузу"
     },
     {
@@ -6747,9 +6703,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 40.573,
-          "first_world_action_ms": 29.385,
-          "latency_ms": 70.672,
+          "execution_ms": 11.595,
+          "first_world_action_ms": 109.0,
+          "latency_ms": 156.679,
           "model": "qwen3-35-36",
           "program_code": "set_game_paused(False)",
           "program_output": {
@@ -6807,7 +6763,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "состояние паузы подтверждено: False",
-              "step_id": "bba17c18c8da4b97bb65b1d34a0f06ce",
+              "step_id": "de7d47cbd5d3444085865666dd6f786b",
               "target_id": "player",
               "verified": true
             }
@@ -6821,7 +6777,7 @@
               "summary": "Снять игру с паузы и продолжить течение мира."
             }
           },
-          "latency_ms": 70.672,
+          "latency_ms": 156.679,
           "selected_targets": [
             "player"
           ],
@@ -6846,7 +6802,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.832707595825195
+                "y": 0.838121795654297
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -6886,14 +6842,12 @@
       "passed": true,
       "timing": {
         "action_ready_to_mutation_ms": 1.0,
-        "client_ttfa_ms": 5406.0,
-        "server_action_ready_ms": 867.721,
-        "submit_to_action_ready_ms": 5405.0,
-        "submit_to_initial_response_ms": 4293.0
+        "client_ttfa_ms": 1859.0,
+        "server_action_ready_ms": 596.662,
+        "submit_to_action_ready_ms": 1858.0,
+        "submit_to_initial_response_ms": 1162.0
       },
-      "timing_warnings": [
-        "client TTFA 5406.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-      ],
+      "timing_warnings": [],
       "wish": "Сними с паузы игру"
     },
     {
@@ -6933,9 +6887,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 35.96,
-          "first_world_action_ms": 20.338,
-          "latency_ms": 109.379,
+          "execution_ms": 18.536,
+          "first_world_action_ms": 51.169,
+          "latency_ms": 116.585,
           "model": "qwen3-35-36",
           "program_code": "set_game_speed(0.5)",
           "program_output": {
@@ -6993,7 +6947,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "скорость мира подтверждена: 0.5",
-              "step_id": "5f28951e4fd54ec5a6ee8a0583e6f51a",
+              "step_id": "fad3ee7d6b9d4a488d70e6c07328e213",
               "target_id": "player",
               "verified": true
             }
@@ -7007,7 +6961,7 @@
               "summary": "Замедлить течение игрового мира вдвое."
             }
           },
-          "latency_ms": 109.379,
+          "latency_ms": 116.585,
           "selected_targets": [
             "player"
           ],
@@ -7032,7 +6986,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.82783031463623
+                "y": 0.833073043823242
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -7071,15 +7025,13 @@
       "level_version": "monaco-start-v1",
       "passed": true,
       "timing": {
-        "action_ready_to_mutation_ms": 0.0,
-        "client_ttfa_ms": 3463.0,
-        "server_action_ready_ms": 840.693,
-        "submit_to_action_ready_ms": 3463.0,
-        "submit_to_initial_response_ms": 2138.0
+        "action_ready_to_mutation_ms": 2.0,
+        "client_ttfa_ms": 1493.0,
+        "server_action_ready_ms": 349.461,
+        "submit_to_action_ready_ms": 1491.0,
+        "submit_to_initial_response_ms": 855.0
       },
-      "timing_warnings": [
-        "client TTFA 3463.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-      ],
+      "timing_warnings": [],
       "wish": "Замедли игру"
     },
     {
@@ -7119,9 +7071,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 100.911,
-          "first_world_action_ms": 5.048,
-          "latency_ms": 109.113,
+          "execution_ms": 13.626,
+          "first_world_action_ms": 50.669,
+          "latency_ms": 109.928,
           "model": "qwen3-35-36",
           "program_code": "set_game_speed(2.0)",
           "program_output": {
@@ -7179,7 +7131,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "скорость мира подтверждена: 2.0",
-              "step_id": "624f6d2aac6c4334952453088dbeffd3",
+              "step_id": "222983f8f75049febf7fde19ad7e58a2",
               "target_id": "player",
               "verified": true
             }
@@ -7193,7 +7145,7 @@
               "summary": "Ускорить течение игрового мира вдвое."
             }
           },
-          "latency_ms": 109.113,
+          "latency_ms": 109.928,
           "selected_targets": [
             "player"
           ],
@@ -7218,7 +7170,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.835305213928223
+                "y": 0.846384620666504
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -7258,14 +7210,12 @@
       "passed": true,
       "timing": {
         "action_ready_to_mutation_ms": 1.0,
-        "client_ttfa_ms": 2648.0,
-        "server_action_ready_ms": 633.026,
-        "submit_to_action_ready_ms": 2647.0,
-        "submit_to_initial_response_ms": 1589.0
+        "client_ttfa_ms": 1513.0,
+        "server_action_ready_ms": 282.815,
+        "submit_to_action_ready_ms": 1512.0,
+        "submit_to_initial_response_ms": 685.0
       },
-      "timing_warnings": [
-        "client TTFA 2648.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-      ],
+      "timing_warnings": [],
       "wish": "Ускорь игру"
     },
     {
@@ -7305,9 +7255,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 24.279,
-          "first_world_action_ms": 21.065,
-          "latency_ms": 174.5,
+          "execution_ms": 42.554,
+          "first_world_action_ms": 38.007,
+          "latency_ms": 92.071,
           "model": "qwen3-35-36",
           "program_code": "set_light_level(0.3)",
           "program_output": {
@@ -7365,7 +7315,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "освещённость подтверждена: 0.3",
-              "step_id": "b197f8ce73224474a7f14e35cbba02f4",
+              "step_id": "583855609d2248069a560ac3c4abf895",
               "target_id": "player",
               "verified": true
             }
@@ -7379,7 +7329,7 @@
               "summary": "Заметно затемнить весь игровой мир."
             }
           },
-          "latency_ms": 174.5,
+          "latency_ms": 92.071,
           "selected_targets": [
             "player"
           ],
@@ -7404,7 +7354,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.832893371582031
+                "y": 0.849724133809408
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -7444,13 +7394,13 @@
       "passed": true,
       "timing": {
         "action_ready_to_mutation_ms": 1.0,
-        "client_ttfa_ms": 3630.0,
-        "server_action_ready_ms": 654.179,
-        "submit_to_action_ready_ms": 3629.0,
-        "submit_to_initial_response_ms": 2590.0
+        "client_ttfa_ms": 2584.0,
+        "server_action_ready_ms": 352.406,
+        "submit_to_action_ready_ms": 2583.0,
+        "submit_to_initial_response_ms": 1835.0
       },
       "timing_warnings": [
-        "client TTFA 3630.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
+        "client TTFA 2584.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
       ],
       "wish": "Сделай мир темнее"
     },
@@ -7491,9 +7441,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 80.773,
-          "first_world_action_ms": 44.775,
-          "latency_ms": 129.354,
+          "execution_ms": 11.356,
+          "first_world_action_ms": 45.457,
+          "latency_ms": 146.505,
           "model": "qwen3-35-36",
           "program_code": "set_light_level(0.3)",
           "program_output": {
@@ -7551,7 +7501,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "освещённость подтверждена: 0.3",
-              "step_id": "077098542cf844b7be725d3f326d9868",
+              "step_id": "207cad84095c475e85aef4efa4d251a8",
               "target_id": "player",
               "verified": true
             }
@@ -7565,7 +7515,7 @@
               "summary": "Заметно затемнить весь игровой мир."
             }
           },
-          "latency_ms": 129.354,
+          "latency_ms": 146.505,
           "selected_targets": [
             "player"
           ],
@@ -7590,7 +7540,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.82329273223877
+                "y": 0.843669319152832
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -7630,14 +7580,12 @@
       "passed": true,
       "timing": {
         "action_ready_to_mutation_ms": 1.0,
-        "client_ttfa_ms": 6664.0,
-        "server_action_ready_ms": 898.932,
-        "submit_to_action_ready_ms": 6663.0,
-        "submit_to_initial_response_ms": 5475.0
+        "client_ttfa_ms": 1597.0,
+        "server_action_ready_ms": 425.996,
+        "submit_to_action_ready_ms": 1596.0,
+        "submit_to_initial_response_ms": 993.0
       },
-      "timing_warnings": [
-        "client TTFA 6664.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-      ],
+      "timing_warnings": [],
       "wish": "Погаси свет во всём мире"
     },
     {
@@ -7677,9 +7625,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 139.955,
-          "first_world_action_ms": 62.883,
-          "latency_ms": 147.215,
+          "execution_ms": 13.999,
+          "first_world_action_ms": 48.409,
+          "latency_ms": 198.767,
           "model": "qwen3-35-36",
           "program_code": "set_light_level(1.6)",
           "program_output": {
@@ -7737,7 +7685,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "освещённость подтверждена: 1.6",
-              "step_id": "ae39b96dea3544ba87fc6d9432000106",
+              "step_id": "43f234ca63bf4212b817d93ef5bae69e",
               "target_id": "player",
               "verified": true
             }
@@ -7751,7 +7699,7 @@
               "summary": "Заметно осветить весь игровой мир."
             }
           },
-          "latency_ms": 147.215,
+          "latency_ms": 198.767,
           "selected_targets": [
             "player"
           ],
@@ -7776,7 +7724,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.831061871846517
+                "y": 0.839899253845215
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -7816,13 +7764,13 @@
       "passed": true,
       "timing": {
         "action_ready_to_mutation_ms": 1.0,
-        "client_ttfa_ms": 3394.0,
-        "server_action_ready_ms": 1127.655,
-        "submit_to_action_ready_ms": 3393.0,
-        "submit_to_initial_response_ms": 2709.0
+        "client_ttfa_ms": 3346.0,
+        "server_action_ready_ms": 1887.181,
+        "submit_to_action_ready_ms": 3345.0,
+        "submit_to_initial_response_ms": 2410.0
       },
       "timing_warnings": [
-        "client TTFA 3394.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
+        "client TTFA 3346.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
       ],
       "wish": "Сделай мир светлее"
     },
@@ -7863,9 +7811,9 @@
           },
           "execution_engine": "monty",
           "execution_error": null,
-          "execution_ms": 133.67,
-          "first_world_action_ms": 15.658,
-          "latency_ms": 143.546,
+          "execution_ms": 11.859,
+          "first_world_action_ms": 47.777,
+          "latency_ms": 215.592,
           "model": "qwen3-35-36",
           "program_code": "set_light_level(1.6)",
           "program_output": {
@@ -7923,7 +7871,7 @@
               "attempt": 1.0,
               "client_observation": "Клиент применил действие и сделал новый снимок мира",
               "detail": "освещённость подтверждена: 1.6",
-              "step_id": "d0f04ee7e7a8409b941ba2a0ea02ee16",
+              "step_id": "143aa2832ed6461f95626177f0c09332",
               "target_id": "player",
               "verified": true
             }
@@ -7937,7 +7885,7 @@
               "summary": "Заметно осветить весь игровой мир."
             }
           },
-          "latency_ms": 143.546,
+          "latency_ms": 215.592,
           "selected_targets": [
             "player"
           ],
@@ -7962,7 +7910,7 @@
               ],
               "direction": {
                 "x": 0.9,
-                "y": 0.833899370829264
+                "y": 0.837377230326335
               },
               "intensity": 0.75,
               "lifetime": 0.55,
@@ -8001,15 +7949,13 @@
       "level_version": "monaco-start-v1",
       "passed": true,
       "timing": {
-        "action_ready_to_mutation_ms": 1.0,
-        "client_ttfa_ms": 3456.0,
-        "server_action_ready_ms": 901.672,
-        "submit_to_action_ready_ms": 3455.0,
-        "submit_to_initial_response_ms": 2039.0
+        "action_ready_to_mutation_ms": 2.0,
+        "client_ttfa_ms": 1363.0,
+        "server_action_ready_ms": 411.564,
+        "submit_to_action_ready_ms": 1361.0,
+        "submit_to_initial_response_ms": 742.0
       },
-      "timing_warnings": [
-        "client TTFA 3456.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-      ],
+      "timing_warnings": [],
       "wish": "Залей светом весь мир"
     }
   ],
@@ -8018,7 +7964,7 @@
   "passed": 40,
   "renderer": "llvmpipe (LLVM 5.0.1, 256 bits)",
   "suite_version": "agent-world-effects-v2",
-  "timing_violation_count": 40,
+  "timing_violation_count": 13,
   "total": 40,
   "ttfa_gate_applicable": false
 }

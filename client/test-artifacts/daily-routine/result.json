@@ -1,0 +1,102 @@
+{
+	"commands": [
+		"commute",
+		"work",
+		"work",
+		"home",
+		"commute",
+		"commute"
+	],
+	"evidence": [
+		{
+			"frame": "01-apartment",
+			"phase": "apartment",
+			"view": {
+				"buttons": [],
+				"entities": [
+					"table",
+					"bed",
+					"desk",
+					"exit",
+					"player"
+				],
+				"location": "apartment"
+			}
+		},
+		{
+			"frame": "02-metro",
+			"phase": "apartment",
+			"view": {
+				"buttons": [],
+				"entities": [
+					"train",
+					"player",
+					"passengers"
+				],
+				"location": "metro"
+			}
+		},
+		{
+			"frame": "03-office",
+			"phase": "office",
+			"view": {
+				"buttons": [
+					"ОБРАБОТАТЬ"
+				],
+				"entities": [
+					"workdesk",
+					"player"
+				],
+				"location": "office"
+			}
+		},
+		{
+			"frame": "04-home",
+			"phase": "apartment",
+			"view": {
+				"buttons": [],
+				"entities": [
+					"table",
+					"bed",
+					"desk",
+					"exit",
+					"player"
+				],
+				"location": "apartment"
+			}
+		},
+		{
+			"frame": "05-failed-trip",
+			"phase": "apartment",
+			"view": {
+				"buttons": [
+					"Отправиться на работу  [E]"
+				],
+				"entities": [
+					"table",
+					"bed",
+					"desk",
+					"exit",
+					"player"
+				],
+				"location": "apartment"
+			}
+		},
+		{
+			"frame": "06-recovered",
+			"phase": "office",
+			"view": {
+				"buttons": [
+					"ОБРАБОТАТЬ"
+				],
+				"entities": [
+					"workdesk",
+					"player"
+				],
+				"location": "office"
+			}
+		}
+	],
+	"issues": [],
+	"passed": true
+}

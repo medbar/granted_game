@@ -1,0 +1,204 @@
+{
+  "version": "bureaucracy-district-v1",
+  "title": "Бюрократия реальности",
+  "bounds": [
+    20,
+    55,
+    1200,
+    540
+  ],
+  "rooms": [
+    {
+      "id": "apartment",
+      "name": "КВАРТИРА  № 17",
+      "rect": [
+        50,
+        80,
+        290,
+        220
+      ],
+      "color": "#334641"
+    },
+    {
+      "id": "office",
+      "name": "ОТДЕЛ ОБРАБОТКИ",
+      "rect": [
+        385,
+        80,
+        320,
+        220
+      ],
+      "color": "#394758"
+    },
+    {
+      "id": "archive",
+      "name": "ГОРОДСКОЙ АРХИВ",
+      "rect": [
+        750,
+        80,
+        280,
+        220
+      ],
+      "color": "#4b3e53"
+    },
+    {
+      "id": "park",
+      "name": "СКВЕР",
+      "rect": [
+        50,
+        425,
+        360,
+        160
+      ],
+      "color": "#31473e"
+    },
+    {
+      "id": "precinct",
+      "name": "ПОЛИЦИЯ",
+      "rect": [
+        750,
+        450,
+        240,
+        135
+      ],
+      "color": "#4a3937"
+    },
+    {
+      "id": "outside",
+      "name": "ЗА КОРДОНОМ",
+      "rect": [
+        1080,
+        70,
+        120,
+        510
+      ],
+      "color": "#293d38"
+    }
+  ],
+  "barriers": [
+    {
+      "x": 1030,
+      "y": 55,
+      "w": 16,
+      "h": 267
+    },
+    {
+      "x": 1030,
+      "y": 427,
+      "w": 16,
+      "h": 168
+    }
+  ],
+  "objects": {
+    "table": {
+      "id": "table",
+      "kind": "table",
+      "name": "Ужин",
+      "x": 120,
+      "y": 155,
+      "command": "eat"
+    },
+    "bed": {
+      "id": "bed",
+      "kind": "bed",
+      "name": "Кровать",
+      "x": 280,
+      "y": 170,
+      "command": "sleep"
+    },
+    "desk": {
+      "id": "desk",
+      "kind": "desk",
+      "name": "Письменный стол",
+      "x": 210,
+      "y": 250,
+      "command": "sign"
+    },
+    "bus": {
+      "id": "bus",
+      "kind": "bus",
+      "name": "На работу",
+      "x": 335,
+      "y": 348,
+      "command": "commute"
+    },
+    "workdesk": {
+      "id": "workdesk",
+      "kind": "desk",
+      "name": "ОБРАБОТАТЬ",
+      "x": 525,
+      "y": 180,
+      "command": "work"
+    },
+    "checkpoint": {
+      "id": "checkpoint",
+      "kind": "door",
+      "name": "КОРДОН",
+      "x": 1038,
+      "y": 374,
+      "w": 16,
+      "h": 105,
+      "open": false,
+      "legal_status": "restricted"
+    },
+    "side_gate": {
+      "id": "side_gate",
+      "kind": "door",
+      "name": "Дверь архива",
+      "x": 748,
+      "y": 240,
+      "w": 14,
+      "h": 65,
+      "open": false,
+      "legal_status": "restricted"
+    },
+    "car": {
+      "id": "car",
+      "kind": "car",
+      "name": "Служебный автомобиль",
+      "x": 560,
+      "y": 395,
+      "legal_status": "ordinary"
+    },
+    "rock": {
+      "id": "rock",
+      "kind": "rock",
+      "name": "Камень в сквере",
+      "x": 245,
+      "y": 500
+    },
+    "tree": {
+      "id": "tree",
+      "kind": "tree",
+      "name": "Липа",
+      "x": 100,
+      "y": 510
+    },
+    "npc_1": {
+      "id": "npc_1",
+      "kind": "npc",
+      "name": "Коллега",
+      "x": 640,
+      "y": 350
+    },
+    "police_1": {
+      "id": "police_1",
+      "kind": "police",
+      "name": "Инспектор",
+      "x": 810,
+      "y": 357,
+      "home_x": 810,
+      "home_y": 357
+    },
+    "police_2": {
+      "id": "police_2",
+      "kind": "police",
+      "name": "Патруль",
+      "x": 920,
+      "y": 510,
+      "home_x": 920,
+      "home_y": 510
+    }
+  }
+}
+

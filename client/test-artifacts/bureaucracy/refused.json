@@ -1,0 +1,395 @@
+{
+	"attention": 3.0,
+	"case_count": 2.0,
+	"case_status": "failed",
+	"contract_ready": true,
+	"contract_signed": true,
+	"contract_terms": "Исполнение желаний в обмен на твою жизнь после смерти.",
+	"day": 2.0,
+	"elapsed": 9.4,
+	"id": "5428dce12695424ebf12134da0bbba84",
+	"level": {
+		"barriers": [
+			{
+				"h": 267.0,
+				"w": 16.0,
+				"x": 1030.0,
+				"y": 55.0
+			},
+			{
+				"h": 168.0,
+				"w": 16.0,
+				"x": 1030.0,
+				"y": 427.0
+			}
+		],
+		"bounds": [
+			20.0,
+			55.0,
+			1200.0,
+			540.0
+		],
+		"objects": {
+			"bed": {
+				"command": "sleep",
+				"id": "bed",
+				"kind": "bed",
+				"name": "Кровать",
+				"x": 280.0,
+				"y": 170.0
+			},
+			"bus": {
+				"command": "commute",
+				"id": "bus",
+				"kind": "bus",
+				"name": "На работу",
+				"x": 335.0,
+				"y": 348.0
+			},
+			"car": {
+				"id": "car",
+				"kind": "car",
+				"legal_status": "ordinary",
+				"name": "Служебный автомобиль",
+				"x": 560.0,
+				"y": 395.0
+			},
+			"checkpoint": {
+				"h": 105.0,
+				"id": "checkpoint",
+				"kind": "door",
+				"legal_status": "restricted",
+				"name": "КОРДОН",
+				"open": false,
+				"w": 16.0,
+				"x": 1038.0,
+				"y": 374.0
+			},
+			"desk": {
+				"command": "sign",
+				"id": "desk",
+				"kind": "desk",
+				"name": "Письменный стол",
+				"x": 210.0,
+				"y": 250.0
+			},
+			"npc_1": {
+				"id": "npc_1",
+				"kind": "npc",
+				"name": "Коллега",
+				"x": 640.0,
+				"y": 350.0
+			},
+			"police_1": {
+				"home_x": 810.0,
+				"home_y": 357.0,
+				"id": "police_1",
+				"kind": "police",
+				"name": "Инспектор",
+				"x": 810.0,
+				"y": 357.0
+			},
+			"police_2": {
+				"home_x": 920.0,
+				"home_y": 510.0,
+				"id": "police_2",
+				"kind": "police",
+				"name": "Патруль",
+				"x": 920.0,
+				"y": 510.0
+			},
+			"rock": {
+				"id": "rock",
+				"kind": "rock",
+				"name": "Камень в сквере",
+				"x": 245.0,
+				"y": 500.0
+			},
+			"side_gate": {
+				"h": 65.0,
+				"id": "side_gate",
+				"kind": "door",
+				"legal_status": "restricted",
+				"name": "Дверь архива",
+				"open": false,
+				"w": 14.0,
+				"x": 748.0,
+				"y": 240.0
+			},
+			"table": {
+				"command": "eat",
+				"id": "table",
+				"kind": "table",
+				"name": "Ужин",
+				"x": 120.0,
+				"y": 155.0
+			},
+			"tree": {
+				"id": "tree",
+				"kind": "tree",
+				"name": "Липа",
+				"x": 100.0,
+				"y": 510.0
+			},
+			"workdesk": {
+				"command": "work",
+				"id": "workdesk",
+				"kind": "desk",
+				"name": "ОБРАБОТАТЬ",
+				"x": 525.0,
+				"y": 180.0
+			}
+		},
+		"rooms": [
+			{
+				"color": "#334641",
+				"id": "apartment",
+				"name": "КВАРТИРА  № 17",
+				"rect": [
+					50.0,
+					80.0,
+					290.0,
+					220.0
+				]
+			},
+			{
+				"color": "#394758",
+				"id": "office",
+				"name": "ОТДЕЛ ОБРАБОТКИ",
+				"rect": [
+					385.0,
+					80.0,
+					320.0,
+					220.0
+				]
+			},
+			{
+				"color": "#4b3e53",
+				"id": "archive",
+				"name": "ГОРОДСКОЙ АРХИВ",
+				"rect": [
+					750.0,
+					80.0,
+					280.0,
+					220.0
+				]
+			},
+			{
+				"color": "#31473e",
+				"id": "park",
+				"name": "СКВЕР",
+				"rect": [
+					50.0,
+					425.0,
+					360.0,
+					160.0
+				]
+			},
+			{
+				"color": "#4a3937",
+				"id": "precinct",
+				"name": "ПОЛИЦИЯ",
+				"rect": [
+					750.0,
+					450.0,
+					240.0,
+					135.0
+				]
+			},
+			{
+				"color": "#293d38",
+				"id": "outside",
+				"name": "ЗА КОРДОНОМ",
+				"rect": [
+					1080.0,
+					70.0,
+					120.0,
+					510.0
+				]
+			}
+		],
+		"title": "Бюрократия реальности",
+		"version": "bureaucracy-district-v1"
+	},
+	"lighting": 0.8,
+	"meals": 1.0,
+	"message": "Адвокат: сейчас не удалось добиться решения. Мир не изменён. Попробуйте уточнить желание.",
+	"objects": {
+		"bed": {
+			"command": "sleep",
+			"id": "bed",
+			"kind": "bed",
+			"name": "Кровать",
+			"x": 280.0,
+			"y": 170.0
+		},
+		"bus": {
+			"command": "commute",
+			"id": "bus",
+			"kind": "bus",
+			"name": "На работу",
+			"x": 335.0,
+			"y": 348.0
+		},
+		"car": {
+			"id": "car",
+			"kind": "car",
+			"legal_status": "ordinary",
+			"name": "Служебный автомобиль",
+			"x": 560.0,
+			"y": 395.0
+		},
+		"checkpoint": {
+			"h": 105.0,
+			"id": "checkpoint",
+			"kind": "door",
+			"legal_status": "emergency_exit",
+			"name": "КОРДОН",
+			"open": true,
+			"w": 16.0,
+			"x": 1038.0,
+			"y": 374.0
+		},
+		"desk": {
+			"command": "sign",
+			"id": "desk",
+			"kind": "desk",
+			"name": "Письменный стол",
+			"x": 210.0,
+			"y": 250.0
+		},
+		"npc_1": {
+			"id": "npc_1",
+			"kind": "npc",
+			"name": "Коллега",
+			"x": 640.0,
+			"y": 350.0
+		},
+		"police_1": {
+			"chasing": false,
+			"home_x": 810.0,
+			"home_y": 357.0,
+			"id": "police_1",
+			"kind": "police",
+			"name": "Инспектор",
+			"x": 776.375623857992,
+			"y": 357.0
+		},
+		"police_2": {
+			"chasing": false,
+			"home_x": 920.0,
+			"home_y": 510.0,
+			"id": "police_2",
+			"kind": "police",
+			"name": "Патруль",
+			"x": 886.375623857992,
+			"y": 510.0
+		},
+		"rock": {
+			"id": "rock",
+			"kind": "rock",
+			"name": "Камень в сквере",
+			"x": 245.0,
+			"y": 500.0
+		},
+		"side_gate": {
+			"h": 65.0,
+			"id": "side_gate",
+			"kind": "door",
+			"legal_status": "restricted",
+			"name": "Дверь архива",
+			"open": false,
+			"w": 14.0,
+			"x": 748.0,
+			"y": 240.0
+		},
+		"table": {
+			"command": "eat",
+			"id": "table",
+			"kind": "table",
+			"name": "Ужин",
+			"x": 120.0,
+			"y": 155.0
+		},
+		"tree": {
+			"id": "tree",
+			"kind": "tree",
+			"name": "Липа",
+			"x": 100.0,
+			"y": 510.0
+		},
+		"workdesk": {
+			"command": "work",
+			"id": "workdesk",
+			"kind": "desk",
+			"name": "ОБРАБОТАТЬ",
+			"x": 525.0,
+			"y": 180.0
+		}
+	},
+	"pace": 1.0,
+	"phase": "city",
+	"player": {
+		"crouching": false,
+		"driving": false,
+		"health": 100.0,
+		"id": "player",
+		"protected": false,
+		"recognizable": false,
+		"valid_pass": false,
+		"x": 1109.0,
+		"y": 355.0
+	},
+	"precedents": [
+		{
+			"basis": "life_safety",
+			"id": "BOR-0001",
+			"rule": "Пути эвакуации и транспорт для спасения жизни получают приоритет доступа.",
+			"scope": "doors:emergency_exit",
+			"title": "Приоритет сохранения жизни",
+			"uses": 1.0
+		},
+		{
+			"basis": "identity_review",
+			"id": "BOR-0002",
+			"rule": "Неподтверждённое описание лица исключается из текущего розыска.",
+			"scope": "erase_description",
+			"title": "Пересмотр идентификации",
+			"uses": 1.0
+		}
+	],
+	"processed": 2.0,
+	"receipts": {
+		"wish_10647369": {
+			"argument": "Дверь 'КОРДОН' является единственным проходом для эвакуации из зоны с ограниченным доступом. Согласно Закону о Приоритете Сохранения Жизни, любой путь, необходимый для безопасного покидания опасной зоны, получает статус аварийного выхода, независимо от его первоначальной классификации.",
+			"attempts": 1.0,
+			"basis": "life_safety",
+			"effect": "open_exit",
+			"message": "Адвокат: КОРДОН: аварийный выход признан. Проход открыт для всех — включая преследователей.",
+			"precedent_id": "BOR-0001",
+			"request_id": "wish_10647369",
+			"status": "completed",
+			"target": "checkpoint"
+		},
+		"wish_25903838": {
+			"argument": "Описание лица не подтверждено и исключается из текущего розыска согласно статье Пересмотра идентификации.",
+			"attempts": 1.0,
+			"basis": "identity_review",
+			"effect": "erase_description",
+			"message": "Адвокат: Описание исключено из розыска. Полиция больше вас не узнаёт.",
+			"precedent_id": "BOR-0002",
+			"request_id": "wish_25903838",
+			"status": "completed",
+			"target": "player"
+		},
+		"wish_33461145": {
+			"attempts": 3.0,
+			"error": "ValidationError: 3 validation errors for Petition\neffect\n  Input should be 'open_exit', 'erase_description', 'validate_pass', 'protect', 'emergency_vehicle', 'transform', 'create', 'lighting' or 'pace' [type=literal_error, input_value='unsupported', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\ntarget\n  String should have at least 1 character [type=string_too_short, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_too_short\nbasis\n  String should have at least 1 character [type=string_too_short, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_too_short",
+			"message": "Адвокат: сейчас не удалось добиться решения. Мир не изменён. Попробуйте уточнить желание.",
+			"request_id": "wish_33461145",
+			"status": "failed"
+		}
+	},
+	"revision": 60.0,
+	"status": "escaped"
+}

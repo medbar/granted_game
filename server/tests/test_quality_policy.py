@@ -1,9 +1,32 @@
 from pathlib import Path
+import copy
+import json
 
 from scripts.quality_policy import validate_change, validate_repository
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
+
+
+def test_default_gates_evaluate_laws_not_legacy_genie():
+    from scripts.quality_policy import select_gates, validate_manifest
+    manifest = json.loads((PROJECT_ROOT / "openspec/quality-gates.json").read_text(encoding="utf-8"))
+    assert manifest["default_profile"] == "legal"
+    selected = select_gates(manifest, ["agent_behavior", "player_visible"])
+    assert {"legal_frozen", "legal_live", "legal_client"} <= set(selected)
+    assert not {"monty_live_model", "environment_evolution", "agent_level_live_model"} & set(selected)
+    legacy = select_gates(manifest, ["agent_behavior"], profile="legacy_genie")
+    assert {"monty_live_model", "environment_evolution", "agent_level_live_model"} <= set(legacy)
+    weakened = copy.deepcopy(manifest)
+    weakened["change_classes"]["agent_behavior"]["required_gates"].remove("legal_live")
+    assert validate_manifest(weakened)
+
+
+def test_verify_defaults_to_the_legal_profile():
+    verify = (PROJECT_ROOT / "verify.ps1").read_text(encoding="utf-8")
+    assert '[string]$Profile = "legal"' in verify
+    assert "run_legal_evals.py" in verify
+    assert "bureaucracy_runner.gd" in verify
 
 
 def test_repository_quality_policy_is_valid() -> None:

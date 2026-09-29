@@ -35,9 +35,9 @@
       },
       "execution_engine": "monty",
       "execution_error": null,
-      "execution_ms": 178.474,
-      "first_world_action_ms": 176.51,
-      "latency_ms": 257.857,
+      "execution_ms": 47.057,
+      "first_world_action_ms": 30.049,
+      "latency_ms": 125.253,
       "model": "qwen3-35-36",
       "program_code": "apply_state(nearest('enemy'), 'burning', duration=30)",
       "program_output": {
@@ -95,7 +95,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "состояние burning подтверждено",
-          "step_id": "ee0fb11f146946fd881c5aba4920a441",
+          "step_id": "2f1ba48e92284a7d99af49281516cf43",
           "target_id": "guard_01",
           "verified": true
         }
@@ -109,7 +109,7 @@
           "summary": "Поджечь выбранного персонажа."
         }
       },
-      "latency_ms": 257.857,
+      "latency_ms": 125.253,
       "selected_targets": [
         "guard_01"
       ],
@@ -133,21 +133,21 @@
             "affect_physical"
           ],
           "direction": {
-            "x": 5.21496709187826,
-            "y": 1.4835262298584
+            "x": 5.2666259765625,
+            "y": 1.41656913757324
           },
           "intensity": 0.75,
           "lifetime": 0.55,
           "origin": {
-            "x": -3.88503290812174,
-            "y": 0.651042683919271
+            "x": -3.8333740234375,
+            "y": 0.581457328796387
           },
           "primitive": "BURST",
           "radius": 0.8,
           "speed": 0.0,
           "target": {
-            "x": -3.88503290812174,
-            "y": 0.651042683919271
+            "x": -3.8333740234375,
+            "y": 0.581457328796387
           },
           "turbulence": 0.35
         }
@@ -172,13 +172,11 @@
   "passed": true,
   "timing": {
     "action_ready_to_mutation_ms": 1.0,
-    "client_ttfa_ms": 5747.0,
-    "server_action_ready_ms": 1447.385,
-    "submit_to_action_ready_ms": 5746.0,
-    "submit_to_initial_response_ms": 5056.0
+    "client_ttfa_ms": 1867.0,
+    "server_action_ready_ms": 425.682,
+    "submit_to_action_ready_ms": 1866.0,
+    "submit_to_initial_response_ms": 969.0
   },
-  "timing_warnings": [
-    "client TTFA 5747.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-  ],
+  "timing_warnings": [],
   "wish": "Подожги врага"
 }

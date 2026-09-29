@@ -1,33 +1,43 @@
 {
-  "schema_version": 1,
-  "selection": "Use the union of required_gates for every applicable change class.",
+  "schema_version": 2,
+  "selection": "Use the union of required_gates for all applicable classes in the selected profile. Default: legal; archive-only: legacy_genie.",
   "change_classes": {
     "deterministic_server": {
-      "required_gates": ["quality_policy", "server_tests"]
+      "required_gates": [
+        "quality_policy",
+        "server_tests",
+        "legal_frozen"
+      ]
     },
     "agent_behavior": {
       "required_gates": [
         "quality_policy",
         "server_tests",
-        "environment_evolution",
-        "monty_live_model",
-        "agent_level_live_model"
+        "legal_frozen",
+        "legal_live"
       ]
     },
     "player_visible": {
       "required_gates": [
         "quality_policy",
         "server_tests",
-        "godot_smoke",
-        "godot_client_loop",
+        "legal_smoke",
+        "legal_client",
         "trajectory_review"
       ]
     },
     "observability": {
-      "required_gates": ["quality_policy", "server_tests"]
+      "required_gates": [
+        "quality_policy",
+        "server_tests"
+      ]
     },
     "tooling": {
-      "required_gates": ["quality_policy", "server_tests"]
+      "required_gates": [
+        "quality_policy",
+        "server_tests",
+        "legal_frozen"
+      ]
     }
   },
   "gates": {
@@ -70,6 +80,70 @@
       "kind": "manual-review",
       "command": "Open /observer and the final runtime trajectory for the changed wish cases",
       "evidence": "completed trajectory checklist in eval-plan.md"
+    },
+    "legal_frozen": {
+      "kind": "automated-legal-eval",
+      "command": "server/.venv/Scripts/python.exe server/scripts/run_legal_evals.py --mode frozen",
+      "evidence": "32 legal scenarios; independent expected world, allowed diff, behavioral probes, refusal/reuse/reload/replay checks; no false-positive fulfillment"
+    },
+    "legal_live": {
+      "kind": "live-model-eval",
+      "command": "server/.venv/Scripts/python.exe server/scripts/run_legal_evals.py --mode live",
+      "evidence": "21 eligible legal scenarios with real model, no fixture fallback; 11 frozen-only cases excluded explicitly; review each legal-* report"
+    },
+    "legal_smoke": {
+      "kind": "automated-client",
+      "command": "<GodotPath> --headless --path client --script res://tests/legal_smoke_runner.gd",
+      "evidence": "LEGAL_SMOKE_OK; default campaign and legal district data load without script errors"
+    },
+    "legal_client": {
+      "kind": "automated-client-in-loop",
+      "command": "Run daily_routine_runner.gd and bureaucracy_runner.gd with <GodotPath> --path client --audio-driver Dummy --script res://tests/<runner>",
+      "evidence": "DAILY_ROUTINE_OK and BUREAUCRACY_OK; apartment/metro/one-button work/return/error-retry JSON and PNG; voluntary contract, real exit crossing, continued movement, three attempts and visible refusal"
+    }
+  },
+  "default_profile": "legal",
+  "profiles": {
+    "legacy_genie": {
+      "description": "Archived genie/Monaco regressions; never evidence for the current legal world.",
+      "change_classes": {
+        "deterministic_server": {
+          "required_gates": [
+            "quality_policy",
+            "server_tests"
+          ]
+        },
+        "agent_behavior": {
+          "required_gates": [
+            "quality_policy",
+            "server_tests",
+            "environment_evolution",
+            "monty_live_model",
+            "agent_level_live_model"
+          ]
+        },
+        "player_visible": {
+          "required_gates": [
+            "quality_policy",
+            "server_tests",
+            "godot_smoke",
+            "godot_client_loop",
+            "trajectory_review"
+          ]
+        },
+        "observability": {
+          "required_gates": [
+            "quality_policy",
+            "server_tests"
+          ]
+        },
+        "tooling": {
+          "required_gates": [
+            "quality_policy",
+            "server_tests"
+          ]
+        }
+      }
     }
   }
 }

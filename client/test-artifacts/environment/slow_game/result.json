@@ -35,9 +35,9 @@
       },
       "execution_engine": "monty",
       "execution_error": null,
-      "execution_ms": 35.96,
-      "first_world_action_ms": 20.338,
-      "latency_ms": 109.379,
+      "execution_ms": 18.536,
+      "first_world_action_ms": 51.169,
+      "latency_ms": 116.585,
       "model": "qwen3-35-36",
       "program_code": "set_game_speed(0.5)",
       "program_output": {
@@ -95,7 +95,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "скорость мира подтверждена: 0.5",
-          "step_id": "5f28951e4fd54ec5a6ee8a0583e6f51a",
+          "step_id": "fad3ee7d6b9d4a488d70e6c07328e213",
           "target_id": "player",
           "verified": true
         }
@@ -109,7 +109,7 @@
           "summary": "Замедлить течение игрового мира вдвое."
         }
       },
-      "latency_ms": 109.379,
+      "latency_ms": 116.585,
       "selected_targets": [
         "player"
       ],
@@ -134,7 +134,7 @@
           ],
           "direction": {
             "x": 0.9,
-            "y": 0.82783031463623
+            "y": 0.833073043823242
           },
           "intensity": 0.75,
           "lifetime": 0.55,
@@ -173,14 +173,12 @@
   "level_version": "monaco-start-v1",
   "passed": true,
   "timing": {
-    "action_ready_to_mutation_ms": 0.0,
-    "client_ttfa_ms": 3463.0,
-    "server_action_ready_ms": 840.693,
-    "submit_to_action_ready_ms": 3463.0,
-    "submit_to_initial_response_ms": 2138.0
+    "action_ready_to_mutation_ms": 2.0,
+    "client_ttfa_ms": 1493.0,
+    "server_action_ready_ms": 349.461,
+    "submit_to_action_ready_ms": 1491.0,
+    "submit_to_initial_response_ms": 855.0
   },
-  "timing_warnings": [
-    "client TTFA 3463.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-  ],
+  "timing_warnings": [],
   "wish": "Замедли игру"
 }

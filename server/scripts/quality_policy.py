@@ -103,6 +103,59 @@ def validate_change(change: Path) -> list[str]:
     return errors
 
 
+def select_gates(manifest: dict, change_classes: list[str], profile: str | None = None) -> list[str]:
+    profile = profile or manifest.get("default_profile", "legal")
+    if profile == "legal":
+        classes = manifest.get("change_classes", {})
+    else:
+        definition = manifest.get("profiles", {}).get(profile)
+        if definition is None:
+            raise ValueError(f"unknown quality profile: {profile}")
+        classes = definition.get("change_classes", {})
+    if not change_classes or set(change_classes) - set(classes):
+        raise ValueError("empty or unknown change-class selection")
+    selected = []
+    for name in change_classes:
+        for gate in classes[name]["required_gates"]:
+            if gate not in selected:
+                selected.append(gate)
+    return selected
+
+
+def validate_manifest(manifest: dict) -> list[str]:
+    errors = []
+    if manifest.get("default_profile") != "legal":
+        errors.append("default quality profile must be legal")
+    required = {
+        "deterministic_server": {"quality_policy", "server_tests", "legal_frozen"},
+        "agent_behavior": {"quality_policy", "server_tests", "legal_frozen", "legal_live"},
+        "player_visible": {"quality_policy", "server_tests", "legal_smoke", "legal_client", "trajectory_review"},
+        "observability": {"quality_policy", "server_tests"},
+        "tooling": {"quality_policy", "server_tests", "legal_frozen"},
+    }
+    classes = manifest.get("change_classes", {})
+    legacy_gates = {"environment_evolution", "monty_live_model", "agent_level_live_model",
+                    "godot_smoke", "godot_client_loop"}
+    for name, gates in required.items():
+        actual = set(classes.get(name, {}).get("required_gates", []))
+        if gates - actual:
+            errors.append(f"legal {name} missing gates: {sorted(gates - actual)}")
+        if actual & legacy_gates:
+            errors.append(f"legal {name} must not use archived genie gates")
+    profiles = manifest.get("profiles", {})
+    if "legacy_genie" not in profiles:
+        errors.append("explicit legacy_genie profile must be preserved")
+    for profile, definition in profiles.items():
+        pc = definition.get("change_classes", {})
+        if REQUIRED_CLASSES - set(pc):
+            errors.append(f"{profile} missing change classes")
+        for name, value in pc.items():
+            for gate in value.get("required_gates", []):
+                if gate not in manifest.get("gates", {}):
+                    errors.append(f"{profile}/{name} references unknown gate {gate}")
+    return errors
+
+
 def validate_repository(root: Path) -> list[str]:
     errors: list[str] = []
     openspec = root / "openspec"
@@ -137,6 +190,7 @@ def validate_repository(root: Path) -> list[str]:
         except json.JSONDecodeError as error:
             errors.append(f"invalid quality-gates.json: {error}")
         else:
+            errors.extend(validate_manifest(manifest))
             classes = manifest.get("change_classes", {})
             gates = manifest.get("gates", {})
             missing_classes = REQUIRED_CLASSES - set(classes)
@@ -176,15 +230,25 @@ def validate_repository(root: Path) -> list[str]:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Validate Granted's OpenSpec/TDD/eval-first policy")
+    parser = argparse.ArgumentParser(description="Validate the legal-reality OpenSpec/TDD/eval-first policy")
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[2])
+    parser.add_argument("--profile", choices=("legal", "legacy_genie"), default="legal")
+    parser.add_argument("--classes", nargs="+", default=["agent_behavior", "player_visible"])
+    parser.add_argument("--print-gates", action="store_true")
     args = parser.parse_args()
     errors = validate_repository(args.root.resolve())
     if errors:
         for error in errors:
             print(f"FAIL: {error}")
         raise SystemExit(1)
-    print("Granted quality policy: PASS")
+    if args.print_gates:
+        manifest = json.loads((args.root / "openspec/quality-gates.json").read_text(encoding="utf-8"))
+        try:
+            print(json.dumps({"profile": args.profile, "gates": select_gates(manifest, args.classes, args.profile)}, indent=2))
+        except ValueError as exc:
+            parser.error(str(exc))
+    else:
+        print("Bureaucracy quality policy: PASS")
 
 
 if __name__ == "__main__":

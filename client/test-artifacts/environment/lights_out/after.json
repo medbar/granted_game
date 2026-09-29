@@ -2746,84 +2746,8 @@
           "wetness": 0.0
         },
         "position": {
-          "x": -4.47595418294271,
-          "y": -3.08958333333333
-        },
-        "properties": {
-          "aggro_target": "",
-          "prototype": "enemy",
-          "removed": false,
-          "visible": true
-        },
-        "radius": 0.266666666666667,
-        "states": [],
-        "tags": [
-          "living",
-          "enemy",
-          "guard",
-          "dwarf",
-          "organic"
-        ],
-        "velocity": {
-          "x": -1.17657178243001,
-          "y": 0.552882130940755
-        }
-      },
-      {
-        "health": 58.0,
-        "id": "guard_02",
-        "kind": "creature",
-        "material": {
-          "brittleness": 0.1,
-          "conductivity": 0.2,
-          "flammability": 0.35,
-          "hardness": 0.2,
-          "mass": 1.0,
-          "name": "organic",
-          "temperature": 0.5,
-          "wetness": 0.0
-        },
-        "position": {
-          "x": 0.821435483296712,
-          "y": -4.16800486246745
-        },
-        "properties": {
-          "aggro_target": "",
-          "prototype": "enemy",
-          "removed": false,
-          "visible": true
-        },
-        "radius": 0.266666666666667,
-        "states": [],
-        "tags": [
-          "living",
-          "enemy",
-          "guard",
-          "dwarf",
-          "organic"
-        ],
-        "velocity": {
-          "x": -1.17393480936686,
-          "y": 0.558459726969401
-        }
-      },
-      {
-        "health": 58.0,
-        "id": "guard_03",
-        "kind": "creature",
-        "material": {
-          "brittleness": 0.1,
-          "conductivity": 0.2,
-          "flammability": 0.35,
-          "hardness": 0.2,
-          "mass": 1.0,
-          "name": "organic",
-          "temperature": 0.5,
-          "wetness": 0.0
-        },
-        "position": {
-          "x": 3.76777140299479,
-          "y": 0.676838620503743
+          "x": -5.68224894205729,
+          "y": 2.11962178548177
         },
         "properties": {
           "aggro_target": "",
@@ -2842,7 +2766,83 @@
         ],
         "velocity": {
           "x": 0.0,
-          "y": 0.564004453023275
+          "y": -1.27388229370117
+        }
+      },
+      {
+        "health": 58.0,
+        "id": "guard_02",
+        "kind": "creature",
+        "material": {
+          "brittleness": 0.1,
+          "conductivity": 0.2,
+          "flammability": 0.35,
+          "hardness": 0.2,
+          "mass": 1.0,
+          "name": "organic",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 0.0305392026901245,
+          "y": -2.48587188720703
+        },
+        "properties": {
+          "aggro_target": "",
+          "prototype": "enemy",
+          "removed": false,
+          "visible": true
+        },
+        "radius": 0.266666666666667,
+        "states": [],
+        "tags": [
+          "living",
+          "enemy",
+          "guard",
+          "dwarf",
+          "organic"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": -1.28360926310221
+        }
+      },
+      {
+        "health": 58.0,
+        "id": "guard_03",
+        "kind": "creature",
+        "material": {
+          "brittleness": 0.1,
+          "conductivity": 0.2,
+          "flammability": 0.35,
+          "hardness": 0.2,
+          "mass": 1.0,
+          "name": "organic",
+          "temperature": 0.5,
+          "wetness": 0.0
+        },
+        "position": {
+          "x": 3.7677500406901,
+          "y": 4.04830576578776
+        },
+        "properties": {
+          "aggro_target": "",
+          "prototype": "enemy",
+          "removed": false,
+          "visible": true
+        },
+        "radius": 0.266666666666667,
+        "states": [],
+        "tags": [
+          "living",
+          "enemy",
+          "guard",
+          "dwarf",
+          "organic"
+        ],
+        "velocity": {
+          "x": 0.0,
+          "y": -1.29084091186523
         }
       },
       {
@@ -2860,8 +2860,8 @@
           "wetness": 0.0
         },
         "position": {
-          "x": -7.83430379231771,
-          "y": 2.24776102701823
+          "x": -8.92846374511719,
+          "y": 4.03030548095703
         },
         "properties": {
           "aggro_target": "",
@@ -2880,8 +2880,8 @@
           "organic"
         ],
         "velocity": {
-          "x": 0.350481128692627,
-          "y": 0.0
+          "x": 0.347858397165934,
+          "y": -0.311082490285238
         }
       },
       {
@@ -3109,8 +3109,8 @@
           "wetness": 0.0
         },
         "position": {
-          "x": 0.377993774414063,
-          "y": -4.46990763346354
+          "x": 0.4,
+          "y": -3.8
         },
         "properties": {
           "collected": false,

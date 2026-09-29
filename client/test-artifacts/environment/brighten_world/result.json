@@ -35,9 +35,9 @@
       },
       "execution_engine": "monty",
       "execution_error": null,
-      "execution_ms": 139.955,
-      "first_world_action_ms": 62.883,
-      "latency_ms": 147.215,
+      "execution_ms": 13.999,
+      "first_world_action_ms": 48.409,
+      "latency_ms": 198.767,
       "model": "qwen3-35-36",
       "program_code": "set_light_level(1.6)",
       "program_output": {
@@ -95,7 +95,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "освещённость подтверждена: 1.6",
-          "step_id": "ae39b96dea3544ba87fc6d9432000106",
+          "step_id": "43f234ca63bf4212b817d93ef5bae69e",
           "target_id": "player",
           "verified": true
         }
@@ -109,7 +109,7 @@
           "summary": "Заметно осветить весь игровой мир."
         }
       },
-      "latency_ms": 147.215,
+      "latency_ms": 198.767,
       "selected_targets": [
         "player"
       ],
@@ -134,7 +134,7 @@
           ],
           "direction": {
             "x": 0.9,
-            "y": 0.831061871846517
+            "y": 0.839899253845215
           },
           "intensity": 0.75,
           "lifetime": 0.55,
@@ -174,13 +174,13 @@
   "passed": true,
   "timing": {
     "action_ready_to_mutation_ms": 1.0,
-    "client_ttfa_ms": 3394.0,
-    "server_action_ready_ms": 1127.655,
-    "submit_to_action_ready_ms": 3393.0,
-    "submit_to_initial_response_ms": 2709.0
+    "client_ttfa_ms": 3346.0,
+    "server_action_ready_ms": 1887.181,
+    "submit_to_action_ready_ms": 3345.0,
+    "submit_to_initial_response_ms": 2410.0
   },
   "timing_warnings": [
-    "client TTFA 3394.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
+    "client TTFA 3346.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
   ],
   "wish": "Сделай мир светлее"
 }

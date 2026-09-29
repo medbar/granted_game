@@ -35,9 +35,9 @@
       },
       "execution_engine": "monty",
       "execution_error": null,
-      "execution_ms": 133.67,
-      "first_world_action_ms": 15.658,
-      "latency_ms": 143.546,
+      "execution_ms": 11.859,
+      "first_world_action_ms": 47.777,
+      "latency_ms": 215.592,
       "model": "qwen3-35-36",
       "program_code": "set_light_level(1.6)",
       "program_output": {
@@ -95,7 +95,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "освещённость подтверждена: 1.6",
-          "step_id": "d0f04ee7e7a8409b941ba2a0ea02ee16",
+          "step_id": "143aa2832ed6461f95626177f0c09332",
           "target_id": "player",
           "verified": true
         }
@@ -109,7 +109,7 @@
           "summary": "Заметно осветить весь игровой мир."
         }
       },
-      "latency_ms": 143.546,
+      "latency_ms": 215.592,
       "selected_targets": [
         "player"
       ],
@@ -134,7 +134,7 @@
           ],
           "direction": {
             "x": 0.9,
-            "y": 0.833899370829264
+            "y": 0.837377230326335
           },
           "intensity": 0.75,
           "lifetime": 0.55,
@@ -173,14 +173,12 @@
   "level_version": "monaco-start-v1",
   "passed": true,
   "timing": {
-    "action_ready_to_mutation_ms": 1.0,
-    "client_ttfa_ms": 3456.0,
-    "server_action_ready_ms": 901.672,
-    "submit_to_action_ready_ms": 3455.0,
-    "submit_to_initial_response_ms": 2039.0
+    "action_ready_to_mutation_ms": 2.0,
+    "client_ttfa_ms": 1363.0,
+    "server_action_ready_ms": 411.564,
+    "submit_to_action_ready_ms": 1361.0,
+    "submit_to_initial_response_ms": 742.0
   },
-  "timing_warnings": [
-    "client TTFA 3456.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-  ],
+  "timing_warnings": [],
   "wish": "Залей светом весь мир"
 }

@@ -110,9 +110,9 @@
       },
       "execution_engine": "monty",
       "execution_error": null,
-      "execution_ms": 130.575,
-      "first_world_action_ms": 79.899,
-      "latency_ms": 154.446,
+      "execution_ms": 40.669,
+      "first_world_action_ms": 15.569,
+      "latency_ms": 63.74,
       "model": "qwen3-35-36",
       "program_code": "for _ in range(4):\n    spawn('wall', near='player')",
       "program_output": null,
@@ -165,7 +165,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "новый объект wall найден",
-          "step_id": "c09dab2cee5040a4ba6fbcf20ac550a2",
+          "step_id": "94148ab7393e4b69b4cf5d8907be014f",
           "target_id": "player",
           "verified": true
         },
@@ -175,7 +175,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "новый объект wall найден",
-          "step_id": "eff0dfa545784a1a9fedf599600d7026",
+          "step_id": "40c2f8fd2ae04ad698269149066575b5",
           "target_id": "player",
           "verified": true
         },
@@ -185,7 +185,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "новый объект wall найден",
-          "step_id": "66cdbc60adb04c98810f60e31aa09077",
+          "step_id": "7ba96422d4b84077b1cace28dc6cfbb5",
           "target_id": "player",
           "verified": true
         },
@@ -195,7 +195,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "новый объект wall найден",
-          "step_id": "2fa4476e13f6454abd930c8208eb6999",
+          "step_id": "90e3d8491c0a48baafeff822edc018f6",
           "target_id": "player",
           "verified": true
         }
@@ -209,7 +209,7 @@
           "summary": "Создать 4 физических стен рядом с игроком."
         }
       },
-      "latency_ms": 154.446,
+      "latency_ms": 63.74,
       "selected_targets": [
         "player"
       ],
@@ -234,7 +234,7 @@
           ],
           "direction": {
             "x": 0.9,
-            "y": 0.836425844828288
+            "y": 0.838905906677246
           },
           "intensity": 0.75,
           "lifetime": 0.55,
@@ -258,7 +258,7 @@
           ],
           "direction": {
             "x": 0.9,
-            "y": 0.836425844828288
+            "y": 0.838905906677246
           },
           "intensity": 0.75,
           "lifetime": 0.55,
@@ -282,7 +282,7 @@
           ],
           "direction": {
             "x": 0.9,
-            "y": 0.836425844828288
+            "y": 0.838905906677246
           },
           "intensity": 0.75,
           "lifetime": 0.55,
@@ -306,7 +306,7 @@
           ],
           "direction": {
             "x": 0.9,
-            "y": 0.836425844828288
+            "y": 0.838905906677246
           },
           "intensity": 0.75,
           "lifetime": 0.55,
@@ -389,13 +389,11 @@
   "passed": true,
   "timing": {
     "action_ready_to_mutation_ms": 1.0,
-    "client_ttfa_ms": 5169.0,
-    "server_action_ready_ms": 1345.384,
-    "submit_to_action_ready_ms": 5168.0,
-    "submit_to_initial_response_ms": 4380.0
+    "client_ttfa_ms": 1173.0,
+    "server_action_ready_ms": 239.698,
+    "submit_to_action_ready_ms": 1172.0,
+    "submit_to_initial_response_ms": 618.0
   },
-  "timing_warnings": [
-    "client TTFA 5169.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-  ],
+  "timing_warnings": [],
   "wish": "Создай четыре стены вокруг игрока"
 }

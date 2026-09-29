@@ -35,9 +35,9 @@
       },
       "execution_engine": "monty",
       "execution_error": null,
-      "execution_ms": 95.382,
-      "first_world_action_ms": 25.578,
-      "latency_ms": 102.867,
+      "execution_ms": 54.661,
+      "first_world_action_ms": 66.254,
+      "latency_ms": 189.444,
       "model": "qwen3-35-36",
       "program_code": "enemy = nearest('enemy')\nspawn('trap', near=enemy)",
       "program_output": {
@@ -95,7 +95,7 @@
           "attempt": 1.0,
           "client_observation": "Клиент применил действие и сделал новый снимок мира",
           "detail": "новый объект trap найден",
-          "step_id": "e3882adfbec74dc285fe3858d797aa37",
+          "step_id": "57a974640106425ebb6b454ac6138974",
           "target_id": "guard_01",
           "verified": true
         }
@@ -109,7 +109,7 @@
           "summary": "Создать видимую ловушку у выбранной цели."
         }
       },
-      "latency_ms": 102.867,
+      "latency_ms": 189.444,
       "selected_targets": [
         "guard_01"
       ],
@@ -133,21 +133,21 @@
             "create_object"
           ],
           "direction": {
-            "x": 5.18853098551432,
-            "y": 1.51284529368083
+            "x": 5.30425898234049,
+            "y": 1.37099157969157
           },
           "intensity": 0.75,
           "lifetime": 0.55,
           "origin": {
-            "x": -3.91146901448568,
-            "y": 0.685377820332845
+            "x": -3.79574101765951,
+            "y": 0.528460629781087
           },
           "primitive": "BURST",
           "radius": 0.8,
           "speed": 0.0,
           "target": {
-            "x": -3.91146901448568,
-            "y": 0.685377820332845
+            "x": -3.79574101765951,
+            "y": 0.528460629781087
           },
           "turbulence": 0.35
         }
@@ -174,14 +174,12 @@
   "level_version": "monaco-start-v1",
   "passed": true,
   "timing": {
-    "action_ready_to_mutation_ms": 0.0,
-    "client_ttfa_ms": 3042.0,
-    "server_action_ready_ms": 390.02,
-    "submit_to_action_ready_ms": 3042.0,
-    "submit_to_initial_response_ms": 1980.0
+    "action_ready_to_mutation_ms": 2.0,
+    "client_ttfa_ms": 1807.0,
+    "server_action_ready_ms": 586.116,
+    "submit_to_action_ready_ms": 1805.0,
+    "submit_to_initial_response_ms": 1190.0
   },
-  "timing_warnings": [
-    "client TTFA 3042.0 ms exceeds 2000.0 ms (software renderer; raw value retained)"
-  ],
+  "timing_warnings": [],
   "wish": "Создай ловушку рядом с врагом"
 }

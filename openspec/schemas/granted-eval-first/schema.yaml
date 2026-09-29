@@ -151,7 +151,7 @@ artifacts:
 
       Classify the change using all applicable classes: deterministic_server,
       agent_behavior, player_visible, observability, tooling. Explain why each selected gate
-      is required. Generated code, action labels, HTTP success and hidden genie speech are
+      is required. Generated code, action labels, HTTP success and hidden lawyer speech are
       never acceptable fulfillment oracles.
 
       Include a trajectory-review checklist for player-visible agent changes. The review must
